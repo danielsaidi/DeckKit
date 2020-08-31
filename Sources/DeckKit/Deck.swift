@@ -10,6 +10,13 @@ import Foundation
 
 public struct Deck<CardType: Card>: Identifiable, Equatable {
     
+    public init(
+        name: String,
+        cards: [CardType]) {
+        self.name = name
+        self.cards = cards
+    }
+    
     public let id = UUID()
     public let name: String
     public var cards: [CardType]

@@ -13,7 +13,7 @@ import CoreGraphics
  This is a basic card view, that can be used either as is or
  as a template for creating your own card types.
  */
-struct BasicCardView<CardType: BasicCard>: View {
+public struct BasicCardView<CardType: BasicCard>: View {
     
     public init(
         card: CardType,
@@ -28,7 +28,7 @@ struct BasicCardView<CardType: BasicCard>: View {
     private let size: CGSize
     private let cornerRadius: CGFloat
     
-    var body: some View {
+    public var body: some View {
         VStack {
             VStack {
                 title
