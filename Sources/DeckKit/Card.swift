@@ -8,7 +8,4 @@
 
 import Foundation
 
-public protocol Card: Identifiable, Equatable {
-    
-    var id: UUID { get }
-}
+public protocol Card: Identifiable, Equatable {}
