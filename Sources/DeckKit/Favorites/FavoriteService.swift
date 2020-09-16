@@ -19,4 +19,5 @@ public protocol FavoriteService: AnyObject {
     func getFavorites<Item: Favoritable>(for type: Item.Type) -> [Item.ID]
     func isFavorite<Item: Favoritable>(_ item: Item) -> Bool
     func setIsFavorite<Item: Favoritable>(_ isFavorite: Bool, for item: Item)
+    func toggleIsFavorite<Item: Favoritable>(for item: Item)
 }

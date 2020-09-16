@@ -23,16 +23,21 @@ public class FavoriteContext<Item: Favoritable>: ObservableObject, FavoriteServi
     
     @Published var favorites: [Item.ID] = []
     
-    public func getFavorites<Item: Favoritable>(for type: Item.Type) -> [Item.ID] {
-        service.getFavorites(for: Item.self)
+    public func getFavorites<ItemType: Favoritable>(for type: ItemType.Type) -> [ItemType.ID] {
+        service.getFavorites(for: ItemType.self)
     }
     
-    public func isFavorite<Item: Favoritable>(_ item: Item) -> Bool {
+    public func isFavorite<ItemType: Favoritable>(_ item: ItemType) -> Bool {
         service.isFavorite(item)
     }
     
     public func setIsFavorite<ItemType: Favoritable>(_ isFavorite: Bool, for item: ItemType) {
         service.setIsFavorite(isFavorite, for: item)
+        favorites = getFavorites(for: ItemType.self) as? [Item.ID] ?? []
+    }
+    
+    public func toggleIsFavorite<ItemType: Favoritable>(for item: ItemType) {
+        service.toggleIsFavorite(for: item)
         favorites = getFavorites(for: ItemType.self) as? [Item.ID] ?? []
     }
 }

@@ -33,6 +33,10 @@ public class UserDefaultsFavoriteService: FavoriteService {
         isFavorite ? favorites.append(item.id) : favorites.removeAll { $0 == item.id }
         defaults.set(favorites, forKey: key(for: Item.self))
     }
+    
+    public func toggleIsFavorite<Item: Favoritable>(for item: Item) {
+        setIsFavorite(!isFavorite(item), for: item)
+    }
 }
 
 private extension UserDefaultsFavoriteService {
