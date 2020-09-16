@@ -34,6 +34,8 @@ public extension Deck {
     }
     
     mutating func moveToFront(_ card: CardType) {
+        guard cards.count > 0 else { return }
+        if cards[0].id == card.id { return }
         let topCard = cards.remove(at: index(of: card))
         cards.insert(topCard, at: 0)
     }
