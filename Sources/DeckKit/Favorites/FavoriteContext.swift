@@ -21,7 +21,8 @@ public class FavoriteContext<Item: Favoritable>: ObservableObject, FavoriteServi
     
     private let service: FavoriteService
     
-    @Published var favorites: [Item.ID] = []
+    @Published public var favorites: [Item.ID] = []
+    @Published public var showOnlyFavorites: Bool = false
     
     public func getFavorites<ItemType: Favoritable>(for type: ItemType.Type) -> [ItemType.ID] {
         service.getFavorites(for: ItemType.self)
