@@ -91,16 +91,7 @@ public struct DeckStackView<CardType: Card>: View {
     
     public var body: some View {
         ZStack(alignment: .center) {
-            ForEach(visibleCards) { card in
-                cardBuilder(card)
-                    .zIndex(zIndex(of: card))
-                    .shadow(radius: 2)
-                    .offset(size: dragOffset(for: card))
-                    .offset(y: offset(of: card))
-                    .scaleEffect(scale(of: card))
-                    .rotationEffect(dragRotation(for: card))
-                    .gesture(dragGesture(for: card))
-            }
+            ForEach(visibleCards, content: cardBuilderWithModifiers)
         }.onAppear(perform: refreshVisibleCards)
     }
 }
@@ -135,6 +126,17 @@ public extension DeckStackView {
 // MARK: - View Logic
 
 public extension DeckStackView {
+    
+    func cardBuilderWithModifiers(_ card: CardType) -> some View {
+        cardBuilder(card)
+            .zIndex(zIndex(of: card))
+            .shadow(radius: 2)
+            .offset(size: dragOffset(for: card))
+            .offset(y: offset(of: card))
+            .scaleEffect(scale(of: card))
+            .rotationEffect(dragRotation(for: card))
+            .gesture(dragGesture(for: card))
+    }
     
     func dragGesture(for card: CardType) -> some Gesture {
         DragGesture()
