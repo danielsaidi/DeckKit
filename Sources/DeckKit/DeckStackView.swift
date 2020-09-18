@@ -30,7 +30,7 @@ import SwiftUI
  will be pretty obvious that the back of the stack is just a
  visual trick.
  */
-public struct DeckStackView<CardType: Card>: View {
+public struct DeckStackView<ItemType: CardItem>: View {
     
     /// Creates an instance of the view.
     ///
@@ -41,15 +41,15 @@ public struct DeckStackView<CardType: Card>: View {
     ///   - alwaysShowLastCard: Whether or not to show the last card.
     ///   - scaleOffset: The percentual shrink of each card.
     ///   - scaleOffset: The point-based offset of each card.
-    ///   - viewBuilder: A builder that generates card views.
+    ///   - cardBuilder: A builder that generates card views.
     public init(
-        deck: Deck<CardType>,
+        deck: Deck<ItemType>,
         direction: Direction = .up,
         displayCount: Int = 10,
         alwaysShowLastCard: Bool = true,
         scaleOffset: CGFloat = 0.02,
         verticalOffset: CGFloat = 10,
-        viewBuilder: @escaping CardViewBuilder) {
+        cardBuilder: @escaping CardViewBuilder) {
         assert(scaleOffset > 0, "scaleOffset must be positive")
         assert(verticalOffset > 0, "verticalOffset must be positive")
         self.context = DeckContext(deck: deck)
@@ -58,13 +58,13 @@ public struct DeckStackView<CardType: Card>: View {
         self.alwaysShowLastCard = alwaysShowLastCard
         self.scaleOffset = scaleOffset
         self.verticalOffset = verticalOffset
-        self.cardBuilder = viewBuilder
+        self.cardBuilder = cardBuilder
     }
     
     /**
      A function that takes a card and returns a view.
      */
-    public typealias CardViewBuilder = (CardType) -> AnyView
+    public typealias CardViewBuilder = (ItemType) -> AnyView
     
     /**
      The offset direction of cards further down in the stack.
@@ -74,25 +74,25 @@ public struct DeckStackView<CardType: Card>: View {
     }
     
     private let alwaysShowLastCard: Bool
-    private let cardBuilder: (CardType) -> AnyView
+    private let cardBuilder: (ItemType) -> AnyView
     private let direction: Direction
     private let displayCount: Int
     private let scaleOffset: CGFloat
     private let verticalOffset: CGFloat
     
-    private var deck: Deck<CardType> { context.deck }
-    private var cards: [CardType] { deck.cards }
+    private var deck: Deck<ItemType> { context.deck }
+    private var items: [ItemType] { deck.items }
     
-    @State private var visibleCards: [CardType] = []
+    @State private var visibleItems: [ItemType] = []
     
-    @ObservedObject private var context: DeckContext<CardType>
-    @State private var activeCard: CardType? = nil
+    @ObservedObject private var context: DeckContext<ItemType>
+    @State private var activeItem: ItemType? = nil
     @State private var topCardOffset: CGSize = .zero
     
     public var body: some View {
         ZStack(alignment: .center) {
-            ForEach(visibleCards, content: cardBuilderWithModifiers)
-        }.onAppear(perform: refreshVisibleCards)
+            ForEach(visibleItems, content: cardBuilderWithModifiers)
+        }.onAppear(perform: refreshCards)
     }
 }
 
@@ -101,24 +101,24 @@ public struct DeckStackView<CardType: Card>: View {
 
 public extension DeckStackView {
     
-    func moveCardToBack(_ card: CardType) {
-        context.deck.moveToBack(card)
-        refreshVisibleCards()
+    func moveItemToBack(_ item: ItemType) {
+        context.deck.moveToBack(item)
+        refreshCards()
     }
     
-    func moveCardToFront(_ card: CardType) {
-        context.deck.moveToFront(card)
-        refreshVisibleCards()
+    func moveItemToFront(_ item: ItemType) {
+        context.deck.moveToFront(item)
+        refreshCards()
     }
     
-    func refreshVisibleCards() {
-        let first = Array(cards.prefix(displayCount))
+    func refreshCards() {
+        let first = Array(items.prefix(displayCount))
         guard
             alwaysShowLastCard,
-            let last = cards.last,
+            let last = items.last,
             !first.contains(last)
-            else { return visibleCards = first }
-        visibleCards = Array(first) + [last]
+            else { return visibleItems = first }
+        visibleItems = Array(first) + [last]
     }
 }
 
@@ -127,72 +127,72 @@ public extension DeckStackView {
 
 public extension DeckStackView {
     
-    func cardBuilderWithModifiers(_ card: CardType) -> some View {
-        cardBuilder(card)
-            .zIndex(zIndex(of: card))
+    func cardBuilderWithModifiers(_ item: ItemType) -> some View {
+        cardBuilder(item)
+            .zIndex(zIndex(of: item))
             .shadow(radius: 2)
-            .offset(size: dragOffset(for: card))
-            .offset(y: offset(of: card))
-            .scaleEffect(scale(of: card))
-            .rotationEffect(dragRotation(for: card))
-            .gesture(dragGesture(for: card))
+            .offset(size: dragOffset(for: item))
+            .offset(y: offset(of: item))
+            .scaleEffect(scale(of: item))
+            .rotationEffect(dragRotation(for: item))
+            .gesture(dragGesture(for: item))
     }
     
-    func dragGesture(for card: CardType) -> some Gesture {
+    func dragGesture(for item: ItemType) -> some Gesture {
         DragGesture()
-            .onChanged({ handleDragGestureChanged($0, for: card) })
-            .onEnded({ handleDragGestureEnded($0, for: card) })
+            .onChanged({ handleDragGestureChanged($0, for: item) })
+            .onEnded({ handleDragGestureEnded($0) })
     }
     
-    func dragOffset(for card: CardType) -> CGSize {
-        if card != activeCard { return .zero }
+    func dragOffset(for item: ItemType) -> CGSize {
+        if item != activeItem { return .zero }
         return topCardOffset
     }
     
-    func dragRotation(for card: CardType) -> Angle {
-        if card != activeCard { return .degrees(0) }
+    func dragRotation(for item: ItemType) -> Angle {
+        if item != activeItem { return .degrees(0) }
         return .degrees(Double(topCardOffset.width) / 20.0)
     }
     
-    func handleDragGestureChanged(_ drag: DragGesture.Value, for card: CardType) {
-        if activeCard == nil { activeCard = card }
-        if card != activeCard { return }
+    func handleDragGestureChanged(_ drag: DragGesture.Value, for item: ItemType) {
+        if activeItem == nil { activeItem = item }
+        if item != activeItem { return }
         withAnimation(.spring()) {
             if drag.translation.width < -200 ||
                 drag.translation.width > 200 ||
                 drag.translation.height < -250 ||
                 drag.translation.height > 250 {
-                moveCardToBack(card)
+                moveItemToBack(item)
             } else {
-                moveCardToFront(card)
+                moveItemToFront(item)
             }
             topCardOffset = drag.translation
         }
     }
     
-    func handleDragGestureEnded(_ drag: DragGesture.Value, for card: CardType) {
+    func handleDragGestureEnded(_ drag: DragGesture.Value) {
         withAnimation(.spring()) {
-            activeCard = nil
+            activeItem = nil
             topCardOffset = .zero
         }
     }
     
-    func offset(of card: CardType) -> CGFloat {
-        guard let index = visibleCards.firstIndex(of: card) else { return .zero }
+    func offset(of item: ItemType) -> CGFloat {
+        guard let index = visibleItems.firstIndex(of: item) else { return .zero }
         let offset = CGFloat(index) * verticalOffset
         let multiplier: CGFloat = direction == .down ? 1 : -1
         return offset * multiplier
     }
     
-    func scale(of card: CardType) -> CGFloat {
-        guard let index = visibleCards.firstIndex(of: card) else { return 1 }
+    func scale(of item: ItemType) -> CGFloat {
+        guard let index = visibleItems.firstIndex(of: item) else { return 1 }
         let offset = CGFloat(index) * scaleOffset
         return CGFloat(1 - offset)
     }
     
-    func zIndex(of card: CardType) -> Double {
-        guard let index = visibleCards.firstIndex(of: card) else { return 0 }
-        return Double(deck.cards.count - index)
+    func zIndex(of card: ItemType) -> Double {
+        guard let index = visibleItems.firstIndex(of: card) else { return 0 }
+        return Double(visibleItems.count - index)
     }
 }
 
@@ -217,7 +217,7 @@ struct DeckStackView_Previews: PreviewProvider {
     
     @State static var isSheetPresented = false
     
-    static var card1: StandardBasicCard { StandardBasicCard(
+    static var item1: BasicCardItem { BasicCardItem(
         title: "Title 1",
         text: "Text 1",
         footnote: "Footnote 1",
@@ -225,7 +225,7 @@ struct DeckStackView_Previews: PreviewProvider {
         tintColor: .yellow)
     }
     
-    static var card2: StandardBasicCard { StandardBasicCard(
+    static var item2: BasicCardItem { BasicCardItem(
         title: "Title 2",
         text: "Text 2",
         footnote: "Footnote 2",
@@ -235,14 +235,14 @@ struct DeckStackView_Previews: PreviewProvider {
     
     static var deck = Deck(
         name: "My Deck",
-        cards: [card1, card2, card1, card2, card1, card2, card1, card2, card1, card2, card1, card2])
+        items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2])
     
     static var previews: some View {
         VStack {
             DeckStackView(
                 deck: deck,
                 direction: .up,
-                viewBuilder: { AnyView(BasicCardView(card: $0)) })
+                cardBuilder: { AnyView(BasicCard(item: $0)) })
                 .padding(100)
                 .background(Color.secondary)
                 .onTapGesture(perform: presentSheet)

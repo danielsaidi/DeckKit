@@ -12,7 +12,7 @@ import Foundation
  This context class can be used to help observing deck state
  in SwiftUI views.
  */
-public class DeckContext<CardType: Card>: ObservableObject {
+public class DeckContext<CardType: CardItem>: ObservableObject {
     
     public init(deck: Deck<CardType>) {
         self.deck = deck

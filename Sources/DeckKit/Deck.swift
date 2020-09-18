@@ -8,35 +8,39 @@
 
 import Foundation
 
-public struct Deck<CardType: Card>: Identifiable, Equatable {
+/**
+ This struct can be used to create a deck of items, that can
+ then be converted to views when the deck is presented.
+ */
+public struct Deck<Item: CardItem>: Identifiable, Equatable {
     
     public init(
         name: String,
-        cards: [CardType]) {
+        items: [Item]) {
         self.name = name
-        self.cards = cards
+        self.items = items
     }
     
     public let id = UUID()
     public let name: String
-    public var cards: [CardType]
+    public var items: [Item]
 }
 
 public extension Deck {
     
-    func index(of card: CardType) -> Int {
-        cards.firstIndex { $0.id == card.id } ?? 0
+    func index(of card: Item) -> Int {
+        items.firstIndex { $0.id == card.id } ?? 0
     }
     
-    mutating func moveToBack(_ card: CardType) {
-        let topCard = cards.remove(at: index(of: card))
-        cards.append(topCard)
+    mutating func moveToBack(_ card: Item) {
+        let topCard = items.remove(at: index(of: card))
+        items.append(topCard)
     }
     
-    mutating func moveToFront(_ card: CardType) {
-        guard cards.count > 0 else { return }
-        if cards[0].id == card.id { return }
-        let topCard = cards.remove(at: index(of: card))
-        cards.insert(topCard, at: 0)
+    mutating func moveToFront(_ card: Item) {
+        guard items.count > 0 else { return }
+        if items[0].id == card.id { return }
+        let topCard = items.remove(at: index(of: card))
+        items.insert(topCard, at: 0)
     }
 }

@@ -7,46 +7,77 @@
 //
 
 import SwiftUI
+import CoreGraphics
 
 /**
- This protocol can be implemented by basc cards. You can use
- `StandardBasicCard` or create your own implementation.
+ This is a card view that presents a `BasicCardItem`. It can
+ be used as is or as a template for creating your own custom
+ card views.
  */
-public protocol BasicCard: Card {
-    
-    var title: String { get }
-    var text: String { get }
-    var footnote: String { get }
-    
-    var backgroundColor: Color { get }
-    var tintColor: Color { get }
-}
-
-/**
- This is a basic implementation of the `BasicCard` protocol.
- You can use it as is if you just want a plane basic card.
- */
-public struct StandardBasicCard: BasicCard {
+public struct BasicCard: View {
     
     public init(
-        title: String,
-        text: String,
-        footnote: String,
-        backgroundColor: Color,
-        tintColor: Color) {
-        self.title = title
-        self.text = text
-        self.footnote = footnote
-        self.backgroundColor = backgroundColor
-        self.tintColor = tintColor
+        item: BasicCardItem,
+        size: CGSize = CGSize(width: 300, height: 400),
+        cornerRadius: CGFloat = 10) {
+        self.item = item
+        self.size = size
+        self.cornerRadius = cornerRadius
     }
     
-    public let id = UUID()
+    private let item: BasicCardItem
+    private let size: CGSize
+    private let cornerRadius: CGFloat
+    
+    public var body: some View {
+        VStack {
+            VStack {
+                title
+                Divider()
+                text
+                Spacer()
+                Divider()
+                footnote
+            }
+        }
+        .padding()
+        .frame(width: size.width, height: size.height)
+        .foregroundColor(item.tintColor)
+        .background(item.backgroundColor)
+        .cornerRadius(cornerRadius)
+        
+    }
+}
 
-    public let title: String
-    public let text: String
-    public let footnote: String
+extension BasicCard {
+    
+    var title: some View {
+        Text(item.title).font(.title)
+    }
+    
+    var text: some View {
+        Text(item.text)
+            .font(.body)
+            .multilineTextAlignment(.center)
+            .padding()
+    }
+    
+    var footnote: some View {
+        Text(item.footnote)
+            .font(.footnote)
+            .padding()
+    }
+}
 
-    public let backgroundColor: Color
-    public let tintColor: Color
+
+struct BasicCard_Previews: PreviewProvider {
+    static var previews: some View {
+        let item = BasicCardItem(
+            title: "Title",
+            text: "Text",
+            footnote: "Footnote",
+            backgroundColor: .red,
+            tintColor: .yellow)
+        return BasicCard(item: item)
+    }
 }
