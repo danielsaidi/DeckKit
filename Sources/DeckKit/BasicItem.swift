@@ -1,5 +1,5 @@
 //
-//  BasicCardItem.swift
+//  BasicItem.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
@@ -9,9 +9,9 @@
 import SwiftUI
 
 /**
- This is a very basic implementation of the `Card` protocol.
+ This is a basic implementation of the `CardItem` protocol.
  */
-public struct BasicCardItem: CardItem {
+public struct BasicItem: CardItem {
     
     public init(
         title: String,

@@ -17,7 +17,7 @@ import CoreGraphics
 public struct BasicCard: View {
     
     public init(
-        item: BasicCardItem,
+        item: BasicItem,
         size: CGSize = CGSize(width: 300, height: 400),
         cornerRadius: CGFloat = 10) {
         self.item = item
@@ -25,7 +25,7 @@ public struct BasicCard: View {
         self.cornerRadius = cornerRadius
     }
     
-    private let item: BasicCardItem
+    private let item: BasicItem
     private let size: CGSize
     private let cornerRadius: CGFloat
     
@@ -69,10 +69,9 @@ extension BasicCard {
     }
 }
 
-
 struct BasicCard_Previews: PreviewProvider {
     static var previews: some View {
-        let item = BasicCardItem(
+        let item = BasicItem(
             title: "Title",
             text: "Text",
             footnote: "Footnote",

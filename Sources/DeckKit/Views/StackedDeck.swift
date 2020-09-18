@@ -1,5 +1,5 @@
 //
-//  DeckStackView.swift
+//  StackedDeck.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
@@ -30,7 +30,7 @@ import SwiftUI
  will be pretty obvious that the back of the stack is just a
  visual trick.
  */
-public struct DeckStackView<ItemType: CardItem>: View {
+public struct StackedDeck<ItemType: CardItem>: View {
     
     /// Creates an instance of the view.
     ///
@@ -49,7 +49,7 @@ public struct DeckStackView<ItemType: CardItem>: View {
         alwaysShowLastCard: Bool = true,
         scaleOffset: CGFloat = 0.02,
         verticalOffset: CGFloat = 10,
-        cardBuilder: @escaping CardViewBuilder) {
+        cardBuilder: @escaping CardBuilder) {
         assert(scaleOffset > 0, "scaleOffset must be positive")
         assert(verticalOffset > 0, "verticalOffset must be positive")
         self.context = DeckContext(deck: deck)
@@ -62,9 +62,9 @@ public struct DeckStackView<ItemType: CardItem>: View {
     }
     
     /**
-     A function that takes a card and returns a view.
+     A function that takes an item and returns a card view.
      */
-    public typealias CardViewBuilder = (ItemType) -> AnyView
+    public typealias CardBuilder = (ItemType) -> AnyView
     
     /**
      The offset direction of cards further down in the stack.
@@ -75,19 +75,17 @@ public struct DeckStackView<ItemType: CardItem>: View {
     
     private let alwaysShowLastCard: Bool
     private let cardBuilder: (ItemType) -> AnyView
+    private var deck: Deck<ItemType> { context.deck }
     private let direction: Direction
     private let displayCount: Int
+    private var items: [ItemType] { deck.items }
     private let scaleOffset: CGFloat
     private let verticalOffset: CGFloat
-    
-    private var deck: Deck<ItemType> { context.deck }
-    private var items: [ItemType] { deck.items }
-    
-    @State private var visibleItems: [ItemType] = []
     
     @ObservedObject private var context: DeckContext<ItemType>
     @State private var activeItem: ItemType? = nil
     @State private var topCardOffset: CGSize = .zero
+    @State private var visibleItems: [ItemType] = []
     
     public var body: some View {
         ZStack(alignment: .center) {
@@ -99,7 +97,7 @@ public struct DeckStackView<ItemType: CardItem>: View {
 
 // MARK: - Functions
 
-public extension DeckStackView {
+public extension StackedDeck {
     
     func moveItemToBack(_ item: ItemType) {
         context.deck.moveToBack(item)
@@ -117,7 +115,7 @@ public extension DeckStackView {
             alwaysShowLastCard,
             let last = items.last,
             !first.contains(last)
-            else { return visibleItems = first }
+        else { return visibleItems = first }
         visibleItems = Array(first) + [last]
     }
 }
@@ -125,7 +123,7 @@ public extension DeckStackView {
 
 // MARK: - View Logic
 
-public extension DeckStackView {
+public extension StackedDeck {
     
     func cardBuilderWithModifiers(_ item: ItemType) -> some View {
         cardBuilder(item)
@@ -213,11 +211,9 @@ private extension View {
 
 // MARK: - Preview
 
-struct DeckStackView_Previews: PreviewProvider {
+struct StackedDeck_Previews: PreviewProvider {
     
-    @State static var isSheetPresented = false
-    
-    static var item1: BasicCardItem { BasicCardItem(
+    static var item1: BasicItem { BasicItem(
         title: "Title 1",
         text: "Text 1",
         footnote: "Footnote 1",
@@ -225,7 +221,7 @@ struct DeckStackView_Previews: PreviewProvider {
         tintColor: .yellow)
     }
     
-    static var item2: BasicCardItem { BasicCardItem(
+    static var item2: BasicItem { BasicItem(
         title: "Title 2",
         text: "Text 2",
         footnote: "Footnote 2",
@@ -238,23 +234,12 @@ struct DeckStackView_Previews: PreviewProvider {
         items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2])
     
     static var previews: some View {
-        VStack {
-            DeckStackView(
-                deck: deck,
-                direction: .up,
-                cardBuilder: { AnyView(BasicCard(item: $0)) })
-                .padding(100)
-                .background(Color.secondary)
-                .onTapGesture(perform: presentSheet)
-                .sheet(isPresented: $isSheetPresented, content: {
-                    Text("HEJ")
-                })
-            Button("Present Sheet", action: presentSheet)
-        }
-        
-    }
-    
-    static func presentSheet() {
-        isSheetPresented = true
+        StackedDeck(
+            deck: deck,
+            direction: .up,
+            cardBuilder: { AnyView(BasicCard(item: $0)) })
+            .frame(width: 400, height: 600, alignment: .center)
+            .padding(100)
+            .background(Color.secondary)
     }
 }
