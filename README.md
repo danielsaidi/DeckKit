@@ -30,6 +30,13 @@ I will add a stunning (well...) logo, improved documentation and a demo app afte
 
 ```
 https://github.com/danielsaidi/DeckKit.git
+
+```
+
+### CocoaPods
+
+```
+pod DeckKit
 ```
 
 
