@@ -72,6 +72,11 @@ You can then use any of the deck views above to present your deck. If you use a 
 Remember to convert the view to an `AnyView`.
 
 
+## Acknowledgements
+
+This library wouldn't have been made without [this amazing card tutorial](https://www.swiftcompiled.com/swiftui-cards/).
+
+
 ## Contact me
 
 Feel free to reach out if you have questions or if you want to contribute in any way:
