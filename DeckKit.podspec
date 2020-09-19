@@ -23,4 +23,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '6.0'
   
   s.source_files = 'Sources/**/*.swift'
+  s.tvos.exclude_files = [
+    'Sources/DeckKit/View/StackedDeck.swift',
+  ]
 end
