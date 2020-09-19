@@ -44,8 +44,8 @@ platform :ios do
       bump_type = "patch"
     end
 
-    # version = version_bump_podspec(path: "DSSwiftKit.podspec", bump_type: bump_type)
-    # increment_version_number(version_number: version)
+    version = version_bump_podspec(path: "DeckKit.podspec", bump_type: bump_type)
+    #increment_version_number(version_number: version)
   
     git_commit(
       path: "*",
