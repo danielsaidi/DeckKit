@@ -19,7 +19,11 @@
 
 With `DeckKit`, you can create decks of any model that implements `CardItem` and present them in various ways.
 
-It can look like this: **TBD**
+It can look like this: 
+
+<p align="center">
+    <img src="Resources/Demo.gif" width=450 />
+</p>
 
 I will add a stunning (well...) logo, improved documentation and a demo app after the library gets 10 stars or the first external issue. Until then, create issues or reach out to me if you need help.
 
