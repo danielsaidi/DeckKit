@@ -83,7 +83,7 @@ public struct StackedDeck<ItemType: CardItem>: View {
     private let verticalOffset: CGFloat
     
     @ObservedObject private var context: DeckContext<ItemType>
-    @State private var activeItem: ItemType? = nil
+    @State private var activeItem: ItemType?
     @State private var topCardOffset: CGSize = .zero
     @State private var visibleItems: [ItemType] = []
     
