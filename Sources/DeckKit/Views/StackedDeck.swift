@@ -6,6 +6,7 @@
 //  Copyright © 2020 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS) || os(macOS)
 import SwiftUI
 
 /**
@@ -243,3 +244,4 @@ struct StackedDeck_Previews: PreviewProvider {
             .background(Color.secondary)
     }
 }
+#endif
