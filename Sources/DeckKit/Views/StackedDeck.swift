@@ -30,6 +30,10 @@ import SwiftUI
  unique color, you may want to set this to `false`, since it
  will be pretty obvious that the back of the stack is just a
  visual trick.
+ 
+ `ACKNOWLEDGEMENT` This view builds upon the amazing work by
+ Alex Brown (@Alex_Brown23) and his amazing card tutorial at
+ https://www.swiftcompiled.com/swiftui-cards/. Thank you!
  */
 public struct StackedDeck<ItemType: CardItem>: View {
     
