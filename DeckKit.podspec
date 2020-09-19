@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DeckKit'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.swift_versions   = ['5.3']
   s.summary          = 'DeckKit contains tools for building deck-based apps.'
 
