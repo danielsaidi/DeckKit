@@ -17,12 +17,17 @@ public class FavoriteContext<Item: Favoritable>: ObservableObject, FavoriteServi
     public init(service: FavoriteService) {
         self.service = service
         self.favorites = getFavorites(for: Item.self)
+        self.showOnlyFavorites = showOnlyFavoritesSetting
     }
     
     private let service: FavoriteService
     
     @Published public var favorites: [Item.ID] = []
-    @Published public var showOnlyFavorites: Bool = false
+    @Published public var showOnlyFavorites: Bool = false {
+        didSet { showOnlyFavoritesSetting = showOnlyFavorites }
+    }
+    
+    @UserDefaultsPersisted(key: "com.deckkit.favorites.showonlyfavorites", defaultValue: false) private var showOnlyFavoritesSetting: Bool
     
     public func getFavorites<ItemType: Favoritable>(for type: ItemType.Type) -> [ItemType.ID] {
         service.getFavorites(for: ItemType.self)
