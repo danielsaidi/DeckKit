@@ -40,7 +40,6 @@ public struct HorizontalDeck<ItemType: CardItem>: View {
     private var items: [ItemType] { deck.items }
     
     @ObservedObject private var context: DeckContext<ItemType>
-    @State private var visibleItems: [ItemType] = []
     
     public var body: some View {
         ScrollView(.horizontal) {
