@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "DeckKit",
+        "repositoryURL": "git@github.com:danielsaidi/DeckKit.git",
+        "state": {
+          "branch": null,
+          "revision": "42a8e91b0605dfc5df022f5715c6153130857cbd",
+          "version": "0.1.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
