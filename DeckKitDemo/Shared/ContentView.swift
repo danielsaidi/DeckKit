@@ -116,7 +116,7 @@ extension View {
     
     func platformSpecificPadding() -> some View {
         #if os(macOS)
-        return self.padding(100)
+        return self.padding(.vertical, 100)
         #else
         return self
         #endif

@@ -17,15 +17,13 @@
 
 `DeckKit` is a tiny SwiftUI library that can help you create deck-based apps.
 
-With `DeckKit`, you can create decks of any model that implements `CardItem` and present them in various ways.
-
-It can look like this: 
+With `DeckKit`, you can present any model that implements `CardItem` as cards. It can look like this: 
 
 <p align="center">
     <img src="Resources/Demo.gif" width=450 />
 </p>
 
-I will add a stunning (well...) logo, improved documentation and a demo app after the library gets 10 stars or the first external issue. Until then, create issues or reach out to me if you need help.
+I will add a stunning (well...) logo and improve the documentation after the library gets 50 stars or the first external issue. Until then, create issues or reach out to me if you need help.
 
 
 ## Installation
@@ -47,11 +45,10 @@ pod DeckKit
 
 I will add better documentation if anyone starts using this library, but basically it works like this:
 
-* `CardItem` is a protocol. 
-* Any model that is `Identifiable` and `Equatable` can implement `CardItem`.
+* `CardItem` is a protocol that inherits `Identifiable` and `Equatable`
 * A `Deck` can be created with any `CardItem` collection.
 
-Decs can be used as plain data objects, but can also bre presented with SwiftUI.
+Decks can be used as plain data objects, but can also bre presented with SwiftUI.
 
 
 ## Presenting a deck
@@ -64,15 +61,13 @@ A `Deck` can be presented in many ways, including these two built in views:
 You can easily build your own `Deck`-based views as well, using plain SwiftUI.
 
 
-## Try it out
+## Demo app
 
-I will add a demo app if anyone starts using this library. Until then, you can use the built in `BasicItem` and a `BasicCard` to try things out.
+This repo contains a very basic, universal demo app that runs on iOS 14 and macOS 11.
 
-Just create a collection of `BasicItem`s, the create a `Deck` with these items.
+Just open the `DeckKitDemo` project and run the app on either platform.
 
-You can then use any of the deck views above to present your deck. If you use a `BasicItem`, you just have to return a `BasicCard` in the `deckBuilder`.
-
-Remember to convert the view to an `AnyView`.
+The library could run on tvOS as well, but the demo currently has no tvOS app.
 
 
 ## Acknowledgements
