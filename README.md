@@ -1,6 +1,10 @@
 # DeckKit
 
 <p align="center">
+    <img src ="Resources/Logo.png" width=600 />
+</p>
+
+<p align="center">
     <a href="https://github.com/danielsaidi/DeckKit">
         <img src="https://badge.fury.io/gh/danielsaidi%2FDeckKit.svg?style=flat" alt="Version" />
     </a>
