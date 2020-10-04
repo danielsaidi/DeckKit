@@ -11,29 +11,24 @@ import SwiftUI
 
 /**
  This view presents a deck as a stack, from which a user can
- swipe away the top card to send it to the end of the deck.
- 
- If the number of visible cards (10 by default) is less than
- the total number of cards, the topmost cards will fade away
- when they are swiped away.
- 
+ swipe away the top card and send it to the back of the deck.
+
  This view takes a generic `Deck` as init parameter, as well
- as and a `cardBuilder` that takes the same card type as the
- deck as input parameter and returns a view.
+ as a `cardBuilder` function that uses the same item type as
+ the deck as input parameter and returns a view.
  
- `alwaysShowLastCard` sets whether or not to always show the
- last card, even if it is too far back in the deck given the
- provided `displayCount`. If `true`, the card will be pushed
- to the end of the visible stack and then disappear when the
- next card is swiped from the top. If `false`, the card will
- fade out. If your cards have individual appearances, e.g. a
- unique color, you may want to set this to `false`, since it
- will be pretty obvious that the back of the stack is just a
- visual trick.
+ If there are more cards in the deck than are covered by the
+ `displayCount` value, the `alwaysShowLastCard` parameter is
+ used to determine if a card fades out when it is swiped off
+ the top of the deck. If `alwaysShowLastCard` is `true`, the
+ bottommost card is displayed together with the topmost ones.
+ This will make the deck appear smaller than it is, but is a
+ good way to be able to render a deck with many cards, while
+ still making it performant and visually manageable.
  
  `ACKNOWLEDGEMENT` This view builds upon the amazing work by
  Alex Brown (@Alex_Brown23) and his amazing card tutorial at
- https://www.swiftcompiled.com/swiftui-cards/. Thank you!
+ https://www.swiftcompiled.com/swiftui-cards/.manageable
  */
 public struct StackedDeck<ItemType: CardItem>: View {
     
@@ -45,7 +40,11 @@ public struct StackedDeck<ItemType: CardItem>: View {
     ///   - displayCount: The max number of cards to display.
     ///   - alwaysShowLastCard: Whether or not to show the last card.
     ///   - scaleOffset: The percentual shrink of each card.
-    ///   - scaleOffset: The point-based offset of each card.
+    ///   - verticalOffset: The point-based vertical offset of each card.
+    ///   - swipeLeftAction: Called when a card sent to the back of the deck by swiping it left.
+    ///   - swipeRightAction: Called when a card sent to the back of the deck by swiping it right.
+    ///   - swipeUpAction: Called when a card sent to the back of the deck by swiping it up.
+    ///   - swipeDownAction: Called when a card sent to the back of the deck by swiping it down.
     ///   - cardBuilder: A builder that generates card views.
     public init(
         deck: Binding<Deck<ItemType>>,
@@ -54,6 +53,10 @@ public struct StackedDeck<ItemType: CardItem>: View {
         alwaysShowLastCard: Bool = true,
         scaleOffset: CGFloat = 0.02,
         verticalOffset: CGFloat = 10,
+        swipeLeftAction: @escaping GestureAction = { _ in },
+        swipeRightAction: @escaping GestureAction = { _ in },
+        swipeUpAction: @escaping GestureAction = { _ in },
+        swipeDownAction: @escaping GestureAction = { _ in },
         cardBuilder: @escaping CardBuilder) {
         assert(scaleOffset > 0, "scaleOffset must be positive")
         assert(verticalOffset > 0, "verticalOffset must be positive")
@@ -63,6 +66,10 @@ public struct StackedDeck<ItemType: CardItem>: View {
         self.alwaysShowLastCard = alwaysShowLastCard
         self.scaleOffset = scaleOffset
         self.verticalOffset = verticalOffset
+        self.swipeLeftAction = swipeLeftAction
+        self.swipeRightAction = swipeRightAction
+        self.swipeUpAction = swipeUpAction
+        self.swipeDownAction = swipeDownAction
         self.cardBuilder = cardBuilder
     }
     
@@ -72,19 +79,30 @@ public struct StackedDeck<ItemType: CardItem>: View {
     public typealias CardBuilder = (ItemType) -> AnyView
     
     /**
+     A function that is called when gestures causes a change
+     for a certain item.
+     */
+    public typealias GestureAction = (ItemType) -> Void
+    
+    /**
      The offset direction of cards further down in the stack.
      */
     public enum Direction {
         case up, down
     }
     
+    private var deck: Binding<Deck<ItemType>>
+    private var items: [ItemType] { deck.wrappedValue.items }
+    
     private let alwaysShowLastCard: Bool
     private let cardBuilder: (ItemType) -> AnyView
-    private var deck: Binding<Deck<ItemType>>
     private let direction: Direction
     private let displayCount: Int
-    private var items: [ItemType] { deck.wrappedValue.items }
     private let scaleOffset: CGFloat
+    private let swipeLeftAction: GestureAction
+    private let swipeRightAction: GestureAction
+    private let swipeUpAction: GestureAction
+    private let swipeDownAction: GestureAction
     private let verticalOffset: CGFloat
     
     @State private var activeItem: ItemType?
@@ -147,10 +165,7 @@ private extension StackedDeck {
         if activeItem == nil { activeItem = item }
         if item != activeItem { return }
         withAnimation(.spring()) {
-            if drag.translation.width < -200 ||
-                drag.translation.width > 200 ||
-                drag.translation.height < -250 ||
-                drag.translation.height > 250 {
+            if dragGestureIsPastThreshold(drag) {
                 moveItemToBack(item)
             } else {
                 moveItemToFront(item)
@@ -160,10 +175,34 @@ private extension StackedDeck {
     }
     
     func dragGestureEnded(_ drag: DragGesture.Value) {
+        if let item = activeItem {
+            (dragGestureEndedAction(for: drag))?(item)
+        }
         withAnimation(.spring()) {
             activeItem = nil
             topCardOffset = .zero
         }
+    }
+    
+    func dragGestureEndedAction(for drag: DragGesture.Value) -> GestureAction? {
+        guard dragGestureIsPastThreshold(drag) else { return nil }
+        if dragGestureIsPastHorizontalThreshold(drag) {
+            return drag.translation.width > 0 ? swipeRightAction : swipeLeftAction
+        } else {
+            return drag.translation.height > 0 ? swipeDownAction : swipeUpAction
+        }
+    }
+    
+    func dragGestureIsPastThreshold(_ drag: DragGesture.Value) -> Bool {
+        dragGestureIsPastHorizontalThreshold(drag) || dragGestureIsPastVerticalThreshold(drag)
+    }
+    
+    func dragGestureIsPastHorizontalThreshold(_ drag: DragGesture.Value) -> Bool {
+        abs(drag.translation.width) > 200
+    }
+    
+    func dragGestureIsPastVerticalThreshold(_ drag: DragGesture.Value) -> Bool {
+        abs(drag.translation.height) > 250
     }
     
     func dragOffset(for item: ItemType) -> CGSize {
@@ -195,8 +234,8 @@ private extension StackedDeck {
         visibleItems.firstIndex(of: item)
     }
     
-    func zIndex(of card: ItemType) -> Double {
-        guard let index = visibleIndex(of: card) else { return 0 }
+    func zIndex(of index: ItemType) -> Double {
+        guard let index = visibleIndex(of: index) else { return 0 }
         return Double(visibleItems.count - index)
     }
 }
@@ -250,4 +289,5 @@ struct StackedDeck_Previews: PreviewProvider {
             .background(Color.secondary)
     }
 }
+
 #endif

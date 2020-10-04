@@ -67,7 +67,11 @@ private extension ContentView {
                 direction: .up,
                 displayCount: 10,
                 alwaysShowLastCard: true,
-                verticalOffset: 10) {
+                verticalOffset: 10,
+                swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
+                swipeRightAction: { hobby in print("\(hobby.id) was swiped right") },
+                swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
+                swipeDownAction: { hobby in print("\(hobby.id) was swiped down") }) {
                 AnyView(card(for: $0))
             })
         }

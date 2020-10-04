@@ -3,11 +3,16 @@
 
 ## 0.2.0
 
-The `deck` init params for `StackedDeck` and `HorizontalDeck` has been changed to a binding. This helps avoiding that the deck UI resets everytime the view hierarchy reloads.
+The `deck` init params for `StackedDeck` and `HorizontalDeck` has been changed to a binding.
 
-With this change, I could also remove a bunch of state for visible cards in `StackDeck`, which makes deck modifications instantly trigger UI changes. I have added a shuffle button to the demo to demonstrate this.
+This gives you better control over the deck, removes UI glitches and helped me remove a bunch of state for visible cards in `StackDeck`, which means that deck modifications now instantly trigger UI changes. 
 
-I have changed the order of the `StackDeck`'s vertical card offset and scale effect, to fix a UI glitch. 
+I have added a shuffle button to the demo to demonstrate how much better the stacked deck performs.
+
+The `StackedDeck` has been improved in more ways:
+
+    * I have changed the order of how the vertical offset and scale effect are applied, which fixes a UI glitch.
+    * I have added `swipeLeft/Right/Up/Down` actions which let you trigger actions depending on how a user swipes a card of the top of the deck.
 
 The `DeckContext` class is still in the library, but is not used by the library itself.
 
