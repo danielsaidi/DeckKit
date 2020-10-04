@@ -24,9 +24,9 @@ public struct HorizontalDeck<ItemType: CardItem>: View {
     ///   - deck: The generic deck that is to be presented.
     ///   - cardBuilder: A builder that generates card views.
     public init(
-        deck: Deck<ItemType>,
+        deck: Binding<Deck<ItemType>>,
         cardBuilder: @escaping CardBuilder) {
-        self.context = DeckContext(deck: deck)
+        self.deck = deck
         self.cardBuilder = cardBuilder
     }
     
@@ -36,10 +36,8 @@ public struct HorizontalDeck<ItemType: CardItem>: View {
     public typealias CardBuilder = (ItemType) -> AnyView
     
     private let cardBuilder: (ItemType) -> AnyView
-    private var deck: Deck<ItemType> { context.deck }
-    private var items: [ItemType] { deck.items }
-    
-    @ObservedObject private var context: DeckContext<ItemType>
+    private var deck: Binding<Deck<ItemType>>
+    private var items: [ItemType] { deck.wrappedValue.items }
     
     public var body: some View {
         ScrollView(.horizontal) {
@@ -77,7 +75,7 @@ struct HorizontalDeck_Previews: PreviewProvider {
     
     static var previews: some View {
         HorizontalDeck(
-            deck: deck,
+            deck: .constant(deck),
             cardBuilder: { AnyView(BasicCard(item: $0)) })
             .background(Color.secondary)
     }

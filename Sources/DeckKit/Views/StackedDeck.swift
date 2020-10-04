@@ -48,7 +48,7 @@ public struct StackedDeck<ItemType: CardItem>: View {
     ///   - scaleOffset: The point-based offset of each card.
     ///   - cardBuilder: A builder that generates card views.
     public init(
-        deck: Deck<ItemType>,
+        deck: Binding<Deck<ItemType>>,
         direction: Direction = .up,
         displayCount: Int = 10,
         alwaysShowLastCard: Bool = true,
@@ -57,7 +57,7 @@ public struct StackedDeck<ItemType: CardItem>: View {
         cardBuilder: @escaping CardBuilder) {
         assert(scaleOffset > 0, "scaleOffset must be positive")
         assert(verticalOffset > 0, "verticalOffset must be positive")
-        self.context = DeckContext(deck: deck)
+        self.deck = deck
         self.direction = direction
         self.displayCount = displayCount
         self.alwaysShowLastCard = alwaysShowLastCard
@@ -80,14 +80,13 @@ public struct StackedDeck<ItemType: CardItem>: View {
     
     private let alwaysShowLastCard: Bool
     private let cardBuilder: (ItemType) -> AnyView
-    private var deck: Deck<ItemType> { context.deck }
+    private var deck: Binding<Deck<ItemType>>
     private let direction: Direction
     private let displayCount: Int
-    private var items: [ItemType] { deck.items }
+    private var items: [ItemType] { deck.wrappedValue.items }
     private let scaleOffset: CGFloat
     private let verticalOffset: CGFloat
     
-    @ObservedObject private var context: DeckContext<ItemType>
     @State private var activeItem: ItemType?
     @State private var topCardOffset: CGSize = .zero
     @State private var visibleItems: [ItemType] = []
@@ -105,12 +104,12 @@ public struct StackedDeck<ItemType: CardItem>: View {
 public extension StackedDeck {
     
     func moveItemToBack(_ item: ItemType) {
-        context.deck.moveToBack(item)
+        deck.wrappedValue.moveToBack(item)
         refreshCards()
     }
     
     func moveItemToFront(_ item: ItemType) {
-        context.deck.moveToFront(item)
+        deck.wrappedValue.moveToFront(item)
         refreshCards()
     }
     
@@ -240,7 +239,7 @@ struct StackedDeck_Previews: PreviewProvider {
     
     static var previews: some View {
         StackedDeck(
-            deck: deck,
+            deck: .constant(deck),
             direction: .up,
             cardBuilder: { AnyView(BasicCard(item: $0)) })
             .frame(width: 400, height: 600, alignment: .center)
