@@ -89,12 +89,21 @@ public struct StackedDeck<ItemType: CardItem>: View {
     
     @State private var activeItem: ItemType?
     @State private var topCardOffset: CGSize = .zero
-    @State private var visibleItems: [ItemType] = []
+    
+    private var visibleItems: [ItemType] {
+        let first = Array(items.prefix(displayCount))
+        guard
+            alwaysShowLastCard,
+            let last = items.last,
+            !first.contains(last)
+        else { return first }
+        return Array(first) + [last]
+    }
     
     public var body: some View {
         ZStack(alignment: .center) {
             ForEach(visibleItems, content: cardBuilderWithModifiers)
-        }.onAppear(perform: refreshCards)
+        }
     }
 }
 
@@ -105,22 +114,10 @@ public extension StackedDeck {
     
     func moveItemToBack(_ item: ItemType) {
         deck.wrappedValue.moveToBack(item)
-        refreshCards()
     }
     
     func moveItemToFront(_ item: ItemType) {
         deck.wrappedValue.moveToFront(item)
-        refreshCards()
-    }
-    
-    func refreshCards() {
-        let first = Array(items.prefix(displayCount))
-        guard
-            alwaysShowLastCard,
-            let last = items.last,
-            !first.contains(last)
-        else { return visibleItems = first }
-        visibleItems = Array(first) + [last]
     }
 }
 
