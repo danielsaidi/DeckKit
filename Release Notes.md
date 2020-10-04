@@ -5,6 +5,8 @@
 
 This version changes the `deck` init params for `StackedDeck` and `HorizontalDeck` to a binding, to avoid having the deck reset everytime the view hierarchy reloads.
 
+With this change, I could remove state for visible cards in `StackDeck`, to make deck modifications instantly trigger UI changes. I have added a shuffle button to the demo to demonstrate this.
+
 The `DeckContext` class is still in the library, but is not used by the library itself.
 
 

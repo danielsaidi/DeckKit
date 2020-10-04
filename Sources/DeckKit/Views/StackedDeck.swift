@@ -124,36 +124,26 @@ public extension StackedDeck {
 
 // MARK: - View Logic
 
-public extension StackedDeck {
+private extension StackedDeck {
     
     func cardBuilderWithModifiers(_ item: ItemType) -> some View {
         cardBuilder(item)
             .zIndex(zIndex(of: item))
             .shadow(radius: 2)
             .offset(size: dragOffset(for: item))
-            .offset(y: offset(of: item))
             .scaleEffect(scale(of: item))
+            .offset(y: offset(of: item))
             .rotationEffect(dragRotation(for: item))
             .gesture(dragGesture(for: item))
     }
     
     func dragGesture(for item: ItemType) -> some Gesture {
         DragGesture()
-            .onChanged({ handleDragGestureChanged($0, for: item) })
-            .onEnded({ handleDragGestureEnded($0) })
+            .onChanged({ dragGestureChanged($0, for: item) })
+            .onEnded({ dragGestureEnded($0) })
     }
     
-    func dragOffset(for item: ItemType) -> CGSize {
-        if item != activeItem { return .zero }
-        return topCardOffset
-    }
-    
-    func dragRotation(for item: ItemType) -> Angle {
-        if item != activeItem { return .degrees(0) }
-        return .degrees(Double(topCardOffset.width) / 20.0)
-    }
-    
-    func handleDragGestureChanged(_ drag: DragGesture.Value, for item: ItemType) {
+    func dragGestureChanged(_ drag: DragGesture.Value, for item: ItemType) {
         if activeItem == nil { activeItem = item }
         if item != activeItem { return }
         withAnimation(.spring()) {
@@ -169,28 +159,44 @@ public extension StackedDeck {
         }
     }
     
-    func handleDragGestureEnded(_ drag: DragGesture.Value) {
+    func dragGestureEnded(_ drag: DragGesture.Value) {
         withAnimation(.spring()) {
             activeItem = nil
             topCardOffset = .zero
         }
     }
     
+    func dragOffset(for item: ItemType) -> CGSize {
+        isActive(item) ? topCardOffset : .zero
+    }
+    
+    func dragRotation(for item: ItemType) -> Angle {
+        .degrees(isActive(item) ? Double(topCardOffset.width) / 20.0 : 0)
+    }
+    
+    func isActive(_ item: ItemType) -> Bool {
+        item == activeItem
+    }
+    
     func offset(of item: ItemType) -> CGFloat {
-        guard let index = visibleItems.firstIndex(of: item) else { return .zero }
+        guard let index = visibleIndex(of: item) else { return .zero }
         let offset = CGFloat(index) * verticalOffset
         let multiplier: CGFloat = direction == .down ? 1 : -1
         return offset * multiplier
     }
     
     func scale(of item: ItemType) -> CGFloat {
-        guard let index = visibleItems.firstIndex(of: item) else { return 1 }
+        guard let index = visibleIndex(of: item) else { return 1 }
         let offset = CGFloat(index) * scaleOffset
         return CGFloat(1 - offset)
     }
     
+    func visibleIndex(of item: ItemType) -> Int? {
+        visibleItems.firstIndex(of: item)
+    }
+    
     func zIndex(of card: ItemType) -> Double {
-        guard let index = visibleItems.firstIndex(of: card) else { return 0 }
+        guard let index = visibleIndex(of: card) else { return 0 }
         return Double(visibleItems.count - index)
     }
 }
