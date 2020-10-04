@@ -18,7 +18,7 @@ struct ContentView: View {
         ZStack {
             background
             deckView.platformSpecificPadding()
-            menuStack
+            menu
         }
     }
 }
@@ -37,11 +37,7 @@ private extension ContentView {
     }
     
     func shuffle() {
-        deck = Deck(name: deck.name, items: deck.items.shuffled())
-        isHorizontalList.toggle()
-        DispatchQueue.main.async {
-            isHorizontalList.toggle()
-        }
+        deck.items.shuffle()
     }
 }
 
@@ -56,31 +52,24 @@ private extension ContentView {
             .edgesIgnoringSafeArea(.all)
     }
     
+    func card(for hobby: Hobby) -> some View {
+        HobbyCard(item: hobby)
+    }
+    
     var deckView: AnyView {
         if isHorizontalList {
-            return AnyView(HorizontalDeck(deck: deck) {
-                AnyView(HobbyCard(item: $0).padding())
+            return AnyView(HorizontalDeck(deck: $deck) {
+                AnyView(card(for: $0).padding())
             })
         } else {
             return AnyView(StackedDeck(
-                deck: deck,
+                deck: $deck,
                 direction: .up,
                 displayCount: 10,
                 alwaysShowLastCard: true,
                 verticalOffset: 10) {
-                AnyView(HobbyCard(item: $0))
+                AnyView(card(for: $0))
             })
-        }
-    }
-    
-    var menu: some View {
-        HStack(spacing: 20) {
-            //menuButton(text: "Shuffle", image: "shuffle", action: shuffle)
-            if isHorizontalList {
-                menuButton(text: "Stack", image: "rectangle.stack", action: showAsStack)
-            } else {
-                menuButton(text: "List", image: "pause.fill", action: showAsHorizontalList)
-            }
         }
     }
     
@@ -101,10 +90,17 @@ private extension ContentView {
         .shadow(radius: 20)
     }
     
-    var menuStack: some View {
+    var menu: some View {
         ZStack(alignment: .bottom) {
             Color.clear
-            menu.padding()
+            HStack(spacing: 20) {
+                menuButton(text: "Shuffle", image: "shuffle", action: shuffle)
+                if isHorizontalList {
+                    menuButton(text: "Stack", image: "rectangle.stack", action: showAsStack)
+                } else {
+                    menuButton(text: "List", image: "pause.fill", action: showAsHorizontalList)
+                }
+            }.padding()
         }
     }
 }

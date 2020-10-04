@@ -5,9 +5,9 @@
         "package": "DeckKit",
         "repositoryURL": "git@github.com:danielsaidi/DeckKit.git",
         "state": {
-          "branch": null,
-          "revision": "42a8e91b0605dfc5df022f5715c6153130857cbd",
-          "version": "0.1.2"
+          "branch": "master",
+          "revision": "6f2098729e923f31b196a39fc658608f47d3bee1",
+          "version": null
         }
       }
     ]
