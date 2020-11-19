@@ -11,8 +11,8 @@ I have added a shuffle button to the demo to demonstrate how much better the sta
 
 The `StackedDeck` has been improved in more ways:
 
-    * I have changed the order of how the vertical offset and scale effect are applied, which fixes a UI glitch.
-    * I have added `swipeLeft/Right/Up/Down` actions which let you trigger actions depending on how a user swipes a card of the top of the deck.
+* I have changed the order of how the vertical offset and scale effect are applied, which fixes a UI glitch.
+* I have added `swipeLeft/Right/Up/Down` actions which let you trigger actions depending on how a user swipes a card of the top of the deck.
 
 The `DeckContext` class is still in the library, but is not used by the library itself.
 
