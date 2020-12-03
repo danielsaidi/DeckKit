@@ -24,7 +24,7 @@
 With `DeckKit`, you can present any model that implements `CardItem` as cards. It can look like this: 
 
 <p align="center">
-    <img src="Resources/Demo.gif" width=450 />
+    <img src="Resources/Demo.gif" width=300 />
 </p>
 
 I will add a stunning (well...) logo and improve the documentation after the library gets 50 stars or the first external issue. Until then, create issues or reach out to me if you need help.
