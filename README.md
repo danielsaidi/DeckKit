@@ -69,7 +69,7 @@ You can easily build your own `Deck`-based views as well, using plain SwiftUI.
 
 This repo contains a very basic, universal demo app that runs on iOS 14 and macOS 11.
 
-Just open the `DeckKitDemo` project and run the app on either platform.
+Just open the `Demo` project and run the app on either platform.
 
 The library could run on tvOS as well, but the demo currently has no tvOS app.
 
