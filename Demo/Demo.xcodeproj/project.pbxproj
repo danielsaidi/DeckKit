@@ -226,9 +226,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		656FA43C251A62500079841C /* DeckKitDemo (iOS) */ = {
+		656FA43C251A62500079841C /* Demo (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 656FA451251A62500079841C /* Build configuration list for PBXNativeTarget "DeckKitDemo (iOS)" */;
+			buildConfigurationList = 656FA451251A62500079841C /* Build configuration list for PBXNativeTarget "Demo (iOS)" */;
 			buildPhases = (
 				656FA439251A62500079841C /* Sources */,
 				656FA43A251A62500079841C /* Frameworks */,
@@ -238,16 +238,16 @@
 			);
 			dependencies = (
 			);
-			name = "DeckKitDemo (iOS)";
+			name = "Demo (iOS)";
 			packageProductDependencies = (
 			);
 			productName = "DeckKitDemo (iOS)";
 			productReference = 656FA43D251A62500079841C /* DeckKitDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		656FA444251A62500079841C /* DeckKitDemo (macOS) */ = {
+		656FA444251A62500079841C /* Demo (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 656FA454251A62500079841C /* Build configuration list for PBXNativeTarget "DeckKitDemo (macOS)" */;
+			buildConfigurationList = 656FA454251A62500079841C /* Build configuration list for PBXNativeTarget "Demo (macOS)" */;
 			buildPhases = (
 				656FA441251A62500079841C /* Sources */,
 				656FA442251A62500079841C /* Frameworks */,
@@ -257,7 +257,7 @@
 			);
 			dependencies = (
 			);
-			name = "DeckKitDemo (macOS)";
+			name = "Demo (macOS)";
 			packageProductDependencies = (
 			);
 			productName = "DeckKitDemo (macOS)";
@@ -282,7 +282,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 656FA434251A624F0079841C /* Build configuration list for PBXProject "DeckKitDemo" */;
+			buildConfigurationList = 656FA434251A624F0079841C /* Build configuration list for PBXProject "Demo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -297,8 +297,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				656FA43C251A62500079841C /* DeckKitDemo (iOS) */,
-				656FA444251A62500079841C /* DeckKitDemo (macOS) */,
+				656FA43C251A62500079841C /* Demo (iOS) */,
+				656FA444251A62500079841C /* Demo (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -495,7 +495,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.DeckKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.deckkit.demo;
 				PRODUCT_NAME = DeckKitDemo;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -517,7 +517,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.DeckKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.deckkit.demo;
 				PRODUCT_NAME = DeckKitDemo;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -544,7 +544,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.DeckKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.deckkit.demo;
 				PRODUCT_NAME = DeckKitDemo;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -569,7 +569,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.DeckKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.deckkit.demo;
 				PRODUCT_NAME = DeckKitDemo;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -579,7 +579,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		656FA434251A624F0079841C /* Build configuration list for PBXProject "DeckKitDemo" */ = {
+		656FA434251A624F0079841C /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				656FA44F251A62500079841C /* Debug */,
@@ -588,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		656FA451251A62500079841C /* Build configuration list for PBXNativeTarget "DeckKitDemo (iOS)" */ = {
+		656FA451251A62500079841C /* Build configuration list for PBXNativeTarget "Demo (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				656FA452251A62500079841C /* Debug */,
@@ -597,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		656FA454251A62500079841C /* Build configuration list for PBXNativeTarget "DeckKitDemo (macOS)" */ = {
+		656FA454251A62500079841C /* Build configuration list for PBXNativeTarget "Demo (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				656FA455251A62500079841C /* Debug */,
