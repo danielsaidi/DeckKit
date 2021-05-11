@@ -14,15 +14,11 @@
 
 ## About DeckKit
 
-`DeckKit` is a tiny SwiftUI library that can help you create deck-based apps.
-
-With `DeckKit`, you can present any model that implements `CardItem` as cards. It can look like this: 
+`DeckKit` is a tiny SwiftUI library that can help you create deck-based apps. It can look like this...or completely different: 
 
 <p align="center">
     <img src="Resources/Demo.gif" width=300 />
 </p>
-
-I will add a stunning (well...) logo and improve the documentation after the library gets 50 stars or the first external issue. Until then, create issues or reach out to me if you need help.
 
 
 ## Installation
@@ -42,31 +38,31 @@ pod DeckKit
 
 ## How does it work
 
-I will add better documentation if anyone starts using this library, but basically it works like this:
+I will improve documentation if anyone requests it (just create an issue), but basically it works like this:
 
 * `CardItem` is a protocol that inherits `Identifiable` and `Equatable`
-* A `Deck` can be created with any `CardItem` collection.
+* A `Deck` can be created with a `CardItem` collection.
 
-Decks can be used as plain data objects, but can also bre presented with SwiftUI.
+A `Deck` can be used as a plain data object, but can also bre presented with `SwiftUI`.
 
 
-## Presenting a deck
+## SwiftUI
 
-A `Deck` can be presented in many ways, including these two built in views:
+`DeckKit` contains two `SwiftUI` views for presenting a `Deck`:
 
 * `StackedDeck` stacks cards on top of eachother and lets the user swipe cards off the top.
-* `HorizontalDeck` presents cards in a horizontal list.
+* `HorizontalDeck` presents cards in a horizontal list and lets the user swipe horizontally.
 
-You can easily build your own `Deck`-based views as well, using plain SwiftUI.
+You can build your own `Deck`-based views as well, using plain `SwiftUI` views.
 
 
 ## Demo app
 
-This repo contains a very basic, universal demo app that runs on iOS 14 and macOS 11.
+This repo contains a basic, universal demo app that runs on iOS 14 and macOS 11.
 
 Just open the `Demo` project and run the app on either platform.
 
-The library could run on tvOS as well, but the demo currently has no tvOS app.
+The library could run on `tvOS` and `watchOS` as well, but there are currently no such demos.
 
 
 ## Acknowledgements
