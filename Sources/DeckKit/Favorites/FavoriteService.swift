@@ -16,8 +16,23 @@ public protocol Favoritable: Identifiable {}
  */
 public protocol FavoriteService: AnyObject {
     
+    /**
+     Get all favorite item IDs.
+     */
     func getFavorites<Item: Favoritable>(for type: Item.Type) -> [Item.ID]
+    
+    /**
+     Check whether or not a certain item is a favorite.
+     */
     func isFavorite<Item: Favoritable>(_ item: Item) -> Bool
+    
+    /**
+     Set whether or not a certain item is a favorite.
+     */
     func setIsFavorite<Item: Favoritable>(_ isFavorite: Bool, for item: Item)
+    
+    /**
+     Toggle whether or not a certain item is a favorite.
+     */
     func toggleIsFavorite<Item: Favoritable>(for item: Item)
 }

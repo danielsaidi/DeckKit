@@ -9,7 +9,7 @@
 import SwiftUI
 
 /**
- This view presents a deck as a horizontal list.
+ This view presents a deck of cards as a horizontal list.
  
  This view takes a generic `Deck` as init parameter, as well
  as and a `cardBuilder` that takes the same card type as the

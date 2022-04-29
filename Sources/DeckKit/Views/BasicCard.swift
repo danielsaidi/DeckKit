@@ -10,11 +10,19 @@ import SwiftUI
 import CoreGraphics
 
 /**
- This is a card view that presents a `BasicDeckItem`. It can
- be used as is or as a template.
+ This view can be used to presents a ``BasicCard/Item``, and
+ can be used as is or as a template for other cards.
  */
 public struct BasicCard: View {
     
+    /**
+     Create a basic card.
+     
+     - Parameters:
+       - item: The item to display in the card.
+       - size: The size of the card.
+       - cornerRadius: The corner radius of the card.
+     */
     public init(
         item: Item,
         size: CGSize = CGSize(width: 300, height: 400),

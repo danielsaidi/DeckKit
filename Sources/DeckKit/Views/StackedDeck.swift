@@ -10,12 +10,12 @@
 import SwiftUI
 
 /**
- This view presents a deck as a stack, from which a user can
- swipe away the top card and send it to the back of the deck.
+ This view presents a deck of cards as a stack, from which a
+ user can swipe away the top card and send it to the back of
+ the stack.
 
- This view takes a generic `Deck` as init parameter, as well
- as a `cardBuilder` function that uses the same item type as
- the deck as input parameter and returns a view.
+ This view takes a generic ``Deck`` and a `cardBuilder` that
+ maps the deck's items to card views.
  
  If there are more cards in the deck than are covered by the
  `displayCount` value, the `alwaysShowLastCard` parameter is
@@ -27,25 +27,28 @@ import SwiftUI
  still making it performant and visually manageable.
  
  `ACKNOWLEDGEMENT` This view builds upon the amazing work by
- Alex Brown (@Alex_Brown23) and his amazing card tutorial at
- https://www.swiftcompiled.com/swiftui-cards/.manageable
+ Alex Brown and his amazing card tutorial at:
+ 
+ https://www.swiftcompiled.com/swiftui-cards/
  */
 public struct StackedDeck<ItemType: DeckItem>: View {
     
-    /// Creates an instance of the view.
-    ///
-    /// - Parameters:
-    ///   - deck: The generic deck that is to be presented.
-    ///   - direction: Whether the deck goes `.up` or `.down`
-    ///   - displayCount: The max number of cards to display.
-    ///   - alwaysShowLastCard: Whether or not to show the last card.
-    ///   - scaleOffset: The percentual shrink of each card.
-    ///   - verticalOffset: The point-based vertical offset of each card.
-    ///   - swipeLeftAction: Called when a card sent to the back of the deck by swiping it left.
-    ///   - swipeRightAction: Called when a card sent to the back of the deck by swiping it right.
-    ///   - swipeUpAction: Called when a card sent to the back of the deck by swiping it up.
-    ///   - swipeDownAction: Called when a card sent to the back of the deck by swiping it down.
-    ///   - cardBuilder: A builder that generates card views.
+    /**
+     Creates an instance of the view.
+     
+     - Parameters:
+       - deck: The generic deck that is to be presented.
+       - direction: Whether the deck goes `.up` or `.down`
+       - displayCount: The max number of cards to display.
+       - alwaysShowLastCard: Whether or not to show the last card.
+       - scaleOffset: The percentual shrink of each card.
+       - verticalOffset: The point-based vertical offset of each card.
+       - swipeLeftAction: Called when a card sent to the back of the deck by swiping it left.
+       - swipeRightAction: Called when a card sent to the back of the deck by swiping it right.
+       - swipeUpAction: Called when a card sent to the back of the deck by swiping it up.
+       - swipeDownAction: Called when a card sent to the back of the deck by swiping it down.
+       - cardBuilder: A builder that generates card views.
+     */
     public init(
         deck: Binding<Deck<ItemType>>,
         direction: Direction = .up,
@@ -130,10 +133,16 @@ public struct StackedDeck<ItemType: DeckItem>: View {
 
 public extension StackedDeck {
     
+    /**
+     Move a certain item to the back of the stack.
+     */
     func moveItemToBack(_ item: ItemType) {
         deck.wrappedValue.moveToBack(item)
     }
     
+    /**
+     Move a certain item to the front of the stack.
+     */
     func moveItemToFront(_ item: ItemType) {
         deck.wrappedValue.moveToFront(item)
     }
