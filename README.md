@@ -1,7 +1,8 @@
-# DeckKit
+<p align="center">
+    <img src ="Resources/Logo.png" alt="DeckKit Logo" title="DeckKit" width=600 />
+</p>
 
 <p align="center">
-    <img src ="Resources/Logo.png" width=600 /><br />
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/cocoapods/p/DeckKit.svg?style=flat" alt="Platform" />
     <img src="https://img.shields.io/badge/Swift-5.3-orange.svg" alt="Swift 5.3" />
@@ -14,63 +15,71 @@
 
 ## About DeckKit
 
-`DeckKit` is a tiny SwiftUI library that can help you create deck-based apps. It can look like this...or completely different: 
+DeckKit makes it easy to create deck-based apps in `SwiftUI`. The result can look like this, or completely different: 
 
 <p align="center">
     <img src="Resources/Demo.gif" width=300 />
 </p>
 
+These decks can be customized to fit your specific needs. You can change colors, fonts, corner radius, expanded height etc. and use any views as your cards.
+
+
+
+## Supported Platforms
+
+DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
+
+
 
 ## Installation
 
-### Swift Package Manager
+DeckKit can be installed with the Swift Package Manager:
 
 ```
 https://github.com/danielsaidi/DeckKit.git
 ```
 
-### CocoaPods
+or with CocoaPods:
 
 ```
 pod DeckKit
 ```
 
 
-## How does it work
 
-I will improve documentation if anyone requests it (just create an issue), but basically it works like this:
+## Getting started
 
-* `CardItem` is a protocol that inherits `Identifiable` and `Equatable`
-* A `Deck` can be created with a `CardItem` collection.
-
-A `Deck` can be used as a plain data object, but can also bre presented with `SwiftUI`.
+To get started with BottomSheet, have a look at [this getting started guide][GettingStarted].
 
 
-## SwiftUI
 
-`DeckKit` contains two `SwiftUI` views for presenting a `Deck`:
+## Documentation
 
-* `StackedDeck` stacks cards on top of eachother and lets the user swipe cards off the top.
-* `HorizontalDeck` presents cards in a horizontal list and lets the user swipe horizontally.
+The [online documentation][Documentation] contains more information, code examples etc. and makes it easy to overview the various parts of the library.
 
-You can build your own `Deck`-based views as well, using plain `SwiftUI` views.
+The online documentation is currently iOS only. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`. 
 
 
-## Demo app
 
-This repo contains a basic, universal demo app that runs on iOS 14 and macOS 11.
+## Demo Application
 
-Just open the `Demo` project and run the app on either platform.
+This project contains a demo app that lets you explore BottomSheet on iOS and macOS. To run it, just open and run `Demo/Demo.xcodeproj`.
 
-The library could run on `tvOS` and `watchOS` as well, but there are currently no such demos.
 
 
 ## Acknowledgements
 
-This library wouldn't have been made without [this amazing card tutorial](https://www.swiftcompiled.com/swiftui-cards/).
+This library wouldn't have been made without [this amazing card tutorial][Tutorial].
 
 
-## Contact me
+
+## Support
+
+You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support. 
+
+
+
+## Contact
 
 Feel free to reach out if you have questions or if you want to contribute in any way:
 
@@ -79,11 +88,20 @@ Feel free to reach out if you have questions or if you want to contribute in any
 * Web site: [danielsaidi.com][Website]
 
 
+
 ## License
 
-DeckKit is available under the MIT license. See LICENSE file for more info.
+DeckKit is available under the MIT license. See the [LICENSE][License] file for more info.
+
 
 
 [Email]: mailto:daniel.saidi@gmail.com
 [Twitter]: http://www.twitter.com/danielsaidi
 [Website]: http://www.danielsaidi.com
+[Sponsors]: https://github.com/sponsors/danielsaidi
+
+[Documentation]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/
+[GettingStarted]: https://github.com/danielsaidi/DeckKit/blob/master/Readmes/Getting-Started.md
+[License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
+
+[Tutorial]: https://www.swiftcompiled.com/swiftui-cards/

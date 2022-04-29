@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "DeckKit",
-    platforms: [.iOS(.v13), .watchOS(.v6), .tvOS(.v13), .macOS(.v11)],
+    platforms: [.iOS(.v13), .macOS(.v11), .tvOS(.v13), .watchOS(.v6)],
     products: [
         .library(
             name: "DeckKit",

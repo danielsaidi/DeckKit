@@ -30,7 +30,7 @@ import SwiftUI
  Alex Brown (@Alex_Brown23) and his amazing card tutorial at
  https://www.swiftcompiled.com/swiftui-cards/.manageable
  */
-public struct StackedDeck<ItemType: CardItem>: View {
+public struct StackedDeck<ItemType: DeckItem>: View {
     
     /// Creates an instance of the view.
     ///

@@ -1,7 +1,16 @@
 # Release notes
 
 
-## 0.2.0
+## 0.3
+
+
+### 💥 Breaking Changes
+
+* `CardItem` has been renamed to `DeckItem`.
+
+
+
+## 0.2
 
 The `deck` init params for `StackedDeck` and `HorizontalDeck` has been changed to a binding.
 
@@ -17,12 +26,14 @@ The `StackedDeck` has been improved in more ways:
 The `DeckContext` class is still in the library, but is not used by the library itself.
 
 
+
 ## 0.1.1
 
 This version was just made to force the CocoaPod to pass validation. 
 
 
-## 0.1.0
+
+## 0.1
 
 This version is the first public release of DeckKit. 
 

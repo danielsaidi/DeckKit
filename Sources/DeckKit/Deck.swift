@@ -12,7 +12,7 @@ import Foundation
  This struct can be used to create a deck of items, that can
  then be converted to views when the deck is presented.
  */
-public struct Deck<Item: CardItem>: Identifiable, Equatable {
+public struct Deck<Item: DeckItem>: Identifiable, Equatable {
     
     public init(
         name: String,

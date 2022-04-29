@@ -12,4 +12,4 @@ import Foundation
  This protocol represents a model that can be used as a card
  view model.
  */
-public protocol CardItem: Identifiable, Equatable {}
+public protocol DeckItem: Identifiable, Equatable {}

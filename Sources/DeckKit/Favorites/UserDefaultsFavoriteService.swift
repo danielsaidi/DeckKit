@@ -42,6 +42,6 @@ public class UserDefaultsFavoriteService: FavoriteService {
 private extension UserDefaultsFavoriteService {
     
     func key<Item: Favoritable>(for type: Item.Type) -> String {
-        "com.prankdeck.favorites.\(String(describing: type))"
+        "com.danielsaidi.deckkit.favorites.\(String(describing: type))"
     }
 }

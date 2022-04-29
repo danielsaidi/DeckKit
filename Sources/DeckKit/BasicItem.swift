@@ -9,9 +9,9 @@
 import SwiftUI
 
 /**
- This is a basic implementation of the `CardItem` protocol.
+ This is a basic implementation of the `DeckItem` protocol.
  */
-public struct BasicItem: CardItem {
+public struct BasicItem: DeckItem {
     
     public init(
         title: String,

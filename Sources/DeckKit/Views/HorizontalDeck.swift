@@ -16,7 +16,7 @@ import SwiftUI
  deck as input parameter and returns a view.
  */
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public struct HorizontalDeck<ItemType: CardItem>: View {
+public struct HorizontalDeck<ItemType: DeckItem>: View {
     
     /// Creates an instance of the view.
     ///
