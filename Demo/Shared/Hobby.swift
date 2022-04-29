@@ -6,10 +6,11 @@
 //  Copyright © 2020 Daniel Saidi. All rights reserved.
 //
 
+import DeckKit
 import Foundation
 import SwiftUI
 
-struct Hobby: CardItem {
+struct Hobby: DeckItem {
     
     let id = UUID().uuidString
     

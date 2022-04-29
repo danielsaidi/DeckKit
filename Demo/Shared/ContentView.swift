@@ -6,12 +6,18 @@
 //  Copyright © 2020 Daniel Saidi. All rights reserved.
 //
 
+import DeckKit
 import SwiftUI
 
 struct ContentView: View {
     
-    @State var deck = Deck(name: "Hobbies", items: Hobby.demoCollection)
-    @State var isHorizontalList = false
+    @State
+    var deck = Deck(
+        name: "Hobbies",
+        items: Hobby.demoCollection)
+    
+    @State
+    var isHorizontalList = false
     
     var body: some View {
         ZStack {

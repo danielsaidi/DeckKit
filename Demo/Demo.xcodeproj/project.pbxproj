@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,28 +17,8 @@
 		656FA460251A69720079841C /* Hobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA45E251A696D0079841C /* Hobby.swift */; };
 		656FA462251A6A0C0079841C /* HobbyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA461251A6A0C0079841C /* HobbyCard.swift */; };
 		656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA461251A6A0C0079841C /* HobbyCard.swift */; };
-		A98279FD257ED0A60006D64F /* BasicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279EF257ED0A60006D64F /* BasicItem.swift */; };
-		A98279FE257ED0A60006D64F /* BasicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279EF257ED0A60006D64F /* BasicItem.swift */; };
-		A98279FF257ED0A60006D64F /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F1257ED0A60006D64F /* FavoriteService.swift */; };
-		A9827A00257ED0A60006D64F /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F1257ED0A60006D64F /* FavoriteService.swift */; };
-		A9827A01257ED0A60006D64F /* FavoriteContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F2257ED0A60006D64F /* FavoriteContext.swift */; };
-		A9827A02257ED0A60006D64F /* FavoriteContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F2257ED0A60006D64F /* FavoriteContext.swift */; };
-		A9827A03257ED0A60006D64F /* UserDefaultsFavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F3257ED0A60006D64F /* UserDefaultsFavoriteService.swift */; };
-		A9827A04257ED0A60006D64F /* UserDefaultsFavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F3257ED0A60006D64F /* UserDefaultsFavoriteService.swift */; };
-		A9827A05257ED0A60006D64F /* DeckContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F4257ED0A60006D64F /* DeckContext.swift */; };
-		A9827A06257ED0A60006D64F /* DeckContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F4257ED0A60006D64F /* DeckContext.swift */; };
-		A9827A07257ED0A60006D64F /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F5257ED0A60006D64F /* CardItem.swift */; };
-		A9827A08257ED0A60006D64F /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F5257ED0A60006D64F /* CardItem.swift */; };
-		A9827A09257ED0A60006D64F /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F6257ED0A60006D64F /* Deck.swift */; };
-		A9827A0A257ED0A60006D64F /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F6257ED0A60006D64F /* Deck.swift */; };
-		A9827A0B257ED0A60006D64F /* UserDefaultsPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F8257ED0A60006D64F /* UserDefaultsPersisted.swift */; };
-		A9827A0C257ED0A60006D64F /* UserDefaultsPersisted.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279F8257ED0A60006D64F /* UserDefaultsPersisted.swift */; };
-		A9827A0D257ED0A60006D64F /* BasicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279FA257ED0A60006D64F /* BasicCard.swift */; };
-		A9827A0E257ED0A60006D64F /* BasicCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279FA257ED0A60006D64F /* BasicCard.swift */; };
-		A9827A0F257ED0A60006D64F /* HorizontalDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279FB257ED0A60006D64F /* HorizontalDeck.swift */; };
-		A9827A10257ED0A60006D64F /* HorizontalDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279FB257ED0A60006D64F /* HorizontalDeck.swift */; };
-		A9827A11257ED0A60006D64F /* StackedDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279FC257ED0A60006D64F /* StackedDeck.swift */; };
-		A9827A12257ED0A60006D64F /* StackedDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98279FC257ED0A60006D64F /* StackedDeck.swift */; };
+		A9CD2C8C281C27A40044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8B281C27A40044E20E /* DeckKit */; };
+		A9CD2C8E281C27A80044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8D281C27A80044E20E /* DeckKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,17 +32,6 @@
 		656FA448251A62500079841C /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		656FA45E251A696D0079841C /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
 		656FA461251A6A0C0079841C /* HobbyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCard.swift; sourceTree = "<group>"; };
-		A98279EF257ED0A60006D64F /* BasicItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicItem.swift; sourceTree = "<group>"; };
-		A98279F1257ED0A60006D64F /* FavoriteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
-		A98279F2257ED0A60006D64F /* FavoriteContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteContext.swift; sourceTree = "<group>"; };
-		A98279F3257ED0A60006D64F /* UserDefaultsFavoriteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsFavoriteService.swift; sourceTree = "<group>"; };
-		A98279F4257ED0A60006D64F /* DeckContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckContext.swift; sourceTree = "<group>"; };
-		A98279F5257ED0A60006D64F /* CardItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
-		A98279F6257ED0A60006D64F /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
-		A98279F8257ED0A60006D64F /* UserDefaultsPersisted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsPersisted.swift; sourceTree = "<group>"; };
-		A98279FA257ED0A60006D64F /* BasicCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCard.swift; sourceTree = "<group>"; };
-		A98279FB257ED0A60006D64F /* HorizontalDeck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalDeck.swift; sourceTree = "<group>"; };
-		A98279FC257ED0A60006D64F /* StackedDeck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedDeck.swift; sourceTree = "<group>"; };
 		A9827A18257ED1D60006D64F /* Release Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "Release Notes.md"; path = "../Release Notes.md"; sourceTree = "<group>"; };
 		A9827A19257ED1D60006D64F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		A9827A1A257ED1D60006D64F /* DeckKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeckKit.podspec; path = ../DeckKit.podspec; sourceTree = "<group>"; };
@@ -71,6 +40,7 @@
 		A9827A1D257ED1D60006D64F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		A9827A1E257ED1D60006D64F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A9827A1F257ED1E20006D64F /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Fastfile; path = ../Fastlane/Fastfile; sourceTree = "<group>"; };
+		A9CD2C8A281C27960044E20E /* deckkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = deckkit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9CD2C8C281C27A40044E20E /* DeckKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9CD2C8E281C27A80044E20E /* DeckKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +66,7 @@
 		656FA430251A624F0079841C = {
 			isa = PBXGroup;
 			children = (
+				A9CD2C89281C27960044E20E /* Packages */,
 				656FA435251A624F0079841C /* Shared */,
 				656FA43F251A62500079841C /* iOS */,
 				656FA446251A62500079841C /* macOS */,
@@ -106,11 +79,11 @@
 		656FA435251A624F0079841C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				656FA45D251A695C0079841C /* Hobbies */,
-				A98279ED257ED0A60006D64F /* Sources */,
-				656FA436251A624F0079841C /* DeckKitDemoApp.swift */,
-				656FA437251A624F0079841C /* ContentView.swift */,
 				656FA438251A62500079841C /* Assets.xcassets */,
+				656FA437251A624F0079841C /* ContentView.swift */,
+				656FA436251A624F0079841C /* DeckKitDemoApp.swift */,
+				656FA45E251A696D0079841C /* Hobby.swift */,
+				656FA461251A6A0C0079841C /* HobbyCard.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -148,66 +121,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		656FA45D251A695C0079841C /* Hobbies */ = {
-			isa = PBXGroup;
-			children = (
-				656FA45E251A696D0079841C /* Hobby.swift */,
-				656FA461251A6A0C0079841C /* HobbyCard.swift */,
-			);
-			path = Hobbies;
-			sourceTree = "<group>";
-		};
-		A98279ED257ED0A60006D64F /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				A98279EE257ED0A60006D64F /* DeckKit */,
-			);
-			name = Sources;
-			path = ../../Sources;
-			sourceTree = "<group>";
-		};
-		A98279EE257ED0A60006D64F /* DeckKit */ = {
-			isa = PBXGroup;
-			children = (
-				A98279EF257ED0A60006D64F /* BasicItem.swift */,
-				A98279F0257ED0A60006D64F /* Favorites */,
-				A98279F4257ED0A60006D64F /* DeckContext.swift */,
-				A98279F5257ED0A60006D64F /* CardItem.swift */,
-				A98279F6257ED0A60006D64F /* Deck.swift */,
-				A98279F7257ED0A60006D64F /* Data */,
-				A98279F9257ED0A60006D64F /* Views */,
-			);
-			path = DeckKit;
-			sourceTree = "<group>";
-		};
-		A98279F0257ED0A60006D64F /* Favorites */ = {
-			isa = PBXGroup;
-			children = (
-				A98279F1257ED0A60006D64F /* FavoriteService.swift */,
-				A98279F2257ED0A60006D64F /* FavoriteContext.swift */,
-				A98279F3257ED0A60006D64F /* UserDefaultsFavoriteService.swift */,
-			);
-			path = Favorites;
-			sourceTree = "<group>";
-		};
-		A98279F7257ED0A60006D64F /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				A98279F8257ED0A60006D64F /* UserDefaultsPersisted.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
-		A98279F9257ED0A60006D64F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				A98279FA257ED0A60006D64F /* BasicCard.swift */,
-				A98279FB257ED0A60006D64F /* HorizontalDeck.swift */,
-				A98279FC257ED0A60006D64F /* StackedDeck.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		A9827A17257ED1B20006D64F /* Project Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +134,14 @@
 				A9827A18257ED1D60006D64F /* Release Notes.md */,
 			);
 			name = "Project Files";
+			sourceTree = "<group>";
+		};
+		A9CD2C89281C27960044E20E /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				A9CD2C8A281C27960044E20E /* deckkit */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +161,7 @@
 			);
 			name = "Demo (iOS)";
 			packageProductDependencies = (
+				A9CD2C8B281C27A40044E20E /* DeckKit */,
 			);
 			productName = "DeckKitDemo (iOS)";
 			productReference = 656FA43D251A62500079841C /* DeckKitDemo.app */;
@@ -259,6 +181,7 @@
 			);
 			name = "Demo (macOS)";
 			packageProductDependencies = (
+				A9CD2C8D281C27A80044E20E /* DeckKit */,
 			);
 			productName = "DeckKitDemo (macOS)";
 			productReference = 656FA445251A62500079841C /* DeckKitDemo.app */;
@@ -327,20 +250,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A98279FD257ED0A60006D64F /* BasicItem.swift in Sources */,
-				A98279FF257ED0A60006D64F /* FavoriteService.swift in Sources */,
-				A9827A07257ED0A60006D64F /* CardItem.swift in Sources */,
 				656FA462251A6A0C0079841C /* HobbyCard.swift in Sources */,
-				A9827A0B257ED0A60006D64F /* UserDefaultsPersisted.swift in Sources */,
-				A9827A01257ED0A60006D64F /* FavoriteContext.swift in Sources */,
-				A9827A03257ED0A60006D64F /* UserDefaultsFavoriteService.swift in Sources */,
-				A9827A0D257ED0A60006D64F /* BasicCard.swift in Sources */,
 				656FA45F251A696D0079841C /* Hobby.swift in Sources */,
 				656FA44B251A62500079841C /* ContentView.swift in Sources */,
-				A9827A0F257ED0A60006D64F /* HorizontalDeck.swift in Sources */,
-				A9827A05257ED0A60006D64F /* DeckContext.swift in Sources */,
-				A9827A09257ED0A60006D64F /* Deck.swift in Sources */,
-				A9827A11257ED0A60006D64F /* StackedDeck.swift in Sources */,
 				656FA449251A62500079841C /* DeckKitDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,20 +261,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A98279FE257ED0A60006D64F /* BasicItem.swift in Sources */,
-				A9827A00257ED0A60006D64F /* FavoriteService.swift in Sources */,
-				A9827A08257ED0A60006D64F /* CardItem.swift in Sources */,
 				656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */,
-				A9827A0C257ED0A60006D64F /* UserDefaultsPersisted.swift in Sources */,
-				A9827A02257ED0A60006D64F /* FavoriteContext.swift in Sources */,
-				A9827A04257ED0A60006D64F /* UserDefaultsFavoriteService.swift in Sources */,
-				A9827A0E257ED0A60006D64F /* BasicCard.swift in Sources */,
 				656FA460251A69720079841C /* Hobby.swift in Sources */,
 				656FA44C251A62500079841C /* ContentView.swift in Sources */,
-				A9827A10257ED0A60006D64F /* HorizontalDeck.swift in Sources */,
-				A9827A06257ED0A60006D64F /* DeckContext.swift in Sources */,
-				A9827A0A257ED0A60006D64F /* Deck.swift in Sources */,
-				A9827A12257ED0A60006D64F /* StackedDeck.swift in Sources */,
 				656FA44A251A62500079841C /* DeckKitDemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -607,6 +508,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A9CD2C8B281C27A40044E20E /* DeckKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DeckKit;
+		};
+		A9CD2C8D281C27A80044E20E /* DeckKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DeckKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 656FA431251A624F0079841C /* Project object */;
 }
