@@ -53,7 +53,7 @@ public struct HorizontalDeck<ItemType: DeckItem>: View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct HorizontalDeck_Previews: PreviewProvider {
     
-    static var item1: BasicItem { BasicItem(
+    static var item1: BasicCard.Item { BasicCard.Item(
         title: "Title 1",
         text: "Text 1",
         footnote: "Footnote 1",
@@ -61,7 +61,7 @@ struct HorizontalDeck_Previews: PreviewProvider {
         tintColor: .yellow)
     }
     
-    static var item2: BasicItem { BasicItem(
+    static var item2: BasicCard.Item { BasicCard.Item(
         title: "Title 2",
         text: "Text 2",
         footnote: "Footnote 2",

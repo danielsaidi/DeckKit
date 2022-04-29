@@ -3,9 +3,14 @@
 
 ## 0.3
 
+### ✨ New features
+
+* `Deck` now lets you specify id.
+
 
 ### 💥 Breaking Changes
 
+* `BasicItem` has been renamed to `BasicCard.Item`.
 * `CardItem` has been renamed to `DeckItem`.
 
 

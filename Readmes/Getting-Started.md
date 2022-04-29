@@ -5,14 +5,64 @@ This article describes how you get started with DeckKit.
 
 ## Installation
 
-BottomSheet can be installed with the Swift Package Manager:
+DeckKit can be installed with the Swift Package Manager:
 
 ```
 https://github.com/danielsaidi/BottomSheet.git
 ``` 
 
+or with CocoaPods:
 
-## WebView
+```
+pod DeckKit
+```
+
+
+## Creating a deck
+
+In DeckKit, a ``Deck`` is the model that can be bound to various views.
+
+You create a deck by giving it an optional name and a set of items that implement the ``DeckItem`` protocol.
+
+For instance, consider a list of hobbies, where the `Hobby` struct looks like this:
+
+```swift
+struct Hobby: CardItem {
+    
+    let id = UUID().uuidString
+    
+    var name: String
+    var text: String
+    var imageName: String
+    var color: Color
+    
+    var backgroundColor: Color { color }
+    var foregroundColor: Color {
+        switch backgroundColor {
+        case .white: return .black
+        default: return .white
+        }
+    }
+    var image: Image { Image(systemName: imageName) }
+}
+```
+
+You can now create a deck like this:
+
+```swift
+let deck = Deck(
+    name: "Hobbies",
+    items: [hobby1, hobby2, hobby3]
+)
+```
+
+We can now display this deck in any of the build-in views.
+
+
+
+
+
+
 
 The library's main view is ``BottomSheet``, which can be created with an `isExpanded` binding, a `minHeight` and `maxHeight` and a `style`.
 

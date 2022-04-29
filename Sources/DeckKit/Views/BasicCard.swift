@@ -10,14 +10,13 @@ import SwiftUI
 import CoreGraphics
 
 /**
- This is a card view that presents a `BasicCardItem`. It can
- be used as is or as a template for creating your own custom
- card views.
+ This is a card view that presents a `BasicDeckItem`. It can
+ be used as is or as a template.
  */
 public struct BasicCard: View {
     
     public init(
-        item: BasicItem,
+        item: Item,
         size: CGSize = CGSize(width: 300, height: 400),
         cornerRadius: CGFloat = 10) {
         self.item = item
@@ -25,7 +24,7 @@ public struct BasicCard: View {
         self.cornerRadius = cornerRadius
     }
     
-    private let item: BasicItem
+    private let item: Item
     private let size: CGSize
     private let cornerRadius: CGFloat
     
@@ -45,7 +44,6 @@ public struct BasicCard: View {
         .foregroundColor(item.tintColor)
         .background(item.backgroundColor)
         .cornerRadius(cornerRadius)
-        
     }
 }
 
@@ -71,7 +69,7 @@ extension BasicCard {
 
 struct BasicCard_Previews: PreviewProvider {
     static var previews: some View {
-        let item = BasicItem(
+        let item = BasicCard.Item(
             title: "Title",
             text: "Text",
             footnote: "Footnote",
