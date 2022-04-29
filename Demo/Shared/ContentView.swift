@@ -107,7 +107,7 @@ private extension ContentView {
                 if isHorizontalList {
                     menuButton(text: "Stack", image: "rectangle.stack", action: showAsStack)
                 } else {
-                    menuButton(text: "List", image: "pause.fill", action: showAsHorizontalList)
+                    menuButton(text: "List", image: "rectangle.split.3x1", action: showAsHorizontalList)
                 }
             }.padding()
         }
