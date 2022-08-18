@@ -48,7 +48,7 @@ pod DeckKit
 
 ## Getting started
 
-To get started with BottomSheet, have a look at [this getting started guide][GettingStarted].
+To get started with DeckKit, have a look at [this getting started guide][GettingStarted].
 
 
 
@@ -62,7 +62,7 @@ The online documentation is currently iOS only. To generate documentation for ot
 
 ## Demo Application
 
-This project contains a demo app that lets you explore BottomSheet on iOS and macOS. To run it, just open and run `Demo/Demo.xcodeproj`.
+This project contains a demo app that lets you explore DeckKit on iOS and macOS. To run it, just open and run `Demo/Demo.xcodeproj`.
 
 
 

@@ -8,7 +8,7 @@ This article describes how you get started with DeckKit.
 DeckKit can be installed with the Swift Package Manager:
 
 ```
-https://github.com/danielsaidi/BottomSheet.git
+https://github.com/danielsaidi/DeckKit.git
 ``` 
 
 or with CocoaPods:
