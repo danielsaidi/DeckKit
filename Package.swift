@@ -15,9 +15,7 @@ let package = Package(
             name: "DeckKit",
             targets: ["DeckKit"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "DeckKit",
