@@ -56,7 +56,7 @@ To get started with DeckKit, have a look at [this getting started guide][Getting
 
 The [online documentation][Documentation] contains more information, code examples etc. and makes it easy to overview the various parts of the library.
 
-The online documentation is currently iOS only. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`. 
+The online documentation is currently iOS-specific. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`. 
 
 
 
