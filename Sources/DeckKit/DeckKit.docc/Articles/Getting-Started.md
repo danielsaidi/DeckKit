@@ -3,21 +3,6 @@
 This article describes how you get started with DeckKit.
 
 
-## Installation
-
-DeckKit can be installed with the Swift Package Manager:
-
-```
-https://github.com/danielsaidi/DeckKit.git
-``` 
-
-or with CocoaPods:
-
-```
-pod DeckKit
-```
-
-
 ## Creating a deck
 
 In DeckKit, a ``Deck`` is the model that can be bound to various views.

@@ -44,17 +44,19 @@ or with CocoaPods:
 pod DeckKit
 ```
 
+You can also clone the repository and build the library locally.
+
 
 
 ## Getting started
 
-To get started with DeckKit, have a look at [this getting started guide][GettingStarted].
+The DeckKit online documentation has a [getting-started guide][Getting-Started] that will help you get started with the library.
 
 
 
 ## Documentation
 
-The [online documentation][Documentation] contains more information, code examples etc. and makes it easy to overview the various parts of the library.
+The [online documentation][Documentation] has articles, code examples etc. that let you overview the various parts of the library.
 
 The online documentation is currently iOS-specific. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`. 
 
@@ -100,7 +102,7 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
 [Documentation]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/
-[GettingStarted]: https://github.com/danielsaidi/DeckKit/blob/master/Readmes/Getting-Started.md
+[Getting-Started]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/getting-started
 [License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
 
 [Tutorial]: https://www.swiftcompiled.com/swiftui-cards/
