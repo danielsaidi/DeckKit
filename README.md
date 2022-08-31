@@ -50,7 +50,7 @@ You can also clone the repository and build the library locally.
 
 ## Getting started
 
-The DeckKit online documentation has a [getting-started guide][Getting-Started] that will help you get started with the library.
+The online documentation has a [getting-started guide][Getting-Started] that will help you get started with the library.
 
 
 
@@ -64,7 +64,7 @@ The online documentation is currently iOS-specific. To generate documentation fo
 
 ## Demo Application
 
-This project contains a demo app that lets you explore DeckKit on iOS and macOS. To run it, just open and run `Demo/Demo.xcodeproj`.
+This project has a demo app that lets you explore the library on iOS and macOS. To try it out, just open and run `Demo/Demo.xcodeproj`.
 
 
 
