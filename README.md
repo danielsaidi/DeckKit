@@ -14,7 +14,9 @@
 
 ## About DeckKit
 
-DeckKit makes it easy to create deck-based apps in `SwiftUI`. The result can look like this or completely different: 
+DeckKit makes it easy to create deck-based apps in `SwiftUI`. 
+
+The result can look like this or completely different:
 
 <p align="center">
     <img src="Resources/Demo.gif" width=300 />
