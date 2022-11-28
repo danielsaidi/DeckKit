@@ -10,12 +10,11 @@
 import SwiftUI
 
 /**
- This view presents a deck of cards as a stack, from which a
- user can swipe away the top card and send it to the back of
- the stack.
+ This view presents a deck of cards, from which the user can
+ swipe away the top card to send it to the back of the stack.
 
  This view takes a generic ``Deck`` and a `cardBuilder` that
- maps the deck's items to card views.
+ maps deck items to card views.
  
  If there are more cards in the deck than are covered by the
  `displayCount` value, the `alwaysShowLastCard` parameter is
@@ -38,37 +37,24 @@ public struct StackedDeck<ItemType: DeckItem>: View {
      
      - Parameters:
        - deck: The generic deck that is to be presented.
-       - direction: Whether the deck goes `.up` or `.down`
-       - displayCount: The max number of cards to display.
-       - alwaysShowLastCard: Whether or not to show the last card.
-       - scaleOffset: The percentual shrink of each card.
-       - verticalOffset: The point-based vertical offset of each card.
-       - swipeLeftAction: Called when a card sent to the back of the deck by swiping it left.
-       - swipeRightAction: Called when a card sent to the back of the deck by swiping it right.
-       - swipeUpAction: Called when a card sent to the back of the deck by swiping it up.
-       - swipeDownAction: Called when a card sent to the back of the deck by swiping it down.
-       - cardBuilder: A builder that generates card views.
+       - config: The stacked deck configuration, by default ``StackedDeckConfiguration/standard``.
+       - swipeLeftAction: The action to trigger when a card is sent to the back of the deck by swiping it left, by default `empty`.
+       - swipeRightAction: The action to trigger when a card is sent to the back of the deck by swiping it right, by default `empty`.
+       - swipeUpAction: The action to trigger when a card is sent to the back of the deck by swiping it up, by default `empty`.
+       - swipeDownAction: The action to trigger when a card is sent to the back of the deck by swiping it down, by default `empty`.
+       - cardBuilder: A builder that generates a card view for each item in the deck.
      */
     public init(
         deck: Binding<Deck<ItemType>>,
-        direction: Direction = .up,
-        displayCount: Int = 10,
-        alwaysShowLastCard: Bool = true,
-        scaleOffset: CGFloat = 0.02,
-        verticalOffset: CGFloat = 10,
+        config: StackedDeckConfiguration,
         swipeLeftAction: @escaping GestureAction = { _ in },
         swipeRightAction: @escaping GestureAction = { _ in },
         swipeUpAction: @escaping GestureAction = { _ in },
         swipeDownAction: @escaping GestureAction = { _ in },
-        cardBuilder: @escaping CardBuilder) {
-        assert(scaleOffset > 0, "scaleOffset must be positive")
-        assert(verticalOffset > 0, "verticalOffset must be positive")
+        cardBuilder: @escaping CardBuilder
+    ) {
         self.deck = deck
-        self.direction = direction
-        self.displayCount = displayCount
-        self.alwaysShowLastCard = alwaysShowLastCard
-        self.scaleOffset = scaleOffset
-        self.verticalOffset = verticalOffset
+        self.config = config
         self.swipeLeftAction = swipeLeftAction
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
@@ -87,39 +73,20 @@ public struct StackedDeck<ItemType: DeckItem>: View {
      */
     public typealias GestureAction = (ItemType) -> Void
     
-    /**
-     The offset direction of cards further down in the stack.
-     */
-    public enum Direction {
-        case up, down
-    }
-    
     private var deck: Binding<Deck<ItemType>>
-    private var items: [ItemType] { deck.wrappedValue.items }
-    
-    private let alwaysShowLastCard: Bool
+    private var config: StackedDeckConfiguration
+
     private let cardBuilder: (ItemType) -> AnyView
-    private let direction: Direction
-    private let displayCount: Int
-    private let scaleOffset: CGFloat
     private let swipeLeftAction: GestureAction
     private let swipeRightAction: GestureAction
     private let swipeUpAction: GestureAction
     private let swipeDownAction: GestureAction
-    private let verticalOffset: CGFloat
     
-    @State private var activeItem: ItemType?
-    @State private var topCardOffset: CGSize = .zero
-    
-    private var visibleItems: [ItemType] {
-        let first = Array(items.prefix(displayCount))
-        guard
-            alwaysShowLastCard,
-            let last = items.last,
-            !first.contains(last)
-        else { return first }
-        return Array(first) + [last]
-    }
+    @State
+    private var activeItem: ItemType?
+
+    @State
+    private var topCardOffset: CGSize = .zero
     
     public var body: some View {
         ZStack(alignment: .center) {
@@ -129,17 +96,37 @@ public struct StackedDeck<ItemType: DeckItem>: View {
 }
 
 
+// MARK: - Properties
+
+private extension StackedDeck {
+
+    var items: [ItemType] {
+        deck.wrappedValue.items
+    }
+
+    var visibleItems: [ItemType] {
+        let first = Array(items.prefix(config.cardDisplayCount))
+        guard
+            config.alwaysShowLastCard,
+            let last = items.last,
+            !first.contains(last)
+        else { return first }
+        return Array(first) + [last]
+    }
+}
+
+
 // MARK: - Functions
 
-public extension StackedDeck {
-    
+private extension StackedDeck {
+
     /**
      Move a certain item to the back of the stack.
      */
     func moveItemToBack(_ item: ItemType) {
         deck.wrappedValue.moveToBack(item)
     }
-    
+
     /**
      Move a certain item to the front of the stack.
      */
@@ -173,13 +160,13 @@ private extension StackedDeck {
     func dragGestureChanged(_ drag: DragGesture.Value, for item: ItemType) {
         if activeItem == nil { activeItem = item }
         if item != activeItem { return }
+        topCardOffset = drag.translation
         withAnimation(.spring()) {
             if dragGestureIsPastThreshold(drag) {
                 moveItemToBack(item)
             } else {
                 moveItemToFront(item)
             }
-            topCardOffset = drag.translation
         }
     }
     
@@ -207,11 +194,11 @@ private extension StackedDeck {
     }
     
     func dragGestureIsPastHorizontalThreshold(_ drag: DragGesture.Value) -> Bool {
-        abs(drag.translation.width) > 200
+        abs(drag.translation.width) > config.horizontalDragThreshold
     }
     
     func dragGestureIsPastVerticalThreshold(_ drag: DragGesture.Value) -> Bool {
-        abs(drag.translation.height) > 250
+        abs(drag.translation.height) > config.verticalDragThreshold
     }
     
     func dragOffset(for item: ItemType) -> CGSize {
@@ -219,7 +206,7 @@ private extension StackedDeck {
     }
     
     func dragRotation(for item: ItemType) -> Angle {
-        .degrees(isActive(item) ? Double(topCardOffset.width) / 20.0 : 0)
+        .degrees(isActive(item) ? Double(topCardOffset.width) * config.dragRotationFactor : 0)
     }
     
     func isActive(_ item: ItemType) -> Bool {
@@ -228,14 +215,14 @@ private extension StackedDeck {
     
     func offset(of item: ItemType) -> CGFloat {
         guard let index = visibleIndex(of: item) else { return .zero }
-        let offset = CGFloat(index) * verticalOffset
-        let multiplier: CGFloat = direction == .down ? 1 : -1
+        let offset = CGFloat(index) * config.verticalOffset
+        let multiplier: CGFloat = config.direction == .down ? 1 : -1
         return offset * multiplier
     }
     
     func scale(of item: ItemType) -> CGFloat {
         guard let index = visibleIndex(of: item) else { return 1 }
-        let offset = CGFloat(index) * scaleOffset
+        let offset = CGFloat(index) * config.scaleOffset
         return CGFloat(1 - offset)
     }
     
@@ -267,36 +254,51 @@ private extension View {
 // MARK: - Preview
 
 struct StackedDeck_Previews: PreviewProvider {
-    
-    static var item1: BasicCard.Item { BasicCard.Item(
-        title: "Title 1",
-        text: "Text 1",
-        footnote: "Footnote 1",
-        backgroundColor: .red,
-        tintColor: .yellow)
-    }
-    
-    static var item2: BasicCard.Item { BasicCard.Item(
-        title: "Title 2",
-        text: "Text 2",
-        footnote: "Footnote 2",
-        backgroundColor: .yellow,
-        tintColor: .red)
-    }
-    
-    static var deck = Deck(
-        name: "My Deck",
-        items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2])
-    
-    static var previews: some View {
-        StackedDeck(
-            deck: .constant(deck),
-            direction: .up,
-            cardBuilder: { AnyView(BasicCard(item: $0)) })
+
+    struct Preview: View {
+
+        static var item1: BasicCard.Item { BasicCard.Item(
+            title: "Title 1",
+            text: "Text 1",
+            footnote: "Footnote 1",
+            backgroundColor: .red,
+            tintColor: .yellow)
+        }
+
+        static var item2: BasicCard.Item { BasicCard.Item(
+            title: "Title 2",
+            text: "Text 2",
+            footnote: "Footnote 2",
+            backgroundColor: .yellow,
+            tintColor: .red)
+        }
+
+        @State
+        private var deck = Deck(
+            name: "My Deck",
+            items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2]
+        )
+
+        var body: some View {
+            StackedDeck(
+                deck: $deck,
+                config: .init(direction: .down),
+                cardBuilder: { AnyView(BasicCard(item: $0)) }
+            )
             .frame(width: 400, height: 600, alignment: .center)
             .padding(100)
-            .background(Color.secondary)
+            .background(background)
+        }
+
+        var background: some View {
+            Color.blue
+                .opacity(0.3)
+                .edgesIgnoringSafeArea(.all)
+        }
+    }
+
+    static var previews: some View {
+        Preview()
     }
 }
-
 #endif

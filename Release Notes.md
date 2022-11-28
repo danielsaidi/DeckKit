@@ -1,12 +1,27 @@
 # Release notes
 
 
+## 0.4
+
+### ✨ New features
+
+* `StackedDeckConfiguration` is a new `StackedDeck` config.
+* `StackedDeckConfiguration` has a `.standard` value that is automatically used.
+
+### 💡 Behavior changes
+
+* `StackedDeck` no longer changes the card offset value within an animation.
+
+### 💥 Breaking Changes
+
+* `StackedDeck` now takes a configuration as init parameter instead of separate values.
+
+
 ## 0.3
 
 ### ✨ New features
 
 * `Deck` now lets you specify id.
-
 
 ### 💥 Breaking Changes
 

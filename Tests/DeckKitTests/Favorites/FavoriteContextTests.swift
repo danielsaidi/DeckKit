@@ -6,8 +6,8 @@
 //  Copyright © 2020 Daniel Saidi. All rights reserved.
 //
 
-import XCTest
 import DeckKit
+import XCTest
 
 final class FavoriteContextTests: XCTestCase {
     
