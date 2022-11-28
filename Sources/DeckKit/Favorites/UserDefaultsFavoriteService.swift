@@ -48,7 +48,11 @@ public class UserDefaultsFavoriteService: FavoriteService {
      */
     public func setIsFavorite<Item: Favoritable>(_ isFavorite: Bool, for item: Item) {
         var favorites = getFavorites(for: Item.self)
-        isFavorite ? favorites.append(item.id) : favorites.removeAll { $0 == item.id }
+        if isFavorite {
+            favorites.append(item.id)
+        } else {
+            favorites.removeAll { $0 == item.id }
+        }
         defaults.set(favorites, forKey: key(for: Item.self))
     }
     
