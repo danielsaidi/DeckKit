@@ -19,6 +19,9 @@ struct ContentView: View {
     var deck = Deck(
         name: "Hobbies",
         items: Hobby.demoCollection)
+
+    @State
+    var hobby: Hobby?
     
     @State
     var stackType = StackType.stacked
@@ -26,11 +29,13 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             picker
-                .padding()
             deckView.withPlatformPadding()
             shuffleButton
         }
         .background(background)
+        .sheet(item: $hobby) {
+            HobbyCardContent(item: $0, inSheet: true)
+        }
     }
 }
 
@@ -74,7 +79,7 @@ private extension ContentView {
             deck: $deck,
             config: .standard,
             swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
-            swipeRightAction: { hobby in print("\(hobby.id) was swiped right") },
+            swipeRightAction: { self.hobby = $0 },
             swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
             swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
             cardBuilder: card
@@ -103,7 +108,9 @@ private extension ContentView {
         Picker("Pick style", selection: $stackType) {
             pickerItem(for: .stacked)
             pickerItem(for: .horizontal)
-        }.pickerStyle(.segmented)
+        }
+        .pickerStyle(.segmented)
+        .padding()
     }
 
     func pickerItem(for type: StackType) -> some View {
