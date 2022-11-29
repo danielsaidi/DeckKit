@@ -24,7 +24,7 @@ import SwiftUI
  the top of the deck. See the configuration for more ways to
  configure this view.
  */
-public struct StackedDeck<ItemType: DeckItem>: View {
+public struct StackedDeck<ItemType: DeckItem, ItemView: View>: View {
     
     /**
      Creates an instance of the view.
@@ -59,7 +59,7 @@ public struct StackedDeck<ItemType: DeckItem>: View {
     /**
      A function that's used to build a view for a stack item.
      */
-    public typealias CardBuilder = (ItemType) -> AnyView
+    public typealias CardBuilder = (ItemType) -> ItemView
     
     /**
      A function that's used to trigged an action for an item.
@@ -69,7 +69,7 @@ public struct StackedDeck<ItemType: DeckItem>: View {
     private var deck: Binding<Deck<ItemType>>
     private var config: StackedDeckConfiguration
 
-    private let cardBuilder: (ItemType) -> AnyView
+    private let cardBuilder: (ItemType) -> ItemView
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
@@ -276,7 +276,7 @@ struct StackedDeck_Previews: PreviewProvider {
             StackedDeck(
                 deck: $deck,
                 config: .init(direction: .down),
-                cardBuilder: { AnyView(BasicCard(item: $0)) }
+                cardBuilder: { BasicCard(item: $0) }
             )
             .frame(width: 400, height: 600, alignment: .center)
             .padding(100)

@@ -60,22 +60,23 @@ private extension ContentView {
     func card(for hobby: Hobby) -> some View {
         HobbyCard(item: hobby)
     }
-    
-    var deckView: AnyView {
+
+    @ViewBuilder
+    var deckView: some View {
         if isHorizontalList {
-            return AnyView(HorizontalDeck(deck: $deck) {
-                AnyView(card(for: $0).padding())
-            })
+            HorizontalDeck(deck: $deck) {
+                card(for: $0).padding()
+            }
         } else {
-            return AnyView(StackedDeck(
+            StackedDeck(
                 deck: $deck,
                 config: .standard,
                 swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
                 swipeRightAction: { hobby in print("\(hobby.id) was swiped right") },
                 swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
-                swipeDownAction: { hobby in print("\(hobby.id) was swiped down") }) {
-                AnyView(card(for: $0))
-            })
+                swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
+                cardBuilder: card
+            )
         }
     }
     

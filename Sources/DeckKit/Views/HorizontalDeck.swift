@@ -16,7 +16,7 @@ import SwiftUI
  deck as input parameter and returns a view.
  */
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
-public struct HorizontalDeck<ItemType: DeckItem>: View {
+public struct HorizontalDeck<ItemType: DeckItem, ItemView: View>: View {
     
     /// Creates an instance of the view.
     ///
@@ -33,9 +33,9 @@ public struct HorizontalDeck<ItemType: DeckItem>: View {
     /**
      A function that takes an item and returns a card view.
      */
-    public typealias CardBuilder = (ItemType) -> AnyView
+    public typealias CardBuilder = (ItemType) -> ItemView
     
-    private let cardBuilder: (ItemType) -> AnyView
+    private let cardBuilder: CardBuilder
     private var deck: Binding<Deck<ItemType>>
     private var items: [ItemType] { deck.wrappedValue.items }
     
@@ -68,6 +68,10 @@ struct HorizontalDeck_Previews: PreviewProvider {
         backgroundColor: .yellow,
         tintColor: .red)
     }
+
+    static func card(for item: BasicCard.Item) -> some View {
+        BasicCard(item: item)
+    }
     
     static var deck = Deck(
         name: "My Deck",
@@ -76,7 +80,7 @@ struct HorizontalDeck_Previews: PreviewProvider {
     static var previews: some View {
         HorizontalDeck(
             deck: .constant(deck),
-            cardBuilder: { AnyView(BasicCard(item: $0)) })
-            .background(Color.secondary)
+            cardBuilder: card
+        ).background(Color.secondary)
     }
 }

@@ -1,6 +1,15 @@
 # Release notes
 
 
+## 0.5
+
+### 💡 Behavior changes
+
+* `HorizontalDeck` card builder no longer requires `AnyView`.
+* `StackedDeck` action parameters are now optional.
+* `StackedDeck` card builder no longer requires `AnyView`.
+
+
 ## 0.4
 
 ### ✨ New features
