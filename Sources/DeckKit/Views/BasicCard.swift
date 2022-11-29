@@ -25,15 +25,12 @@ public struct BasicCard: View {
      */
     public init(
         item: Item,
-        size: CGSize = CGSize(width: 300, height: 400),
         cornerRadius: CGFloat = 10) {
         self.item = item
-        self.size = size
         self.cornerRadius = cornerRadius
     }
     
     private let item: Item
-    private let size: CGSize
     private let cornerRadius: CGFloat
     
     public var body: some View {
@@ -41,6 +38,7 @@ public struct BasicCard: View {
             VStack {
                 title
                 Divider()
+                Spacer()
                 text
                 Spacer()
                 Divider()
@@ -48,7 +46,6 @@ public struct BasicCard: View {
             }
         }
         .padding()
-        .frame(width: size.width, height: size.height)
         .foregroundColor(item.tintColor)
         .background(item.backgroundColor)
         .cornerRadius(cornerRadius)
@@ -77,12 +74,14 @@ extension BasicCard {
 
 struct BasicCard_Previews: PreviewProvider {
     static var previews: some View {
-        let item = BasicCard.Item(
-            title: "Title",
-            text: "Text",
-            footnote: "Footnote",
-            backgroundColor: .red,
-            tintColor: .yellow)
-        return BasicCard(item: item)
+        BasicCard(
+            item: BasicCard.Item(
+                title: "Title",
+                text: "Text",
+                footnote: "Footnote",
+                backgroundColor: .red,
+                tintColor: .yellow
+            )
+        ).padding()
     }
 }

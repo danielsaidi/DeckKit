@@ -9,6 +9,11 @@
 * `StackedDeck` action parameters are now optional.
 * `StackedDeck` card builder no longer requires `AnyView`.
 
+### 💥 Breaking Changes
+
+* `BasicCard` no longer applies a fixed width to its content.
+* `HorizontalDeck` no longer contains a scroll view.
+
 
 ## 0.4
 

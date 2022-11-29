@@ -66,10 +66,12 @@ private extension ContentView {
 
     var horizontalDeck: some View {
         GeometryReader { geo in
-            HorizontalDeck(deck: $deck) {
-                card(for: $0)
-                    .frame(width: geo.size.width - 30)
-                    .padding(.horizontal)
+            ScrollView(.horizontal) {
+                HorizontalDeck(deck: $deck) {
+                    card(for: $0)
+                        .frame(width: geo.size.width - 30)
+                        .padding(.horizontal)
+                }
             }
         }
     }

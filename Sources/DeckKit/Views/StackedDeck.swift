@@ -57,12 +57,12 @@ public struct StackedDeck<ItemType: DeckItem, ItemView: View>: View {
     }
     
     /**
-     A function that's used to build a view for a stack item.
+     A function that builds a view for a deck item.
      */
     public typealias CardBuilder = (ItemType) -> ItemView
     
     /**
-     A function that's used to trigged an action for an item.
+     A function to trigger for a deck item swipe action.
      */
     public typealias ItemAction = (ItemType) -> Void
     
@@ -278,15 +278,13 @@ struct StackedDeck_Previews: PreviewProvider {
                 config: .init(direction: .down),
                 cardBuilder: { BasicCard(item: $0) }
             )
-            .frame(width: 400, height: 600, alignment: .center)
+            .frame(maxHeight: .infinity)
             .padding(100)
-            .background(background)
+            .background(background.edgesIgnoringSafeArea(.all))
         }
 
         var background: some View {
-            Color.blue
-                .opacity(0.3)
-                .edgesIgnoringSafeArea(.all)
+            Color.secondary.edgesIgnoringSafeArea(.all)
         }
     }
 

@@ -17,34 +17,39 @@ import SwiftUI
  */
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct HorizontalDeck<ItemType: DeckItem, ItemView: View>: View {
-    
-    /// Creates an instance of the view.
-    ///
-    /// - Parameters:
-    ///   - deck: The generic deck that is to be presented.
-    ///   - cardBuilder: A builder that generates card views.
+
+    /**
+     Create a horizontal deck.
+
+     - Parameters:
+       - deck: The generic deck that is to be presented.
+       - spacing: The spacing to put between items, by default `20`.
+       - cardBuilder: A builder that generates card views.
+     */
     public init(
         deck: Binding<Deck<ItemType>>,
-        cardBuilder: @escaping CardBuilder) {
+        spacing: Double = 20,
+        cardBuilder: @escaping CardBuilder
+    ) {
         self.deck = deck
+        self.spacing = spacing
         self.cardBuilder = cardBuilder
     }
-    
+
     /**
-     A function that takes an item and returns a card view.
+     A function that builds a view for a deck item.
      */
     public typealias CardBuilder = (ItemType) -> ItemView
     
     private let cardBuilder: CardBuilder
-    private var deck: Binding<Deck<ItemType>>
+    private let deck: Binding<Deck<ItemType>>
+    private let spacing: Double
     private var items: [ItemType] { deck.wrappedValue.items }
     
     public var body: some View {
-        ScrollView(.horizontal) {
-            LazyHStack {
-                ForEach(items) {
-                    cardBuilder($0)
-                }
+        LazyHStack(spacing: spacing) {
+            ForEach(items) {
+                cardBuilder($0)
             }
         }
     }
@@ -69,8 +74,13 @@ struct HorizontalDeck_Previews: PreviewProvider {
         tintColor: .red)
     }
 
-    static func card(for item: BasicCard.Item) -> some View {
+    static func card(
+        for item: BasicCard.Item,
+        geo: GeometryProxy
+    ) -> some View {
         BasicCard(item: item)
+            .aspectRatio(geo.size.width / geo.size.height, contentMode: .fit)
+            .frame(maxWidth: geo.size.width - 30)
     }
     
     static var deck = Deck(
@@ -78,9 +88,14 @@ struct HorizontalDeck_Previews: PreviewProvider {
         items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2])
     
     static var previews: some View {
-        HorizontalDeck(
-            deck: .constant(deck),
-            cardBuilder: card
-        ).background(Color.secondary)
+        GeometryReader { geo in
+            ScrollView(.horizontal) {
+                HorizontalDeck(
+                    deck: .constant(deck),
+                    spacing: 20,
+                    cardBuilder: { item in card(for: item, geo: geo) }
+                ).padding(.horizontal)
+            }.background(Color.secondary.edgesIgnoringSafeArea(.all))
+        }
     }
 }
