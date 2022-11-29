@@ -32,19 +32,19 @@ public struct StackedDeck<ItemType: DeckItem>: View {
      - Parameters:
        - deck: The generic deck that is to be presented.
        - config: The stacked deck configuration, by default ``StackedDeckConfiguration/standard``.
-       - swipeLeftAction: The action to trigger when a card is sent to the back of the deck by swiping it left, by default `empty`.
-       - swipeRightAction: The action to trigger when a card is sent to the back of the deck by swiping it right, by default `empty`.
-       - swipeUpAction: The action to trigger when a card is sent to the back of the deck by swiping it up, by default `empty`.
-       - swipeDownAction: The action to trigger when a card is sent to the back of the deck by swiping it down, by default `empty`.
+       - swipeLeftAction: The action to trigger when a card is sent to the back of the deck by swiping it left, by default `nil`.
+       - swipeRightAction: The action to trigger when a card is sent to the back of the deck by swiping it right, by default `nil`.
+       - swipeUpAction: The action to trigger when a card is sent to the back of the deck by swiping it up, by default `nil`.
+       - swipeDownAction: The action to trigger when a card is sent to the back of the deck by swiping it down, by default `nil`.
        - cardBuilder: A builder that generates a card view for each item in the deck.
      */
     public init(
         deck: Binding<Deck<ItemType>>,
         config: StackedDeckConfiguration,
-        swipeLeftAction: @escaping ItemAction = { _ in },
-        swipeRightAction: @escaping ItemAction = { _ in },
-        swipeUpAction: @escaping ItemAction = { _ in },
-        swipeDownAction: @escaping ItemAction = { _ in },
+        swipeLeftAction: ItemAction? = nil,
+        swipeRightAction: ItemAction? = nil,
+        swipeUpAction: ItemAction? = nil,
+        swipeDownAction: ItemAction? = nil,
         cardBuilder: @escaping CardBuilder
     ) {
         self.deck = deck
@@ -70,10 +70,10 @@ public struct StackedDeck<ItemType: DeckItem>: View {
     private var config: StackedDeckConfiguration
 
     private let cardBuilder: (ItemType) -> AnyView
-    private let swipeLeftAction: ItemAction
-    private let swipeRightAction: ItemAction
-    private let swipeUpAction: ItemAction
-    private let swipeDownAction: ItemAction
+    private let swipeLeftAction: ItemAction?
+    private let swipeRightAction: ItemAction?
+    private let swipeUpAction: ItemAction?
+    private let swipeDownAction: ItemAction?
     
     @State
     private var activeItem: ItemType?
