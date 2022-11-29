@@ -17,7 +17,7 @@ struct Hobby: DeckItem {
     var name: String
     var text: String
     var imageName: String
-    var color: Color = colors.randomElement() ?? .white
+    var color: Color = .demoColors.randomElement() ?? .white
     
     var backgroundColor: Color { color }
     var foregroundColor: Color {
@@ -31,8 +31,6 @@ struct Hobby: DeckItem {
 
 extension Hobby {
 
-    static var colors: [Color] = [.black, .blue, .gray, .green, .orange, .red, .pink, .purple, .yellow]
-    
     static var demoCollection: [Hobby] = [
         Hobby(name: "Drawing", text: "Perfect for when you have a lot of paper.", imageName: "pencil"),
         Hobby(name: "Origami", text: "Perfect for when you have a lot of failed drawings.", imageName: "doc"),

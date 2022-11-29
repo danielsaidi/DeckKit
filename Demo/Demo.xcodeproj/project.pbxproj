@@ -19,10 +19,12 @@
 		656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA461251A6A0C0079841C /* HobbyCard.swift */; };
 		A927503029360936006A2F56 /* HobbyCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927502F29360936006A2F56 /* HobbyCardContent.swift */; };
 		A927503129360936006A2F56 /* HobbyCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927502F29360936006A2F56 /* HobbyCardContent.swift */; };
-		A927503329360B60006A2F56 /* View+DemoShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503229360B60006A2F56 /* View+DemoShadow.swift */; };
-		A927503429360B60006A2F56 /* View+DemoShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503229360B60006A2F56 /* View+DemoShadow.swift */; };
+		A927503329360B60006A2F56 /* View+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503229360B60006A2F56 /* View+Demo.swift */; };
+		A927503429360B60006A2F56 /* View+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503229360B60006A2F56 /* View+Demo.swift */; };
 		A927503629360BB8006A2F56 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503529360BB8006A2F56 /* RoundButton.swift */; };
 		A927503729360BB8006A2F56 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503529360BB8006A2F56 /* RoundButton.swift */; };
+		A927503C2936135F006A2F56 /* Color+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503B2936135F006A2F56 /* Color+Demo.swift */; };
+		A927503D2936135F006A2F56 /* Color+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503B2936135F006A2F56 /* Color+Demo.swift */; };
 		A9CD2C8C281C27A40044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8B281C27A40044E20E /* DeckKit */; };
 		A9CD2C8E281C27A80044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8D281C27A80044E20E /* DeckKit */; };
 /* End PBXBuildFile section */
@@ -39,8 +41,9 @@
 		656FA45E251A696D0079841C /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
 		656FA461251A6A0C0079841C /* HobbyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCard.swift; sourceTree = "<group>"; };
 		A927502F29360936006A2F56 /* HobbyCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCardContent.swift; sourceTree = "<group>"; };
-		A927503229360B60006A2F56 /* View+DemoShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+DemoShadow.swift"; sourceTree = "<group>"; };
+		A927503229360B60006A2F56 /* View+Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Demo.swift"; sourceTree = "<group>"; };
 		A927503529360BB8006A2F56 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		A927503B2936135F006A2F56 /* Color+Demo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Demo.swift"; sourceTree = "<group>"; };
 		A9827A18257ED1D60006D64F /* Release Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "Release Notes.md"; path = "../Release Notes.md"; sourceTree = "<group>"; };
 		A9827A19257ED1D60006D64F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		A9827A1A257ED1D60006D64F /* DeckKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeckKit.podspec; path = ../DeckKit.podspec; sourceTree = "<group>"; };
@@ -90,10 +93,10 @@
 			children = (
 				656FA438251A62500079841C /* Assets.xcassets */,
 				A927503929360C15006A2F56 /* Buttons */,
+				A927503A29361342006A2F56 /* Extensions */,
 				A927503829360C0C006A2F56 /* Hobbies */,
 				656FA437251A624F0079841C /* ContentView.swift */,
 				656FA436251A624F0079841C /* DeckKitDemoApp.swift */,
-				A927503229360B60006A2F56 /* View+DemoShadow.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -147,6 +150,15 @@
 				A927503529360BB8006A2F56 /* RoundButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		A927503A29361342006A2F56 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A927503B2936135F006A2F56 /* Color+Demo.swift */,
+				A927503229360B60006A2F56 /* View+Demo.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A9827A17257ED1B20006D64F /* Project Files */ = {
@@ -280,9 +292,10 @@
 			files = (
 				A927503029360936006A2F56 /* HobbyCardContent.swift in Sources */,
 				656FA462251A6A0C0079841C /* HobbyCard.swift in Sources */,
+				A927503C2936135F006A2F56 /* Color+Demo.swift in Sources */,
 				A927503629360BB8006A2F56 /* RoundButton.swift in Sources */,
 				656FA45F251A696D0079841C /* Hobby.swift in Sources */,
-				A927503329360B60006A2F56 /* View+DemoShadow.swift in Sources */,
+				A927503329360B60006A2F56 /* View+Demo.swift in Sources */,
 				656FA44B251A62500079841C /* ContentView.swift in Sources */,
 				656FA449251A62500079841C /* DeckKitDemoApp.swift in Sources */,
 			);
@@ -294,9 +307,10 @@
 			files = (
 				A927503129360936006A2F56 /* HobbyCardContent.swift in Sources */,
 				656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */,
+				A927503D2936135F006A2F56 /* Color+Demo.swift in Sources */,
 				A927503729360BB8006A2F56 /* RoundButton.swift in Sources */,
 				656FA460251A69720079841C /* Hobby.swift in Sources */,
-				A927503429360B60006A2F56 /* View+DemoShadow.swift in Sources */,
+				A927503429360B60006A2F56 /* View+Demo.swift in Sources */,
 				656FA44C251A62500079841C /* ContentView.swift in Sources */,
 				656FA44A251A62500079841C /* DeckKitDemoApp.swift in Sources */,
 			);
@@ -425,7 +439,7 @@
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -447,7 +461,7 @@
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -478,7 +492,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.deckkit.demo;
 				PRODUCT_NAME = DeckKitDemo;
 				SDKROOT = macosx;
@@ -503,7 +517,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.danielsaidi.deckkit.demo;
 				PRODUCT_NAME = DeckKitDemo;
 				SDKROOT = macosx;
