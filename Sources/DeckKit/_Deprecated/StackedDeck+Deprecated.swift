@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS) || os(macOS)
 @available(*, deprecated, renamed: "DeckView")
 public typealias StackedDeck = DeckView
 
@@ -81,3 +82,4 @@ extension StackedDeckConfiguration {
         )
     }
 }
+#endif
