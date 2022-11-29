@@ -41,10 +41,10 @@ public struct StackedDeck<ItemType: DeckItem>: View {
     public init(
         deck: Binding<Deck<ItemType>>,
         config: StackedDeckConfiguration,
-        swipeLeftAction: @escaping GestureAction = { _ in },
-        swipeRightAction: @escaping GestureAction = { _ in },
-        swipeUpAction: @escaping GestureAction = { _ in },
-        swipeDownAction: @escaping GestureAction = { _ in },
+        swipeLeftAction: @escaping ItemAction = { _ in },
+        swipeRightAction: @escaping ItemAction = { _ in },
+        swipeUpAction: @escaping ItemAction = { _ in },
+        swipeDownAction: @escaping ItemAction = { _ in },
         cardBuilder: @escaping CardBuilder
     ) {
         self.deck = deck
@@ -64,16 +64,16 @@ public struct StackedDeck<ItemType: DeckItem>: View {
     /**
      A function that's used to trigged an action for an item.
      */
-    public typealias GestureAction = (ItemType) -> Void
+    public typealias ItemAction = (ItemType) -> Void
     
     private var deck: Binding<Deck<ItemType>>
     private var config: StackedDeckConfiguration
 
     private let cardBuilder: (ItemType) -> AnyView
-    private let swipeLeftAction: GestureAction
-    private let swipeRightAction: GestureAction
-    private let swipeUpAction: GestureAction
-    private let swipeDownAction: GestureAction
+    private let swipeLeftAction: ItemAction
+    private let swipeRightAction: ItemAction
+    private let swipeUpAction: ItemAction
+    private let swipeDownAction: ItemAction
     
     @State
     private var activeItem: ItemType?
@@ -173,7 +173,7 @@ private extension StackedDeck {
         }
     }
     
-    func dragGestureEndedAction(for drag: DragGesture.Value) -> GestureAction? {
+    func dragGestureEndedAction(for drag: DragGesture.Value) -> ItemAction? {
         guard dragGestureIsPastThreshold(drag) else { return nil }
         if dragGestureIsPastHorizontalThreshold(drag) {
             return drag.translation.width > 0 ? swipeRightAction : swipeLeftAction
