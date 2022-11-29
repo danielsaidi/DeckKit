@@ -17,7 +17,7 @@ public struct StackedDeckConfiguration: Codable, Equatable {
      Create a stacked deck configuration.
 
      - Parameters:
-       - direction: The visual direction of the stack, by default ``.up``.
+       - direction: The visual direction of the stack, by default `.up`.
        - cardDisplayCount: The max number of cards to display, by default `10`.
        - alwaysShowLastCard: Whether or not to show the last card for visual stability, by default `true`.
        - scaleOffset: The percentual factor to shrink cards for each step down the stack, by default `0.02`.

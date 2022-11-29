@@ -14,21 +14,15 @@ import SwiftUI
  swipe away the top card to send it to the back of the stack.
 
  This view takes a generic ``Deck`` and a `cardBuilder` that
- maps deck items to card views.
+ maps deck items to card views. You can also configure it by
+ passing in a custom ``StackedDeckConfiguration``.
  
  If there are more cards in the deck than are covered by the
- `displayCount` value, the `alwaysShowLastCard` parameter is
+ configuration's ``StackedDeckConfiguration/cardDisplayCount``
+ then the ``StackedDeckConfiguration/alwaysShowLastCard`` is
  used to determine if a card fades out when it is swiped off
- the top of the deck. If `alwaysShowLastCard` is `true`, the
- bottommost card is displayed together with the topmost ones.
- This will make the deck appear smaller than it is, but is a
- good way to be able to render a deck with many cards, while
- still making it performant and visually manageable.
- 
- `ACKNOWLEDGEMENT` This view builds upon the amazing work by
- Alex Brown and his amazing card tutorial at:
- 
- https://www.swiftcompiled.com/swiftui-cards/
+ the top of the deck. See the configuration for more ways to
+ configure this view.
  */
 public struct StackedDeck<ItemType: DeckItem>: View {
     
@@ -63,13 +57,12 @@ public struct StackedDeck<ItemType: DeckItem>: View {
     }
     
     /**
-     A function that takes an item and returns a card view.
+     A function that's used to build a view for a stack item.
      */
     public typealias CardBuilder = (ItemType) -> AnyView
     
     /**
-     A function that is called when gestures causes a change
-     for a certain item.
+     A function that's used to trigged an action for an item.
      */
     public typealias GestureAction = (ItemType) -> Void
     
@@ -153,8 +146,8 @@ private extension StackedDeck {
     
     func dragGesture(for item: ItemType) -> some Gesture {
         DragGesture()
-            .onChanged({ dragGestureChanged($0, for: item) })
-            .onEnded({ dragGestureEnded($0) })
+            .onChanged { dragGestureChanged($0, for: item) }
+            .onEnded { dragGestureEnded($0) }
     }
     
     func dragGestureChanged(_ drag: DragGesture.Value, for item: ItemType) {

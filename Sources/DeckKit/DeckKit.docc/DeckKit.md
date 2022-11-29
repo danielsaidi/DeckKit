@@ -64,6 +64,7 @@ DeckKit is available under the MIT license.
 - ``BasicCard``
 - ``HorizontalDeck``
 - ``StackedDeck``
+- ``StackedDeckConfiguration``
 
 ### Favorites
 

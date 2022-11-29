@@ -5,7 +5,7 @@
 
 ### ✨ New features
 
-* `StackedDeckConfiguration` is a new `StackedDeck` config.
+* `StackedDeck` uses a new `StackedDeckConfiguration`.
 * `StackedDeckConfiguration` has a `.standard` value that is automatically used.
 
 ### 💡 Behavior changes
@@ -15,6 +15,7 @@
 ### 💥 Breaking Changes
 
 * `StackedDeck` now takes a configuration as init parameter instead of separate values.
+
 
 
 ## 0.3
