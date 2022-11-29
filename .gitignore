@@ -3,6 +3,7 @@
 /.build
 /Packages
 .swiftpm/
+*.xcuserstate
 
 # Documentation
 Docs
