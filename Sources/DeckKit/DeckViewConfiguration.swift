@@ -18,7 +18,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
 
      - Parameters:
        - direction: The visual direction of the stack, by default `.up`.
-       - cardDisplayCount: The max number of cards to display, by default `10`.
+       - itemDisplayCount: The max number of items to display, by default `10`.
        - alwaysShowLastCard: Whether or not to show the last card for visual stability, by default `true`.
        - scaleOffset: The percentual factor to shrink cards for each step down the stack, by default `0.02`.
        - verticalOffset: The vertical offset to apply to cards for each step down the stack, by default `10`.
@@ -28,7 +28,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
      */
     public init(
         direction: Direction = .up,
-        cardDisplayCount: Int = 10,
+        itemDisplayCount: Int = 10,
         alwaysShowLastCard: Bool = true,
         scaleOffset: Double = 0.02,
         verticalOffset: Double = 10,
@@ -39,7 +39,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
         assert(scaleOffset > 0, "scaleOffset must be positive")
         assert(verticalOffset > 0, "verticalOffset must be positive")
         self.direction = direction
-        self.cardDisplayCount = cardDisplayCount
+        self.itemDisplayCount = itemDisplayCount
         self.alwaysShowLastCard = alwaysShowLastCard
         self.scaleOffset = scaleOffset
         self.verticalOffset = verticalOffset
@@ -52,7 +52,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
     public var direction: Direction
 
     /// The max number of cards to display.
-    public var cardDisplayCount: Int
+    public var itemDisplayCount: Int
 
     /// Whether or not to show the last card for visual stability.
     public var alwaysShowLastCard: Bool

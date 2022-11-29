@@ -92,7 +92,7 @@ private extension DeckView {
     }
 
     var visibleItems: [ItemType] {
-        let first = Array(items.prefix(config.cardDisplayCount))
+        let first = Array(items.prefix(config.itemDisplayCount))
         guard
             config.alwaysShowLastCard,
             let last = items.last,

@@ -18,7 +18,9 @@
 * `BasicCard` has been deprecated and will be removed in 0.6.
 * `HorizontalDeck` has been deprecated and will be removed in 0.6.
 * `StackedDeck` has been renamed to `DeckView`.
+* `StackedDeck` has a new `itemViewBuilder` initializer.
 * `StackedDeckConfiguration` has been renamed to `DeckViewConfiguration`.
+* `StackedDeckConfiguration` has a new `itemDisplayCount` initializer.
 
 
 
