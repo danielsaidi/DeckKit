@@ -58,13 +58,8 @@ DeckKit is available under the MIT license.
 - ``Deck``
 - ``DeckContext``
 - ``DeckItem``
-
-### Views
-
-- ``BasicCard``
-- ``HorizontalDeck``
-- ``StackedDeck``
-- ``StackedDeckConfiguration``
+- ``DeckView``
+- ``DeckViewConfiguration``
 
 ### Favorites
 

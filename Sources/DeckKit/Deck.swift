@@ -18,13 +18,13 @@ public struct Deck<Item: DeckItem>: Identifiable, Equatable {
      Create a deck with items.
      
      - Parameters:
-       - id: The unique id of the deck.
-       - name: The name of the deck.
+       - id: The unique id of the deck, by default `UUID()`.
+       - name: The name of the deck, by default `.empty`.
        - items: The items to include in the deck.
      */
     public init(
         id: UUID = UUID(),
-        name: String,
+        name: String = "",
         items: [Item]) {
         self.id = id
         self.name = name
