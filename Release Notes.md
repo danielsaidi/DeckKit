@@ -14,6 +14,11 @@
 * `BasicCard` no longer applies a fixed width to its content.
 * `HorizontalDeck` no longer contains a scroll view.
 
+### 🗑️ Deprecations
+
+* `HorizontalDeck` has been deprecated.
+
+
 
 ## 0.4
 

@@ -15,6 +15,7 @@ import SwiftUI
  as and a `cardBuilder` that takes the same card type as the
  deck as input parameter and returns a view.
  */
+@available(*, deprecated, message: "HorizontalDeck is deprecated and will be removed in DeckKit 0.6")
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct HorizontalDeck<ItemType: DeckItem, ItemView: View>: View {
 
@@ -55,6 +56,7 @@ public struct HorizontalDeck<ItemType: DeckItem, ItemView: View>: View {
     }
 }
 
+@available(*, deprecated, message: "HorizontalDeck is deprecated and will be removed in DeckKit 0.6")
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct HorizontalDeck_Previews: PreviewProvider {
     
