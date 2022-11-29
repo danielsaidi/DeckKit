@@ -14,8 +14,8 @@ final class DeckViewConfigurationTests: XCTestCase {
     func testStandardInstanceUsesStandardValues() {
         let config = DeckViewConfiguration.standard
         XCTAssertEqual(config.direction, .up)
-        XCTAssertEqual(config.cardDisplayCount, 10)
-        XCTAssertEqual(config.alwaysShowLastCard, true)
+        XCTAssertEqual(config.itemDisplayCount, 10)
+        XCTAssertEqual(config.alwaysShowLastItem, true)
         XCTAssertEqual(config.scaleOffset, 0.02)
         XCTAssertEqual(config.verticalOffset, 10)
         XCTAssertEqual(config.horizontalDragThreshold, 100)
@@ -25,16 +25,16 @@ final class DeckViewConfigurationTests: XCTestCase {
     func testCustomInstanceUsesCustomValues() {
         let config = DeckViewConfiguration(
             direction: .down,
-            cardDisplayCount: 20,
-            alwaysShowLastCard: false,
+            itemDisplayCount: 20,
+            alwaysShowLastItem: false,
             scaleOffset: 0.01,
             verticalOffset: 20,
             horizontalDragThreshold: 123,
             verticalDragThreshold: 456
         )
         XCTAssertEqual(config.direction, .down)
-        XCTAssertEqual(config.cardDisplayCount, 20)
-        XCTAssertEqual(config.alwaysShowLastCard, false)
+        XCTAssertEqual(config.itemDisplayCount, 20)
+        XCTAssertEqual(config.alwaysShowLastItem, false)
         XCTAssertEqual(config.scaleOffset, 0.01)
         XCTAssertEqual(config.verticalOffset, 20)
         XCTAssertEqual(config.horizontalDragThreshold, 123)

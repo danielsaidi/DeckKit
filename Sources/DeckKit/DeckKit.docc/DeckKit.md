@@ -7,7 +7,7 @@ DeckKit makes it easy to create deck-based apps in `SwiftUI`.
 
 ![DeckKit logo](Logo.png)
 
-These decks can be customized to fit your specific needs. You can change colors, fonts, corner radius, expanded height etc. and use any views as your cards.
+These decks can be customized to fit your specific needs. You can change colors, fonts, corner radius, expanded height etc. and use any views you like.
 
 
 

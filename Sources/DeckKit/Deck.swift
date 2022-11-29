@@ -50,28 +50,28 @@ public struct Deck<Item: DeckItem>: Identifiable, Equatable {
 public extension Deck {
     
     /**
-     The index of a certain card item, if any.
+     The index of a certain item, if any.
      */
-    func index(of card: Item) -> Int? {
-        items.firstIndex { $0.id == card.id }
+    func index(of item: Item) -> Int? {
+        items.firstIndex { $0.id == item.id }
     }
     
     /**
-     Move a card to the back of the deck.
+     Move an item to the back of the deck.
      */
-    mutating func moveToBack(_ card: Item) {
-        guard let index = index(of: card) else { return }
-        let topCard = items.remove(at: index)
-        items.append(topCard)
+    mutating func moveToBack(_ item: Item) {
+        guard let index = index(of: item) else { return }
+        let topItem = items.remove(at: index)
+        items.append(topItem)
     }
     
     /**
-     Move a card to the front of the deck.
+     Move an item to the front of the deck.
      */
-    mutating func moveToFront(_ card: Item) {
-        guard let index = index(of: card) else { return }
-        if items[0].id == card.id { return }
-        let topCard = items.remove(at: index)
-        items.insert(topCard, at: 0)
+    mutating func moveToFront(_ item: Item) {
+        guard let index = index(of: item) else { return }
+        if items[0].id == item.id { return }
+        let topItem = items.remove(at: index)
+        items.insert(topItem, at: 0)
     }
 }

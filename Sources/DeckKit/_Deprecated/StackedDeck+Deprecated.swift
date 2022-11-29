@@ -72,7 +72,7 @@ extension StackedDeckConfiguration {
         self.init(
             direction: direction,
             itemDisplayCount: cardDisplayCount,
-            alwaysShowLastCard: alwaysShowLastCard,
+            alwaysShowLastItem: alwaysShowLastCard,
             scaleOffset: scaleOffset,
             verticalOffset: verticalOffset,
             dragRotationFactor: dragRotationFactor,

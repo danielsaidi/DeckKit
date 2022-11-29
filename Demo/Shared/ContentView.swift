@@ -21,17 +21,19 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
+            VStack(spacing: 0) {
                 deckView.withPlatformPadding()
                 shuffleButton
             }
-            .background(background)
             .sheet(item: $hobby) {
                 HobbyCardContent(item: $0, inSheet: true)
             }
             .navigationTitle("DeckKit")
             .navigationBarTitleDisplayMode(.inline)
+            .padding()
+            .background(background)
         }
+
     }
 }
 
@@ -64,8 +66,6 @@ private extension ContentView {
             swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
             itemViewBuilder: HobbyCard.init
         )
-        .padding(.horizontal)
-        .padding(.top, 40)
     }
 }
 

@@ -19,17 +19,17 @@ public struct DeckViewConfiguration: Codable, Equatable {
      - Parameters:
        - direction: The visual direction of the stack, by default `.up`.
        - itemDisplayCount: The max number of items to display, by default `10`.
-       - alwaysShowLastCard: Whether or not to show the last card for visual stability, by default `true`.
-       - scaleOffset: The percentual factor to shrink cards for each step down the stack, by default `0.02`.
-       - verticalOffset: The vertical offset to apply to cards for each step down the stack, by default `10`.
-       - dragRotationFactor: The offset factor with which to rotate a card when it's panned, by default `0.05`.
-       - horizontalDragThreshold: The number of points a card must be panned to be moved to the bottom of the deck, by default `100`.
-       - verticalDragThreshold: The number of points a card must be panned to be moved to the bottom of the deck, by default `250`.
+       - alwaysShowLastItem: Whether or not to show the last item for visual stability, by default `true`.
+       - scaleOffset: The percentual shrink factor to apply to each item in the stack, by default `0.02`.
+       - verticalOffset: The vertical offset to apply to each item in the stack, by default `10`.
+       - dragRotationFactor: The offset factor with which to rotate an item when it's panned, by default `0.05`.
+       - horizontalDragThreshold: The number of points an item must be panned to be moved to the bottom of the deck, by default `100`.
+       - verticalDragThreshold: The number of points an item must be panned to be moved to the bottom of the deck, by default `250`.
      */
     public init(
         direction: Direction = .up,
         itemDisplayCount: Int = 10,
-        alwaysShowLastCard: Bool = true,
+        alwaysShowLastItem: Bool = true,
         scaleOffset: Double = 0.02,
         verticalOffset: Double = 10,
         dragRotationFactor: Double = 0.01,
@@ -40,7 +40,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
         assert(verticalOffset > 0, "verticalOffset must be positive")
         self.direction = direction
         self.itemDisplayCount = itemDisplayCount
-        self.alwaysShowLastCard = alwaysShowLastCard
+        self.alwaysShowLastItem = alwaysShowLastItem
         self.scaleOffset = scaleOffset
         self.verticalOffset = verticalOffset
         self.dragRotationFactor = dragRotationFactor
@@ -51,25 +51,25 @@ public struct DeckViewConfiguration: Codable, Equatable {
     /// The visual direction of the stack.
     public var direction: Direction
 
-    /// The max number of cards to display.
+    /// The max number of items to display.
     public var itemDisplayCount: Int
 
-    /// Whether or not to show the last card for visual stability.
-    public var alwaysShowLastCard: Bool
+    /// Whether or not to show the last item for visual stability.
+    public var alwaysShowLastItem: Bool
 
-    /// The percentual factor to shrink cards for each step down the stack.
+    /// The percentual shrink factor to apply to each item in the stack.
     public var scaleOffset: Double
 
-    /// The vertical offset to apply to cards for each step down the stack.
+    /// The vertical offset to apply to each item in the stack.
     public var verticalOffset: Double
 
-    /// The offset factor with which to rotate a card when it's panned.
+    /// The offset factor with which to rotate an item when it's panned.
     public var dragRotationFactor: Double
 
-    /// The number of points a card must be panned to be moved to the bottom of the deck.
+    /// The number of points an item must be panned to be moved to the bottom of the deck.
     public var horizontalDragThreshold: Double
 
-    /// The number of points a card must be panned to be moved to the bottom of the deck.
+    /// The number of points an item must be panned to be moved to the bottom of the deck.
     public var verticalDragThreshold: Double
 }
 

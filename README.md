@@ -22,7 +22,7 @@ The result can look like this or completely different:
     <img src="Resources/Demo.gif" width=300 />
 </p>
 
-These decks can be customized to fit your specific needs. You can change colors, fonts, corner radius, expanded height etc. and use any views as your cards.
+These decks can be customized to fit your specific needs. You can change colors, fonts, corner radius, expanded height etc. and use any views you like.
 
 
 
@@ -70,12 +70,6 @@ This project has a demo app that lets you explore the library on iOS and macOS. 
 
 
 
-## Acknowledgements
-
-This library wouldn't have been made without [this amazing card tutorial][Tutorial].
-
-
-
 ## Support
 
 You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support. 
@@ -106,5 +100,3 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 [Documentation]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/
 [Getting-Started]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/getting-started
 [License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
-
-[Tutorial]: https://www.swiftcompiled.com/swiftui-cards/

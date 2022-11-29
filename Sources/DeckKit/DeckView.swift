@@ -10,13 +10,13 @@
 import SwiftUI
 
 /**
- This view renders a ``Deck`` as deck of cards, from which a
- user can swipe away the top card to trigger certain actions.
+ This view renders a ``Deck`` as deck of items, from which a
+ user can swipe away the top item to trigger certain actions.
 
- This view takes a generic ``Deck`` and a `cardBuilder` that
- maps deck items to card views. You can also configure it by
- passing in a ``DeckViewConfiguration`` that defines how the
- view should present the stack.
+ The view takes a generic ``Deck`` and maps its items to any
+ views you like, which is determined by the `itemViewBuilder`.
+ You can pass in a ``DeckViewConfiguration`` value to config
+ how the deck should be presented.
  */
 public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     
@@ -26,10 +26,10 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
      - Parameters:
        - deck: The generic deck that is to be presented.
        - config: The stacked deck configuration, by default ``DeckViewConfiguration/standard``.
-       - swipeLeftAction: The action to trigger when a card is sent to the back of the deck by swiping it left, by default `nil`.
-       - swipeRightAction: The action to trigger when a card is sent to the back of the deck by swiping it right, by default `nil`.
-       - swipeUpAction: The action to trigger when a card is sent to the back of the deck by swiping it up, by default `nil`.
-       - swipeDownAction: The action to trigger when a card is sent to the back of the deck by swiping it down, by default `nil`.
+       - swipeLeftAction: The action to trigger when an item is sent to the back of the deck by swiping it left, by default `nil`.
+       - swipeRightAction: The action to trigger when an item is sent to the back of the deck by swiping it right, by default `nil`.
+       - swipeUpAction: The action to trigger when an item is sent to the back of the deck by swiping it up, by default `nil`.
+       - swipeDownAction: The action to trigger when an item is sent to the back of the deck by swiping it down, by default `nil`.
        - itemViewBuilder: A builder that generates a view for each item in the deck.
      */
     public init(
@@ -73,11 +73,20 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     private var activeItem: ItemType?
 
     @State
-    private var topCardOffset: CGSize = .zero
+    private var topItemOffset: CGSize = .zero
     
     public var body: some View {
         ZStack(alignment: .center) {
-            ForEach(visibleItems, content: itemViewBuilderWithModifiers)
+            ForEach(visibleItems) { item in
+                itemViewBuilder(item)
+                    .zIndex(zIndex(of: item))
+                    .shadow(radius: 0.5)
+                    .offset(size: dragOffset(for: item))
+                    .scaleEffect(scale(of: item))
+                    .offset(y: offset(of: item))
+                    .rotationEffect(dragRotation(for: item))
+                    .gesture(dragGesture(for: item))
+            }
         }
     }
 }
@@ -94,11 +103,11 @@ private extension DeckView {
     var visibleItems: [ItemType] {
         let first = Array(items.prefix(config.itemDisplayCount))
         guard
-            config.alwaysShowLastCard,
+            config.alwaysShowLastItem,
             let last = items.last,
             !first.contains(last)
         else { return first }
-        return Array(first) + [last]
+        return Array(first).dropLast() + [last]
     }
 }
 
@@ -127,17 +136,6 @@ private extension DeckView {
 
 private extension DeckView {
     
-    func itemViewBuilderWithModifiers(_ item: ItemType) -> some View {
-        itemViewBuilder(item)
-            .zIndex(zIndex(of: item))
-            .shadow(radius: 0.5)
-            .offset(size: dragOffset(for: item))
-            .scaleEffect(scale(of: item))
-            .offset(y: offset(of: item))
-            .rotationEffect(dragRotation(for: item))
-            .gesture(dragGesture(for: item))
-    }
-    
     func dragGesture(for item: ItemType) -> some Gesture {
         DragGesture()
             .onChanged { dragGestureChanged($0, for: item) }
@@ -147,7 +145,7 @@ private extension DeckView {
     func dragGestureChanged(_ drag: DragGesture.Value, for item: ItemType) {
         if activeItem == nil { activeItem = item }
         if item != activeItem { return }
-        topCardOffset = drag.translation
+        topItemOffset = drag.translation
         withAnimation(.spring()) {
             if dragGestureIsPastThreshold(drag) {
                 moveItemToBack(item)
@@ -163,7 +161,7 @@ private extension DeckView {
         }
         withAnimation(.spring()) {
             activeItem = nil
-            topCardOffset = .zero
+            topItemOffset = .zero
         }
     }
     
@@ -189,28 +187,36 @@ private extension DeckView {
     }
     
     func dragOffset(for item: ItemType) -> CGSize {
-        isActive(item) ? topCardOffset : .zero
+        isActive(item) ? topItemOffset : .zero
     }
     
     func dragRotation(for item: ItemType) -> Angle {
-        .degrees(isActive(item) ? Double(topCardOffset.width) * config.dragRotationFactor : 0)
+        .degrees(isActive(item) ? Double(topItemOffset.width) * config.dragRotationFactor : 0)
     }
     
     func isActive(_ item: ItemType) -> Bool {
         item == activeItem
     }
-    
-    func offset(of item: ItemType) -> CGFloat {
-        guard let index = visibleIndex(of: item) else { return .zero }
-        let offset = CGFloat(index) * config.verticalOffset
-        let multiplier: CGFloat = config.direction == .down ? 1 : -1
+
+    func offset(at index: Int) -> Double {
+        let offset = Double(index) * config.verticalOffset
+        let multiplier: Double = config.direction == .down ? 1 : -1
         return offset * multiplier
     }
     
-    func scale(of item: ItemType) -> CGFloat {
+    func offset(of item: ItemType) -> Double {
+        guard let index = visibleIndex(of: item) else { return .zero }
+        return offset(at: index)
+    }
+
+    func scale(at index: Int) -> Double {
+        let offset = Double(index) * config.scaleOffset
+        return Double(1 - offset)
+    }
+
+    func scale(of item: ItemType) -> Double {
         guard let index = visibleIndex(of: item) else { return 1 }
-        let offset = CGFloat(index) * config.scaleOffset
-        return CGFloat(1 - offset)
+        return scale(at: index)
     }
     
     func visibleIndex(of item: ItemType) -> Int? {
@@ -263,22 +269,30 @@ struct DeckView_Previews: PreviewProvider {
         @State
         private var deck = Deck(
             name: "My Deck",
-            items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2]
+            items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2,
+                    item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2]
         )
 
         var body: some View {
-            DeckView(
-                deck: $deck,
-                config: .init(direction: .down),
-                itemViewBuilder: { PreviewCard(item: $0) }
-            )
-            .frame(maxHeight: .infinity)
-            .padding(100)
-            .background(background.edgesIgnoringSafeArea(.all))
+            VStack {
+                DeckView(
+                    deck: $deck,
+                    config: .init(
+                        direction: .down,
+                        itemDisplayCount: 10
+                    ),
+                    itemViewBuilder: { PreviewCard(item: $0) }
+                )
+
+                Color.black.opacity(0.4).frame(height: 20)
+            }
+
+            .padding()
+            .background(background)
         }
 
         var background: some View {
-            Color.secondary.edgesIgnoringSafeArea(.all)
+            Color.secondary
         }
     }
 

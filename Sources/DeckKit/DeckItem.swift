@@ -1,5 +1,5 @@
 //
-//  CardItem.swift
+//  DeckItem.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
