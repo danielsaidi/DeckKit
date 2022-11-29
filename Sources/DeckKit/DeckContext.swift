@@ -9,9 +9,12 @@
 import Foundation
 
 /**
- This context can be used to observe deck state in SwiftUI.
+ This context can be used to observe a ``Deck``.
+
+ Using the context lets you change the items in the observed
+ ``deck`` and have the UI automatically update itself.
  */
-public class DeckContext<CardType: DeckItem>: ObservableObject {
+public class DeckContext<ItemType: DeckItem>: ObservableObject {
     
     /**
      Create a deck context.
@@ -19,10 +22,10 @@ public class DeckContext<CardType: DeckItem>: ObservableObject {
      - Parameters:
        - deck: The deck to track with the context.
      */
-    public init(deck: Deck<CardType>) {
+    public init(deck: Deck<ItemType>) {
         self.deck = deck
     }
     
     @Published
-    public var deck: Deck<CardType>
+    public var deck: Deck<ItemType>
 }

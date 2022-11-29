@@ -9,8 +9,8 @@
 import Foundation
 
 /**
- This struct can be used to create a deck of items, that can
- then be converted to card views when the deck is presented.
+ This struct represents a deck with an id, a name as well as
+ a collection of ``DeckItem`` items.
  */
 public struct Deck<Item: DeckItem>: Identifiable, Equatable {
     

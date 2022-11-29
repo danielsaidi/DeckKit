@@ -9,7 +9,6 @@
 import Foundation
 
 /**
- This protocol represents a model that can be used as a card
- view model.
+ This protocol represents a item in a ``Deck``.
  */
 public protocol DeckItem: Identifiable, Equatable {}
