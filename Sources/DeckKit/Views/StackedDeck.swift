@@ -136,7 +136,7 @@ private extension StackedDeck {
     func cardBuilderWithModifiers(_ item: ItemType) -> some View {
         cardBuilder(item)
             .zIndex(zIndex(of: item))
-            .shadow(radius: 2)
+            .shadow(radius: 0.5)
             .offset(size: dragOffset(for: item))
             .scaleEffect(scale(of: item))
             .offset(y: offset(of: item))

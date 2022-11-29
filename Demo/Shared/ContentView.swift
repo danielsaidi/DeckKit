@@ -10,6 +10,10 @@ import DeckKit
 import SwiftUI
 
 struct ContentView: View {
+
+    enum StackType: String {
+        case stacked, horizontal
+    }
     
     @State
     var deck = Deck(
@@ -17,14 +21,16 @@ struct ContentView: View {
         items: Hobby.demoCollection)
     
     @State
-    var isHorizontalList = false
+    var stackType = StackType.stacked
     
     var body: some View {
-        ZStack {
-            background
-            deckView.platformSpecificPadding()
-            menu
+        VStack(spacing: 20) {
+            picker
+                .padding()
+            deckView.withPlatformPadding()
+            shuffleButton
         }
+        .background(background)
     }
 }
 
@@ -33,16 +39,48 @@ struct ContentView: View {
 
 private extension ContentView {
     
-    func showAsHorizontalList() {
-        isHorizontalList = true
-    }
-    
-    func showAsStack() {
-        isHorizontalList = false
-    }
-    
     func shuffle() {
         deck.items.shuffle()
+    }
+}
+
+
+// MARK: - Decks
+
+private extension ContentView {
+
+    @ViewBuilder
+    var deckView: some View {
+        switch stackType {
+        case .horizontal:
+            horizontalDeck
+        case .stacked:
+            stackedDeck
+        }
+    }
+
+    var horizontalDeck: some View {
+        GeometryReader { geo in
+            HorizontalDeck(deck: $deck) {
+                card(for: $0)
+                    .frame(width: geo.size.width - 30)
+                    .padding(.horizontal)
+            }
+        }
+    }
+
+    var stackedDeck: some View {
+        StackedDeck(
+            deck: $deck,
+            config: .standard,
+            swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
+            swipeRightAction: { hobby in print("\(hobby.id) was swiped right") },
+            swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
+            swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
+            cardBuilder: card
+        )
+        .padding(.horizontal)
+        .padding(.top, 40)
     }
 }
 
@@ -61,54 +99,24 @@ private extension ContentView {
         HobbyCard(item: hobby)
     }
 
-    @ViewBuilder
-    var deckView: some View {
-        if isHorizontalList {
-            HorizontalDeck(deck: $deck) {
-                card(for: $0).padding()
-            }
-        } else {
-            StackedDeck(
-                deck: $deck,
-                config: .standard,
-                swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
-                swipeRightAction: { hobby in print("\(hobby.id) was swiped right") },
-                swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
-                swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
-                cardBuilder: card
-            )
-        }
+    var picker: some View {
+        Picker("Pick style", selection: $stackType) {
+            pickerItem(for: .stacked)
+            pickerItem(for: .horizontal)
+        }.pickerStyle(.segmented)
     }
-    
-    func menuButton(text: String, image: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            VStack(spacing: 10) {
-                Circle()
-                    .strokeBorder(Color.white, lineWidth: 1)
-                    .background(Color.white.opacity(0.4).clipShape(Circle()))
-                    .overlay(Image(systemName: image))
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(width: 60)
-                Text(text)
-                    .font(.footnote)
-            }
-        }
-        .buttonStyle(PlainButtonStyle())
-        .shadow(radius: 20)
+
+    func pickerItem(for type: StackType) -> some View {
+        Text(type.rawValue.capitalized)
+            .tag(type)
     }
-    
-    var menu: some View {
-        ZStack(alignment: .bottom) {
-            Color.clear
-            HStack(spacing: 20) {
-                menuButton(text: "Shuffle", image: "shuffle", action: shuffle)
-                if isHorizontalList {
-                    menuButton(text: "Stack", image: "rectangle.stack", action: showAsStack)
-                } else {
-                    menuButton(text: "List", image: "rectangle.split.3x1", action: showAsHorizontalList)
-                }
-            }.padding()
-        }
+
+    var shuffleButton: some View {
+        RoundButton(
+            text: "Shuffle",
+            image: "shuffle",
+            action: shuffle
+        )
     }
 }
 
@@ -117,7 +125,7 @@ private extension ContentView {
 
 extension View {
     
-    func platformSpecificPadding() -> some View {
+    func withPlatformPadding() -> some View {
         #if os(macOS)
         return self.padding(.vertical, 100)
         #else
