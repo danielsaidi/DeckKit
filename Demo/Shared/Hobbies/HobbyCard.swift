@@ -10,19 +10,15 @@ import SwiftUI
 
 struct HobbyCard: View {
     
-    init(
-        item: Hobby,
-        cornerRadius: CGFloat = 10) {
+    init(item: Hobby) {
         self.item = item
-        self.cornerRadius = cornerRadius
     }
     
     private let item: Hobby
-    private let cornerRadius: CGFloat
     
     var body: some View {
         HobbyCardContent(item: item)
-            .cornerRadius(cornerRadius)
+            .cornerRadius(10)
     }
 }
 

@@ -11,10 +11,6 @@ import SwiftUI
 
 struct ContentView: View {
 
-    enum StackType: String {
-        case stacked, horizontal
-    }
-    
     @State
     var deck = Deck(
         name: "Hobbies",
@@ -23,18 +19,18 @@ struct ContentView: View {
     @State
     var hobby: Hobby?
     
-    @State
-    var stackType = StackType.stacked
-    
     var body: some View {
-        VStack(spacing: 20) {
-            picker
-            deckView.withPlatformPadding()
-            shuffleButton
-        }
-        .background(background)
-        .sheet(item: $hobby) {
-            HobbyCardContent(item: $0, inSheet: true)
+        NavigationView {
+            VStack(spacing: 20) {
+                deckView.withPlatformPadding()
+                shuffleButton
+            }
+            .background(background)
+            .sheet(item: $hobby) {
+                HobbyCardContent(item: $0, inSheet: true)
+            }
+            .navigationTitle("DeckKit")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
@@ -56,35 +52,17 @@ private extension ContentView {
 
     @ViewBuilder
     var deckView: some View {
-        switch stackType {
-        case .horizontal:
-            horizontalDeck
-        case .stacked:
-            stackedDeck
-        }
-    }
-
-    var horizontalDeck: some View {
-        GeometryReader { geo in
-            ScrollView(.horizontal) {
-                HorizontalDeck(deck: $deck) {
-                    card(for: $0)
-                        .frame(width: geo.size.width - 30)
-                        .padding(.horizontal)
-                }
-            }
-        }
-    }
-
-    var stackedDeck: some View {
-        StackedDeck(
+        DeckView(
             deck: $deck,
-            config: .standard,
+            config: .init(
+                direction: .down,
+                itemDisplayCount: 5
+            ),
             swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
             swipeRightAction: { self.hobby = $0 },
             swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
             swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
-            cardBuilder: card
+            itemViewBuilder: HobbyCard.init
         )
         .padding(.horizontal)
         .padding(.top, 40)
@@ -100,24 +78,6 @@ private extension ContentView {
         Color.gray
             .opacity(0.3)
             .edgesIgnoringSafeArea(.all)
-    }
-    
-    func card(for hobby: Hobby) -> some View {
-        HobbyCard(item: hobby)
-    }
-
-    var picker: some View {
-        Picker("Pick style", selection: $stackType) {
-            pickerItem(for: .stacked)
-            pickerItem(for: .horizontal)
-        }
-        .pickerStyle(.segmented)
-        .padding()
-    }
-
-    func pickerItem(for type: StackType) -> some View {
-        Text(type.rawValue.capitalized)
-            .tag(type)
     }
 
     var shuffleButton: some View {
