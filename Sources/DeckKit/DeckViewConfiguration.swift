@@ -1,5 +1,5 @@
 //
-//  StackedDeckConfiguration.swift
+//  DeckViewConfiguration.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2022-11-28.
@@ -9,9 +9,9 @@
 import Foundation
 
 /**
- This config can be used to configure a ``StackedDeck`` view.
+ This config can be used to configure a ``DeckView``.
  */
-public struct StackedDeckConfiguration: Codable, Equatable {
+public struct DeckViewConfiguration: Codable, Equatable {
 
     /**
      Create a stacked deck configuration.
@@ -73,15 +73,15 @@ public struct StackedDeckConfiguration: Codable, Equatable {
     public var verticalDragThreshold: Double
 }
 
-public extension StackedDeckConfiguration {
+public extension DeckViewConfiguration {
 
     /**
      A standard stacked deck configuration.
      */
-    static var standard = StackedDeckConfiguration()
+    static var standard = DeckViewConfiguration()
 }
 
-public extension StackedDeckConfiguration {
+public extension DeckViewConfiguration {
 
     /**
      The visual direction of a stack, where ``up`` means the

@@ -5,9 +5,8 @@
 
 ### 💡 Behavior changes
 
-* `HorizontalDeck` card builder no longer requires `AnyView`.
-* `StackedDeck` action parameters are now optional.
-* `StackedDeck` card builder no longer requires `AnyView`.
+* `DeckView` action parameters are now optional.
+* `DeckView` card builder no longer requires `AnyView`.
 
 ### 💥 Breaking Changes
 
@@ -18,6 +17,8 @@
 
 * `BasicCard` has been deprecated and will be removed in 0.6.
 * `HorizontalDeck` has been deprecated and will be removed in 0.6.
+* `StackedDeck` has been renamed to `DeckView`.
+* `StackedDeckConfiguration` has been renamed to `DeckViewConfiguration`.
 
 
 

@@ -1,5 +1,5 @@
 //
-//  StackedDeckConfigurationTests.swift
+//  DeckViewConfigurationTests.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2022-11-28.
@@ -9,10 +9,10 @@
 import DeckKit
 import XCTest
 
-final class StackedDeckConfigurationTests: XCTestCase {
+final class DeckViewConfigurationTests: XCTestCase {
 
     func testStandardInstanceUsesStandardValues() {
-        let config = StackedDeckConfiguration.standard
+        let config = DeckViewConfiguration.standard
         XCTAssertEqual(config.direction, .up)
         XCTAssertEqual(config.cardDisplayCount, 10)
         XCTAssertEqual(config.alwaysShowLastCard, true)
@@ -23,7 +23,7 @@ final class StackedDeckConfigurationTests: XCTestCase {
     }
 
     func testCustomInstanceUsesCustomValues() {
-        let config = StackedDeckConfiguration(
+        let config = DeckViewConfiguration(
             direction: .down,
             cardDisplayCount: 20,
             alwaysShowLastCard: false,

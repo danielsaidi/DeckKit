@@ -1,5 +1,5 @@
 //
-//  StackedDeck.swift
+//  DeckView.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
@@ -10,42 +10,36 @@
 import SwiftUI
 
 /**
- This view presents a deck of cards, from which the user can
- swipe away the top card to send it to the back of the stack.
+ This view renders a ``Deck`` as deck of cards, from which a
+ user can swipe away the top card to trigger certain actions.
 
  This view takes a generic ``Deck`` and a `cardBuilder` that
  maps deck items to card views. You can also configure it by
- passing in a custom ``StackedDeckConfiguration``.
- 
- If there are more cards in the deck than are covered by the
- configuration's ``StackedDeckConfiguration/cardDisplayCount``
- then the ``StackedDeckConfiguration/alwaysShowLastCard`` is
- used to determine if a card fades out when it is swiped off
- the top of the deck. See the configuration for more ways to
- configure this view.
+ passing in a ``DeckViewConfiguration`` that defines how the
+ view should present the stack.
  */
-public struct StackedDeck<ItemType: DeckItem, ItemView: View>: View {
+public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     
     /**
      Creates an instance of the view.
      
      - Parameters:
        - deck: The generic deck that is to be presented.
-       - config: The stacked deck configuration, by default ``StackedDeckConfiguration/standard``.
+       - config: The stacked deck configuration, by default ``DeckViewConfiguration/standard``.
        - swipeLeftAction: The action to trigger when a card is sent to the back of the deck by swiping it left, by default `nil`.
        - swipeRightAction: The action to trigger when a card is sent to the back of the deck by swiping it right, by default `nil`.
        - swipeUpAction: The action to trigger when a card is sent to the back of the deck by swiping it up, by default `nil`.
        - swipeDownAction: The action to trigger when a card is sent to the back of the deck by swiping it down, by default `nil`.
-       - cardBuilder: A builder that generates a card view for each item in the deck.
+       - itemViewBuilder: A builder that generates a view for each item in the deck.
      */
     public init(
         deck: Binding<Deck<ItemType>>,
-        config: StackedDeckConfiguration,
+        config: DeckViewConfiguration,
         swipeLeftAction: ItemAction? = nil,
         swipeRightAction: ItemAction? = nil,
         swipeUpAction: ItemAction? = nil,
         swipeDownAction: ItemAction? = nil,
-        cardBuilder: @escaping CardBuilder
+        itemViewBuilder: @escaping ItemViewBuilder
     ) {
         self.deck = deck
         self.config = config
@@ -53,23 +47,23 @@ public struct StackedDeck<ItemType: DeckItem, ItemView: View>: View {
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
         self.swipeDownAction = swipeDownAction
-        self.cardBuilder = cardBuilder
+        self.itemViewBuilder = itemViewBuilder
     }
-    
-    /**
-     A function that builds a view for a deck item.
-     */
-    public typealias CardBuilder = (ItemType) -> ItemView
     
     /**
      A function to trigger for a deck item swipe action.
      */
     public typealias ItemAction = (ItemType) -> Void
+
+    /**
+     A function that creates a view for a deck item.
+     */
+    public typealias ItemViewBuilder = (ItemType) -> ItemView
     
     private var deck: Binding<Deck<ItemType>>
-    private var config: StackedDeckConfiguration
+    private var config: DeckViewConfiguration
 
-    private let cardBuilder: (ItemType) -> ItemView
+    private let itemViewBuilder: (ItemType) -> ItemView
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
@@ -83,7 +77,7 @@ public struct StackedDeck<ItemType: DeckItem, ItemView: View>: View {
     
     public var body: some View {
         ZStack(alignment: .center) {
-            ForEach(visibleItems, content: cardBuilderWithModifiers)
+            ForEach(visibleItems, content: itemViewBuilderWithModifiers)
         }
     }
 }
@@ -91,7 +85,7 @@ public struct StackedDeck<ItemType: DeckItem, ItemView: View>: View {
 
 // MARK: - Properties
 
-private extension StackedDeck {
+private extension DeckView {
 
     var items: [ItemType] {
         deck.wrappedValue.items
@@ -111,7 +105,7 @@ private extension StackedDeck {
 
 // MARK: - Functions
 
-private extension StackedDeck {
+private extension DeckView {
 
     /**
      Move a certain item to the back of the stack.
@@ -131,10 +125,10 @@ private extension StackedDeck {
 
 // MARK: - View Logic
 
-private extension StackedDeck {
+private extension DeckView {
     
-    func cardBuilderWithModifiers(_ item: ItemType) -> some View {
-        cardBuilder(item)
+    func itemViewBuilderWithModifiers(_ item: ItemType) -> some View {
+        itemViewBuilder(item)
             .zIndex(zIndex(of: item))
             .shadow(radius: 0.5)
             .offset(size: dragOffset(for: item))
@@ -246,7 +240,7 @@ private extension View {
 
 // MARK: - Preview
 
-struct StackedDeck_Previews: PreviewProvider {
+struct DeckView_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -273,10 +267,10 @@ struct StackedDeck_Previews: PreviewProvider {
         )
 
         var body: some View {
-            StackedDeck(
+            DeckView(
                 deck: $deck,
                 config: .init(direction: .down),
-                cardBuilder: { PreviewCard(item: $0) }
+                itemViewBuilder: { PreviewCard(item: $0) }
             )
             .frame(maxHeight: .infinity)
             .padding(100)
