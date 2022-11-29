@@ -1,5 +1,5 @@
 //
-//  BasicCard.swift
+//  PreviewCard.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
@@ -10,10 +10,10 @@ import SwiftUI
 import CoreGraphics
 
 /**
- This view can be used to presents a ``BasicCard/Item``, and
+ This view can be used to presents a ``PreviewCard/Item``, and
  can be used as is or as a template for other cards.
  */
-public struct BasicCard: View {
+struct PreviewCard: View {
     
     /**
      Create a basic card.
@@ -23,17 +23,42 @@ public struct BasicCard: View {
        - size: The size of the card.
        - cornerRadius: The corner radius of the card.
      */
-    public init(
+    init(
         item: Item,
         cornerRadius: CGFloat = 10) {
         self.item = item
         self.cornerRadius = cornerRadius
     }
+
+    struct Item: DeckItem {
+
+        init(
+            title: String,
+            text: String,
+            footnote: String,
+            backgroundColor: Color,
+            tintColor: Color) {
+            self.title = title
+            self.text = text
+            self.footnote = footnote
+            self.backgroundColor = backgroundColor
+            self.tintColor = tintColor
+        }
+
+        let id = UUID()
+
+        let title: String
+        let text: String
+        let footnote: String
+
+        let backgroundColor: Color
+        let tintColor: Color
+    }
     
     private let item: Item
     private let cornerRadius: CGFloat
     
-    public var body: some View {
+    var body: some View {
         VStack {
             VStack {
                 title
@@ -52,7 +77,7 @@ public struct BasicCard: View {
     }
 }
 
-extension BasicCard {
+extension PreviewCard {
     
     var title: some View {
         Text(item.title).font(.title)
@@ -72,10 +97,10 @@ extension BasicCard {
     }
 }
 
-struct BasicCard_Previews: PreviewProvider {
+struct PreviewCard_Previews: PreviewProvider {
     static var previews: some View {
-        BasicCard(
-            item: BasicCard.Item(
+        PreviewCard(
+            item: PreviewCard.Item(
                 title: "Title",
                 text: "Text",
                 footnote: "Footnote",

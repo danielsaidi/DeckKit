@@ -250,7 +250,7 @@ struct StackedDeck_Previews: PreviewProvider {
 
     struct Preview: View {
 
-        static var item1: BasicCard.Item { BasicCard.Item(
+        static var item1: PreviewCard.Item { PreviewCard.Item(
             title: "Title 1",
             text: "Text 1",
             footnote: "Footnote 1",
@@ -258,7 +258,7 @@ struct StackedDeck_Previews: PreviewProvider {
             tintColor: .yellow)
         }
 
-        static var item2: BasicCard.Item { BasicCard.Item(
+        static var item2: PreviewCard.Item { PreviewCard.Item(
             title: "Title 2",
             text: "Text 2",
             footnote: "Footnote 2",
@@ -276,7 +276,7 @@ struct StackedDeck_Previews: PreviewProvider {
             StackedDeck(
                 deck: $deck,
                 config: .init(direction: .down),
-                cardBuilder: { BasicCard(item: $0) }
+                cardBuilder: { PreviewCard(item: $0) }
             )
             .frame(maxHeight: .infinity)
             .padding(100)

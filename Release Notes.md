@@ -16,7 +16,8 @@
 
 ### 🗑️ Deprecations
 
-* `HorizontalDeck` has been deprecated.
+* `BasicCard` has been deprecated and will be removed in 0.6.
+* `HorizontalDeck` has been deprecated and will be removed in 0.6.
 
 
 
