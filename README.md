@@ -18,17 +18,11 @@ DeckKit makes it easy to create deck-based apps in `SwiftUI`.
 
 The result can look like this or completely different:
 
-<p align="center">
+<p align="center" style="border-radius: 10px">
     <img src="Resources/Demo.gif" width=300 />
 </p>
 
 These decks can be customized to fit your specific needs. You can change colors, fonts, corner radius, expanded height etc. and use any views you like.
-
-
-
-## Supported Platforms
-
-DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
 
 
 
@@ -50,9 +44,56 @@ You can also clone the repository and build the library locally.
 
 
 
+## Supported Platforms
+
+DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
+
+
+
 ## Getting started
 
 The online documentation has a [getting-started guide][Getting-Started] that will help you get started with the library.
+
+In DeckKit, a `Deck` can be used to define a deck of items that implement the `DeckItem` protocol.
+
+For instance, consider a `Hobby` type that looks like this:
+
+```swift
+struct Hobby: DeckItem {
+    
+    var name: String
+    var text: String
+
+    var id: String { name }
+}
+```
+
+You can now create a deck with hobbies and display it in a `DeckView`:
+
+```swift
+struct MyView: View {
+
+    @State
+    var deck = Deck(
+        name: "Hobbies",
+        items: [
+            Hobby(name: "Music", text: "I love music!"), 
+            Hobby(name: "Movies", text: "I also love movies!"), 
+            Hobby(name: "Programming", text: "Not to mention programming!")
+        ]
+    )
+
+    var body: some View {
+        DeckView(deck: $deck) {
+            // Create a view for the hobby here
+        }.padding()
+    }
+}
+```
+
+The `DeckView` takes an optional `DeckViewConfiguration` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, the drag threshold before sending an item to the back of the stack etc. You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges.
+
+DeckKit has many options for managing state, additional views etc. Check the [online documentation][Documentation] and [getting-started guide][Getting-Started] for more information.
 
 
 

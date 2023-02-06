@@ -19,6 +19,32 @@ import SwiftUI
  how the deck should be presented.
  */
 public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
+
+    /**
+     Creates an instance of the view.
+
+     - Parameters:
+       - deck: The generic deck that is to be presented.
+       - config: The stacked deck configuration, by default ``DeckViewConfiguration/standard``.
+       - swipeLeftAction: The action to trigger when an item is sent to the back of the deck by swiping it left, by default `nil`.
+       - swipeRightAction: The action to trigger when an item is sent to the back of the deck by swiping it right, by default `nil`.
+       - swipeUpAction: The action to trigger when an item is sent to the back of the deck by swiping it up, by default `nil`.
+       - swipeDownAction: The action to trigger when an item is sent to the back of the deck by swiping it down, by default `nil`.
+       - itemViewBuilder: A builder that generates a view for each item in the deck.
+     */
+    public init(
+        deck: Binding<Deck<ItemType>>,
+        config: DeckViewConfiguration,
+        itemViewBuilder: @escaping ItemViewBuilder
+    ) {
+        self.deck = deck
+        self.config = config
+        self.swipeLeftAction = nil
+        self.swipeRightAction = nil
+        self.swipeUpAction = nil
+        self.swipeDownAction = nil
+        self.itemViewBuilder = itemViewBuilder
+    }
     
     /**
      Creates an instance of the view.
@@ -34,7 +60,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
      */
     public init(
         deck: Binding<Deck<ItemType>>,
-        config: DeckViewConfiguration,
+        config: DeckViewConfiguration = .standard,
         swipeLeftAction: ItemAction? = nil,
         swipeRightAction: ItemAction? = nil,
         swipeUpAction: ItemAction? = nil,
@@ -254,7 +280,7 @@ struct DeckView_Previews: PreviewProvider {
             title: "Title 1",
             text: "Text 1",
             footnote: "Footnote 1",
-            backgroundColor: .red,
+            backgroundColor: .blue,
             tintColor: .yellow)
         }
 
@@ -263,7 +289,7 @@ struct DeckView_Previews: PreviewProvider {
             text: "Text 2",
             footnote: "Footnote 2",
             backgroundColor: .yellow,
-            tintColor: .red)
+            tintColor: .blue)
         }
 
         @State
@@ -275,24 +301,18 @@ struct DeckView_Previews: PreviewProvider {
 
         var body: some View {
             VStack {
+                DeckView(deck: $deck) {
+                    PreviewCard(item: $0)
+                }
                 DeckView(
                     deck: $deck,
-                    config: .init(
-                        direction: .down,
-                        itemDisplayCount: 10
-                    ),
-                    itemViewBuilder: { PreviewCard(item: $0) }
-                )
-
-                Color.black.opacity(0.4).frame(height: 20)
+                    config: .down
+                ) {
+                    PreviewCard(item: $0)
+                }
             }
-
             .padding()
-            .background(background)
-        }
-
-        var background: some View {
-            Color.secondary
+            .padding(.vertical, 100)
         }
     }
 

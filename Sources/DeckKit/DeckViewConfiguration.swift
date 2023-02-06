@@ -76,9 +76,16 @@ public struct DeckViewConfiguration: Codable, Equatable {
 public extension DeckViewConfiguration {
 
     /**
-     A standard stacked deck configuration.
+     A standard deck view configuration.
      */
     static var standard = DeckViewConfiguration()
+
+    /**
+     A standard deck view configuration with down direction.
+     */
+    static var down = DeckViewConfiguration(
+        direction: .down
+    )
 }
 
 public extension DeckViewConfiguration {

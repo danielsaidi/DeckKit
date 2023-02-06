@@ -1,17 +1,28 @@
 # Release notes
 
 
+## 0.6
+
+### 💡 New features
+
+This version adds an additional `DeckView` initializer so that you don't have to specify the `itemViewBuilder` parameter name.
+
+### 🗑️ Deprecations
+
+* `DeckView` `itemViewBuilder` has been renamed to `itemView`.
+
+### 💥 Breaking Changes
+
+* All previously deprecated code has been removed.
+
+
+
 ## 0.5
 
 ### 💡 Behavior changes
 
 * `DeckView` action parameters are now optional.
 * `DeckView` card builder no longer requires `AnyView`.
-
-### 💥 Breaking Changes
-
-* `BasicCard` no longer applies a fixed width to its content.
-* `HorizontalDeck` no longer contains a scroll view.
 
 ### 🗑️ Deprecations
 
@@ -21,6 +32,11 @@
 * `StackedDeck` has a new `itemViewBuilder` initializer.
 * `StackedDeckConfiguration` has been renamed to `DeckViewConfiguration`.
 * `StackedDeckConfiguration` has a new `itemDisplayCount` initializer.
+
+### 💥 Breaking Changes
+
+* `BasicCard` no longer applies a fixed width to its content.
+* `HorizontalDeck` no longer contains a scroll view.
 
 
 

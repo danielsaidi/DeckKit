@@ -5,9 +5,9 @@ This article describes how you get started with DeckKit.
 
 ## Creating a deck
 
-In DeckKit, a ``Deck`` is used to define a deck of items. You create a deck by giving it an optional ID and name as well as a set of items that implement the ``DeckItem`` protocol.
+In DeckKit, a ``Deck`` can be used to define a deck of items that implement the ``DeckItem`` protocol.
 
-For instance, consider a hobby type that looks like this:
+For instance, consider a `Hobby` type that looks like this:
 
 ```swift
 struct Hobby: DeckItem {
@@ -29,22 +29,20 @@ struct MyView: View {
         name: "Hobbies",
         items: [
             Hobby(name: "Music", text: "I love music!"), 
-            Hobby(name: "Movies", text: "I also love movies!!"), 
-            Hobby(name: "Programming", text: "Not to mention programming!!!")
+            Hobby(name: "Movies", text: "I also love movies!"), 
+            Hobby(name: "Programming", text: "Not to mention programming!")
         ]
     )
 
     var body: some View {
-        DeckView(
-            deck: $deck,
-            config: .init(direction: .down),
-            itemViewBuilder: { hobby in
-                // Create a view for the hobby here
-            }
-        ).padding()
+        DeckView(deck: $deck) {
+            // Create a view for the hobby here
+        }.padding()
     }
 }
 ```
+
+The ``DeckView`` takes an optional ``DeckViewConfiguration`` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, the drag threshold before sending an item to the back of the stack etc. You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges. 
 
 
 
@@ -92,11 +90,6 @@ A context can be passed around, injected as an environment object etc.
 
 
 
-## Configuring the deck view
-
-The ``DeckView`` takes a ``DeckViewConfiguration`` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, the drag threshold before sending an item to the back of the stack etc.
-
-
 
 ## Favorites
 
@@ -119,4 +112,4 @@ You can then use the context to fetch all favorites of a certain type, toggle th
 
 ## Conclusion
 
-That's about it. Enjoy using this library to create deck-based apps in SwiftUI!
+That's about it. I hope you enjoy using this library to create deck-based apps in SwiftUI!
