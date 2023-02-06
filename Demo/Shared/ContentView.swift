@@ -21,7 +21,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
+            VStack(spacing: 50) {
                 deckView.withPlatformPadding()
                 shuffleButton
             }
@@ -64,7 +64,7 @@ private extension ContentView {
             swipeRightAction: { self.hobby = $0 },
             swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
             swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
-            itemViewBuilder: HobbyCard.init
+            itemView: HobbyCard.init
         )
     }
 }
