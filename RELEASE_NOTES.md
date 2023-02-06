@@ -1,5 +1,9 @@
 # Release notes
 
+DeckKit will use semver after 1.0. 
+
+Until then, deprecated features may be removed in the next minor version.
+
 
 ## 0.6
 
@@ -7,13 +11,10 @@
 
 This version adds an additional `DeckView` initializer so that you don't have to specify the `itemViewBuilder` parameter name.
 
-### 🗑️ Deprecations
-
-* `DeckView` `itemViewBuilder` has been renamed to `itemView`.
-
 ### 💥 Breaking Changes
 
 * All previously deprecated code has been removed.
+* `DeckView` `itemViewBuilder` has been renamed to `itemView`.
 
 
 

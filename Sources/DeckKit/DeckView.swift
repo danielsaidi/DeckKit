@@ -35,7 +35,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     public init(
         deck: Binding<Deck<ItemType>>,
         config: DeckViewConfiguration,
-        itemViewBuilder: @escaping ItemViewBuilder
+        itemView: @escaping ItemViewBuilder
     ) {
         self.deck = deck
         self.config = config
@@ -43,7 +43,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
         self.swipeRightAction = nil
         self.swipeUpAction = nil
         self.swipeDownAction = nil
-        self.itemViewBuilder = itemViewBuilder
+        self.itemView = itemView
     }
     
     /**
@@ -65,7 +65,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
         swipeRightAction: ItemAction? = nil,
         swipeUpAction: ItemAction? = nil,
         swipeDownAction: ItemAction? = nil,
-        itemViewBuilder: @escaping ItemViewBuilder
+        itemView: @escaping ItemViewBuilder
     ) {
         self.deck = deck
         self.config = config
@@ -73,7 +73,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
         self.swipeDownAction = swipeDownAction
-        self.itemViewBuilder = itemViewBuilder
+        self.itemView = itemView
     }
     
     /**
@@ -89,7 +89,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     private var deck: Binding<Deck<ItemType>>
     private var config: DeckViewConfiguration
 
-    private let itemViewBuilder: (ItemType) -> ItemView
+    private let itemView: (ItemType) -> ItemView
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
@@ -104,7 +104,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     public var body: some View {
         ZStack(alignment: .center) {
             ForEach(visibleItems) { item in
-                itemViewBuilder(item)
+                itemView(item)
                     .zIndex(zIndex(of: item))
                     .shadow(radius: 0.5)
                     .offset(size: dragOffset(for: item))
