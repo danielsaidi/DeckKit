@@ -5,11 +5,12 @@
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-5.6-orange.svg" alt="Swift 5.6" />
+    <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
-    <a href="https://twitter.com/danielsaidi">
-        <img src="https://img.shields.io/badge/contact-@danielsaidi-blue.svg?style=flat" alt="Twitter: @danielsaidi" />
-    </a>
+    <img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" />
+    <img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" />
 </p>
+
 
 
 ## About DeckKit
@@ -22,7 +23,7 @@ The result can look like this or completely different:
     <img src="Resources/Demo.gif" width=300 />
 </p>
 
-These decks can be customized to fit your specific needs. You can change colors, fonts, corner radius, expanded height etc. and use any views you like.
+These decks and their cards can be customized to great extent. You can change colors, fonts, corner radius, expanded height etc. and use any views you like.
 
 
 
@@ -40,7 +41,7 @@ or with CocoaPods:
 pod DeckKit
 ```
 
-You can also clone the repository and build the library locally.
+If you prefer to not have external dependencies, you can also just copy the source code into your app.
 
 
 
@@ -93,15 +94,13 @@ struct MyView: View {
 
 The `DeckView` takes an optional `DeckViewConfiguration` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, the drag threshold before sending an item to the back of the stack etc. You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges.
 
-DeckKit has many options for managing state, additional views etc. Check the [online documentation][Documentation] and [getting-started guide][Getting-Started] for more information.
+For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started].
 
 
 
 ## Documentation
 
-The [online documentation][Documentation] has articles, code examples etc. that let you overview the various parts of the library.
-
-The online documentation is currently iOS-specific. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`. 
+The [online documentation][Documentation] has articles, code examples etc. that let you overview the various parts of the library. 
 
 
 
@@ -121,9 +120,10 @@ You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for 
 
 Feel free to reach out if you have questions or if you want to contribute in any way:
 
-* E-mail: [daniel.saidi@gmail.com][Email]
+* Website: [danielsaidi.com][Website]
+* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 * Twitter: [@danielsaidi][Twitter]
-* Web site: [danielsaidi.com][Website]
+* E-mail: [daniel.saidi@gmail.com][Email]
 
 
 
@@ -134,8 +134,9 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 
 
 [Email]: mailto:daniel.saidi@gmail.com
-[Twitter]: http://www.twitter.com/danielsaidi
-[Website]: http://www.danielsaidi.com
+[Website]: https://www.danielsaidi.com
+[Twitter]: https://www.twitter.com/danielsaidi
+[Mastodon]: https://mastodon.social/@danielsaidi
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
 [Documentation]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/
