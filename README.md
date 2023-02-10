@@ -1,5 +1,5 @@
 <p align="center">
-    <img src ="Resources/Logo.png" alt="DeckKit Logo" title="DeckKit" width=600 />
+    <img src ="Resources/Logo_GitHub.png" alt="DeckKit Logo" title="DeckKit" width=600 />
 </p>
 
 <p align="center">
