@@ -21,6 +21,9 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
+            #if os(macOS)
+            EmptyView()
+            #endif
             VStack(spacing: 50) {
                 deckView.withPlatformPadding()
                 shuffleButton
@@ -29,7 +32,9 @@ struct ContentView: View {
                 HobbyCardContent(item: $0, inSheet: true)
             }
             .navigationTitle("DeckKit")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
             .padding()
             .background(background)
         }
