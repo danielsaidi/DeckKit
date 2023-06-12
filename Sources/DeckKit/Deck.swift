@@ -64,7 +64,7 @@ public extension Deck {
         let topItem = items.remove(at: index)
         items.append(topItem)
     }
-    
+
     /**
      Move an item to the front of the deck.
      */
@@ -73,5 +73,12 @@ public extension Deck {
         if items[0].id == item.id { return }
         let topItem = items.remove(at: index)
         items.insert(topItem, at: 0)
+    }
+
+    /**
+     Shuffle the deck.
+     */
+    mutating func shuffle() {
+        items.shuffle()
     }
 }

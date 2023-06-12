@@ -6,10 +6,11 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
-## 0.6.1
+## 0.7
 
 ### 💡 New features
 
+`Deck` has a new `shuffle` function.
 `DeckView` has a new convenience initializer.
 
 

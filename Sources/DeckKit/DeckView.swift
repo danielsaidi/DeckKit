@@ -39,29 +39,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     }
 
     /**
-     Create a deck view with a custom view configuration.
-
-     - Parameters:
-       - deck: The deck to present.
-       - config: The view configuration to use.
-       - itemView: An item view builder to use for each item in the deck.
-     */
-    public init(
-        deck: Binding<Deck<ItemType>>,
-        config: DeckViewConfiguration,
-        itemView: @escaping ItemViewBuilder
-    ) {
-        self.deck = deck
-        self.config = config
-        self.swipeLeftAction = nil
-        self.swipeRightAction = nil
-        self.swipeUpAction = nil
-        self.swipeDownAction = nil
-        self.itemView = itemView
-    }
-    
-    /**
-     Create a deck view with custom view parameters.
+     Create a deck view with custom parameters.
      
      - Parameters:
        - deck: The deck to present.
@@ -108,7 +86,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
     private let swipeDownAction: ItemAction?
-    
+
     @State
     private var activeItem: ItemType?
 
@@ -124,7 +102,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
                     .offset(size: dragOffset(for: item))
                     .scaleEffect(scale(of: item))
                     .offset(y: offset(of: item))
-                    .rotationEffect(dragRotation(for: item))
+                    .rotationEffect(dragRotation(for: item) ?? .zero)
                     .gesture(dragGesture(for: item))
             }
         }
@@ -230,8 +208,9 @@ private extension DeckView {
         isActive(item) ? topItemOffset : .zero
     }
     
-    func dragRotation(for item: ItemType) -> Angle {
-        .degrees(isActive(item) ? Double(topItemOffset.width) * config.dragRotationFactor : 0)
+    func dragRotation(for item: ItemType) -> Angle? {
+        guard isActive(item) else { return nil }
+        return .degrees(Double(topItemOffset.width) * config.dragRotationFactor)
     }
     
     func isActive(_ item: ItemType) -> Bool {
@@ -258,7 +237,7 @@ private extension DeckView {
         guard let index = visibleIndex(of: item) else { return 1 }
         return scale(at: index)
     }
-    
+
     func visibleIndex(of item: ItemType) -> Int? {
         visibleItems.firstIndex(of: item)
     }
