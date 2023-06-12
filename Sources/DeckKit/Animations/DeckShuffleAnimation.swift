@@ -56,7 +56,12 @@ public class DeckShuffleAnimation: ObservableObject {
 
 
     /// This data type defines shuffle rotation and offsets.
-    public typealias ShuffleData = (Angle, x: Double, y: Double)
+    public struct ShuffleData {
+
+        public let angle: Angle
+        public let xOffset: Double
+        public let yOffset: Double
+    }
 
     private var shuffleData: [ShuffleData] = []
 }
@@ -72,8 +77,8 @@ public extension View {
         in deck: Deck<Item>
     ) -> some View {
         let data = animation.shuffleData(for: item, in: deck)
-        return self.rotationEffect(data?.0 ?? .zero)
-            .offset(x: data?.1 ?? 0, y: data?.2 ?? 0)
+        return self.rotationEffect(data?.angle ?? .zero)
+            .offset(x: data?.xOffset ?? 0, y: data?.yOffset ?? 0)
             .animation(.default, value: animation.animationTrigger)
     }
 }
@@ -119,10 +124,10 @@ private extension DeckShuffleAnimation {
 
     func randomizeShuffleData<Item>(for deck: Binding<Deck<Item>>) {
         shuffleData = (0..<deck.wrappedValue.items.count).map { _ in
-            (
-                Angle.degrees(Double.random(in: -maxDegrees...maxDegrees)),
-                Double.random(in: -maxOffsetX...maxOffsetX),
-                Double.random(in: -maxOffsetY...maxOffsetY)
+            ShuffleData(
+                angle: Angle.degrees(Double.random(in: -maxDegrees...maxDegrees)),
+                xOffset: Double.random(in: -maxOffsetX...maxOffsetX),
+                yOffset: Double.random(in: -maxOffsetY...maxOffsetY)
             )
         }
     }
@@ -144,7 +149,13 @@ private extension DeckShuffleAnimation {
     }
 
     func easeOutShuffleState<Item>(for deck: Binding<Deck<Item>>) {
-        shuffleData = shuffleData.map { ($0.0/2, $0.1/2, $0.2/2) }
+        shuffleData = shuffleData.map {
+            ShuffleData(
+                angle: $0.angle/2,
+                xOffset: $0.xOffset/2,
+                yOffset: $0.yOffset/2
+            )
+        }
         animationTrigger.toggle()
         performAfterDelay {
             self.resetShuffleState(for: deck)
