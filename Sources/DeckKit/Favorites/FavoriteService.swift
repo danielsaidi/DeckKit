@@ -3,13 +3,8 @@
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-09-17.
-//  Copyright © 2020 Daniel Saidi. All rights reserved.
+//  Copyright © 2020-2023 Daniel Saidi. All rights reserved.
 //
-
-/**
- This protocol can be implemented by anything that can be markes as a favorite.
- */
-public protocol Favoritable: Identifiable {}
 
 /**
  This protocol can be implemented by classes that can mark items as favorites.

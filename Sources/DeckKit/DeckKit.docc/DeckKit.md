@@ -59,6 +59,10 @@ DeckKit is available under the MIT license.
 - ``DeckView``
 - ``DeckViewConfiguration``
 
+### Animations
+
+- ``DeckShuffleAnimation``
+
 ### Favorites
 
 - ``Favoritable``

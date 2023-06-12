@@ -20,17 +20,8 @@ struct ContentView: View {
     @State
     var selectedHobby: Hobby?
 
-    @State
-    var isShuffling = false
-
-    @State
-    var shuffleDegrees = Self.getShuffleDegrees()
-
-    @State
-    var shuffleOffsetsY = Self.getShuffleOffsets()
-
-    @State
-    var shuffleOffsetsX = Self.getShuffleOffsets()
+    @StateObject
+    var animation = DeckShuffleAnimation()
     
     var body: some View {
         NavigationView {
@@ -81,85 +72,17 @@ private extension ContentView {
         RoundButton(
             text: "Shuffle",
             image: "shuffle",
-            action: shuffle
+            action: { animation.shuffle($deck) }
         )
     }
 
     func card(for hobby: Hobby) -> some View {
-        let data = shuffleData(for: hobby)
-        return HobbyCard(item: hobby)
-            .rotationEffect(data.0)
-            .offset(x: data.1, y: data.2)
-    }
-}
-
-private extension ContentView {
-
-    func shuffle() {
-        withAnimation {
-            isShuffling = true
-            performAfterDelay(shuffleSecond)
-        }
-    }
-
-    func shuffleSecond() {
-        withAnimation {
-            isShuffling = false
-            performAfterDelay(shuffleThird)
-        }
-    }
-
-    func shuffleThird() {
-        withAnimation {
-            randomizeShuffleData()
-            isShuffling = true
-            performAfterDelay(shuffleDeck)
-        }
-    }
-
-    func shuffleDeck() {
-        deck.shuffle()
-        performAfterDelay(endShuffle)
-    }
-
-    func endShuffle() {
-        withAnimation {
-            isShuffling = false
-            randomizeShuffleData()
-        }
-    }
-
-    func randomizeShuffleData() {
-        shuffleDegrees = Self.getShuffleDegrees()
-        shuffleOffsetsX = Self.getShuffleOffsets()
-        shuffleOffsetsY = Self.getShuffleOffsets()
-    }
-
-    func performAfterDelay(_ action: @escaping () -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: action)
-    }
-
-    func shuffleData(for hobby: Hobby) -> (Angle, Double, Double)  {
-        guard
-            isShuffling,
-            let index = deck.items.firstIndex(of: hobby)
-        else { return (.zero, 0, 0) }
-        let degrees = Angle.degrees(shuffleDegrees[index])
-        let offsetX = shuffleOffsetsX[index]
-        let offsetY = shuffleOffsetsY[index]
-        return (degrees, offsetX, offsetY)
-    }
-
-    static func getShuffleDegrees() -> [Double] {
-        (0...100).map { _ in
-            Double.random(in: -8...8)
-        }
-    }
-
-    static func getShuffleOffsets() -> [Double] {
-        (0...100).map { _ in
-            Double.random(in: -8...8)
-        }
+        HobbyCard(item: hobby)
+            .withShuffleAnimation(
+                animation,
+                for: hobby,
+                in: deck
+            )
     }
 }
 

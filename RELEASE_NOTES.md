@@ -10,8 +10,9 @@ Until then, deprecated features may be removed in the next minor version.
 
 ### 💡 New features
 
-`Deck` has a new `shuffle` function.
-`DeckView` has a new convenience initializer.
+* `Deck` has a new `shuffle` function.
+* `DeckShuffleAnimation` is a new animation.
+* `DeckView` has a new convenience initializer.
 
 
 

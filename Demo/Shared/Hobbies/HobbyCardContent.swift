@@ -3,7 +3,7 @@
 //  DeckKitDemo
 //
 //  Created by Daniel Saidi on 2020-09-22.
-//  Copyright © 2020 Daniel Saidi. All rights reserved.
+//  Copyright © 2020-2023 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -98,6 +98,7 @@ private extension HobbyCardContent {
     var footnote: some View {
         Text(inSheet ? "Swipe down to close" : "Swipe left for a new hobby, swipe right to select this one.")
             .font(.footnote)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 
