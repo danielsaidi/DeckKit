@@ -5,25 +5,28 @@
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-5.6-orange.svg" alt="Swift 5.6" />
-    <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
-    <img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" />
-    <img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" />
+        <a href="https://twitter.com/danielsaidi">
+        <img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" />
+    </a>
+    <a href="https://mastodon.social/@danielsaidi">
+        <img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" />
+    </a>
 </p>
 
 
 
 ## About DeckKit
 
-DeckKit makes it easy to create deck-based apps in `SwiftUI`. 
-
-The result can look like this or completely different:
+DeckKit helps you create deck-based apps in `SwiftUI`. The result can look like this or completely different:
 
 <p align="center" style="border-radius: 10px">
     <img src="Resources/Demo.gif" width=300 />
 </p>
 
-These decks and their cards can be customized to great extent. You can change colors, fonts, corner radius, expanded height etc. and use any views you like.
+DeckKit decks can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
+
+DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
 
 
 
@@ -35,19 +38,7 @@ DeckKit can be installed with the Swift Package Manager:
 https://github.com/danielsaidi/DeckKit.git
 ```
 
-or with CocoaPods:
-
-```
-pod DeckKit
-```
-
 If you prefer to not have external dependencies, you can also just copy the source code into your app.
-
-
-
-## Supported Platforms
-
-DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
 
 
 
@@ -92,7 +83,9 @@ struct MyView: View {
 }
 ```
 
-The `DeckView` takes an optional `DeckViewConfiguration` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, the drag threshold before sending an item to the back of the stack etc. You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges.
+The `DeckView` takes an optional `DeckViewConfiguration` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, etc. 
+
+You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges.
 
 For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started].
 
@@ -110,7 +103,7 @@ This project has a demo app that lets you explore the library on iOS and macOS. 
 
 
 
-## Support
+## Support this library
 
 You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support. 
 
