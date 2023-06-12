@@ -14,8 +14,8 @@ import SwiftUI
  To use this animation, first create a `@StateObject` in the
  view that should use the animation, then bind the animation
  to your deck item views using the `withDeckShuffleAnimation`
- view modifier, then call `shuffle` shuffle the deck with an
- animation.
+ view modifier, then call `shuffle` to shuffle the deck with
+ a nice shuffle animation.
  */
 public class DeckShuffleAnimation: ObservableObject {
 

@@ -9,8 +9,6 @@ DeckKit makes it easy to create deck-based apps in `SwiftUI`.
 
 DeckKit decks can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
 
-The online documentation is currently iOS only. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`.
-
 DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
 
 
@@ -36,6 +34,12 @@ The <doc:Getting-Started> article has a guide to help you get started with RichT
 ## Repository
 
 For more information, source code, an if you want to report issues, sponsor the project etc., visit the [project repository](https://github.com/danielsaidi/DeckKit).
+
+
+
+## About this documentation
+
+The online documentation is currently iOS only. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`.
 
 
 
