@@ -13,45 +13,38 @@ import SwiftUI
 struct Hobby: DeckItem {
     
     let id = UUID().uuidString
-    
+
+    var number: Int
     var name: String
+    var color: Color
     var text: String
     var imageName: String
-    var color: Color = .demoColors.randomElement() ?? .white
-    
-    var backgroundColor: Color { color }
-    var foregroundColor: Color {
-        switch backgroundColor {
-        case .white: return .black
-        default: return .white
-        }
-    }
+
     var image: Image { Image(systemName: imageName) }
 }
 
 extension Hobby {
 
     static var demoCollection: [Hobby] = [
-        Hobby(name: "Drawing", text: "Perfect for when you have a lot of paper.", imageName: "pencil"),
-        Hobby(name: "Origami", text: "Perfect for when you have a lot of failed drawings.", imageName: "doc"),
-        Hobby(name: "Paper Planes", text: "Perfect for when you have a lot of failed origamis.", imageName: "paperplane"),
-        Hobby(name: "Lassoing", text: "Perfect for when your friends run away because you throw paper planes at them.", imageName: "lasso"),
-        Hobby(name: "Writing", text: "Write an exciting story about your life.", imageName: "doc.text"),
-        Hobby(name: "Reading", text: "Read the exciting story about your life.", imageName: "book.closed"),
-        Hobby(name: "Trashbinning", text: "Realise that the story of your life isn't that exciting.", imageName: "trash"),
-        Hobby(name: "Studying", text: "Make something out of your life...perhaps it will become exciting?", imageName: "graduationcap"),
-        Hobby(name: "Macgyvering", text: "Create space rockets out of paperclips. Now THAT'S exciting!", imageName: "paperclip"),
-        Hobby(name: "Bungee Jumping", text: "Also exciting, but remember to connect yourself with a rope!", imageName: "person.fill.turn.down"),
-        Hobby(name: "Music", text: "Ok, this is an actual hobby. Listening to music, playing music...eating music?", imageName: "music.note"),
-        Hobby(name: "Watching stuff", text: "Be careful! It can be really creepy if you do it in the wrong way. Also, you can't watch music.", imageName: "eye"),
-        Hobby(name: "Smelling stuff", text: "This is getting weird.", imageName: "eye"),
-        Hobby(name: "Kissing stuff", text: "Just stop!", imageName: "mouth"),
-        Hobby(name: "Sleeping", text: "Some says that even this is a hobby!", imageName: "zzz"),
-        Hobby(name: "Star gazing", text: "Perfect for when you fail to do the sleeping hobby thing!", imageName: "star"),
-        Hobby(name: "Lightning gazing", text: "Make sure to stay far away!", imageName: "cloud.bolt"),
-        Hobby(name: "Umbrella dancing", text: "Don't combine this with lightning gazing!", imageName: "umbrella"),
-        Hobby(name: "Tornado gazing", text: "Make sure to stay extra far away! And close that umbrella!", imageName: "cloud.bolt"),
-        Hobby(name: "Pyromaniac stuff", text: "No one should ever claim that this is a hobby. It's illegal!!!", imageName: "flame"),
-        Hobby(name: "Swift", text: "The best hobby! And perfectly legal 👌", imageName: "swift"),
+        Hobby(number: 01, name: "Drawing", color: .cyan, text: "Perfect for when you have a lot of paper.", imageName: "pencil"),
+        Hobby(number: 02, name: "Origami", color: .gray, text: "Perfect for when you have a lot of failed drawings.", imageName: "doc"),
+        Hobby(number: 03, name: "Paper Planes", color: .mint, text: "Perfect for when you have a lot of failed origamis.", imageName: "paperplane"),
+        Hobby(number: 04, name: "Lassoing", color: .brown, text: "Perfect for when your paper planes fly away.", imageName: "lasso"),
+        Hobby(number: 05, name: "Writing", color: .black, text: "Write an exciting story about your life.", imageName: "doc.text"),
+        Hobby(number: 06, name: "Reading", color: .orange, text: "Read that exciting story about your life.", imageName: "book.closed"),
+        Hobby(number: 07, name: "Trashbinning", color: .gray, text: "Realise that the story of your life isn't that exciting.", imageName: "trash"),
+        Hobby(number: 08, name: "Studying", color: .orange, text: "Make something exciting out of your life.", imageName: "graduationcap"),
+        Hobby(number: 09, name: "Macgyvering", color: .pink, text: "Create a space ship out of a paperclip. Now THAT'S exciting!", imageName: "paperclip"),
+        Hobby(number: 10, name: "Bungee Jumping", color: .yellow, text: "Also exciting, but remember to connect yourself with a rope!", imageName: "person.fill.turn.down"),
+        Hobby(number: 11, name: "Music", color: .red, text: "Ok, music is an actual hobby. Like listening to music, playing music...and eating music?", imageName: "music.note"),
+        Hobby(number: 12, name: "Watching stuff", color: .teal, text: "This can be really creepy if you do it in the wrong way.", imageName: "eye"),
+        Hobby(number: 13, name: "Smelling stuff", color: .indigo, text: "Sure, there are plenty of nice things to smell, but this is getting weird.", imageName: "eye"),
+        Hobby(number: 14, name: "Kissing stuff", color: .red, text: "Just stop!", imageName: "mouth"),
+        Hobby(number: 15, name: "Sleeping", color: .purple, text: "Can you imagine that some people says this isn't a hobby!?", imageName: "zzz"),
+        Hobby(number: 16, name: "Star gazing", color: .black, text: "Perfect for when you fail to sleeping.", imageName: "star"),
+        Hobby(number: 17, name: "Lightning gazing", color: .yellow, text: "Make sure to stay far away!", imageName: "cloud.bolt"),
+        Hobby(number: 18, name: "Umbrella spinning", color: .teal, text: "Don't combine this with lightning gazing!", imageName: "umbrella"),
+        Hobby(number: 19, name: "Tornado gazing", color: .mint, text: "Remember to stay far away...and to close that umbrella!", imageName: "tornado"),
+        Hobby(number: 20, name: "Swift", color: .orange, text: "The best hobby!", imageName: "swift"),
     ]
 }

@@ -29,12 +29,20 @@ struct RoundButton: View {
             VStack(spacing: 10) {
                 Image(systemName: image)
                     .padding()
-                    .background(Circle().fill(.white))
-                    .withDemoShadow()
+                    .background(badge)
                 Text(text)
                     .font(.footnote)
             }
         }
         .buttonStyle(PlainButtonStyle())
+    }
+}
+
+private extension RoundButton {
+
+    var badge: some View {
+        Circle()
+            .fill(.white)
+            .shadow(radius: 0, x: 0, y: 1)
     }
 }

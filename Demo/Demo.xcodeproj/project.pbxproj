@@ -19,12 +19,8 @@
 		656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA461251A6A0C0079841C /* HobbyCard.swift */; };
 		A927503029360936006A2F56 /* HobbyCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927502F29360936006A2F56 /* HobbyCardContent.swift */; };
 		A927503129360936006A2F56 /* HobbyCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927502F29360936006A2F56 /* HobbyCardContent.swift */; };
-		A927503329360B60006A2F56 /* View+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503229360B60006A2F56 /* View+Demo.swift */; };
-		A927503429360B60006A2F56 /* View+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503229360B60006A2F56 /* View+Demo.swift */; };
 		A927503629360BB8006A2F56 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503529360BB8006A2F56 /* RoundButton.swift */; };
 		A927503729360BB8006A2F56 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503529360BB8006A2F56 /* RoundButton.swift */; };
-		A927503C2936135F006A2F56 /* Color+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503B2936135F006A2F56 /* Color+Demo.swift */; };
-		A927503D2936135F006A2F56 /* Color+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927503B2936135F006A2F56 /* Color+Demo.swift */; };
 		A9CD2C8C281C27A40044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8B281C27A40044E20E /* DeckKit */; };
 		A9CD2C8E281C27A80044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8D281C27A80044E20E /* DeckKit */; };
 /* End PBXBuildFile section */
@@ -41,17 +37,7 @@
 		656FA45E251A696D0079841C /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
 		656FA461251A6A0C0079841C /* HobbyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCard.swift; sourceTree = "<group>"; };
 		A927502F29360936006A2F56 /* HobbyCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCardContent.swift; sourceTree = "<group>"; };
-		A927503229360B60006A2F56 /* View+Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Demo.swift"; sourceTree = "<group>"; };
 		A927503529360BB8006A2F56 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
-		A927503B2936135F006A2F56 /* Color+Demo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Demo.swift"; sourceTree = "<group>"; };
-		A9827A18257ED1D60006D64F /* Release Notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = "Release Notes.md"; path = "../Release Notes.md"; sourceTree = "<group>"; };
-		A9827A19257ED1D60006D64F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		A9827A1A257ED1D60006D64F /* DeckKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = DeckKit.podspec; path = ../DeckKit.podspec; sourceTree = "<group>"; };
-		A9827A1B257ED1D60006D64F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
-		A9827A1C257ED1D60006D64F /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
-		A9827A1D257ED1D60006D64F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
-		A9827A1E257ED1D60006D64F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		A9827A1F257ED1E20006D64F /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Fastfile; path = ../Fastlane/Fastfile; sourceTree = "<group>"; };
 		A9CD2C8A281C27960044E20E /* deckkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = deckkit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +70,6 @@
 				656FA446251A62500079841C /* macOS */,
 				656FA45A251A629E0079841C /* Frameworks */,
 				656FA43E251A62500079841C /* Products */,
-				A9827A17257ED1B20006D64F /* Project Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,7 +78,6 @@
 			children = (
 				656FA438251A62500079841C /* Assets.xcassets */,
 				A927503929360C15006A2F56 /* Buttons */,
-				A927503A29361342006A2F56 /* Extensions */,
 				A927503829360C0C006A2F56 /* Hobbies */,
 				656FA437251A624F0079841C /* ContentView.swift */,
 				656FA436251A624F0079841C /* DeckKitDemoApp.swift */,
@@ -150,30 +134,6 @@
 				A927503529360BB8006A2F56 /* RoundButton.swift */,
 			);
 			path = Buttons;
-			sourceTree = "<group>";
-		};
-		A927503A29361342006A2F56 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				A927503B2936135F006A2F56 /* Color+Demo.swift */,
-				A927503229360B60006A2F56 /* View+Demo.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A9827A17257ED1B20006D64F /* Project Files */ = {
-			isa = PBXGroup;
-			children = (
-				A9827A1D257ED1D60006D64F /* .gitignore */,
-				A9827A1B257ED1D60006D64F /* .swiftlint.yml */,
-				A9827A1A257ED1D60006D64F /* DeckKit.podspec */,
-				A9827A1F257ED1E20006D64F /* Fastfile */,
-				A9827A19257ED1D60006D64F /* LICENSE */,
-				A9827A1C257ED1D60006D64F /* Package.swift */,
-				A9827A1E257ED1D60006D64F /* README.md */,
-				A9827A18257ED1D60006D64F /* Release Notes.md */,
-			);
-			name = "Project Files";
 			sourceTree = "<group>";
 		};
 		A9CD2C89281C27960044E20E /* Packages */ = {
@@ -292,10 +252,8 @@
 			files = (
 				A927503029360936006A2F56 /* HobbyCardContent.swift in Sources */,
 				656FA462251A6A0C0079841C /* HobbyCard.swift in Sources */,
-				A927503C2936135F006A2F56 /* Color+Demo.swift in Sources */,
 				A927503629360BB8006A2F56 /* RoundButton.swift in Sources */,
 				656FA45F251A696D0079841C /* Hobby.swift in Sources */,
-				A927503329360B60006A2F56 /* View+Demo.swift in Sources */,
 				656FA44B251A62500079841C /* ContentView.swift in Sources */,
 				656FA449251A62500079841C /* DeckKitDemoApp.swift in Sources */,
 			);
@@ -307,10 +265,8 @@
 			files = (
 				A927503129360936006A2F56 /* HobbyCardContent.swift in Sources */,
 				656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */,
-				A927503D2936135F006A2F56 /* Color+Demo.swift in Sources */,
 				A927503729360BB8006A2F56 /* RoundButton.swift in Sources */,
 				656FA460251A69720079841C /* Hobby.swift in Sources */,
-				A927503429360B60006A2F56 /* View+Demo.swift in Sources */,
 				656FA44C251A62500079841C /* ContentView.swift in Sources */,
 				656FA44A251A62500079841C /* DeckKitDemoApp.swift in Sources */,
 			);
@@ -439,7 +395,7 @@
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -461,7 +417,7 @@
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

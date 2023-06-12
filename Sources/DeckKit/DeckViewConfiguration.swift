@@ -38,7 +38,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
         alwaysShowLastItem: Bool = true,
         scaleOffset: Double = 0.02,
         verticalOffset: Double = 10,
-        dragRotationFactor: Double = 0.01,
+        dragRotationFactor: Double = 0.05,
         horizontalDragThreshold: Double = 100,
         verticalDragThreshold: Double = 250
     ) {
