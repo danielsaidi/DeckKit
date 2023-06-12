@@ -16,6 +16,12 @@ public struct DeckViewConfiguration: Codable, Equatable {
     /**
      Create a stacked deck configuration.
 
+     Note that `alwaysShowLastItem` will make sure that your
+     deck always shows the last item, even if the deck has a
+     large number of items. This makes swiping a card to the
+     back look more consistent, since a card would otherwise
+     fade away as it is swiped to the back of the deck.
+
      - Parameters:
        - direction: The visual direction of the stack, by default `.up`.
        - itemDisplayCount: The max number of items to display, by default `10`.

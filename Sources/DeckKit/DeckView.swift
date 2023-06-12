@@ -21,16 +21,30 @@ import SwiftUI
 public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
 
     /**
-     Creates an instance of the view.
+     Create a deck view with a standard view configuration.
 
      - Parameters:
-       - deck: The generic deck that is to be presented.
-       - config: The stacked deck configuration, by default ``DeckViewConfiguration/standard``.
-       - swipeLeftAction: The action to trigger when an item is sent to the back of the deck by swiping it left, by default `nil`.
-       - swipeRightAction: The action to trigger when an item is sent to the back of the deck by swiping it right, by default `nil`.
-       - swipeUpAction: The action to trigger when an item is sent to the back of the deck by swiping it up, by default `nil`.
-       - swipeDownAction: The action to trigger when an item is sent to the back of the deck by swiping it down, by default `nil`.
-       - itemViewBuilder: A builder that generates a view for each item in the deck.
+       - deck: The deck to present.
+       - itemView: An item view builder to use for each item in the deck.
+     */
+    public init(
+        _ deck: Binding<Deck<ItemType>>,
+        itemView: @escaping ItemViewBuilder
+    ) {
+        self.init(
+            deck: deck,
+            config: .standard,
+            itemView: itemView
+        )
+    }
+
+    /**
+     Create a deck view with a custom view configuration.
+
+     - Parameters:
+       - deck: The deck to present.
+       - config: The view configuration to use.
+       - itemView: An item view builder to use for each item in the deck.
      */
     public init(
         deck: Binding<Deck<ItemType>>,
@@ -47,16 +61,16 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     }
     
     /**
-     Creates an instance of the view.
+     Create a deck view with custom view parameters.
      
      - Parameters:
-       - deck: The generic deck that is to be presented.
+       - deck: The deck to present.
        - config: The stacked deck configuration, by default ``DeckViewConfiguration/standard``.
        - swipeLeftAction: The action to trigger when an item is sent to the back of the deck by swiping it left, by default `nil`.
        - swipeRightAction: The action to trigger when an item is sent to the back of the deck by swiping it right, by default `nil`.
        - swipeUpAction: The action to trigger when an item is sent to the back of the deck by swiping it up, by default `nil`.
        - swipeDownAction: The action to trigger when an item is sent to the back of the deck by swiping it down, by default `nil`.
-       - itemViewBuilder: A builder that generates a view for each item in the deck.
+       - itemView: An item view builder to use for each item in the deck.
      */
     public init(
         deck: Binding<Deck<ItemType>>,

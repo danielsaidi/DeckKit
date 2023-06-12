@@ -5,6 +5,15 @@ DeckKit will use semver after 1.0.
 Until then, deprecated features may be removed in the next minor version.
 
 
+
+## 0.6.1
+
+### 💡 New features
+
+`DeckView` has a new convenience initializer.
+
+
+
 ## 0.6
 
 ### 💡 New features
