@@ -7,6 +7,7 @@
 //
 
 /**
- This protocol can be implemented by anything that can be markes as a favorite.
+ This protocol can be implemented by any type that should be
+ able to be marked as a favorite.
  */
 public protocol Favoritable: Identifiable {}

@@ -25,49 +25,50 @@ public struct Deck<Item: DeckItem>: Identifiable, Equatable {
     public init(
         id: UUID = UUID(),
         name: String = "",
-        items: [Item]) {
+        items: [Item]
+    ) {
         self.id = id
         self.name = name
         self.items = items
     }
     
-    /**
-     The unique id of the deck.
-     */
+    /// The unique id of the deck.
     public let id: UUID
     
-    /**
-     The name of the deck.
-     */
+    /// The name of the deck.
     public let name: String
     
-    /**
-     The items that are added to the deck.
-     */
+    /// The items that are added to the deck.
     public var items: [Item]
 }
 
 public extension Deck {
     
-    /**
-     The index of a certain item, if any.
-     */
+    /// The index of a certain item, if any.
     func index(of item: Item) -> Int? {
         items.firstIndex { $0.id == item.id }
     }
     
-    /**
-     Move an item to the back of the deck.
-     */
+    /// Move the first item to the back of the deck.
+    mutating func moveFirstItemToBack() {
+        guard let item = items.first else { return }
+        moveToBack(item)
+    }
+    
+    /// Move the last item to the front of the deck.
+    mutating func moveLastItemToFront() {
+        guard let item = items.last else { return }
+        moveToFront(item)
+    }
+    
+    /// Move an item to the back of the deck.
     mutating func moveToBack(_ item: Item) {
         guard let index = index(of: item) else { return }
         let topItem = items.remove(at: index)
         items.append(topItem)
     }
 
-    /**
-     Move an item to the front of the deck.
-     */
+    /// Move an item to the front of the deck.
     mutating func moveToFront(_ item: Item) {
         guard let index = index(of: item) else { return }
         if items[0].id == item.id { return }
@@ -75,9 +76,7 @@ public extension Deck {
         items.insert(topItem, at: 0)
     }
 
-    /**
-     Shuffle the deck.
-     */
+    /// Shuffle the deck.
     mutating func shuffle() {
         items.shuffle()
     }

@@ -6,6 +6,14 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.7.1
+
+### 💡 New features
+
+* `Deck` has new `move` functions.
+
+
+
 ## 0.7
 
 ### 💡 New features

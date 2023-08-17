@@ -134,16 +134,10 @@ private extension DeckView {
 
 private extension DeckView {
 
-    /**
-     Move a certain item to the back of the stack.
-     */
     func moveItemToBack(_ item: ItemType) {
         deck.wrappedValue.moveToBack(item)
     }
 
-    /**
-     Move a certain item to the front of the stack.
-     */
     func moveItemToFront(_ item: ItemType) {
         deck.wrappedValue.moveToFront(item)
     }

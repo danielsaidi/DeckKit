@@ -6,8 +6,11 @@
 //  Copyright © 2020-2023 Daniel Saidi. All rights reserved.
 //
 
+import Foundation
+
 /**
- This protocol can be implemented by classes that can mark items as favorites.
+ This service protocol can be implemented any types that can
+ toggle the favorite state of ``Favoritable`` items.
  */
 public protocol FavoriteService: AnyObject {
     

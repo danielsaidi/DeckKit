@@ -10,8 +10,7 @@ import SwiftUI
 import CoreGraphics
 
 /**
- This view can be used to presents a ``PreviewCard/Item``, and
- can be used as is or as a template for other cards.
+ This view can be used as a preview template for other cards.
  */
 struct PreviewCard: View {
     
