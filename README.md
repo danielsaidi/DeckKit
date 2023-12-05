@@ -14,7 +14,7 @@
 
 ## About DeckKit
 
-DeckKit helps you create deck-based apps in `SwiftUI`. 
+DeckKit helps you create deck-based apps in `SwiftUI`. It has a `DeckView` that can render any `DeckItem` collection, with support for swipe gestures, edge swipe detection, shuffling, etc.  
 
 The result can look like this or completely different:
 
