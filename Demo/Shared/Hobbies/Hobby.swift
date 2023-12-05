@@ -48,3 +48,10 @@ extension Hobby {
         Hobby(number: 20, name: "Swift", color: .orange, text: "The best hobby!", imageName: "swift"),
     ]
 }
+
+extension Array where Element == Hobby {
+    
+    var previewItem: Hobby {
+        randomElement() ?? self[0]
+    }
+}

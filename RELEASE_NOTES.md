@@ -6,6 +6,16 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.8
+
+DeckKit now targets Swift 5.9.
+
+### 🐛 Bug Fixes
+
+* `DeckShuffleAnimation` now properly triggers `isShuffling`.
+
+
+
 ## 0.7.1
 
 ### 💡 New features

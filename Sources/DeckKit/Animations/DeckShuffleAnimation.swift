@@ -47,11 +47,15 @@ public class DeckShuffleAnimation: ObservableObject {
 
 
     /// Whether or not the animation is currently shuffling.
-    @Published
-    public private(set) var isShuffling = false
+    public var isShuffling: Bool {
+        !shuffleData.isEmpty
+    }
 
     @Published
     fileprivate var animationTrigger = false
+    
+    @Published
+    private var shuffleData: [ShuffleData] = []
 
 
     /// This data type defines shuffle rotation and offsets.
@@ -61,8 +65,6 @@ public class DeckShuffleAnimation: ObservableObject {
         public let xOffset: Double
         public let yOffset: Double
     }
-
-    private var shuffleData: [ShuffleData] = []
 }
 
 public extension View {
@@ -93,7 +95,7 @@ public extension DeckShuffleAnimation {
      */
     func shuffle<Item>(
         _ deck: Binding<Deck<Item>>,
-        times: Int = 5
+        times: Int = 3
     ) {
         if animationTrigger { return }
         randomizeShuffleData(for: deck)

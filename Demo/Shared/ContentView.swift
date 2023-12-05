@@ -33,7 +33,10 @@ struct ContentView: View {
                 shuffleButton
             }
             .sheet(item: $selectedHobby) {
-                HobbyCardContent(item: $0, inSheet: true)
+                HobbyCardContent(
+                    item: $0,
+                    inSheet: true
+                )
             }
             .navigationTitle("DeckKit")
             #if os(iOS)
@@ -58,7 +61,19 @@ private extension ContentView {
             swipeRightAction: { selectedHobby = $0 },
             swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
             swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
-            itemView: card
+            itemView: deckViewCard
+        )
+    }
+    
+    func deckViewCard(for hobby: Hobby) -> some View {
+        HobbyCard(
+            item: hobby,
+            isShuffling: animation.isShuffling
+        )
+        .withShuffleAnimation(
+            animation,
+            for: hobby,
+            in: deck
         )
     }
 
@@ -74,15 +89,6 @@ private extension ContentView {
             image: "shuffle",
             action: { animation.shuffle($deck) }
         )
-    }
-
-    func card(for hobby: Hobby) -> some View {
-        HobbyCard(item: hobby)
-            .withShuffleAnimation(
-                animation,
-                for: hobby,
-                in: deck
-            )
     }
 }
 

@@ -12,13 +12,16 @@ struct HobbyCardContent: View {
 
     init(
         item: Hobby,
+        isShuffling: Bool = false,
         inSheet: Bool = false
     ) {
         self.item = item
+        self.isShuffling = isShuffling
         self.inSheet = inSheet
     }
 
     private let item: Hobby
+    private let isShuffling: Bool
     private let inSheet: Bool
 
     private let numberSize = 60.0
@@ -52,6 +55,7 @@ private extension HobbyCardContent {
             Divider()
             footnote
         }
+        .opacity(isShuffling ? 0.5 : 1)
     }
 
     var imageHeader: some View {
@@ -102,12 +106,10 @@ private extension HobbyCardContent {
     }
 }
 
-struct HobbyCardContent_Previews: PreviewProvider {
-    static let hobbies = Hobby.demoCollection
-
-    static var previews: some View {
-        HobbyCardContent(
-            item: hobbies.randomElement() ?? hobbies[0]
-        )
-    }
+#Preview {
+    
+    HobbyCardContent(
+        item: Hobby.demoCollection.previewItem,
+        isShuffling: false
+    )
 }
