@@ -1,5 +1,5 @@
 <p align="center">
-    <img src ="Resources/Logo_GitHub.png" alt="DeckKit Logo" title="DeckKit" width=600 />
+    <img src ="Resources/Logo_GitHub.png" alt="DeckKit Logo" title="DeckKit" />
 </p>
 
 <p align="center">
@@ -18,15 +18,15 @@
 
 ## About DeckKit
 
-DeckKit helps you create deck-based apps in `SwiftUI`. The result can look like this or completely different:
+DeckKit helps you create deck-based apps in `SwiftUI`. 
+
+The result can look like this or completely different:
 
 <p align="center" style="border-radius: 10px">
     <img src="Resources/Demo.gif" width=300 />
 </p>
 
 DeckKit decks can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
-
-DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
 
 
 
@@ -44,11 +44,7 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 ## Getting started
 
-The online documentation has a [getting-started guide][Getting-Started] that will help you get started with the library.
-
-In DeckKit, a `Deck` can be used to define a deck of items that implement the `DeckItem` protocol.
-
-For instance, consider a `Hobby` type that looks like this:
+With DeckKit, you can use a `Deck` with a set of items that implement the `DeckItem` protocol:
 
 ```swift
 struct Hobby: DeckItem {
@@ -58,11 +54,7 @@ struct Hobby: DeckItem {
 
     var id: String { name }
 }
-```
 
-You can now create a deck with hobbies and display it in a `DeckView`:
-
-```swift
 struct MyView: View {
 
     @State
@@ -83,29 +75,27 @@ struct MyView: View {
 }
 ```
 
-The `DeckView` takes an optional `DeckViewConfiguration` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, etc. 
+The `DeckView` takes an optional `DeckViewConfiguration` that can be used to configure the visual direction, the number of visible items, etc. You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges.
 
-You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges.
-
-For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started].
+For more information, please see the [getting started guide][Getting-Started].
 
 
 
 ## Documentation
 
-The [online documentation][Documentation] has articles, code examples etc. that let you overview the various parts of the library. 
+The [online documentation][Documentation] has more information, articles, code examples, etc. 
 
 
 
 ## Demo Application
 
-This project has a demo app that lets you explore the library on iOS and macOS. To try it out, just open and run `Demo/Demo.xcodeproj`.
+The demo app lets you explore the library on iOS and macOS. To try it out, just open and run the `Demo` project.
 
 
 
-## Support this library
+## Support my work 
 
-You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support. 
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][GitHub]. 
 
 
 
@@ -128,6 +118,7 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 
 [Email]: mailto:daniel.saidi@gmail.com
 [Website]: https://www.danielsaidi.com
+[GitHub]: https://www.github.com/danielsaidi
 [Twitter]: https://www.twitter.com/danielsaidi
 [Mastodon]: https://mastodon.social/@danielsaidi
 [Sponsors]: https://github.com/sponsors/danielsaidi

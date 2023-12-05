@@ -1,6 +1,6 @@
 # ``DeckKit``
 
-DeckKit makes it easy to create deck-based apps in `SwiftUI`.
+DeckKit helps you create deck-based apps in `SwiftUI`.
 
 
 ## Overview
@@ -8,8 +8,6 @@ DeckKit makes it easy to create deck-based apps in `SwiftUI`.
 ![DeckKit logo](Logo.png)
 
 DeckKit decks can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
-
-DeckKit supports `iOS 13`, `macOS 11`, `tvOS 13` and `watchOS 6`.
 
 
 
@@ -33,19 +31,13 @@ The <doc:Getting-Started> article has a guide to help you get started with RichT
 
 ## Repository
 
-For more information, source code, an if you want to report issues, sponsor the project etc., visit the [project repository](https://github.com/danielsaidi/DeckKit).
-
-
-
-## About this documentation
-
-The online documentation is currently iOS only. To generate documentation for other platforms, open the package in Xcode, select a simulator then run `Product/Build Documentation`.
+For more information, source code, etc., visit the [project repository][Repository].
 
 
 
 ## License
 
-DeckKit is available under the MIT license.
+RichTextKit is available under the MIT license. See the [LICENSE][License] file for more info.
 
 
 
@@ -73,3 +65,8 @@ DeckKit is available under the MIT license.
 - ``FavoriteContext``
 - ``FavoriteService``
 - ``UserDefaultsFavoriteService``
+
+
+
+[License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
+[Repository]: https://github.com/danielsaidi/DeckKit
