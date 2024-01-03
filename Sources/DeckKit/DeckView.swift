@@ -3,20 +3,19 @@
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
-//  Copyright © 2020-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS)
 import SwiftUI
 
 /**
- This view renders a ``Deck`` as deck of items, from which a
- user can swipe away the top item to trigger certain actions.
+ This view renders a ``Deck`` as a stack of cards from which
+ users can swipe away the top item and trigger actions.
 
  The view takes a generic ``Deck`` and maps its items to any
- views you like, which is determined by the `itemViewBuilder`.
- You can pass in a ``DeckViewConfiguration`` value to config
- how the deck should be presented.
+ views, as determined by the `itemViewBuilder`. You can pass
+ in a ``DeckViewConfiguration`` to customize the deck.
  */
 public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
 
@@ -68,20 +67,16 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
         self.itemView = itemView
     }
     
-    /**
-     A function to trigger for a deck item swipe action.
-     */
+    /// A function to trigger when swiping away a deck item.
     public typealias ItemAction = (ItemType) -> Void
 
-    /**
-     A function that creates a view for a deck item.
-     */
+    /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
     private var deck: Binding<Deck<ItemType>>
     private var config: DeckViewConfiguration
-
     private let itemView: (ItemType) -> ItemView
+    
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
@@ -259,33 +254,37 @@ private extension View {
 
 // MARK: - Preview
 
-struct DeckView_Previews: PreviewProvider {
+private var item1: PreviewCard.Item { PreviewCard.Item(
+    title: "Title 1",
+    text: "Text 1",
+    footnote: "Footnote 1",
+    backgroundColor: .blue,
+    tintColor: .yellow)
+}
 
+private var item2: PreviewCard.Item { PreviewCard.Item(
+    title: "Title 2",
+    text: "Text 2",
+    footnote: "Footnote 2",
+    backgroundColor: .yellow,
+    tintColor: .blue)
+}
+
+#Preview {
+    
     struct Preview: View {
-
-        static var item1: PreviewCard.Item { PreviewCard.Item(
-            title: "Title 1",
-            text: "Text 1",
-            footnote: "Footnote 1",
-            backgroundColor: .blue,
-            tintColor: .yellow)
-        }
-
-        static var item2: PreviewCard.Item { PreviewCard.Item(
-            title: "Title 2",
-            text: "Text 2",
-            footnote: "Footnote 2",
-            backgroundColor: .yellow,
-            tintColor: .blue)
-        }
-
+        
         @State
-        private var deck = Deck(
+        var deck = Deck(
             name: "My Deck",
-            items: [item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2,
-                    item1, item2, item1, item2, item1, item2, item1, item2, item1, item2, item1, item2]
+            items: [
+                item1, item2, item1, item2, item1, item2,
+                item1, item2, item1, item2, item1, item2,
+                item1, item2, item1, item2, item1, item2,
+                item1, item2, item1, item2, item1, item2
+            ]
         )
-
+        
         var body: some View {
             VStack {
                 DeckView(deck: $deck) {
@@ -303,8 +302,6 @@ struct DeckView_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }
 #endif

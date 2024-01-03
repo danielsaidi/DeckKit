@@ -42,7 +42,11 @@ struct MyView: View {
 }
 ```
 
-The ``DeckView`` takes an optional ``DeckViewConfiguration`` parameter that can be used to configure the view in various ways. You can for instance use it to control the visual direction, the number of visible items, the drag threshold before sending an item to the back of the stack etc. You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges. 
+The ``DeckView`` takes an optional ``DeckViewConfiguration`` parameter that can be used to configure the view in various ways. 
+
+You can use the configuration to control the visual direction, the number of visible items, drag threshold, etc. 
+
+You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges. 
 
 
 
@@ -87,7 +91,6 @@ struct MyView: View {
 ```
  
 A context can be passed around, injected as an environment object etc.
-
 
 
 

@@ -51,6 +51,7 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 - ``Deck``
 - ``DeckContext``
+- ``DeckPageView``
 - ``DeckItem``
 - ``DeckView``
 - ``DeckViewConfiguration``

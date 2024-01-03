@@ -6,6 +6,16 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 1.0
+
+DeckKit now targets iOS 15.0, macOS 11.0, tvOS 15.0 and watchOS 8.0.
+
+### 💡 New features
+
+* `DeckPageView` is a new horizontal page view.
+
+
+
 ## 0.8
 
 DeckKit now targets Swift 5.9.

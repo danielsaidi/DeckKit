@@ -3,7 +3,7 @@
 //  DeckKitDemo
 //
 //  Created by Daniel Saidi on 2020-09-22.
-//  Copyright © 2020-2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
