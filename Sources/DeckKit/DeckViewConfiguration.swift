@@ -23,7 +23,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
      fade away as it is swiped to the back of the deck.
 
      - Parameters:
-       - direction: The visual direction of the stack, by default `.up`.
+       - direction: The visual direction of the stack, by default `.down`.
        - itemDisplayCount: The max number of items to display, by default `10`.
        - alwaysShowLastItem: Whether or not to show the last item for visual stability, by default `true`.
        - scaleOffset: The percentual shrink factor to apply to each item in the stack, by default `0.02`.
@@ -33,7 +33,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
        - verticalDragThreshold: The number of points an item must be panned to be moved to the bottom of the deck, by default `250`.
      */
     public init(
-        direction: Direction = .up,
+        direction: Direction = .down,
         itemDisplayCount: Int = 10,
         alwaysShowLastItem: Bool = true,
         scaleOffset: Double = 0.02,

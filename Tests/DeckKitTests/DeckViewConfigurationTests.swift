@@ -13,7 +13,7 @@ final class DeckViewConfigurationTests: XCTestCase {
 
     func testStandardInstanceUsesStandardValues() {
         let config = DeckViewConfiguration.standard
-        XCTAssertEqual(config.direction, .up)
+        XCTAssertEqual(config.direction, .down)
         XCTAssertEqual(config.itemDisplayCount, 10)
         XCTAssertEqual(config.alwaysShowLastItem, true)
         XCTAssertEqual(config.scaleOffset, 0.02)

@@ -10,10 +10,16 @@ Until then, deprecated features may be removed in the next minor version.
 
 This patch adds support for environment keys.
 
-### 💡 New features
+It also adjustes the default direction of the ``DeckView``, from `.up` to `.down`.
+
+### ✨ New features
 
 * `DeckViewConfiguration.Key` is a new environment key.
 * `View` has a `.deckViewConfiguration` modifier that you can use to apply a custom view configuration.
+
+### 💡 Behavior changes
+
+* `DeckViewConfiguration` now uses `.down` as the default direction.
 
 
 
@@ -21,7 +27,7 @@ This patch adds support for environment keys.
 
 DeckKit now targets iOS 15.0, macOS 11.0, tvOS 15.0 and watchOS 8.0.
 
-### 💡 New features
+### ✨ New features
 
 * `DeckPageView` is a new horizontal page view.
 
@@ -39,7 +45,7 @@ DeckKit now targets Swift 5.9.
 
 ## 0.7.1
 
-### 💡 New features
+### ✨ New features
 
 * `Deck` has new `move` functions.
 
@@ -47,7 +53,7 @@ DeckKit now targets Swift 5.9.
 
 ## 0.7
 
-### 💡 New features
+### ✨ New features
 
 * `Deck` has a new `shuffle` function.
 * `DeckShuffleAnimation` is a new animation.
@@ -57,7 +63,7 @@ DeckKit now targets Swift 5.9.
 
 ## 0.6
 
-### 💡 New features
+### ✨ New features
 
 This version adds an additional `DeckView` initializer so that you don't have to specify the `itemViewBuilder` parameter name.
 
