@@ -14,44 +14,26 @@ import SwiftUI
  users can swipe away the top item and trigger actions.
 
  The view takes a generic ``Deck`` and maps its items to any
- views, as determined by the `itemViewBuilder`. You can pass
- in a ``DeckViewConfiguration`` to customize the deck.
+ views, as determined by the `itemViewBuilder`. 
+ 
+ You can pass in a custom ``DeckViewConfiguration`` with the
+ `.deckViewConfiguration` view modifier.
  */
 public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
-
-    /**
-     Create a deck view with a standard view configuration.
-
-     - Parameters:
-       - deck: The deck to present.
-       - itemView: An item view builder to use for each item in the deck.
-     */
-    public init(
-        _ deck: Binding<Deck<ItemType>>,
-        itemView: @escaping ItemViewBuilder
-    ) {
-        self.init(
-            deck: deck,
-            config: .standard,
-            itemView: itemView
-        )
-    }
 
     /**
      Create a deck view with custom parameters.
      
      - Parameters:
        - deck: The deck to present.
-       - config: The stacked deck configuration, by default ``DeckViewConfiguration/standard``.
-       - swipeLeftAction: The action to trigger when an item is sent to the back of the deck by swiping it left, by default `nil`.
-       - swipeRightAction: The action to trigger when an item is sent to the back of the deck by swiping it right, by default `nil`.
-       - swipeUpAction: The action to trigger when an item is sent to the back of the deck by swiping it up, by default `nil`.
-       - swipeDownAction: The action to trigger when an item is sent to the back of the deck by swiping it down, by default `nil`.
+       - swipeLeftAction: The action to trigger when swiping items left, by default `nil`.
+       - swipeRightAction: The action to trigger when swiping items right, by default `nil`.
+       - swipeUpAction: The action to trigger when swiping items up, by default `nil`.
+       - swipeDownAction: The action to trigger when swiping items down, by default `nil`.
        - itemView: An item view builder to use for each item in the deck.
      */
     public init(
         deck: Binding<Deck<ItemType>>,
-        config: DeckViewConfiguration = .standard,
         swipeLeftAction: ItemAction? = nil,
         swipeRightAction: ItemAction? = nil,
         swipeUpAction: ItemAction? = nil,
@@ -59,7 +41,6 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
         itemView: @escaping ItemViewBuilder
     ) {
         self.deck = deck
-        self.config = config
         self.swipeLeftAction = swipeLeftAction
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
@@ -74,19 +55,23 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
     private var deck: Binding<Deck<ItemType>>
-    private var config: DeckViewConfiguration
     private let itemView: (ItemType) -> ItemView
     
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
     private let swipeDownAction: ItemAction?
+    
+    var legacyConfig: DeckViewConfiguration?                // Deprecated
 
     @State
     private var activeItem: ItemType?
 
     @State
     private var topItemOffset: CGSize = .zero
+    
+    @Environment(\.deckViewConfiguration)
+    private var environmentConfig
     
     public var body: some View {
         ZStack(alignment: .center) {
@@ -108,6 +93,10 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
 // MARK: - Properties
 
 private extension DeckView {
+    
+    var config: DeckViewConfiguration {
+        legacyConfig ?? environmentConfig
+    }
 
     var items: [ItemType] {
         deck.wrappedValue.items
@@ -285,17 +274,18 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
             ]
         )
         
+        var preview: some View {
+            DeckView(deck: $deck) {
+                PreviewCard(item: $0)
+            }
+        }
+        
         var body: some View {
             VStack {
-                DeckView(deck: $deck) {
-                    PreviewCard(item: $0)
-                }
-                DeckView(
-                    deck: $deck,
-                    config: .down
-                ) {
-                    PreviewCard(item: $0)
-                }
+                preview
+                    .deckViewConfiguration(.init(direction: .up))
+                preview
+                    .deckViewConfiguration(.init(direction: .down))
             }
             .padding()
             .padding(.vertical, 100)

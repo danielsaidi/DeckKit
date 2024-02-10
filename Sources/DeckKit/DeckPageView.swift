@@ -93,8 +93,8 @@ private extension DeckPageView {
 
     return DeckPageView($deck) {
         PreviewCard(item: $0)
+            .aspectRatio(0.75, contentMode: .fit)
             .padding(15)
-            .frame(maxHeight: 350)
     }.background(Color.gray)
 }
 #endif

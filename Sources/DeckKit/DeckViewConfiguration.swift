@@ -6,7 +6,7 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 /**
  This config can be used to configure a ``DeckView``.
@@ -81,17 +81,35 @@ public struct DeckViewConfiguration: Codable, Equatable {
 
 public extension DeckViewConfiguration {
 
-    /**
-     A standard deck view configuration.
-     */
+    /// A standard deck view configuration.
     static var standard = DeckViewConfiguration()
+}
 
-    /**
-     A standard deck view configuration with down direction.
-     */
-    static var down = DeckViewConfiguration(
-        direction: .down
-    )
+public extension DeckViewConfiguration {
+    
+    /// This key can be used to apply a custom configuration.
+    struct Key: EnvironmentKey {
+        
+        public static let defaultValue = DeckViewConfiguration()
+    }
+}
+
+extension EnvironmentValues {
+
+    /// This key can be used to apply a custom configuration.
+    var deckViewConfiguration: DeckViewConfiguration {
+        get { self [DeckViewConfiguration.Key.self] }
+        set { self [DeckViewConfiguration.Key.self] = newValue }
+    }
+}
+
+public extension View {
+
+    /// Apply a custom deck view configuration.
+    func deckViewConfiguration(
+        _ value: DeckViewConfiguration) -> some View {
+        self.environment(\.deckViewConfiguration, value)
+    }
 }
 
 public extension DeckViewConfiguration {

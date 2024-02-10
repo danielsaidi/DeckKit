@@ -5,9 +5,9 @@ This article describes how you get started with DeckKit.
 
 ## Creating a deck
 
-In DeckKit, a ``Deck`` can be used to define a deck of items that implement the ``DeckItem`` protocol.
+In DeckKit, a ``Deck`` can be used to define a deck of ``DeckItem`` values.
 
-For instance, consider a `Hobby` type that looks like this:
+For instance, consider this `Hobby` type:
 
 ```swift
 struct Hobby: DeckItem {
@@ -19,34 +19,68 @@ struct Hobby: DeckItem {
 }
 ```
 
-You can now create a deck with hobbies and display it in a ``DeckView``:
+You can easily define a deck of hobbies like this:
 
 ```swift
-struct MyView: View {
-
-    @State
-    var deck = Deck(
-        name: "Hobbies",
-        items: [
-            Hobby(name: "Music", text: "I love music!"), 
-            Hobby(name: "Movies", text: "I also love movies!"), 
-            Hobby(name: "Programming", text: "Not to mention programming!")
-        ]
-    )
-
-    var body: some View {
-        DeckView(deck: $deck) {
-            // Create a view for the hobby here
-        }.padding()
+extension Deck {
+    
+    static var hobbies: Deck<Hobby> {
+        .init(
+            name: "Hobbies",
+            items: [
+                Hobby(name: "Music", text: "I love music!"),
+                Hobby(name: "Movies", text: "I also love movies!"),
+                Hobby(name: "Programming", text: "Not to mention programming!")
+            ]
+        )
     }
 }
 ```
 
-The ``DeckView`` takes an optional ``DeckViewConfiguration`` parameter that can be used to configure the view in various ways. 
+and display your deck in some of the built-in views, like a ``DeckView``:
 
-You can use the configuration to control the visual direction, the number of visible items, drag threshold, etc. 
+```swift
+struct MyView: View {
 
-You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges. 
+    @State var deck = Deck<Hobby>.hobbies
+
+    var body: some View {
+        DeckView(deck: $deck) { hobby in
+            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                .fill(.blue)
+                .overlay(Text(hobby.name))
+                .shadow(radius: 10)
+        }
+        .padding()
+    }
+}
+```
+
+You can easily customize these deck views with convenient view modifiers:
+
+```swift
+struct MyView: View {
+
+    @State var deck = Deck<Hobby>.hobbies
+
+    var body: some View {
+        DeckView(deck: $deck) { hobby in
+            RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                .fill(.blue)
+                .overlay(Text(hobby.name))
+                .shadow(radius: 10)
+        }
+        .padding()
+        .deckViewConfiguration(
+            .init(direction: .down)
+        )
+    }
+}
+```
+
+You can use configurations to control the visual direction, the number of visible items, drag threshold, etc.
+
+Views have different capabilities. For instance, a ``DeckView`` can trigger custom actions when a card is dragged to specific edges. 
 
 
 

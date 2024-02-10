@@ -6,11 +6,11 @@
 //  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 /**
- This struct represents a deck with an id, a name as well as
- a collection of ``DeckItem`` items.
+ This struct represents a deck of items, with a unique id, a
+ name, and a collection of ``DeckItem`` items.
  */
 public struct Deck<Item: DeckItem>: Identifiable, Equatable {
     
@@ -80,4 +80,51 @@ public extension Deck {
     mutating func shuffle() {
         items.shuffle()
     }
+}
+
+
+
+private struct Hobby: DeckItem {
+    
+    var name: String
+    var text: String
+
+    var id: String { name }
+}
+
+private extension Deck {
+    
+    static var hobbies: Deck<Hobby> {
+        .init(
+            name: "Hobbies",
+            items: [
+                Hobby(name: "Music", text: "I love music!"),
+                Hobby(name: "Movies", text: "I also love movies!"),
+                Hobby(name: "Programming", text: "Not to mention programming!")
+            ]
+        )
+    }
+}
+
+#Preview {
+    
+    struct MyView: View {
+
+        @State var deck = Deck<Hobby>.hobbies
+
+        var body: some View {
+            DeckView(deck: $deck) { hobby in
+                RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/)
+                    .fill(.blue)
+                    .overlay(Text(hobby.name))
+                    .shadow(radius: 10)
+            }
+            .padding()
+            .deckViewConfiguration(
+                .init(direction: .down)
+            )
+        }
+    }
+    
+    return MyView()
 }
