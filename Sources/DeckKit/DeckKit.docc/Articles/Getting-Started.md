@@ -37,7 +37,7 @@ extension Deck {
 }
 ```
 
-and display your deck in some of the built-in views, like a ``DeckView``:
+and display your deck in any of the built-in views, like a ``DeckView``:
 
 ```swift
 struct MyView: View {

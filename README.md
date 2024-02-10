@@ -40,7 +40,7 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 ## Getting started
 
-With DeckKit, you can use a `Deck` with a set of items that implement the `DeckItem` protocol:
+With DeckKit, you can create a `Deck` of any model that implement the `DeckItem` protocol:
 
 ```swift
 struct Hobby: DeckItem {
@@ -51,27 +51,42 @@ struct Hobby: DeckItem {
     var id: String { name }
 }
 
-struct MyView: View {
-
-    @State
-    var deck = Deck(
-        name: "Hobbies",
-        items: [
-            Hobby(name: "Music", text: "I love music!"), 
-            Hobby(name: "Movies", text: "I also love movies!"), 
-            Hobby(name: "Programming", text: "Not to mention programming!")
-        ]
-    )
-
-    var body: some View {
-        DeckView(deck: $deck) {
-            // Create a view for the hobby here
-        }.padding()
+extension Deck {
+    
+    static var hobbies: Deck<Hobby> {
+        .init(
+            name: "Hobbies",
+            items: [
+                Hobby(name: "Music", text: "I love music!"),
+                Hobby(name: "Movies", text: "I also love movies!"),
+                Hobby(name: "Programming", text: "Not to mention programming!")
+            ]
+        )
     }
 }
 ```
 
-The `DeckView` takes an optional `DeckViewConfiguration` that can be used to configure the visual direction, the number of visible items, etc. You can also provide additional actions that should be triggered when a card is dragged to the leading, trailing, top and bottom edges.
+You can display a `Deck` in any of the built-in views, like a `DeckView`:
+
+```swift
+struct MyView: View {
+
+    @State var deck = Deck<Hobby>.hobbies
+
+    var body: some View {
+        DeckView(deck: $deck) { hobby in
+            RoundedRectangle(cornerRadius: 25.0)
+                .fill(.blue)
+                .overlay(Text(hobby.name))
+                .shadow(radius: 10)
+        }
+        .padding()
+        .deckViewConfiguration(
+            .init(direction: .down)
+        )
+    }
+}
+```
 
 For more information, please see the [getting started guide][Getting-Started].
 
