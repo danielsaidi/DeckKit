@@ -9,6 +9,7 @@
 import DeckKit
 import XCTest
 
+#if os(iOS) || os(macOS)
 final class DeckViewConfigurationTests: XCTestCase {
 
     func testStandardInstanceUsesStandardValues() {
@@ -41,3 +42,4 @@ final class DeckViewConfigurationTests: XCTestCase {
         XCTAssertEqual(config.verticalDragThreshold, 456)
     }
 }
+#endif

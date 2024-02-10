@@ -6,7 +6,7 @@
 //  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
 //
 
-#if os(iOS) || os(macOS)
+#if os(iOS) || os(macOS) || os(visionOS)
 import SwiftUI
 
 /**
@@ -281,14 +281,10 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
         }
         
         var body: some View {
-            VStack {
-                preview
-                    .deckViewConfiguration(.init(direction: .up))
-                preview
-                    .deckViewConfiguration(.init(direction: .down))
-            }
-            .padding()
-            .padding(.vertical, 100)
+            preview
+                .deckViewConfiguration(.init(direction: .down))
+                .padding()
+                .padding(.vertical, 100)
         }
     }
 

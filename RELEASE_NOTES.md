@@ -8,7 +8,7 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 1.0.1
 
-This patch adds support for environment keys.
+This patch adds support for visionOS and environment keys.
 
 It also adjustes the default direction of the ``DeckView``, from `.up` to `.down`.
 
