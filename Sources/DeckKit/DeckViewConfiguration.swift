@@ -6,6 +6,7 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
+#if os(iOS) || os(macOS)
 import SwiftUI
 
 /**
@@ -90,7 +91,7 @@ public extension DeckViewConfiguration {
     /// This key can be used to apply a custom configuration.
     struct Key: EnvironmentKey {
         
-        public static let defaultValue = DeckViewConfiguration()
+        public static let defaultValue = DeckViewConfiguration.standard
     }
 }
 
@@ -124,3 +125,4 @@ public extension DeckViewConfiguration {
         case up, down
     }
 }
+#endif

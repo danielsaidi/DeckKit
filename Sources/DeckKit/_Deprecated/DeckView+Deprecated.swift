@@ -1,5 +1,6 @@
 import SwiftUI
 
+#if os(iOS) || os(macOS)
 public extension DeckView {
     
     @available(*, deprecated, message: "Use the .deckViewConfiguration view modifier to specify a custom configuration.")
@@ -23,3 +24,4 @@ public extension DeckView {
         self.legacyConfig = config
     }
 }
+#endif
