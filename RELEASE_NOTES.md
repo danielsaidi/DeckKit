@@ -12,6 +12,10 @@ The configuration is once more init injected and not through the environment.
 * `DeckView` now has a shuffle animation init parameter.
 * `DeckViewConfiguration` has a new `modified` function.
 
+### 💡 Behavior changes
+
+* `DeckItem` is now a typalias, not a `protocol`.
+
 ### 🗑️ Deprecations
 
 * `Favoritable` is no longer needed.

@@ -8,7 +8,5 @@
 
 import Foundation
 
-/**
- This protocol represents a item in a ``Deck``.
- */
-public protocol DeckItem: Identifiable, Equatable {}
+/// This typealias represents Identifiable & Equatable items.
+public typealias DeckItem = Identifiable & Equatable
