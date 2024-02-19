@@ -27,6 +27,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
      - Parameters:
        - deck: The deck to present.
        - config: The configuration to apply, by default `.standard`.
+       - shuffleAnimation: The shuffle animation to apply, by default an internal one.
        - swipeLeftAction: The action to trigger when swiping items left, by default `nil`.
        - swipeRightAction: The action to trigger when swiping items right, by default `nil`.
        - swipeUpAction: The action to trigger when swiping items up, by default `nil`.
@@ -36,6 +37,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     init(
         deck: Binding<Deck<ItemType>>,
         config: DeckViewConfiguration = .standard,
+        shuffleAnimation: DeckShuffleAnimation = .init(),
         swipeLeftAction: ItemAction? = nil,
         swipeRightAction: ItemAction? = nil,
         swipeUpAction: ItemAction? = nil,
@@ -44,6 +46,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     ) {
         self._deck = deck
         self.config = config
+        self._shuffle = .init(wrappedValue: shuffleAnimation)
         self.swipeLeftAction = swipeLeftAction
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
@@ -60,9 +63,11 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     @Binding
     private var deck: Deck<ItemType>
     
+    @ObservedObject
+    private var shuffle: DeckShuffleAnimation
+    
     private var config: DeckViewConfiguration
     private let itemView: (ItemType) -> ItemView
-    
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
@@ -85,6 +90,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
                     .offset(y: offset(of: item))
                     .rotationEffect(dragRotation(for: item) ?? .zero)
                     .gesture(dragGesture(for: item))
+                    .withShuffleAnimation(shuffle, for: item, in: deck)
             }
         }
     }
@@ -179,6 +185,8 @@ private extension DeckView {
     }
 
     func offset(at index: Int) -> Double {
+        if shuffle.isShuffling { return 0 }
+        
         let offset = Double(index) * config.verticalOffset
         let multiplier: Double = config.direction == .down ? 1 : -1
         return offset * multiplier
@@ -261,11 +269,18 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
         )
         
         var preview: some View {
-            DeckView(
-                deck: $deck,
-                config: .standard
-            ) {
-                PreviewCard(item: $0)
+            VStack {
+                DeckView(
+                    deck: $deck,
+                    config: .standard,
+                    shuffleAnimation: shuffle
+                ) {
+                    PreviewCard(item: $0)
+                }
+                
+                Button("Shuffle") {
+                    shuffle.shuffle($deck)
+                }
             }
         }
         

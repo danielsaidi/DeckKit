@@ -9,6 +9,7 @@ The configuration is once more init injected and not through the environment.
 
 ### ✨ New features
 
+* `DeckView` now has a shuffle animation init parameter.
 * `DeckViewConfiguration` has a new `modified` function.
 
 ### 🗑️ Deprecations
