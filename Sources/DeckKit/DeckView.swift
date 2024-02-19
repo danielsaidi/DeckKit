@@ -26,21 +26,24 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
      
      - Parameters:
        - deck: The deck to present.
+       - config: The configuration to apply, by default `.standard`.
        - swipeLeftAction: The action to trigger when swiping items left, by default `nil`.
        - swipeRightAction: The action to trigger when swiping items right, by default `nil`.
        - swipeUpAction: The action to trigger when swiping items up, by default `nil`.
        - swipeDownAction: The action to trigger when swiping items down, by default `nil`.
        - itemView: An item view builder to use for each item in the deck.
      */
-    public init(
+    init(
         deck: Binding<Deck<ItemType>>,
+        config: DeckViewConfiguration = .standard,
         swipeLeftAction: ItemAction? = nil,
         swipeRightAction: ItemAction? = nil,
         swipeUpAction: ItemAction? = nil,
         swipeDownAction: ItemAction? = nil,
         itemView: @escaping ItemViewBuilder
     ) {
-        self.deck = deck
+        self._deck = deck
+        self.config = config
         self.swipeLeftAction = swipeLeftAction
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
@@ -54,24 +57,22 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
-    private var deck: Binding<Deck<ItemType>>
+    @Binding
+    private var deck: Deck<ItemType>
+    
+    private var config: DeckViewConfiguration
     private let itemView: (ItemType) -> ItemView
     
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
     private let swipeDownAction: ItemAction?
-    
-    var legacyConfig: DeckViewConfiguration?                // Deprecated
 
     @State
     private var activeItem: ItemType?
 
     @State
     private var topItemOffset: CGSize = .zero
-    
-    @Environment(\.deckViewConfiguration)
-    private var environmentConfig
     
     public var body: some View {
         ZStack(alignment: .center) {
@@ -94,12 +95,8 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
 
 private extension DeckView {
     
-    var config: DeckViewConfiguration {
-        legacyConfig ?? environmentConfig
-    }
-
     var items: [ItemType] {
-        deck.wrappedValue.items
+        deck.items
     }
 
     var visibleItems: [ItemType] {
@@ -110,20 +107,6 @@ private extension DeckView {
             !first.contains(last)
         else { return first }
         return Array(first).dropLast() + [last]
-    }
-}
-
-
-// MARK: - Functions
-
-private extension DeckView {
-
-    func moveItemToBack(_ item: ItemType) {
-        deck.wrappedValue.moveToBack(item)
-    }
-
-    func moveItemToFront(_ item: ItemType) {
-        deck.wrappedValue.moveToFront(item)
     }
 }
 
@@ -144,9 +127,9 @@ private extension DeckView {
         topItemOffset = drag.translation
         withAnimation(.spring()) {
             if dragGestureIsPastThreshold(drag) {
-                moveItemToBack(item)
+                deck.moveToBack(item)
             } else {
-                moveItemToFront(item)
+                deck.moveToFront(item)
             }
         }
     }
@@ -264,6 +247,9 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
     struct Preview: View {
         
         @State
+        var shuffle = DeckShuffleAnimation()
+        
+        @State
         var deck = Deck(
             name: "My Deck",
             items: [
@@ -275,14 +261,16 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
         )
         
         var preview: some View {
-            DeckView(deck: $deck) {
+            DeckView(
+                deck: $deck,
+                config: .standard
+            ) {
                 PreviewCard(item: $0)
             }
         }
         
         var body: some View {
             preview
-                .deckViewConfiguration(.init(direction: .down))
                 .padding()
                 .padding(.vertical, 100)
         }

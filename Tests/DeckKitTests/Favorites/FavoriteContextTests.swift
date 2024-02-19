@@ -27,15 +27,15 @@ final class FavoriteContextTests: XCTestCase {
     }
 }
 
-private class TestClass: Favoritable {
+private class TestClass: Identifiable {
     
     let id: Int = 1
 }
 
 private class TestService: FavoriteService {
     
-    func getFavorites<Item>(for type: Item.Type) -> [Item.ID] where Item: Favoritable { [] }
-    func isFavorite<Item>(_ item: Item) -> Bool where Item: Favoritable { false }
-    func setIsFavorite<Item>(_ isFavorite: Bool, for item: Item) where Item: Favoritable {}
-    func toggleIsFavorite<Item>(for item: Item) where Item: Favoritable {}
+    func getFavorites<Item: Identifiable>(for type: Item.Type) -> [Item.ID] { [] }
+    func isFavorite<Item: Identifiable>(_ item: Item) -> Bool { false }
+    func setIsFavorite<Item: Identifiable>(_ isFavorite: Bool, for item: Item) {}
+    func toggleIsFavorite<Item: Identifiable>(for item: Item) {}
 }

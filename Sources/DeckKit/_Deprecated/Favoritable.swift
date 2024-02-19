@@ -6,8 +6,5 @@
 //  Copyright © 2023 Daniel Saidi. All rights reserved.
 //
 
-/**
- This protocol can be implemented by any type that should be
- able to be marked as a favorite.
- */
+@available(*, deprecated, message: "You only need to implement Identifiable now")
 public protocol Favoritable: Identifiable {}

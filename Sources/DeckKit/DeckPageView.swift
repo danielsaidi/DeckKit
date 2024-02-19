@@ -29,38 +29,27 @@ public struct DeckPageView<ItemType: DeckItem, ItemView: View>: View {
         _ deck: Binding<Deck<ItemType>>,
         itemView: @escaping ItemViewBuilder
     ) {
-        self.deck = deck
+        self._deck = deck
         self.itemView = itemView
     }
     
     /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
-    private var deck: Binding<Deck<ItemType>>
+    @Binding
+    private var deck: Deck<ItemType>
+    
     private let itemView: (ItemType) -> ItemView
 
     public var body: some View {
         TabView {
-            ForEach(items) {
+            ForEach(deck.items) {
                 itemView($0)
             }
         }
         .tabViewStyle(.page)
     }
 }
-
-
-// MARK: - Properties
-
-private extension DeckPageView {
-
-    var items: [ItemType] {
-        deck.wrappedValue.items
-    }
-}
-
-
-// MARK: - Preview
 
 #Preview {
     

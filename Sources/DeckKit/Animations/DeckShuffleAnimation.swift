@@ -69,9 +69,7 @@ public class DeckShuffleAnimation: ObservableObject {
 
 public extension View {
 
-    /**
-     Apply a shuffle animation to a deck item view.
-     */
+    /// Apply a shuffle animation to a deck item view.
     func withShuffleAnimation<Item>(
         _ animation: DeckShuffleAnimation,
         for item: Item,
@@ -86,13 +84,11 @@ public extension View {
 
 public extension DeckShuffleAnimation {
 
-    /**
-     Shuffle the provided deck with a shuffle animation.
-
-     - Parameters:
-       - deck: The deck to shuffle.
-       - times: The number of times to shuffle the deck, by default `5`.
-     */
+    /// Shuffle the provided deck with a shuffle animation.
+    ///
+    /// - Parameters:
+    ///   - deck: The deck to shuffle.
+    ///   - times: The number of times to shuffle, by default `3`.
     func shuffle<Item>(
         _ deck: Binding<Deck<Item>>,
         times: Int = 3
@@ -102,9 +98,7 @@ public extension DeckShuffleAnimation {
         shuffle(deck, times: times, time: 1)
     }
 
-    /**
-     Get the current shuffle data for a certain deck item.
-     */
+    /// Get the current shuffle data for a certain deck item.
     func shuffleData<Item>(
         for item: Item,
         in deck: Deck<Item>

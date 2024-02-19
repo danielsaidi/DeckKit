@@ -14,23 +14,15 @@ import Foundation
  */
 public protocol FavoriteService: AnyObject {
     
-    /**
-     Get all favorite item IDs.
-     */
-    func getFavorites<Item: Favoritable>(for type: Item.Type) -> [Item.ID]
+    /// Get all favorite item IDs.
+    func getFavorites<Item: Identifiable>(for type: Item.Type) -> [Item.ID]
     
-    /**
-     Check whether or not a certain item is a favorite.
-     */
-    func isFavorite<Item: Favoritable>(_ item: Item) -> Bool
+    /// Check whether or not a certain item is a favorite.
+    func isFavorite<Item: Identifiable>(_ item: Item) -> Bool
     
-    /**
-     Set whether or not a certain item is a favorite.
-     */
-    func setIsFavorite<Item: Favoritable>(_ isFavorite: Bool, for item: Item)
+    /// Set whether or not a certain item is a favorite.
+    func setIsFavorite<Item: Identifiable>(_ isFavorite: Bool, for item: Item)
     
-    /**
-     Toggle whether or not a certain item is a favorite.
-     */
-    func toggleIsFavorite<Item: Favoritable>(for item: Item)
+    /// Toggle whether or not a certain item is a favorite.
+    func toggleIsFavorite<Item: Identifiable>(for item: Item)
 }

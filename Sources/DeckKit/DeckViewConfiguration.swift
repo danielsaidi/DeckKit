@@ -12,7 +12,7 @@ import SwiftUI
 /**
  This config can be used to configure a ``DeckView``.
  */
-public struct DeckViewConfiguration: Codable, Equatable {
+public struct DeckViewConfiguration: Codable, Configuration, Equatable {
 
     /**
      Create a stacked deck configuration.
@@ -81,36 +81,11 @@ public struct DeckViewConfiguration: Codable, Equatable {
 }
 
 public extension DeckViewConfiguration {
-
-    /// A standard deck view configuration.
-    static var standard = DeckViewConfiguration()
-}
-
-public extension DeckViewConfiguration {
     
-    /// This key can be used to apply a custom configuration.
-    struct Key: EnvironmentKey {
-        
-        public static let defaultValue = DeckViewConfiguration.standard
-    }
-}
-
-extension EnvironmentValues {
-
-    /// This key can be used to apply a custom configuration.
-    var deckViewConfiguration: DeckViewConfiguration {
-        get { self [DeckViewConfiguration.Key.self] }
-        set { self [DeckViewConfiguration.Key.self] = newValue }
-    }
-}
-
-public extension View {
-
-    /// Apply a custom deck view configuration.
-    func deckViewConfiguration(
-        _ value: DeckViewConfiguration) -> some View {
-        self.environment(\.deckViewConfiguration, value)
-    }
+    /// This is a standard deck view configuration.
+    ///
+    /// You can set this value to change the global default.
+    static var standard = Self.init()
 }
 
 public extension DeckViewConfiguration {

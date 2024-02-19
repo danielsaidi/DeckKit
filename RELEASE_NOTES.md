@@ -1,8 +1,23 @@
 # Release notes
 
-DeckKit will use semver after 1.0. 
 
-Until then, deprecated features may be removed in the next minor version.
+## 1.0.2
+
+This patch rolls back the environment changes in 1.0.1.
+
+The configuration is once more init injected and not through the environment.
+
+### ✨ New features
+
+* `DeckViewConfiguration` has a new `modified` function.
+
+### 🗑️ Deprecations
+
+* `Favoritable` is no longer needed.
+
+### 💥 Breaking Changes
+
+* The `DeckViewConfiguration` environment change has been rolled back.
 
 
 

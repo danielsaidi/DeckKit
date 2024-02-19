@@ -41,5 +41,14 @@ final class DeckViewConfigurationTests: XCTestCase {
         XCTAssertEqual(config.horizontalDragThreshold, 123)
         XCTAssertEqual(config.verticalDragThreshold, 456)
     }
+    
+    func testInstanceCanBeModified() {
+        let config = DeckViewConfiguration.standard
+        let custom = config.modified {
+            $0.alwaysShowLastItem = false
+        }
+        XCTAssertTrue(config.alwaysShowLastItem)
+        XCTAssertFalse(custom.alwaysShowLastItem)
+    }
 }
 #endif
