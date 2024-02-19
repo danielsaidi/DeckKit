@@ -70,12 +70,12 @@ public class DeckShuffleAnimation: ObservableObject {
 public extension View {
 
     /// Apply a shuffle animation to a deck item view.
-    func withShuffleAnimation<Item>(
+    func withShuffleAnimation<Item: DeckItem>(
         _ animation: DeckShuffleAnimation,
         for item: Item,
-        in deck: Deck<Item>
+        in items: [Item]
     ) -> some View {
-        let data = animation.shuffleData(for: item, in: deck)
+        let data = animation.shuffleData(for: item, in: items)
         return self.rotationEffect(data?.angle ?? .zero)
             .offset(x: data?.xOffset ?? 0, y: data?.yOffset ?? 0)
             .animation(.default, value: animation.animationTrigger)
@@ -83,31 +83,19 @@ public extension View {
 }
 
 public extension DeckShuffleAnimation {
-
+    
     /// Shuffle the provided deck with a shuffle animation.
     ///
     /// - Parameters:
     ///   - deck: The deck to shuffle.
     ///   - times: The number of times to shuffle, by default `3`.
     func shuffle<Item>(
-        _ deck: Binding<Deck<Item>>,
+        _ items: Binding<[Item]>,
         times: Int = 3
     ) {
         if animationTrigger { return }
-        randomizeShuffleData(for: deck)
-        shuffle(deck, times: times, time: 1)
-    }
-
-    /// Get the current shuffle data for a certain deck item.
-    func shuffleData<Item>(
-        for item: Item,
-        in deck: Deck<Item>
-    ) -> ShuffleData? {
-        guard
-            shuffleData.count == deck.items.count,
-            let index = deck.items.firstIndex(of: item)
-        else { return nil }
-        return shuffleData[index]
+        randomizeShuffleData(for: items)
+        shuffle(items, times: times, time: 1)
     }
 }
 
@@ -117,8 +105,10 @@ private extension DeckShuffleAnimation {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: action)
     }
 
-    func randomizeShuffleData<Item>(for deck: Binding<Deck<Item>>) {
-        shuffleData = (0..<deck.wrappedValue.items.count).map { _ in
+    func randomizeShuffleData<Item>(
+        for items: Binding<[Item]>
+    ) {
+        shuffleData = (0..<items.count).map { _ in
             ShuffleData(
                 angle: Angle.degrees(Double.random(in: -maxDegrees...maxDegrees)),
                 xOffset: Double.random(in: -maxOffsetX...maxOffsetX),
@@ -128,22 +118,35 @@ private extension DeckShuffleAnimation {
     }
 
     func shuffle<Item>(
-        _ deck: Binding<Deck<Item>>,
+        _ items: Binding<[Item]>,
         times: Int,
         time: Int
     ) {
         animationTrigger.toggle()
         performAfterDelay {
             if time < times {
-                self.randomizeShuffleData(for: deck)
-                self.shuffle(deck, times: times, time: time + 1)
+                self.randomizeShuffleData(for: items)
+                self.shuffle(items, times: times, time: time + 1)
             } else {
-                self.easeOutShuffleState(for: deck)
+                self.easeOutShuffleState(for: items)
             }
         }
     }
+    
+    func shuffleData<Item: DeckItem>(
+        for item: Item,
+        in items: [Item]
+    ) -> ShuffleData? {
+        guard
+            shuffleData.count == items.count,
+            let index = items.firstIndex(of: item)
+        else { return nil }
+        return shuffleData[index]
+    }
 
-    func easeOutShuffleState<Item>(for deck: Binding<Deck<Item>>) {
+    func easeOutShuffleState<Item>(
+        for items: Binding<[Item]>
+    ) {
         shuffleData = shuffleData.map {
             ShuffleData(
                 angle: $0.angle/2,
@@ -153,15 +156,17 @@ private extension DeckShuffleAnimation {
         }
         animationTrigger.toggle()
         performAfterDelay {
-            self.resetShuffleState(for: deck)
+            self.resetShuffleState(for: items)
         }
     }
 
-    func resetShuffleState<Item>(for deck: Binding<Deck<Item>>) {
+    func resetShuffleState<Item>(
+        for items: Binding<[Item]>
+    ) {
         animationTrigger.toggle()
         shuffleData = []
         performAfterDelay {
-            deck.wrappedValue.shuffle()
+            items.wrappedValue.shuffle()
             self.animationTrigger = false
         }
     }

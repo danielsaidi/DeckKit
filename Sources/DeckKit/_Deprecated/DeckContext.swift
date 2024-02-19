@@ -8,12 +8,7 @@
 
 import Foundation
 
-/**
- This context can be used to observe a ``Deck``.
-
- Using the context lets you change the items in the observed
- ``deck`` and have the UI automatically update itself.
- */
+@available(*, deprecated, message: "Deck is no longer needed. You can just use arrays instead.")
 public class DeckContext<ItemType: DeckItem>: ObservableObject {
     
     /**

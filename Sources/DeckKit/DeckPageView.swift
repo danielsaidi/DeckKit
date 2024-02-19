@@ -19,31 +19,30 @@ import SwiftUI
 public struct DeckPageView<ItemType: DeckItem, ItemView: View>: View {
 
     /**
-     Create a deck view with a standard view configuration.
+     Create a deck page view.
 
      - Parameters:
-       - deck: The deck to present.
-       - itemView: An item view builder to use for each item in the deck.
+       - items: The items to present in the page view.
+       - itemView: An item view builder to use for each item.
      */
     public init(
-        _ deck: Binding<Deck<ItemType>>,
+        _ items: [ItemType],
         itemView: @escaping ItemViewBuilder
     ) {
-        self._deck = deck
+        self.items = items
         self.itemView = itemView
     }
     
     /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
-    @Binding
-    private var deck: Deck<ItemType>
+    private var items: [ItemType]
     
     private let itemView: (ItemType) -> ItemView
 
     public var body: some View {
         TabView {
-            ForEach(deck.items) {
+            ForEach(items) {
                 itemView($0)
             }
         }
@@ -70,17 +69,14 @@ public struct DeckPageView<ItemType: DeckItem, ItemView: View>: View {
     }
 
     @State
-    var deck = Deck(
-        name: "My Deck",
-        items: [
-            item1, item2, item1, item2, item1, item2,
-            item1, item2, item1, item2, item1, item2,
-            item1, item2, item1, item2, item1, item2,
-            item1, item2, item1, item2, item1, item2
-        ]
-    )
+    var items = [
+        item1, item2, item1, item2, item1, item2,
+        item1, item2, item1, item2, item1, item2,
+        item1, item2, item1, item2, item1, item2,
+        item1, item2, item1, item2, item1, item2
+    ]
 
-    return DeckPageView($deck) {
+    return DeckPageView(items) {
         PreviewCard(item: $0)
             .aspectRatio(0.75, contentMode: .fit)
             .padding(15)

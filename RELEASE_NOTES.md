@@ -18,7 +18,9 @@ The configuration is once more init injected and not through the environment.
 
 ### 🗑️ Deprecations
 
-* `Favoritable` is no longer needed.
+* `Deck` is no longer needed, you can just use plain arrays instead.
+* `DeckContext` is no longer needed since `Deck` is also deprecated.
+* `Favoritable` is no longer needed, you can just use `Identifiable`.
 
 ### 💥 Breaking Changes
 

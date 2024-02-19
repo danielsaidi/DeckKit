@@ -35,7 +35,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
        - itemView: An item view builder to use for each item in the deck.
      */
     init(
-        deck: Binding<Deck<ItemType>>,
+        items: Binding<[ItemType]>,
         config: DeckViewConfiguration = .standard,
         shuffleAnimation: DeckShuffleAnimation = .init(),
         swipeLeftAction: ItemAction? = nil,
@@ -44,7 +44,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
         swipeDownAction: ItemAction? = nil,
         itemView: @escaping ItemViewBuilder
     ) {
-        self._deck = deck
+        self._items = items
         self.config = config
         self._shuffle = .init(wrappedValue: shuffleAnimation)
         self.swipeLeftAction = swipeLeftAction
@@ -61,7 +61,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
     @Binding
-    private var deck: Deck<ItemType>
+    private var items: [ItemType]
     
     @ObservedObject
     private var shuffle: DeckShuffleAnimation
@@ -90,7 +90,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
                     .offset(y: offset(of: item))
                     .rotationEffect(dragRotation(for: item) ?? .zero)
                     .gesture(dragGesture(for: item))
-                    .withShuffleAnimation(shuffle, for: item, in: deck)
+                    .withShuffleAnimation(shuffle, for: item, in: items)
             }
         }
     }
@@ -101,10 +101,6 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
 
 private extension DeckView {
     
-    var items: [ItemType] {
-        deck.items
-    }
-
     var visibleItems: [ItemType] {
         let first = Array(items.prefix(config.itemDisplayCount))
         guard
@@ -133,9 +129,9 @@ private extension DeckView {
         topItemOffset = drag.translation
         withAnimation(.spring()) {
             if dragGestureIsPastThreshold(drag) {
-                deck.moveToBack(item)
+                items.moveToBack(item)
             } else {
-                deck.moveToFront(item)
+                items.moveToFront(item)
             }
         }
     }
@@ -258,20 +254,17 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
         var shuffle = DeckShuffleAnimation()
         
         @State
-        var deck = Deck(
-            name: "My Deck",
-            items: [
-                item1, item2, item1, item2, item1, item2,
-                item1, item2, item1, item2, item1, item2,
-                item1, item2, item1, item2, item1, item2,
-                item1, item2, item1, item2, item1, item2
-            ]
-        )
+        var items = [
+            item1, item2, item1, item2, item1, item2,
+            item1, item2, item1, item2, item1, item2,
+            item1, item2, item1, item2, item1, item2,
+            item1, item2, item1, item2, item1, item2
+        ]
         
         var preview: some View {
             VStack {
                 DeckView(
-                    deck: $deck,
+                    items: $items,
                     config: .standard,
                     shuffleAnimation: shuffle
                 ) {
@@ -279,7 +272,7 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
                 }
                 
                 Button("Shuffle") {
-                    shuffle.shuffle($deck)
+                    shuffle.shuffle($items)
                 }
             }
         }
