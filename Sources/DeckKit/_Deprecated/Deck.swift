@@ -39,6 +39,7 @@ public struct Deck<Item: DeckItem>: Identifiable, Equatable {
     public var items: [Item]
 }
 
+#if os(iOS) || os(macOS) || os(visionOS)
 public extension DeckView {
     
     @available(*, deprecated, message: "Deck is no longer needed. Just use item arrays instead.")
@@ -64,6 +65,7 @@ public extension DeckView {
         )
     }
 }
+#endif
 
 #if os(iOS)
 public extension DeckPageView {
