@@ -1,17 +1,13 @@
 # Release notes
 
 
-## 1.2
+## 1.1
 
 This version adds support for visionOS.
 
+This minor update also rolls back the environment changes in 1.0.1.
 
-
-## 1.1
-
-This patch rolls back the environment changes in 1.0.1.
-
-The configuration is once more init injected and not through the environment.
+The configuration is once more init injected and not through the environment. The environment injection will be implemented in a major version instead.
 
 ### ✨ New features
 
