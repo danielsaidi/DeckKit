@@ -1,7 +1,13 @@
 # Release notes
 
 
-## 1.0.2
+## 1.2
+
+This version adds support for visionOS.
+
+
+
+## 1.1
 
 This patch rolls back the environment changes in 1.0.1.
 

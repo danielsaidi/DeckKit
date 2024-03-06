@@ -26,16 +26,17 @@ public struct DeckPageView<ItemType: DeckItem, ItemView: View>: View {
        - itemView: An item view builder to use for each item.
      */
     public init(
-        _ items: [ItemType],
+        _ items: Binding<[ItemType]>,
         itemView: @escaping ItemViewBuilder
     ) {
-        self.items = items
+        self._items = items
         self.itemView = itemView
     }
     
     /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
+    @Binding
     private var items: [ItemType]
     
     private let itemView: (ItemType) -> ItemView
@@ -76,7 +77,7 @@ public struct DeckPageView<ItemType: DeckItem, ItemView: View>: View {
         item1, item2, item1, item2, item1, item2
     ]
 
-    return DeckPageView(items) {
+    return DeckPageView($items) {
         PreviewCard(item: $0)
             .aspectRatio(0.75, contentMode: .fit)
             .padding(15)

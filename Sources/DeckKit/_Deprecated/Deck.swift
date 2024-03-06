@@ -53,7 +53,7 @@ public extension DeckView {
         itemView: @escaping ItemViewBuilder
     ) {
         self.init(
-            items: deck.items,
+            deck.items,
             config: config,
             shuffleAnimation: shuffleAnimation,
             swipeLeftAction: swipeLeftAction,
@@ -65,6 +65,7 @@ public extension DeckView {
     }
 }
 
+#if os(iOS)
 public extension DeckPageView {
     
     @available(*, deprecated, message: "Deck is no longer needed. Just use item arrays instead.")
@@ -72,9 +73,10 @@ public extension DeckPageView {
         _ deck: Binding<Deck<ItemType>>,
         itemView: @escaping ItemViewBuilder
     ) {
-        self.init(deck.wrappedValue.items, itemView: itemView)
+        self.init(deck.items, itemView: itemView)
     }
 }
+#endif
 
 public extension DeckShuffleAnimation {
     

@@ -9,13 +9,28 @@
 import DeckKit
 import SwiftUI
 
+#if canImport(UIKit)
+import UIKit
+extension String {
+
+    var image: UIImage? {
+        .init(data: Data())
+    }
+}
+#elseif canImport(AppKit)
+extension String {
+
+    var image: NSImage? {
+        .init(data: Data())
+    }
+}
+#endif
+
+
 struct ContentView: View {
 
     @State
-    var deck = Deck(
-        name: "Hobbies",
-        items: Hobby.demoCollection
-    )
+    var items = Hobby.demoCollection
 
     @State
     var selectedHobby: Hobby?
@@ -52,11 +67,12 @@ private extension ContentView {
 
     var deckView: some View {
         DeckView(
-            deck: $deck,
+            $items,
             config: .init(
                 direction: .down,
                 itemDisplayCount: 5
             ),
+            shuffleAnimation: animation,
             swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
             swipeRightAction: { selectedHobby = $0 },
             swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
@@ -70,11 +86,6 @@ private extension ContentView {
             item: hobby,
             isShuffling: animation.isShuffling
         )
-        .withShuffleAnimation(
-            animation,
-            for: hobby,
-            in: deck
-        )
     }
 
     var background: some View {
@@ -84,11 +95,10 @@ private extension ContentView {
     }
 
     var shuffleButton: some View {
-        RoundButton(
-            text: "Shuffle",
-            image: "shuffle",
-            action: { animation.shuffle($deck) }
-        )
+        Button("Shuffle Deck") {
+            animation.shuffle($items, times: 20)
+        }
+        .buttonStyle(.borderedProminent)
     }
 }
 

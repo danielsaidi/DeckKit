@@ -5,6 +5,7 @@
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
+    <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
     <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
     <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
@@ -14,15 +15,15 @@
 
 ## About DeckKit
 
-DeckKit helps you create deck-based apps in `SwiftUI`. It has a `DeckView` that can render `DeckItem` collections, with support for swipe gestures, edge swipe detection, shuffling, etc.  
+DeckKit is a Swift SDK that helps you build deck-based apps in SwiftUI.
 
-The result can look like this or completely different:
+DeckKit has a `DeckView` that can render any item collection, with support for swipe gestures, edge swipe detection, shuffling, etc. The result can look like this or completely different:
 
 <p align="center" style="border-radius: 10px">
-    <img src="Resources/Demo.gif" width=300 />
+    <img src="Resources/Demo.gif" width=300 alt="Demo video" />
 </p>
 
-DeckKit decks can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
+DeckKit has other deck views as well, and can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
 
 
 
@@ -33,8 +34,6 @@ DeckKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/DeckKit.git
 ```
-
-If you prefer to not have external dependencies, you can also just copy the source code into your app.
 
 
 
@@ -50,40 +49,23 @@ struct Hobby: DeckItem {
 
     var id: String { name }
 }
-
-extension Deck {
-    
-    static var hobbies: Deck<Hobby> {
-        .init(
-            name: "Hobbies",
-            items: [
-                Hobby(name: "Music", text: "I love music!"),
-                Hobby(name: "Movies", text: "I also love movies!"),
-                Hobby(name: "Programming", text: "Not to mention programming!")
-            ]
-        )
-    }
-}
 ```
 
-You can display a `Deck` in any of the built-in views, like a `DeckView`:
+You can display a deck of cards with any of the built-in views, like a `DeckView`:
 
 ```swift
 struct MyView: View {
 
-    @State var deck = Deck<Hobby>.hobbies
+    @State 
+    var hobbies: [Hobby] = ...
 
     var body: some View {
-        DeckView(deck: $deck) { hobby in
+        DeckView($hobbies) { hobby in
             RoundedRectangle(cornerRadius: 25.0)
                 .fill(.blue)
                 .overlay(Text(hobby.name))
                 .shadow(radius: 10)
         }
-        .padding()
-        .deckViewConfiguration(
-            .init(direction: .down)
-        )
     }
 }
 ```
@@ -100,13 +82,15 @@ The [online documentation][Documentation] has more information, articles, code e
 
 ## Demo Application
 
-The demo app lets you explore the library on iOS and macOS. To try it out, just open and run the `Demo` project.
+The demo app lets you explore the library with iOS, macOS, and visionOS. To try it out, just open and run the `Demo` project.
 
 
 
-## Support my work
+## Support my work 
 
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][GitHub]. 
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
+
+Your support makes it possible for me to put more work into these projects and make them the best they can be.
 
 
 
@@ -133,6 +117,7 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 [Twitter]: https://www.twitter.com/danielsaidi
 [Mastodon]: https://mastodon.social/@danielsaidi
 [Sponsors]: https://github.com/sponsors/danielsaidi
+[OpenSource]: https://www.danielsaidi.com/opensource
 
 [Documentation]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/
 [Getting-Started]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/getting-started

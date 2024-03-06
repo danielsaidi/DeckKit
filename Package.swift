@@ -14,15 +14,18 @@ let package = Package(
     products: [
         .library(
             name: "DeckKit",
-            targets: ["DeckKit"]),
+            targets: ["DeckKit"]
+        )
     ],
     dependencies: [],
     targets: [
         .target(
             name: "DeckKit",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "DeckKitTests",
-            dependencies: ["DeckKit"]),
+            dependencies: ["DeckKit"]
+        )
     ]
 )

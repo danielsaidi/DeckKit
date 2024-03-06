@@ -25,7 +25,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
      Create a deck view with custom parameters.
      
      - Parameters:
-       - deck: The deck to present.
+       - items: The items to present.
        - config: The configuration to apply, by default `.standard`.
        - shuffleAnimation: The shuffle animation to apply, by default an internal one.
        - swipeLeftAction: The action to trigger when swiping items left, by default `nil`.
@@ -34,8 +34,8 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
        - swipeDownAction: The action to trigger when swiping items down, by default `nil`.
        - itemView: An item view builder to use for each item in the deck.
      */
-    init(
-        items: Binding<[ItemType]>,
+    public init(
+        _ items: Binding<[ItemType]>,
         config: DeckViewConfiguration = .standard,
         shuffleAnimation: DeckShuffleAnimation = .init(),
         swipeLeftAction: ItemAction? = nil,
@@ -230,20 +230,16 @@ private extension View {
 
 // MARK: - Preview
 
-private var item1: PreviewCard.Item { PreviewCard.Item(
-    title: "Title 1",
-    text: "Text 1",
-    footnote: "Footnote 1",
-    backgroundColor: .blue,
-    tintColor: .yellow)
-}
-
-private var item2: PreviewCard.Item { PreviewCard.Item(
-    title: "Title 2",
-    text: "Text 2",
-    footnote: "Footnote 2",
-    backgroundColor: .yellow,
-    tintColor: .blue)
+private func item(
+    _ index: Int
+) -> PreviewCard.Item {
+    .init(
+        title: "Title \(index)",
+        text: "Text \(index)",
+        footnote: "Footnote \(index)",
+        backgroundColor: .gray.opacity(0.1),
+        tintColor: .black
+    )
 }
 
 #Preview {
@@ -254,26 +250,31 @@ private var item2: PreviewCard.Item { PreviewCard.Item(
         var shuffle = DeckShuffleAnimation()
         
         @State
-        var items = [
-            item1, item2, item1, item2, item1, item2,
-            item1, item2, item1, item2, item1, item2,
-            item1, item2, item1, item2, item1, item2,
-            item1, item2, item1, item2, item1, item2
-        ]
+        var items = (0...25).enumerated().map {
+            item($0.offset)
+        }
         
         var preview: some View {
-            VStack {
+            VStack(spacing: 70) {
                 DeckView(
-                    items: $items,
+                    $items,
                     config: .standard,
                     shuffleAnimation: shuffle
                 ) {
                     PreviewCard(item: $0)
                 }
+                #if os(visionOS)
+                .aspectRatio(0.75, contentMode: .fit)
+                #endif
                 
                 Button("Shuffle") {
                     shuffle.shuffle($items)
                 }
+                #if os(visionOS)
+                .background(Color.blue, in: .capsule)
+                #else
+                .buttonStyle(.borderedProminent)
+                #endif
             }
         }
         

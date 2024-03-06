@@ -19,12 +19,12 @@ struct PreviewCard: View {
      
      - Parameters:
        - item: The item to display in the card.
-       - size: The size of the card.
        - cornerRadius: The corner radius of the card.
      */
     init(
         item: Item,
-        cornerRadius: CGFloat = 10) {
+        cornerRadius: CGFloat = 10
+    ) {
         self.item = item
         self.cornerRadius = cornerRadius
     }
@@ -36,7 +36,8 @@ struct PreviewCard: View {
             text: String,
             footnote: String,
             backgroundColor: Color,
-            tintColor: Color) {
+            tintColor: Color
+        ) {
             self.title = title
             self.text = text
             self.footnote = footnote
@@ -72,6 +73,7 @@ struct PreviewCard: View {
         .padding()
         .foregroundColor(item.tintColor)
         .background(item.backgroundColor)
+        .background(Color.white)
         .cornerRadius(cornerRadius)
     }
 }
@@ -79,7 +81,8 @@ struct PreviewCard: View {
 extension PreviewCard {
     
     var title: some View {
-        Text(item.title).font(.title)
+        Text(item.title)
+            .font(.largeTitle)
     }
     
     var text: some View {

@@ -12,9 +12,12 @@ import SwiftUI
  This animation can be used to animate deck shuffling.
 
  To use this animation, first create a `@StateObject` in the
- view that should use the animation, then bind the animation
- to your item views, using a `withShuffleAnimation` modifier,
- then call `shuffle` to perform an animated shuffle.
+ view that should use the animation, then inject it into any
+ view that supports it, like the ``DeckView``.
+ 
+ Once a view is configured with your shuffle animation, call
+ ``DeckShuffleAnimation/shuffle(_:times:)`` with any list of
+ items to shuffle the list.
  */
 public class DeckShuffleAnimation: ObservableObject {
 

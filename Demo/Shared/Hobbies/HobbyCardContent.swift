@@ -41,6 +41,16 @@ struct HobbyCardContent: View {
         .fontDesign(.serif)
         .background(Color.white)
         .cornerRadius(10)
+        .environment(\.sizeCategory, .medium)
+        .overlay {
+            Image(.card)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(isShuffling ? 1 : 0)
+        }
+        .rotation3DEffect(
+            isShuffling ? .degrees(180) : .zero, axis: (x: 0, y: 1, z: 0)
+        )
     }
 }
 
@@ -62,7 +72,6 @@ private extension HobbyCardContent {
         RoundedRectangle(cornerRadius: 5)
             .fill(item.color.gradient)
             .frame(height: 150)
-            .padding()
             .overlay(imageView)
     }
 
@@ -95,7 +104,6 @@ private extension HobbyCardContent {
 
     var text: some View {
         Text(item.text)
-            .font(.body)
             .fixedSize(horizontal: false, vertical: true)
     }
 

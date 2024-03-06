@@ -1,13 +1,18 @@
 # ``DeckKit``
 
-DeckKit helps you create deck-based apps in `SwiftUI`.
+DeckKit is a Swift SDK that helps you build deck-based apps in SwiftUI.
+
 
 
 ## Overview
 
 ![DeckKit logo](Logo.png)
 
-DeckKit decks can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
+DeckKit is a Swift SDK that helps you build deck-based apps in SwiftUI.
+
+DeckKit has a ``DeckView`` that can render any item collection, with support for swipe gestures, edge swipe detection, shuffling, etc.
+
+DeckKit has other deck views as well, and can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
 
 
 
@@ -19,25 +24,23 @@ DeckKit can be installed with the Swift Package Manager:
 https://github.com/danielsaidi/DeckKit.git
 ```
 
-If you prefer to not have external dependencies, you can also just copy the source code into your app.
-
 
 
 ## Getting started
 
-The <doc:Getting-Started> article has a guide to help you get started with RichTextKit.
+The <doc:Getting-Started> article helps you get started with DeckKit.
 
 
 
 ## Repository
 
-For more information, source code, etc., visit the [project repository][Repository].
+For more information, source code, etc., visit the [project repository](https://github.com/danielsaidi/DeckKit).
 
 
 
 ## License
 
-RichTextKit is available under the MIT license. See the [LICENSE][License] file for more info.
+DeckKit is available under the MIT license.
 
 
 
@@ -49,10 +52,8 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Decks
 
-- ``Deck``
-- ``DeckContext``
-- ``DeckPageView``
 - ``DeckItem``
+- ``DeckPageView``
 - ``DeckView``
 - ``DeckViewConfiguration``
 
@@ -62,12 +63,6 @@ RichTextKit is available under the MIT license. See the [LICENSE][License] file 
 
 ### Favorites
 
-- ``Favoritable``
 - ``FavoriteContext``
 - ``FavoriteService``
 - ``UserDefaultsFavoriteService``
-
-
-
-[License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
-[Repository]: https://github.com/danielsaidi/DeckKit
