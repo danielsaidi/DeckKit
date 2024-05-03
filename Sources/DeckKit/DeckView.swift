@@ -45,7 +45,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     ) {
         self._items = items
         self.initConfig = nil
-        self._shuffle = .init(wrappedValue: shuffleAnimation)
+        self._shuffleAnimation = .init(wrappedValue: shuffleAnimation)
         self.swipeLeftAction = swipeLeftAction
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
@@ -66,7 +66,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     ) {
         self._items = items
         self.initConfig = config
-        self._shuffle = .init(wrappedValue: shuffleAnimation)
+        self._shuffleAnimation = .init(wrappedValue: shuffleAnimation)
         self.swipeLeftAction = swipeLeftAction
         self.swipeRightAction = swipeRightAction
         self.swipeUpAction = swipeUpAction
@@ -94,7 +94,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     private var envConfig: DeckViewConfiguration
     
     @ObservedObject
-    private var shuffle: DeckShuffleAnimation
+    private var shuffleAnimation: DeckShuffleAnimation
     
     @State
     private var activeItem: ItemType?
@@ -113,7 +113,11 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
                     .offset(y: offset(of: item))
                     .rotationEffect(dragRotation(for: item) ?? .zero)
                     .gesture(dragGesture(for: item))
-                    .withShuffleAnimation(shuffle, for: item, in: items)
+                    .deckShuffleAnimation(
+                        shuffleAnimation,
+                        for: item,
+                        in: items
+                    )
             }
         }
     }
@@ -208,7 +212,7 @@ private extension DeckView {
     }
 
     func offset(at index: Int) -> Double {
-        if shuffle.isShuffling { return 0 }
+        if shuffleAnimation.isShuffling { return 0 }
         
         let offset = Double(index) * config.verticalOffset
         let multiplier: Double = config.direction == .down ? 1 : -1
@@ -275,7 +279,7 @@ private func item(
     struct Preview: View {
         
         @State
-        var shuffle = DeckShuffleAnimation()
+        var shuffle = DeckShuffleAnimation(animation: .snappy)
         
         @State
         var items = (0...25).enumerated().map {

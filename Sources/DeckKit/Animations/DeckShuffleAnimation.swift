@@ -20,32 +20,38 @@ import SwiftUI
 /// of items to shuffle the list.
 @MainActor
 public final class DeckShuffleAnimation: ObservableObject {
-
+    
     /// Create a deck shuffle animation.
     ///
     /// - Parameters:
+    ///   - animation: The animation to use, by default `default`.
     ///   - maxDegrees: The max rotation to apply to the cards, by default `6`.
     ///   - maxOffsetX: The max x offset to apply to the cards, by default `6`.
     ///   - maxOffsetY: The max y offset to apply to the cards, by default `6`.
     public init(
+        animation: Animation = .default,
         maxDegrees: Double = 6,
         maxOffsetX: Double = 6,
         maxOffsetY: Double = 6
     ) {
+        self.animation = animation
         self.maxDegrees = maxDegrees
         self.maxOffsetX = maxOffsetX
         self.maxOffsetY = maxOffsetY
     }
-
+    
+    /// The animation to use.
+    public let animation: Animation
+    
     /// The max rotation to apply to the cards.
     public let maxDegrees: Double
-
+    
     /// The max x offset to apply to the cards.
     public let maxOffsetX: Double
-
+    
     /// The max y offset to apply to the cards.
     public let maxOffsetY: Double
-
+    
     /// Whether or not the animation is currently shuffling.
     public var isShuffling = false
     
@@ -54,7 +60,7 @@ public final class DeckShuffleAnimation: ObservableObject {
 }
 
 private struct ShuffleData: Sendable {
-
+    
     public let angle: Angle
     public let xOffset: Double
     public let yOffset: Double
@@ -62,9 +68,18 @@ private struct ShuffleData: Sendable {
 
 @MainActor
 public extension View {
-
-    /// Apply a shuffle animation to a deck item view.
+    
+    @available(*, deprecated, renamed: "deckShuffleAnimation(_:for:in:)")
     func withShuffleAnimation<Item: DeckItem>(
+        _ animation: DeckShuffleAnimation,
+        for item: Item,
+        in items: [Item]
+    ) -> some View {
+        deckShuffleAnimation(animation, for: item, in: items)
+    }
+    
+    /// Apply a shuffle animation to a deck item view.
+    func deckShuffleAnimation<Item: DeckItem>(
         _ animation: DeckShuffleAnimation,
         for item: Item,
         in items: [Item]
@@ -85,7 +100,7 @@ public extension DeckShuffleAnimation {
     ///   - times: The number of times to shuffle, by default `3`.
     func shuffle<Item>(
         _ items: Binding<[Item]>,
-        times: Int = 3
+        times: Int? = nil
     ) {
         Task {
             await shuffleAsync(items, times: times)
@@ -99,31 +114,17 @@ public extension DeckShuffleAnimation {
     ///   - times: The number of times to shuffle, by default `3`.
     func shuffleAsync<Item>(
         _ items: Binding<[Item]>,
-        times: Int = 3
+        times: Int? = nil
     ) async {
         if isShuffling { return }
         isShuffling = true
         let itemCount = items.count
-        for index in 0...times {
-            let isLast = index == times
-            let multiplier = isLast ? 0.5 : 1
-            setShuffleData((0..<itemCount).map { _ in
-                ShuffleData(
-                    angle: Angle.degrees(multiplier * Double.random(in: -maxDegrees...maxDegrees)),
-                    xOffset: multiplier * Double.random(in: -maxOffsetX...maxOffsetX),
-                    yOffset: multiplier * Double.random(in: -maxOffsetY...maxOffsetY)
-                )
-            })
+        for _ in 0...(times ?? 3) {
+            setRandomShuffleData(for: itemCount)
             try? await Task.sleep(nanoseconds: 200_000_000)
         }
         items.wrappedValue.shuffle()
-        setShuffleData((0..<itemCount).map { _ in
-            ShuffleData(
-                angle: Angle.degrees(0),
-                xOffset: 0,
-                yOffset: 0
-            )
-        })
+        setShuffleData([])
         isShuffling = false
     }
 }
@@ -131,9 +132,21 @@ public extension DeckShuffleAnimation {
 @MainActor
 private extension DeckShuffleAnimation {
     
+    func setRandomShuffleData(for itemCount: Int) {
+        setShuffleData(
+            (0..<itemCount).map { _ in
+                .init(
+                    angle: Angle.degrees(Double.random(in: -maxDegrees...maxDegrees)),
+                    xOffset: Double.random(in: -maxOffsetX...maxOffsetX),
+                    yOffset: Double.random(in: -maxOffsetY...maxOffsetY)
+                )
+            }
+        )
+    }
+    
     func setShuffleData(_ data: [ShuffleData]) {
-        withAnimation {
-            self.shuffleData = data
+        withAnimation(animation) {
+            shuffleData = data
         }
     }
     
