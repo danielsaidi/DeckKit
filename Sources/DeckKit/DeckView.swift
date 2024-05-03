@@ -20,7 +20,7 @@ import SwiftUI
  `.deckViewConfiguration` view modifier.
  */
 public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
-
+    
     /**
      Create a deck view with custom parameters.
      
@@ -36,7 +36,6 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
      */
     public init(
         _ items: Binding<[ItemType]>,
-        config: DeckViewConfiguration = .standard,
         shuffleAnimation: DeckShuffleAnimation = .init(),
         swipeLeftAction: ItemAction? = nil,
         swipeRightAction: ItemAction? = nil,
@@ -45,7 +44,28 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
         itemView: @escaping ItemViewBuilder
     ) {
         self._items = items
-        self.config = config
+        self.initConfig = nil
+        self._shuffle = .init(wrappedValue: shuffleAnimation)
+        self.swipeLeftAction = swipeLeftAction
+        self.swipeRightAction = swipeRightAction
+        self.swipeUpAction = swipeUpAction
+        self.swipeDownAction = swipeDownAction
+        self.itemView = itemView
+    }
+    
+    @available(*, deprecated, message: "Apply a configuration with the .deckViewConfiguration view modifier instead.")
+    public init(
+        _ items: Binding<[ItemType]>,
+        config: DeckViewConfiguration,
+        shuffleAnimation: DeckShuffleAnimation = .init(),
+        swipeLeftAction: ItemAction? = nil,
+        swipeRightAction: ItemAction? = nil,
+        swipeUpAction: ItemAction? = nil,
+        swipeDownAction: ItemAction? = nil,
+        itemView: @escaping ItemViewBuilder
+    ) {
+        self._items = items
+        self.initConfig = config
         self._shuffle = .init(wrappedValue: shuffleAnimation)
         self.swipeLeftAction = swipeLeftAction
         self.swipeRightAction = swipeRightAction
@@ -60,19 +80,22 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
-    @Binding
-    private var items: [ItemType]
-    
-    @ObservedObject
-    private var shuffle: DeckShuffleAnimation
-    
-    private var config: DeckViewConfiguration
+    private var initConfig: DeckViewConfiguration?
     private let itemView: (ItemType) -> ItemView
     private let swipeLeftAction: ItemAction?
     private let swipeRightAction: ItemAction?
     private let swipeUpAction: ItemAction?
     private let swipeDownAction: ItemAction?
-
+    
+    @Binding
+    private var items: [ItemType]
+    
+    @Environment(\.deckViewConfiguration)
+    private var envConfig: DeckViewConfiguration
+    
+    @ObservedObject
+    private var shuffle: DeckShuffleAnimation
+    
     @State
     private var activeItem: ItemType?
 
@@ -100,6 +123,10 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
 // MARK: - Properties
 
 private extension DeckView {
+    
+    var config: DeckViewConfiguration {
+        initConfig ?? envConfig
+    }
     
     var visibleItems: [ItemType] {
         let first = Array(items.prefix(config.itemDisplayCount))
@@ -244,6 +271,7 @@ private func item(
 
 #Preview {
     
+    @MainActor
     struct Preview: View {
         
         @State
@@ -258,8 +286,11 @@ private func item(
             VStack(spacing: 70) {
                 DeckView(
                     $items,
-                    config: .standard,
-                    shuffleAnimation: shuffle
+                    shuffleAnimation: shuffle,
+                    swipeLeftAction: { _ in print("Left") },
+                    swipeRightAction: { _ in print("Right") },
+                    swipeUpAction: { _ in print("Up") },
+                    swipeDownAction: { _ in print("Down") }
                 ) {
                     PreviewCard(item: $0)
                 }

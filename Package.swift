@@ -21,7 +21,10 @@ let package = Package(
     targets: [
         .target(
             name: "DeckKit",
-            dependencies: []
+            dependencies: [],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency")
+            ]
         ),
         .testTarget(
             name: "DeckKitTests",

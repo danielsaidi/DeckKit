@@ -1,6 +1,16 @@
 # Release notes
 
 
+## 1.2
+
+This version adds support for strict concurrency checks.
+
+### ✨ New features
+
+* `DeckViewConfiguration` is now applied with a view modifier instead of with the initializer.
+
+
+
 ## 1.1
 
 This version adds support for visionOS.

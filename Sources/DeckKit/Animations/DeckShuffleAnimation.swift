@@ -8,27 +8,24 @@
 
 import SwiftUI
 
-/**
- This animation can be used to animate deck shuffling.
-
- To use this animation, first create a `@StateObject` in the
- view that should use the animation, then inject it into any
- view that supports it, like the ``DeckView``.
- 
- Once a view is configured with your shuffle animation, call
- ``DeckShuffleAnimation/shuffle(_:times:)`` with any list of
- items to shuffle the list.
- */
+/// This animation can be used to animate deck shuffling.
+///
+/// To use this way of animating deck shuffles, first create
+/// a `@StateObject` instance in a view that should use this
+/// animation, then inject it into any view that supports it,
+/// like the ``DeckView``.
+///
+/// Once a view is configured with a shuffle animation, call
+/// ``DeckShuffleAnimation/shuffle(_:times:)`` with any list
+/// of items to shuffle the list.
 public class DeckShuffleAnimation: ObservableObject {
 
-    /**
-     Create a deck shuffle animation.
-
-     - Parameters:
-       - maxDegrees: The max rotation to apply to the cards, by default `6`.
-       - maxOffsetX: The max x offset to apply to the cards, by default `6`.
-       - maxOffsetY: The max y offset to apply to the cards, by default `6`.
-     */
+    /// Create a deck shuffle animation.
+    ///
+    /// - Parameters:
+    ///   - maxDegrees: The max rotation to apply to the cards, by default `6`.
+    ///   - maxOffsetX: The max x offset to apply to the cards, by default `6`.
+    ///   - maxOffsetY: The max y offset to apply to the cards, by default `6`.
     public init(
         maxDegrees: Double = 6,
         maxOffsetX: Double = 6,
@@ -104,7 +101,7 @@ public extension DeckShuffleAnimation {
 
 private extension DeckShuffleAnimation {
 
-    func performAfterDelay(_ action: @escaping () -> Void) {
+    func performAfterDelay(_ action: @Sendable @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: action)
     }
 
@@ -126,7 +123,7 @@ private extension DeckShuffleAnimation {
         time: Int
     ) {
         animationTrigger.toggle()
-        performAfterDelay {
+        performAfterDelay { [unowned self] in
             if time < times {
                 self.randomizeShuffleData(for: items)
                 self.shuffle(items, times: times, time: time + 1)
