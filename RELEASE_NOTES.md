@@ -9,6 +9,14 @@ This version adds support for strict concurrency checks.
 
 * `DeckViewConfiguration` is now applied with a view modifier instead of with the initializer.
 
+### 💡 Adjustments
+
+* `DeckShuffleAnimation` now supports strict concurrency.
+
+### 🐛 Bug Fixes
+
+* `DeckShuffleAnimation` now animates the new cards nicely to the new end state.
+
 
 
 ## 1.1

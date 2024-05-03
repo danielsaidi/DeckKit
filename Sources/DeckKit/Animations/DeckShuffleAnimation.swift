@@ -46,11 +46,8 @@ public final class DeckShuffleAnimation: ObservableObject {
     /// The max y offset to apply to the cards.
     public let maxOffsetY: Double
 
-
     /// Whether or not the animation is currently shuffling.
-    public var isShuffling: Bool {
-        !shuffleData.isEmpty
-    }
+    public var isShuffling = false
     
     @Published
     private var shuffleData: [ShuffleData] = []
@@ -104,7 +101,8 @@ public extension DeckShuffleAnimation {
         _ items: Binding<[Item]>,
         times: Int = 3
     ) async {
-        guard shuffleData.isEmpty else { return }
+        if isShuffling { return }
+        isShuffling = true
         let itemCount = items.count
         for index in 0...times {
             let isLast = index == times
@@ -118,30 +116,27 @@ public extension DeckShuffleAnimation {
             })
             try? await Task.sleep(nanoseconds: 200_000_000)
         }
-        setShuffleData([])
         items.wrappedValue.shuffle()
+        setShuffleData((0..<itemCount).map { _ in
+            ShuffleData(
+                angle: Angle.degrees(0),
+                xOffset: 0,
+                yOffset: 0
+            )
+        })
+        isShuffling = false
     }
 }
 
+@MainActor
 private extension DeckShuffleAnimation {
     
-    @MainActor
     func setShuffleData(_ data: [ShuffleData]) {
         withAnimation {
             self.shuffleData = data
         }
     }
-}
-
-private extension DeckShuffleAnimation {
-
-    func performAfterDelay(
-        _ action: @Sendable @escaping () -> Void
-    ) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: action)
-    }
     
-    @MainActor
     func shuffleData<Item: DeckItem>(
         for item: Item,
         in items: [Item]
