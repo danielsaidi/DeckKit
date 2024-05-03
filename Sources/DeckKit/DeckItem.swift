@@ -9,7 +9,7 @@
 import Foundation
 
 /// This typealias represents Identifiable & Equatable items.
-public typealias DeckItem = Identifiable & Equatable & Sendable
+public typealias DeckItem = Identifiable & Equatable
 
 public extension Array where Element: DeckItem {
     
