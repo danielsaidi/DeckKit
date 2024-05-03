@@ -91,18 +91,6 @@ public extension DeckShuffleAnimation {
     }
 }
 
-public extension View {
-
-    @available(*, deprecated, message: "Deck is no longer needed. Just use item arrays instead.")
-    func withShuffleAnimation<Item: DeckItem>(
-        _ animation: DeckShuffleAnimation,
-        for item: Item,
-        in deck: Deck<Item>
-    ) -> some View {
-        self.withShuffleAnimation(animation, for: item, in: deck.items)
-    }
-}
-
 @available(*, deprecated, message: "Deck is no longer needed. Just use item arrays instead.")
 public extension Deck {
     
