@@ -294,10 +294,9 @@ private func item(
                     swipeLeftAction: { _ in print("Left") },
                     swipeRightAction: { _ in print("Right") },
                     swipeUpAction: { _ in print("Up") },
-                    swipeDownAction: { _ in print("Down") }
-                ) {
-                    PreviewCard(item: $0)
-                }
+                    swipeDownAction: { _ in print("Down") },
+                    itemView: { PreviewCard(item: $0) }
+                )
                 #if os(visionOS)
                 .aspectRatio(0.75, contentMode: .fit)
                 #endif
