@@ -68,10 +68,6 @@ private extension ContentView {
     var deckView: some View {
         DeckView(
             $items,
-            config: .init(
-                direction: .down,
-                itemDisplayCount: 5
-            ),
             shuffleAnimation: animation,
             swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
             swipeRightAction: { selectedHobby = $0 },
@@ -79,6 +75,10 @@ private extension ContentView {
             swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
             itemView: deckViewCard
         )
+        .deckViewConfiguration(.init(
+            direction: .down,
+            itemDisplayCount: 5
+        ))
     }
     
     func deckViewCard(for hobby: Hobby) -> some View {

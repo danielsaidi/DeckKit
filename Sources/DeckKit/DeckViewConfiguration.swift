@@ -102,9 +102,9 @@ public extension View {
 
     /// Apply a ``DeckViewConfiguration``.
     func deckViewConfiguration(
-        _ style: DeckViewConfiguration
+        _ config: DeckViewConfiguration
     ) -> some View {
-        self.environment(\.deckViewConfiguration, style)
+        self.environment(\.deckViewConfiguration, config)
     }
 }
 
