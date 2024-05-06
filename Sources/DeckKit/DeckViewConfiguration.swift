@@ -87,11 +87,9 @@ public extension DeckViewConfiguration {
 
 public extension DeckViewConfiguration {
 
-    /**
-     The visual direction of a stack, where ``up`` means the
-     stack seems to be growing upwards, while ``down`` means
-     it seems to be growing downwards.
-     */
+    /// The visual direction of a deck, where ``up`` is used
+    /// to make the stack grow upwards, while ``down`` makes
+    /// it grow downwards.
     enum Direction: String, Codable {
 
         case up, down
