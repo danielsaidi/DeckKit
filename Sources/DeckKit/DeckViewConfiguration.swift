@@ -9,6 +9,9 @@
 import SwiftUI
 
 /// This config can be used to configure a ``DeckView``.
+///
+/// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
+/// view modifier to apply a custom configuration.
 public struct DeckViewConfiguration: Codable, Configuration, Equatable {
 
     /// Create a deck view configuration.
@@ -87,9 +90,8 @@ public extension DeckViewConfiguration {
 
 public extension DeckViewConfiguration {
 
-    /// The visual direction of a deck, where ``up`` is used
-    /// to make the stack grow upwards, while ``down`` makes
-    /// it grow downwards.
+    /// The visual direction of a deck, where ``up`` makes a
+    /// deck grow upwards, and ``down`` downwards.
     enum Direction: String, Codable {
 
         case up, down

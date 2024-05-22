@@ -36,8 +36,8 @@ struct ContentView: View {
     var selectedHobby: Hobby?
 
     @StateObject
-    var animation = DeckShuffleAnimation()
-    
+    var shuffleAnimation = DeckShuffleAnimation()
+
     var body: some View {
         NavigationView {
             #if os(macOS)
@@ -68,7 +68,7 @@ private extension ContentView {
     var deckView: some View {
         DeckView(
             $items,
-            shuffleAnimation: animation,
+            shuffleAnimation: shuffleAnimation,
             swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
             swipeRightAction: { selectedHobby = $0 },
             swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
@@ -84,7 +84,7 @@ private extension ContentView {
     func deckViewCard(for hobby: Hobby) -> some View {
         HobbyCard(
             item: hobby,
-            isShuffling: animation.isShuffling
+            isShuffling: shuffleAnimation.isShuffling
         )
     }
 
@@ -96,7 +96,7 @@ private extension ContentView {
 
     var shuffleButton: some View {
         Button("Shuffle Deck") {
-            animation.shuffle($items, times: 20)
+            shuffleAnimation.shuffle($items, times: 20)
         }
         .buttonStyle(.borderedProminent)
     }

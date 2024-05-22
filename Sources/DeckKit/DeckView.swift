@@ -9,31 +9,27 @@
 #if os(iOS) || os(macOS) || os(visionOS)
 import SwiftUI
 
-/**
- This view renders a ``Deck`` as a stack of cards from which
- users can swipe away the top item and trigger actions.
-
- The view takes a generic ``Deck`` and maps its items to any
- views, as determined by the `itemViewBuilder`. 
- 
- You can pass in a custom ``DeckViewConfiguration`` with the
- `.deckViewConfiguration` view modifier.
- */
+/// This view renders any ``Deck`` as a stack of cards, from
+/// which the user can swipe the top item to trigger actions.
+///
+/// This view takes a generic ``Deck`` and maps its items to
+/// content views, as determined by the `itemViewBuilder`.
+///
+/// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
+/// view modifier to apply a custom configuration.
 public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
     
-    /**
-     Create a deck view with custom parameters.
-     
-     - Parameters:
-       - items: The items to present.
-       - config: The configuration to apply, by default `.standard`.
-       - shuffleAnimation: The shuffle animation to apply, by default an internal one.
-       - swipeLeftAction: The action to trigger when swiping items left, by default `nil`.
-       - swipeRightAction: The action to trigger when swiping items right, by default `nil`.
-       - swipeUpAction: The action to trigger when swiping items up, by default `nil`.
-       - swipeDownAction: The action to trigger when swiping items down, by default `nil`.
-       - itemView: An item view builder to use for each item in the deck.
-     */
+    /// Create a deck view with custom parameters.
+    ///
+    /// - Parameters:
+    ///   - items: The items to present.
+    ///   - config: The configuration to apply, by default `.standard`.
+    ///   - shuffleAnimation: The shuffle animation to apply, by default an internal one.
+    ///   - swipeLeftAction: The action to trigger when swiping items left, by default `nil`.
+    ///   - swipeRightAction: The action to trigger when swiping items right, by default `nil`.
+    ///   - swipeUpAction: The action to trigger when swiping items up, by default `nil`.
+    ///   - swipeDownAction: The action to trigger when swiping items down, by default `nil`.
+    ///   - itemView: An item view builder to use for each item in the deck.
     public init(
         _ items: Binding<[ItemType]>,
         shuffleAnimation: DeckShuffleAnimation = .init(),
