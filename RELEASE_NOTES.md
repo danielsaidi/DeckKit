@@ -1,6 +1,14 @@
 # Release notes
 
 
+## 1.2.1
+
+This version makes the library build even without strict concurrency checks enabled.
+
+This makes the library build even in Xcode 15.2 and earlier.
+
+
+
 ## 1.2
 
 This version adds support for strict concurrency checks.
