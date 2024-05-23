@@ -1,12 +1,20 @@
 # Release notes
 
 
-## 1.3
+## 2.0
+
+### ✨ New features
+
+* `Card` is a new flippable view type.
 
 ### 🗑️ Deprecations
 
 * `Configuration` has been converted to an `Equatable` extension.
 * `View` `deckShuffleAnimation` has been converted to an internal modifier.
+
+### 💥 Breaking Changes
+
+* The favorite types have cleaned up their generic designed to be easier to use.
 
 
 

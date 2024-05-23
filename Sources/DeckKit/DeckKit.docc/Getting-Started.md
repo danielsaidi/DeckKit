@@ -54,7 +54,7 @@ You can render a ``DeckItem`` collection with in any of the built-in views, e.g.
         }
         ```
 
-        You can use the ``SwiftUI/View/deckViewConfiguration(_:)`` view modifier to configure this view.
+        You can use a ``Card`` view as content view, to easily support a front and back faced card with flip support, or use any custom card view. You can also use the ``SwiftUI/View/deckViewConfiguration(_:)`` view modifier to configure this view.
     }
     
     @Tab("DeckPageView") {
@@ -72,6 +72,8 @@ You can render a ``DeckItem`` collection with in any of the built-in views, e.g.
             }
         }
         ```
+        
+        You can use a ``Card`` view as content view, to easily support a front and back faced card with flip support, or use any custom card view.
     }
 }
 

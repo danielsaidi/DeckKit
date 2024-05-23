@@ -6,6 +6,7 @@
 //  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
 //
 
+import DeckKit
 import SwiftUI
 
 struct HobbyCardContent: View {
@@ -27,6 +28,17 @@ struct HobbyCardContent: View {
     private let numberSize = 60.0
 
     var body: some View {
+        Card(
+            isFlipped: isShuffling,
+            front: front,
+            back: back
+        )
+    }
+}
+
+private extension HobbyCardContent {
+
+    func front() -> some View {
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(item.color, lineWidth: 1)
@@ -39,18 +51,15 @@ struct HobbyCardContent: View {
         }
         .multilineTextAlignment(.center)
         .fontDesign(.serif)
-        .background(Color.white)
         .cornerRadius(10)
         .environment(\.sizeCategory, .medium)
-        .overlay {
-            Image(.card)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(isShuffling ? 1 : 0)
-        }
-        .rotation3DEffect(
-            isShuffling ? .degrees(180) : .zero, axis: (x: 0, y: 1, z: 0)
-        )
+    }
+
+    func back() -> some View {
+        Image(.card)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .opacity(isShuffling ? 1 : 0)
     }
 }
 
