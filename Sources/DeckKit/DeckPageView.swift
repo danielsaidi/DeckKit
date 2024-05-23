@@ -9,11 +9,8 @@
 #if os(iOS)
 import SwiftUI
 
-/// This view renders any ``Deck`` as a horizontal page view,
-/// from which users can swipe left and right.
-///
-/// This view takes a generic ``Deck`` and maps its items to
-/// content views, as determined by the `itemViewBuilder`.
+/// This view renders a collection of ``DeckItem`` values as
+/// a horizontal page view.
 public struct DeckPageView<ItemType: DeckItem, ItemView: View>: View {
 
     /// Create a deck page view.

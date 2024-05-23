@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.
-public struct DeckViewConfiguration: Codable, Configuration, Equatable {
+public struct DeckViewConfiguration: Codable, Equatable {
 
     /// Create a deck view configuration.
     ///

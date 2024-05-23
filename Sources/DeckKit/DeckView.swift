@@ -9,11 +9,11 @@
 #if os(iOS) || os(macOS) || os(visionOS)
 import SwiftUI
 
-/// This view renders any ``Deck`` as a stack of cards, from
-/// which the user can swipe the top item to trigger actions.
+/// This view renders a collection of ``DeckItem`` values as
+/// a physical deck of cards.
 ///
-/// This view takes a generic ``Deck`` and maps its items to
-/// content views, as determined by the `itemViewBuilder`.
+/// This view lets users swipe the top card in any direction
+/// to move it to the bottom of the deck and trigger actions.
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.

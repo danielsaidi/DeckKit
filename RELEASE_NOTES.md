@@ -1,11 +1,20 @@
 # Release notes
 
 
+## 1.3
+
+### 🗑️ Deprecations
+
+* `Configuration` has been converted to an `Equatable` extension.
+* `View` `deckShuffleAnimation` has been converted to an internal modifier.
+
+
+
 ## 1.2.1
 
 This version makes the library build even without strict concurrency checks enabled.
 
-This makes the library build even in Xcode 15.2 and earlier.
+This makes the library once again build with Xcode 15.2 and earlier.
 
 
 

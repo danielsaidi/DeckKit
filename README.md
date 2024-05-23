@@ -23,7 +23,7 @@ DeckKit has a `DeckView` that can render any item collection, with support for s
     <img src="Resources/Demo.gif" width=300 alt="Demo video" />
 </p>
 
-DeckKit has other deck views as well, and can be customized to great extent. You can change colors, fonts, corner radius etc. of the standard card views, and also use completely custom views.
+DeckKit has other views as well, and can be customized to great extent. You can change colors, fonts, etc. and use completely custom views. It also has tools to manage favorite items.
 
 
 

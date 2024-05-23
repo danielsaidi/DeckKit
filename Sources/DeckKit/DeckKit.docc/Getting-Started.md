@@ -6,7 +6,7 @@ This article explains how to get started with DeckKit.
 
 ## How to create a deck of items
 
-In DeckKit, the data source of a deck view is just an array of ``DeckItem`` values.
+In DeckKit, a ``DeckItem`` is just a typealias for `Identifiable & Equatable`.
 
 For instance, consider this `Hobby` type:
 
@@ -23,86 +23,80 @@ struct Hobby: DeckItem {
 You can easily define a deck of hobbies like this:
 
 ```swift
-var deck: [Hobby] = [
-    .init(name: "Music", text: "I love music!"),
-    .init(name: "Movies", text: "...and movies!"),
-    .init(name: "Programming", text: "...but most of all programming!")
-]
+let music = Hobby(name: "Music", text: "I love music!"),
+let movies = Hobby(name: "Movies", text: "...and movies!"),
+let coding = Hobby(name: "Coding", text: "...and coding!")
+let deck: [Hobby] = [music, movies, coding]
 ```
 
-Once you have a collection of items, you can use any of the built-in functions to modify it, such as `moveFirstItemToBack()`, `moveLastItemToFront()`, `shuffle()`, etc.
+Once you have a collection of items, you can use any of the built-in functions to modify it, such as ``Swift/Array/moveFirstItemToBack()``, ``Swift/Array/moveLastItemToFront()``, etc.
 
 
 
 ## How to display a deck of items
 
-You can display a collection of ``DeckItem``s with in any of the built-in views.
+You can render a ``DeckItem`` collection with in any of the built-in views, e.g. in a ``DeckView`` or a ``DeckPageView``:
 
+@TabNavigator {
+    
+    @Tab("DeckView") {
+        ``DeckView`` renders a ``DeckItem`` collection as a deck of cards, where the user can swipe the top card in any direction to move it to the bottom of the deck and trigger optional actions in each direction:
 
-### DeckView
+        ```swift
+        struct MyView: View {
 
-The ``DeckView`` component lists all items in a collection in a stack:
-
-```swift
-struct MyView: View {
-
-    @State var items: [Hobby] = [
-        .init(name: "Music", text: "I love music!"),
-        .init(name: "Movies", text: "...and movies!"),
-        .init(name: "Programming", text: "...but most of all programming!")
-    ]
-
-    var body: some View {
-        DeckView($items) { item in
-            ... Return your view here
+            var body: some View {
+                DeckView($hobbies) { item in
+                    // Return a card view for the provided item
+                }
+                .padding()
+            }
         }
-        .padding()
+        ```
+
+        You can use the ``SwiftUI/View/deckViewConfiguration(_:)`` view modifier to configure this view.
+    }
+    
+    @Tab("DeckPageView") {
+        
+        ``DeckPageView`` renders a ``DeckItem`` collection as a horizontally scrolling page view:
+        
+        ```swift
+        struct MyView: View {
+
+            var body: some View {
+                DeckPageView($hobbies) { item in
+                    // Return a card view for the provided item
+                }
+                .padding()
+            }
+        }
+        ```
     }
 }
-```
-
-You can style and configure the deck view to great extent. Users can swipe the topmost card to any edge to send it to the back, trigger custom actions for each edge, etc.
-
-
-### 👑 DeckPageView
-
-The **DeckPageView** component in [DeckKit Pro][Pro] lists deck items in a horizontally paged list:
-
-```swift
-DeckPageView($items) { item in
-    ... Return your view here
-}
-```
-
-A page view is a great way to swipe back and forth through a collection of items.
-
-
-### 👑 DeckFanView
-
-The **DeckFanView** component in [DeckKit Pro][Pro] lists deck items in a fan layout:
-
-```swift
-DeckFanView($items) { item in
-    ... Return your view here
-}
-```
-
-You can rotate the fan, select any item in the collection, etc. 
-
 
 
 ## 👑 How to manage favorites
 
-[DeckKit Pro][Pro] has functionality for handling favorites.
+DeckKit has functionality for handling the favorite state of any `Identifiable` type.
 
-To track favorite state, you can just create a ``FavoriteContext`` instance:
+To track favorite state, you can just create a ``FavoriteContext`` instance as a :
 
 ```swift
-@StateObject
-var context = FavoriteContext()
+struct MyView {
+
+    @StateObject
+    var context = FavoriteContext<Hobby>()
+    
+    body: some View {
+        Button("Toggle favorite state") {
+            context.toggleIsFavorite(for: coding)
+        }
+    }
+}
 ``` 
 
-The context can be injected as an environment object, passed around as a reference, etc. It uses an injected ``FavoriteService`` to manage favorites, and can be used to fetch all favorites, toggle favorite state of an item, etc.
+The context uses a ``FavoriteService`` to manage favorites, and can be used to fetch all favorites, set and toggle favorite state, etc.
 
 
 [Pro]: https://kankoda.com/deckkit

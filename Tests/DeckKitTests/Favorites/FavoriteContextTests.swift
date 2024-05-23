@@ -11,8 +11,8 @@ import XCTest
 
 final class FavoriteContextTests: XCTestCase {
     
-    private lazy var service = TestService()
-    private lazy var context = FavoriteContext<TestClass>(service: service)
+    private lazy var service = TestService<TestClass>()
+    private lazy var context = FavoriteContext(service: service)
     
     func testInitialValuesHaveValidStandardValues() {
         XCTAssertEqual(context.favorites, [])
@@ -21,7 +21,7 @@ final class FavoriteContextTests: XCTestCase {
     
     func testInitialValuesPersistsChangedValues() {
         context.showOnlyFavorites = true
-        let context2 = FavoriteContext<TestClass>(service: service)
+        let context2 = FavoriteContext(service: service)
         XCTAssertEqual(context2.showOnlyFavorites, true)
         context.showOnlyFavorites = false
     }
@@ -32,10 +32,10 @@ private class TestClass: Identifiable {
     let id: Int = 1
 }
 
-private class TestService: FavoriteService {
-    
-    func getFavorites<Item: Identifiable>(for type: Item.Type) -> [Item.ID] { [] }
-    func isFavorite<Item: Identifiable>(_ item: Item) -> Bool { false }
-    func setIsFavorite<Item: Identifiable>(_ isFavorite: Bool, for item: Item) {}
-    func toggleIsFavorite<Item: Identifiable>(for item: Item) {}
+private class TestService<Item: Identifiable>: FavoriteService {
+
+    func getFavorites() -> [Item.ID] { [] }
+    func isFavorite(_ item: Item) -> Bool { false }
+    func setIsFavorite(_ isFavorite: Bool, for item: Item) {}
+    func toggleIsFavorite(for item: Item) {}
 }

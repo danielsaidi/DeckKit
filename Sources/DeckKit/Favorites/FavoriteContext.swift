@@ -8,56 +8,60 @@
 
 import SwiftUI
 
-/**
- This observable object context can be used to bind favorite
- state to your views.
- */
-public class FavoriteContext<Item: Identifiable>: ObservableObject, FavoriteService {
-    
-    /**
-     Create a favorite context.
-     
-     - Parameters:
-       - service: The service to use to manage favorites, by default a ``UserDefaultsFavoriteService``.
-     */
-    public init(
-        service: FavoriteService = UserDefaultsFavoriteService()
-    ) {
-        self.service = service
-        self.favorites = getFavorites(for: Item.self)
+/// This observable class can be used to manage the favorite
+/// state of any `Identifiable` type.
+///
+/// This class will use a ``UserDefaultsFavoriteService`` by
+/// default, but you can use any custom service.
+public class FavoriteContext<Service: FavoriteService>: ObservableObject, FavoriteService {
+
+    /// Create a default context instance.
+    ///
+    /// This instance uses a ``UserDefaultsFavoriteService``.
+    public init<Item>() where Service == UserDefaultsFavoriteService<Item> {
+        self.service = UserDefaultsFavoriteService()
+        self.favorites = getFavorites()
     }
-    
-    private let service: FavoriteService
-    
-    
+
+    /// Create a context with a custom service.
+    ///
+    /// - Parameters:
+    ///   - service: The service to use to manage favorites.
+    public init(service: Service) {
+        self.service = service
+        self.favorites = getFavorites()
+    }
+
+    private let service: Service
+
+    public typealias Item = Service.Item
+
     /// The item IDs that are currently marked as favorites.
     @Published
     public private(set) var favorites: [Item.ID] = []
-    
+
     /// Whether or not to only show favorites.
     @AppStorage("com.deckkit.favorites.showonlyfavorites")
     public var showOnlyFavorites = false
-    
-    
-    /// Get the raw list of favorites from the embedded service.
-    public func getFavorites<ItemType: Identifiable>(for type: ItemType.Type) -> [ItemType.ID] {
-        service.getFavorites(for: ItemType.self)
+}
+
+public extension FavoriteContext {
+
+    func getFavorites() -> [Item.ID] {
+        service.getFavorites()
     }
     
-    /// Check whether or not a certain item is a favorite.
-    public func isFavorite<ItemType: Identifiable>(_ item: ItemType) -> Bool {
+    func isFavorite(_ item: Item) -> Bool {
         service.isFavorite(item)
     }
     
-    /// Set whether or not a certain item is a favorite.
-    public func setIsFavorite<ItemType: Identifiable>(_ isFavorite: Bool, for item: ItemType) {
+    func setIsFavorite(_ isFavorite: Bool, for item: Item) {
         service.setIsFavorite(isFavorite, for: item)
-        favorites = getFavorites(for: ItemType.self) as? [Item.ID] ?? []
+        favorites = getFavorites()
     }
     
-    /// Toggle whether or not a certain item is a favorite.
-    public func toggleIsFavorite<ItemType: Identifiable>(for item: ItemType) {
+    func toggleIsFavorite(for item: Item) {
         service.toggleIsFavorite(for: item)
-        favorites = getFavorites(for: ItemType.self) as? [Item.ID] ?? []
+        favorites = getFavorites()
     }
 }

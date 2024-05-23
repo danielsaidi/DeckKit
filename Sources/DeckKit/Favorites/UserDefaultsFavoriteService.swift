@@ -8,12 +8,10 @@
 
 import Foundation
 
-/**
- This class implements ``FavoriteService`` by persisting the
- favorite state in `UserDefaults`.
- */
-public class UserDefaultsFavoriteService: FavoriteService {
-    
+/// This class implements ``FavoriteService`` by storing the
+/// favorite state in `UserDefaults`.
+public class UserDefaultsFavoriteService<Item: Identifiable>: FavoriteService {
+
     /// Create a service instance.
     public init(
         defaults: UserDefaults = .standard
@@ -26,33 +24,32 @@ public class UserDefaultsFavoriteService: FavoriteService {
 
 public extension UserDefaultsFavoriteService {
     
-    func getFavorites<Item: Identifiable>(for type: Item.Type) -> [Item.ID] {
-        let key = self.key(for: type)
-        return defaults.array(forKey: key) as? [Item.ID] ?? []
+    func getFavorites() -> [Item.ID] {
+        defaults.array(forKey: key) as? [Item.ID] ?? []
     }
     
-    func isFavorite<Item: Identifiable>(_ item: Item) -> Bool {
-        getFavorites(for: Item.self).contains(item.id)
+    func isFavorite(_ item: Item) -> Bool {
+        getFavorites().contains(item.id)
     }
     
-    func setIsFavorite<Item: Identifiable>(_ isFavorite: Bool, for item: Item) {
-        var favorites = getFavorites(for: Item.self)
+    func setIsFavorite(_ isFavorite: Bool, for item: Item) {
+        var favorites = getFavorites()
         if isFavorite {
             favorites.append(item.id)
         } else {
             favorites.removeAll { $0 == item.id }
         }
-        defaults.set(favorites, forKey: key(for: Item.self))
+        defaults.set(favorites, forKey: key)
     }
     
-    func toggleIsFavorite<Item: Identifiable>(for item: Item) {
+    func toggleIsFavorite(for item: Item) {
         setIsFavorite(!isFavorite(item), for: item)
     }
 }
 
 private extension UserDefaultsFavoriteService {
     
-    func key<Item: Identifiable>(for type: Item.Type) -> String {
-        "com.danielsaidi.deckkit.favorites.\(String(describing: type))"
+    var key: String {
+        "com.danielsaidi.deckkit.favorites.\(String(describing: Item.self))"
     }
 }

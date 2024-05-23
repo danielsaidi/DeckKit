@@ -9,18 +9,8 @@
 import SwiftUI
 import CoreGraphics
 
-/**
- This view can be used as a preview template for other cards.
- */
 struct PreviewCard: View {
     
-    /**
-     Create a basic card.
-     
-     - Parameters:
-       - item: The item to display in the card.
-       - cornerRadius: The corner radius of the card.
-     */
     init(
         item: Item,
         cornerRadius: CGFloat = 10
@@ -99,16 +89,16 @@ extension PreviewCard {
     }
 }
 
-struct PreviewCard_Previews: PreviewProvider {
-    static var previews: some View {
-        PreviewCard(
-            item: PreviewCard.Item(
-                title: "Title",
-                text: "Text",
-                footnote: "Footnote",
-                backgroundColor: .red,
-                tintColor: .yellow
-            )
-        ).padding()
-    }
+#Preview {
+    
+    PreviewCard(
+        item: PreviewCard.Item(
+            title: "Title",
+            text: "Text",
+            footnote: "Footnote",
+            backgroundColor: .red,
+            tintColor: .yellow
+        )
+    )
+    .padding()
 }
