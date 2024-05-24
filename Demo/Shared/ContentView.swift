@@ -9,31 +9,19 @@
 import DeckKit
 import SwiftUI
 
-#if canImport(UIKit)
-import UIKit
-extension String {
-
-    var image: UIImage? {
-        .init(data: Data())
-    }
-}
-#elseif canImport(AppKit)
-extension String {
-
-    var image: NSImage? {
-        .init(data: Data())
-    }
-}
-#endif
-
-
 struct ContentView: View {
 
     @State
-    var items = Hobby.demoCollection
+    var hobbies = Hobby.demoCollection
 
     @State
     var selectedHobby: Hobby?
+
+    @State
+    var showOnlyFavorites = false
+
+    @StateObject
+    var favoriteContext = FavoriteContext<Hobby, UserDefaultsFavoriteService>()
 
     @StateObject
     var shuffleAnimation = DeckShuffleAnimation()
@@ -52,16 +40,24 @@ struct ContentView: View {
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
-            .safeAreaInset(edge: .bottom) {
-                VStack {
-                    shuffleButton
+            .onChange(of: showOnlyFavorites) {
+                if $0 {
+                    hobbies = Hobby.demoCollection.filter { favoriteContext.isFavorite($0) }
+                } else {
+                    hobbies = Hobby.demoCollection
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(.thinMaterial)
             }
+            .onReceiveShake(action: shuffleDeck)
             .sheet(item: $selectedHobby) {
                 HobbyCardContent($0, inSheet: true)
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    shuffleButton
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    favoriteButton
+                }
             }
         }
     }
@@ -70,12 +66,12 @@ struct ContentView: View {
 private extension ContentView {
 
     var background: some View {
-        Color.gray.ignoresSafeArea()
+        Color.background.ignoresSafeArea()
     }
 
     var deckView: some View {
         DeckView(
-            $items,
+            $hobbies,
             shuffleAnimation: shuffleAnimation,
             swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
             swipeRightAction: { selectedHobby = $0 },
@@ -88,16 +84,57 @@ private extension ContentView {
             itemDisplayCount: 5
         ))
     }
-    
-    func deckViewCard(for hobby: Hobby) -> some View {
-        HobbyCard(hobby, isShuffling: shuffleAnimation.isShuffling)
+
+    var favoriteButton: some View {
+        toolbarButton("Toggle Favorite", .favorite, action: toggleShowOnlyFavorites)
+            .symbolVariant(showOnlyFavorites ? .fill : .none)
     }
 
     var shuffleButton: some View {
-        Button("Shuffle Deck") {
-            shuffleAnimation.shuffle($items, times: 20)
+        toolbarButton("Shuffle", .shuffle, action: shuffleDeck)
+            .symbolVariant(isShuffling ? .fill : .none)
+    }
+
+    func deckViewCard(for hobby: Hobby) -> some View {
+        HobbyCard(
+            hobby,
+            isShuffling: isShuffling,
+            isFavorite: favoriteContext.isFavorite(hobby),
+            favoriteAction: favoriteContext.toggleIsFavorite
+        )
+    }
+
+    func toolbarButton(
+        _ title: String,
+        _ icon: Image,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Label(
+                title: { Text(title) },
+                icon: { icon }
+            )
         }
-        .buttonStyle(.borderedProminent)
+    }
+}
+
+private extension ContentView {
+
+    var isShuffling: Bool {
+        shuffleAnimation.isShuffling
+    }
+
+    func shuffleDeck() {
+        shuffleAnimation.shuffle($hobbies, times: 20)
+    }
+
+    func toggleIsFavorite() {
+        guard let hobby = hobbies.first else { return }
+        favoriteContext.toggleIsFavorite(for: hobby)
+    }
+
+    func toggleShowOnlyFavorites() {
+        showOnlyFavorites.toggle()
     }
 }
 

@@ -103,7 +103,7 @@ public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
             ForEach(visibleItems) { item in
                 itemView(item)
                     .zIndex(zIndex(of: item))
-                    .shadow(radius: 0.5)
+                    .shadow(color: Color.black.opacity(0.1), radius: 0, y: 1)
                     .offset(size: dragOffset(for: item))
                     .scaleEffect(scale(of: item))
                     .offset(y: offset(of: item))
@@ -282,7 +282,7 @@ private func item(
             item($0.offset)
         }
         
-        var preview: some View {
+        var body: some View {
             VStack(spacing: 70) {
                 DeckView(
                     $items,
@@ -291,12 +291,16 @@ private func item(
                     swipeRightAction: { _ in print("Right") },
                     swipeUpAction: { _ in print("Up") },
                     swipeDownAction: { _ in print("Down") },
-                    itemView: { PreviewCard(item: $0) }
+                    itemView: { item in
+                        Card(
+                            isFlipped: shuffle.isShuffling,
+                            front: { PreviewCard(item: item) },
+                            back: { Color.blue }
+                        )
+                        .aspectRatio(0.65, contentMode: .fit)
+                    }
                 )
-                #if os(visionOS)
-                .aspectRatio(0.75, contentMode: .fit)
-                #endif
-                
+
                 Button("Shuffle") {
                     shuffle.shuffle($items)
                 }
@@ -306,12 +310,7 @@ private func item(
                 .buttonStyle(.borderedProminent)
                 #endif
             }
-        }
-        
-        var body: some View {
-            preview
-                .padding()
-                .padding(.vertical, 100)
+            .padding()
         }
     }
 

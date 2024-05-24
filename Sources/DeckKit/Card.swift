@@ -19,12 +19,12 @@ public struct Card<Front: View, Back: View>: View {
     ///
     /// - Parameters:
     ///   - isFlipped: Whether the card is flipped.
-    ///   - cornerRadius: The corner radius, by default `20`.
+    ///   - cornerRadius: The corner radius, by default `15`.
     ///   - front: The front view.
     ///   - back: The back view.
     public init(
         isFlipped: Bool,
-        cornerRadius: Double = 20,
+        cornerRadius: Double = 15,
         @ViewBuilder front: @escaping () -> Front,
         @ViewBuilder back: @escaping () -> Back
     ) {
@@ -43,10 +43,32 @@ public struct Card<Front: View, Back: View>: View {
     private var colorScheme
 
     public var body: some View {
-        front()
-            .background(Color.card(for: colorScheme))
-            .overlay { back().opacity(isFlipped ? 1 : 0) }
+        frontView
+            .background(background)
+            .overlay(backView)
+            .padding(100)
             .rotation3DEffect(isFlipped ? .degrees(180) : .zero, axis: (x: 0, y: 1, z: 0))
+            .padding(-100)
+    }
+}
+
+private extension Card {
+
+    var background: some View {
+        Color.card(for: colorScheme)
+            .clipShape(.rect(cornerRadius: cornerRadius))
+    }
+
+    var frontView: some View {
+        front()
+            .clipShape(.rect(cornerRadius: cornerRadius))
+    }
+
+    var backView: some View {
+        front()
+            .opacity(0)
+            .overlay(back().opacity(isFlipped ? 1 : 0))
+            .clipped()
             .clipShape(.rect(cornerRadius: cornerRadius))
     }
 }
@@ -66,6 +88,7 @@ public struct Card<Front: View, Back: View>: View {
                     front: { Color.blue },
                     back: { Color.red }
                 )
+                .aspectRatio(0.65, contentMode: .fit)
 
                 Button("Flip") {
                     withAnimation {
@@ -73,6 +96,7 @@ public struct Card<Front: View, Back: View>: View {
                     }
                 }
             }
+            .padding()
         }
     }
 

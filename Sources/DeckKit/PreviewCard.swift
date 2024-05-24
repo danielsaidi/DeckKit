@@ -65,6 +65,7 @@ struct PreviewCard: View {
         .background(item.backgroundColor)
         .background(Color.white)
         .cornerRadius(cornerRadius)
+        .aspectRatio(0.65, contentMode: .fit)
     }
 }
 

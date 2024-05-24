@@ -13,13 +13,13 @@ import SwiftUI
 ///
 /// This class will use a ``UserDefaultsFavoriteService`` by
 /// default, but you can use any custom service.
-public class FavoriteContext<Service: FavoriteService>: ObservableObject, FavoriteService {
+public class FavoriteContext<Item: Identifiable, Service: FavoriteService>: ObservableObject, FavoriteService where Service.Item == Item {
 
     /// Create a default context instance.
     ///
     /// This instance uses a ``UserDefaultsFavoriteService``.
-    public init<Item>() where Service == UserDefaultsFavoriteService<Item> {
-        self.service = UserDefaultsFavoriteService()
+    public init() where Service == UserDefaultsFavoriteService<Item> {
+        self.service = UserDefaultsFavoriteService<Item>()
         self.favorites = getFavorites()
     }
 
@@ -27,14 +27,12 @@ public class FavoriteContext<Service: FavoriteService>: ObservableObject, Favori
     ///
     /// - Parameters:
     ///   - service: The service to use to manage favorites.
-    public init(service: Service) {
+    public init(service: Service) where Item == Service.Item {
         self.service = service
         self.favorites = getFavorites()
     }
 
     private let service: Service
-
-    public typealias Item = Service.Item
 
     /// The item IDs that are currently marked as favorites.
     @Published
