@@ -12,36 +12,24 @@ import SwiftUI
 struct HobbyCardContent: View {
 
     init(
-        item: Hobby,
-        isShuffling: Bool = false,
+        _ hobby: Hobby,
         inSheet: Bool = false
     ) {
-        self.item = item
-        self.isShuffling = isShuffling
+        self.hobby = hobby
         self.inSheet = inSheet
     }
 
-    private let item: Hobby
-    private let isShuffling: Bool
+    private let hobby: Hobby
     private let inSheet: Bool
-
     private let numberSize = 60.0
 
+    @Environment(\.colorScheme)
+    private var colorScheme
+
     var body: some View {
-        Card(
-            isFlipped: isShuffling,
-            front: front,
-            back: back
-        )
-    }
-}
-
-private extension HobbyCardContent {
-
-    func front() -> some View {
         ZStack(alignment: .topLeading) {
             RoundedRectangle(cornerRadius: 5)
-                .stroke(item.color, lineWidth: 1)
+                .stroke(hobby.color, lineWidth: 1)
                 .padding(numberSize/2)
                 .overlay(cardContent.padding(numberSize))
             Circle()
@@ -54,65 +42,38 @@ private extension HobbyCardContent {
         .cornerRadius(10)
         .environment(\.sizeCategory, .medium)
     }
-
-    func back() -> some View {
-        Image(.card)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .opacity(isShuffling ? 1 : 0)
-    }
 }
 
 private extension HobbyCardContent {
 
     var cardContent: some View {
         VStack(spacing: 30) {
-            imageHeader
+            HobbyCardImageHeader(hobby)
             title
             text
             Spacer()
             Divider()
             footnote
         }
-        .opacity(isShuffling ? 0.5 : 1)
-    }
-
-    var imageHeader: some View {
-        RoundedRectangle(cornerRadius: 5)
-            .fill(item.color.gradient)
-            .frame(height: 150)
-            .overlay(imageView)
-    }
-
-    var imageView: some View {
-        item.image
-            .font(.largeTitle)
-            .padding()
-            .background(imageBadge)
-    }
-
-    var imageBadge: some View {
-        Circle()
-            .fill(.regularMaterial)
     }
 
     var numberView: some View {
-        Text("\(item.number)")
+        Text("\(hobby.number)")
             .font(.title2)
             .fontWeight(.bold)
             .padding()
-            .background(Circle().fill(.white))
+            .background(Color.card(for: colorScheme))
     }
 
     var title: some View {
-        Text(item.name)
+        Text(hobby.name)
             .font(.title)
             .fontWeight(.bold)
             .minimumScaleFactor(0.8)
     }
 
     var text: some View {
-        Text(item.text)
+        Text(hobby.text)
             .fixedSize(horizontal: false, vertical: true)
     }
 
@@ -125,8 +86,5 @@ private extension HobbyCardContent {
 
 #Preview {
     
-    HobbyCardContent(
-        item: Hobby.demoCollection.previewItem,
-        isShuffling: false
-    )
+    HobbyCardContent(.preview)
 }

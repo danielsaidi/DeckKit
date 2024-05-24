@@ -1,5 +1,5 @@
 //
-//  DeckKitDemoApp.swift
+//  DemoApp.swift
 //  DeckKitDemo
 //
 //  Created by Daniel Saidi on 2020-09-22.
@@ -9,7 +9,7 @@
 import SwiftUI
 
 @main
-struct DeckKitDemoApp: App {
+struct DemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

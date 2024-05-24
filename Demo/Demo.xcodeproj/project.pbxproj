@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		656FA449251A62500079841C /* DeckKitDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA436251A624F0079841C /* DeckKitDemoApp.swift */; };
-		656FA44A251A62500079841C /* DeckKitDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA436251A624F0079841C /* DeckKitDemoApp.swift */; };
+		656FA449251A62500079841C /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA436251A624F0079841C /* DemoApp.swift */; };
+		656FA44A251A62500079841C /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA436251A624F0079841C /* DemoApp.swift */; };
 		656FA44B251A62500079841C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA437251A624F0079841C /* ContentView.swift */; };
 		656FA44C251A62500079841C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA437251A624F0079841C /* ContentView.swift */; };
 		656FA44D251A62500079841C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 656FA438251A62500079841C /* Assets.xcassets */; };
@@ -19,12 +19,14 @@
 		656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656FA461251A6A0C0079841C /* HobbyCard.swift */; };
 		A927503029360936006A2F56 /* HobbyCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927502F29360936006A2F56 /* HobbyCardContent.swift */; };
 		A927503129360936006A2F56 /* HobbyCardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A927502F29360936006A2F56 /* HobbyCardContent.swift */; };
+		A98B194F2C00688300690057 /* HobbyCardImageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B194E2C00688300690057 /* HobbyCardImageHeader.swift */; };
+		A98B19502C00688300690057 /* HobbyCardImageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B194E2C00688300690057 /* HobbyCardImageHeader.swift */; };
 		A9CD2C8C281C27A40044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8B281C27A40044E20E /* DeckKit */; };
 		A9CD2C8E281C27A80044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8D281C27A80044E20E /* DeckKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		656FA436251A624F0079841C /* DeckKitDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckKitDemoApp.swift; sourceTree = "<group>"; };
+		656FA436251A624F0079841C /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		656FA437251A624F0079841C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		656FA438251A62500079841C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		656FA43D251A62500079841C /* DeckKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeckKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,6 +37,7 @@
 		656FA45E251A696D0079841C /* Hobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hobby.swift; sourceTree = "<group>"; };
 		656FA461251A6A0C0079841C /* HobbyCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCard.swift; sourceTree = "<group>"; };
 		A927502F29360936006A2F56 /* HobbyCardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCardContent.swift; sourceTree = "<group>"; };
+		A98B194E2C00688300690057 /* HobbyCardImageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyCardImageHeader.swift; sourceTree = "<group>"; };
 		A9CD2C8A281C27960044E20E /* deckkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = deckkit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,10 +78,11 @@
 			children = (
 				656FA438251A62500079841C /* Assets.xcassets */,
 				656FA437251A624F0079841C /* ContentView.swift */,
-				656FA436251A624F0079841C /* DeckKitDemoApp.swift */,
+				656FA436251A624F0079841C /* DemoApp.swift */,
 				656FA45E251A696D0079841C /* Hobby.swift */,
 				656FA461251A6A0C0079841C /* HobbyCard.swift */,
 				A927502F29360936006A2F56 /* HobbyCardContent.swift */,
+				A98B194E2C00688300690057 /* HobbyCardImageHeader.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -233,8 +237,9 @@
 				A927503029360936006A2F56 /* HobbyCardContent.swift in Sources */,
 				656FA462251A6A0C0079841C /* HobbyCard.swift in Sources */,
 				656FA45F251A696D0079841C /* Hobby.swift in Sources */,
+				A98B194F2C00688300690057 /* HobbyCardImageHeader.swift in Sources */,
 				656FA44B251A62500079841C /* ContentView.swift in Sources */,
-				656FA449251A62500079841C /* DeckKitDemoApp.swift in Sources */,
+				656FA449251A62500079841C /* DemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,8 +250,9 @@
 				A927503129360936006A2F56 /* HobbyCardContent.swift in Sources */,
 				656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */,
 				656FA460251A69720079841C /* Hobby.swift in Sources */,
+				A98B19502C00688300690057 /* HobbyCardImageHeader.swift in Sources */,
 				656FA44C251A62500079841C /* ContentView.swift in Sources */,
-				656FA44A251A62500079841C /* DeckKitDemoApp.swift in Sources */,
+				656FA44A251A62500079841C /* DemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

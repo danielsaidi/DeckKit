@@ -6,37 +6,51 @@
 //  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
 //
 
+import DeckKit
 import SwiftUI
 
 struct HobbyCard: View {
     
     init(
-        item: Hobby,
+        _ hobby: Hobby,
         isShuffling: Bool
     ) {
-        self.item = item
+        self.hobby = hobby
         self.isShuffling = isShuffling
     }
     
-    private let item: Hobby
+    private let hobby: Hobby
     private let isShuffling: Bool
     
     var body: some View {
-        HobbyCardContent(
-            item: item,
-            isShuffling: isShuffling
+        Card(
+            isFlipped: isShuffling,
+            front: front,
+            back: back
         )
-        .cornerRadius(10)
+        .aspectRatio(0.65, contentMode: .fit)
+    }
+}
+
+private extension HobbyCard {
+
+    func front() -> some View {
+        HobbyCardContent(hobby)
+    }
+
+    func back() -> some View {
+        Image(.card)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
     }
 }
 
 #Preview {
-    
-    HobbyCard(
-        item: Hobby.demoCollection.previewItem,
-        isShuffling: false
-    )
-    .padding()
-    .shadow(radius: 0.3)
-    .background(Color.blue.ignoresSafeArea())
+    ZStack {
+        Color.gray.ignoresSafeArea()
+
+        HobbyCard(.preview, isShuffling: false)
+            .shadow(radius: 3, y: 2)
+            .padding()
+    }
 }

@@ -44,7 +44,7 @@ public struct Card<Front: View, Back: View>: View {
 
     public var body: some View {
         front()
-            .background(Color.primary.colorInvert().ignoresSafeArea())
+            .background(Color.card(for: colorScheme))
             .overlay { back().opacity(isFlipped ? 1 : 0) }
             .rotation3DEffect(isFlipped ? .degrees(180) : .zero, axis: (x: 0, y: 1, z: 0))
             .clipShape(.rect(cornerRadius: cornerRadius))

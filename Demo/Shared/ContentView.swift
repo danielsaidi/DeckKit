@@ -43,27 +43,35 @@ struct ContentView: View {
             #if os(macOS)
             EmptyView()
             #endif
-            VStack(spacing: 50) {
-                deckView.withPlatformPadding()
-                shuffleButton
-            }
-            .sheet(item: $selectedHobby) {
-                HobbyCardContent(
-                    item: $0,
-                    inSheet: true
-                )
+            ZStack {
+                background
+                deckView
+                .padding()
             }
             .navigationTitle("DeckKit")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
-            .padding()
-            .background(background)
+            .safeAreaInset(edge: .bottom) {
+                VStack {
+                    shuffleButton
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(.thinMaterial)
+            }
+            .sheet(item: $selectedHobby) {
+                HobbyCardContent($0, inSheet: true)
+            }
         }
     }
 }
 
 private extension ContentView {
+
+    var background: some View {
+        Color.gray.ignoresSafeArea()
+    }
 
     var deckView: some View {
         DeckView(
@@ -82,16 +90,7 @@ private extension ContentView {
     }
     
     func deckViewCard(for hobby: Hobby) -> some View {
-        HobbyCard(
-            item: hobby,
-            isShuffling: shuffleAnimation.isShuffling
-        )
-    }
-
-    var background: some View {
-        Color.gray
-            .opacity(0.3)
-            .edgesIgnoringSafeArea(.all)
+        HobbyCard(hobby, isShuffling: shuffleAnimation.isShuffling)
     }
 
     var shuffleButton: some View {
@@ -99,17 +98,6 @@ private extension ContentView {
             shuffleAnimation.shuffle($items, times: 20)
         }
         .buttonStyle(.borderedProminent)
-    }
-}
-
-extension View {
-    
-    func withPlatformPadding() -> some View {
-        #if os(macOS)
-        return self.padding(.vertical, 100)
-        #else
-        return self
-        #endif
     }
 }
 

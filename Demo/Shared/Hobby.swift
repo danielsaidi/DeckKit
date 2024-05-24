@@ -49,9 +49,10 @@ extension Hobby {
     ]
 }
 
-extension Array where Element == Hobby {
-    
-    var previewItem: Hobby {
-        randomElement() ?? self[0]
+extension Hobby {
+
+    static var preview: Self {
+        let list = Hobby.demoCollection
+        return list.randomElement() ?? list[0]
     }
 }
