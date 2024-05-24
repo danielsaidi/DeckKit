@@ -32,7 +32,7 @@ public struct DeckViewConfiguration: Codable, Equatable {
     ///   - horizontalDragThreshold: The number of points an item must be panned to be moved to the bottom of the deck, by default `100`.
     ///   - verticalDragThreshold: The number of points an item must be panned to be moved to the bottom of the deck, by default `250`.
     public init(
-        direction: SwipeDirection = .down,
+        direction: Direction = .down,
         itemDisplayCount: Int = 10,
         alwaysShowLastItem: Bool = true,
         scaleOffset: Double = 0.02,
@@ -52,13 +52,9 @@ public struct DeckViewConfiguration: Codable, Equatable {
         self.horizontalDragThreshold = horizontalDragThreshold
         self.verticalDragThreshold = verticalDragThreshold
     }
-    
-    public enum SwipeDirection: String, Codable, Sendable {
-        case up, down, left, right
-    }
 
     /// The visual direction of the stack.
-    public var direction: SwipeDirection
+    public var direction: Direction
 
     /// The max number of items to display.
     public var itemDisplayCount: Int
@@ -90,10 +86,8 @@ public extension DeckViewConfiguration {
 
 public extension DeckViewConfiguration {
 
-    /// The visual direction of a deck, where ``up`` makes a
-    /// deck grow upwards, and ``down`` downwards.
+    /// This enum defines the visual direction of a deck.
     enum Direction: String, Codable {
-
         case up, down
     }
 }
