@@ -12,8 +12,6 @@ import SwiftUI
 
 struct Hobby: DeckItem {
     
-    let id = UUID().uuidString
-
     var number: Int
     var name: String
     var color: Color
@@ -24,6 +22,8 @@ struct Hobby: DeckItem {
 }
 
 extension Hobby {
+
+    var id: String { name }
 
     static var demoCollection: [Hobby] = [
         Hobby(number: 01, name: "Drawing", color: .cyan, text: "Perfect for when you have a lot of paper.", imageName: "pencil"),

@@ -20,6 +20,9 @@ struct ContentView: View {
     @State
     var showOnlyFavorites = false
 
+    @State
+    var usePageView = false
+
     @StateObject
     var favoriteContext = FavoriteContext<Hobby, UserDefaultsFavoriteService>()
 
@@ -34,7 +37,6 @@ struct ContentView: View {
             ZStack {
                 background
                 deckView
-                    .padding()
             }
             .navigationTitle("DeckKit")
             #if os(iOS)
@@ -48,9 +50,13 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     DemoToolbar(
-                        isShowOnlyFavoritesActive: showOnlyFavorites,
+                        hasFavorites: favoriteContext.hasFavorites,
+                        hasMultipleCards: hobbies.count > 1,
+                        isFavoritesActive: showOnlyFavorites,
+                        isPageViewActive: usePageView,
                         isShuffleActive: isShuffling,
                         favoritesAction: toggleShowOnlyFavorites,
+                        pageViewAction: toggleUsePageView,
                         shuffleAction: shuffleDeck
                     )
                 }
@@ -65,29 +71,38 @@ private extension ContentView {
         Color.background.ignoresSafeArea()
     }
 
-    var deckView: some View {
-        DeckView(
-            $hobbies,
-            shuffleAnimation: shuffleAnimation,
-            swipeLeftAction: { hobby in print("\(hobby.id) was swiped left") },
-            swipeRightAction: { selectedHobby = $0 },
-            swipeUpAction: { hobby in print("\(hobby.id) was swiped up") },
-            swipeDownAction: { hobby in print("\(hobby.id) was swiped down") },
-            itemView: deckViewCard
-        )
-        .deckViewConfiguration(.init(
-            direction: .down,
-            itemDisplayCount: 5
-        ))
-    }
-
-    func deckViewCard(for hobby: Hobby) -> some View {
+    func card(for hobby: Hobby) -> some View {
         HobbyCard(
             hobby,
             isFavorite: favoriteContext.isFavorite(hobby),
             isFlipped: isShuffling,
             favoriteAction: favoriteContext.toggleIsFavorite
         )
+    }
+
+    @ViewBuilder
+    var deckView: some View {
+        if usePageView {
+            DeckPageView($hobbies) { hobby in
+                card(for: hobby)
+                    .padding()
+            }
+        } else {
+            DeckView(
+                $hobbies,
+                shuffleAnimation: shuffleAnimation,
+                swipeLeftAction: { print("\($0.id) was swiped left") },
+                swipeRightAction: { selectedHobby = $0 },
+                swipeUpAction: { print("\($0.id) was swiped up") },
+                swipeDownAction: { print("\($0.id) was swiped down") },
+                itemView: card
+            )
+            .deckViewConfiguration(.init(
+                direction: .down,
+                itemDisplayCount: 5
+            ))
+            .padding()
+        }
     }
 }
 
@@ -106,6 +121,10 @@ private extension ContentView {
         withAnimation {
             favoriteContext.toggleIsFavorite(for: hobby)
         }
+    }
+
+    func toggleUsePageView() {
+        usePageView.toggle()
     }
 
     func toggleShowOnlyFavorites() {

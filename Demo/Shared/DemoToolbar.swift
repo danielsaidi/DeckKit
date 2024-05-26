@@ -9,15 +9,20 @@ import SwiftUI
 
 struct DemoToolbar: View {
 
-    var isShowOnlyFavoritesActive: Bool
+    var hasFavorites: Bool
+    var hasMultipleCards: Bool
+    var isFavoritesActive: Bool
+    var isPageViewActive: Bool
     var isShuffleActive: Bool
     var favoritesAction: () -> Void
+    var pageViewAction: () -> Void
     var shuffleAction: () -> Void
 
     var body: some View {
         HStack {
-            toolbarShuffleButton
-            toolbarFavoriteButton
+            shuffleButton
+            pageViewButton
+            favoriteButton
         }
         .padding(.vertical, 5)
         .padding(.horizontal, 10)
@@ -29,23 +34,34 @@ struct DemoToolbar: View {
 
 private extension DemoToolbar {
 
-    var toolbarFavoriteButton: some View {
+    var favoriteButton: some View {
         toolbarButton(
             "Toggle Favorite",
             .favorite,
             action: favoritesAction
         )
-        .symbolVariant(isShowOnlyFavoritesActive ? .fill : .none)
-        .tint(isShowOnlyFavoritesActive ? .red : .accentColor)
+        .disabled(!hasFavorites)
+        .symbolVariant(isFavoritesActive ? .fill : .none)
+        .tint(isFavoritesActive ? .red : .accentColor)
     }
 
-    var toolbarShuffleButton: some View {
+    var shuffleButton: some View {
         toolbarButton(
             "Shuffle",
             .shuffle,
             action: shuffleAction
         )
+        .disabled(!hasMultipleCards)
         .symbolVariant(isShuffleActive ? .fill : .none)
+    }
+
+    var pageViewButton: some View {
+        toolbarButton(
+            "Toggle page view",
+            .pageView,
+            action: pageViewAction
+        )
+        .symbolVariant(isPageViewActive ? .fill : .none)
     }
 
     func toolbarButton(
@@ -64,9 +80,13 @@ private extension DemoToolbar {
 
 #Preview {
     DemoToolbar(
-        isShowOnlyFavoritesActive: true,
-        isShuffleActive: false,
+        hasFavorites: true,
+        hasMultipleCards: true,
+        isFavoritesActive: true,
+        isPageViewActive: true,
+        isShuffleActive: true,
         favoritesAction: {},
+        pageViewAction: {},
         shuffleAction: {}
     )
 }
