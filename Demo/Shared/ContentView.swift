@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  DeckKitDemo
+//  Demo
 //
 //  Created by Daniel Saidi on 2020-09-22.
 //  Copyright © 2020 Daniel Saidi. All rights reserved.
@@ -34,29 +34,25 @@ struct ContentView: View {
             ZStack {
                 background
                 deckView
-                .padding()
+                    .padding()
             }
             .navigationTitle("DeckKit")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
-            .onChange(of: showOnlyFavorites) {
-                if $0 {
-                    hobbies = Hobby.demoCollection.filter { favoriteContext.isFavorite($0) }
-                } else {
-                    hobbies = Hobby.demoCollection
-                }
-            }
+            .onChange(of: showOnlyFavorites, perform: updateHobbies)
             .onReceiveShake(action: shuffleDeck)
             .sheet(item: $selectedHobby) {
                 HobbyCardContent($0, inSheet: true)
             }
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    shuffleButton
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    favoriteButton
+                ToolbarItem(placement: .bottomBar) {
+                    DemoToolbar(
+                        isShowOnlyFavoritesActive: showOnlyFavorites,
+                        isShuffleActive: isShuffling,
+                        favoritesAction: toggleShowOnlyFavorites,
+                        shuffleAction: shuffleDeck
+                    )
                 }
             }
         }
@@ -85,36 +81,13 @@ private extension ContentView {
         ))
     }
 
-    var favoriteButton: some View {
-        toolbarButton("Toggle Favorite", .favorite, action: toggleShowOnlyFavorites)
-            .symbolVariant(showOnlyFavorites ? .fill : .none)
-    }
-
-    var shuffleButton: some View {
-        toolbarButton("Shuffle", .shuffle, action: shuffleDeck)
-            .symbolVariant(isShuffling ? .fill : .none)
-    }
-
     func deckViewCard(for hobby: Hobby) -> some View {
         HobbyCard(
             hobby,
-            isShuffling: isShuffling,
             isFavorite: favoriteContext.isFavorite(hobby),
+            isFlipped: isShuffling,
             favoriteAction: favoriteContext.toggleIsFavorite
         )
-    }
-
-    func toolbarButton(
-        _ title: String,
-        _ icon: Image,
-        action: @escaping () -> Void
-    ) -> some View {
-        Button(action: action) {
-            Label(
-                title: { Text(title) },
-                icon: { icon }
-            )
-        }
     }
 }
 
@@ -125,21 +98,29 @@ private extension ContentView {
     }
 
     func shuffleDeck() {
-        shuffleAnimation.shuffle($hobbies, times: 20)
+        shuffleAnimation.shuffle($hobbies, times: 5)
     }
 
     func toggleIsFavorite() {
         guard let hobby = hobbies.first else { return }
-        favoriteContext.toggleIsFavorite(for: hobby)
+        withAnimation {
+            favoriteContext.toggleIsFavorite(for: hobby)
+        }
     }
 
     func toggleShowOnlyFavorites() {
         showOnlyFavorites.toggle()
     }
+
+    func updateHobbies(showOnlyFavorites: Bool) {
+        if showOnlyFavorites {
+            hobbies = Hobby.demoCollection.filter { favoriteContext.isFavorite($0) }
+        } else {
+            hobbies = Hobby.demoCollection
+        }
+    }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

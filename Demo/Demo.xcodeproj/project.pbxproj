@@ -27,6 +27,8 @@
 		A98B19562C00756800690057 /* Color+Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B19542C00756800690057 /* Color+Demo.swift */; };
 		A98B19582C0077EF00690057 /* View+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B19572C0077EF00690057 /* View+Shake.swift */; };
 		A98B19592C0077EF00690057 /* View+Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B19572C0077EF00690057 /* View+Shake.swift */; };
+		A98B195D2C032E0800690057 /* DemoToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B195C2C032E0800690057 /* DemoToolbar.swift */; };
+		A98B195E2C032E0800690057 /* DemoToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98B195C2C032E0800690057 /* DemoToolbar.swift */; };
 		A9CD2C8C281C27A40044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8B281C27A40044E20E /* DeckKit */; };
 		A9CD2C8E281C27A80044E20E /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CD2C8D281C27A80044E20E /* DeckKit */; };
 /* End PBXBuildFile section */
@@ -47,6 +49,7 @@
 		A98B19512C00750800690057 /* Image+Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Demo.swift"; sourceTree = "<group>"; };
 		A98B19542C00756800690057 /* Color+Demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Demo.swift"; sourceTree = "<group>"; };
 		A98B19572C0077EF00690057 /* View+Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Shake.swift"; sourceTree = "<group>"; };
+		A98B195C2C032E0800690057 /* DemoToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoToolbar.swift; sourceTree = "<group>"; };
 		A9CD2C8A281C27960044E20E /* deckkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = deckkit; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +92,7 @@
 				A98B195B2C0077FF00690057 /* Extensions */,
 				656FA437251A624F0079841C /* ContentView.swift */,
 				656FA436251A624F0079841C /* DemoApp.swift */,
+				A98B195C2C032E0800690057 /* DemoToolbar.swift */,
 				656FA45E251A696D0079841C /* Hobby.swift */,
 				656FA461251A6A0C0079841C /* HobbyCard.swift */,
 				A927502F29360936006A2F56 /* HobbyCardContent.swift */,
@@ -256,6 +260,7 @@
 			files = (
 				A98B19522C00750800690057 /* Image+Demo.swift in Sources */,
 				A927503029360936006A2F56 /* HobbyCardContent.swift in Sources */,
+				A98B195D2C032E0800690057 /* DemoToolbar.swift in Sources */,
 				A98B19552C00756800690057 /* Color+Demo.swift in Sources */,
 				656FA462251A6A0C0079841C /* HobbyCard.swift in Sources */,
 				656FA45F251A696D0079841C /* Hobby.swift in Sources */,
@@ -272,6 +277,7 @@
 			files = (
 				A98B19532C00750800690057 /* Image+Demo.swift in Sources */,
 				A927503129360936006A2F56 /* HobbyCardContent.swift in Sources */,
+				A98B195E2C032E0800690057 /* DemoToolbar.swift in Sources */,
 				A98B19562C00756800690057 /* Color+Demo.swift in Sources */,
 				656FA463251A6A0C0079841C /* HobbyCard.swift in Sources */,
 				656FA460251A69720079841C /* Hobby.swift in Sources */,

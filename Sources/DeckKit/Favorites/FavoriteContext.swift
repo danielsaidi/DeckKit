@@ -45,6 +45,10 @@ public class FavoriteContext<Item: Identifiable, Service: FavoriteService>: Obse
 
 public extension FavoriteContext {
 
+    var hasFavorites: Bool {
+        !favorites.isEmpty
+    }
+
     func getFavorites() -> [Item.ID] {
         service.getFavorites()
     }

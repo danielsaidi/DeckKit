@@ -1,6 +1,6 @@
 //
 //  HobbyCard.swift
-//  DeckKitDemo
+//  Demo
 //
 //  Created by Daniel Saidi on 2020-09-22.
 //  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
@@ -13,27 +13,28 @@ struct HobbyCard: View {
     
     init(
         _ hobby: Hobby,
-        isShuffling: Bool,
         isFavorite: Bool = false,
+        isFlipped: Bool = false,
         favoriteAction: ((Hobby) -> Void)? = nil
     ) {
         self.hobby = hobby
-        self.isShuffling = isShuffling
         self.isFavorite = isFavorite
+        self.isFlipped = isFlipped
         self.favoriteAction = favoriteAction ?? { _ in }
     }
     
     private let hobby: Hobby
-    private let isShuffling: Bool
     private let isFavorite: Bool
+    private let isFlipped: Bool
     private let favoriteAction: (Hobby) -> Void
 
     var body: some View {
         Card(
-            isFlipped: isShuffling,
+            isFlipped: isFlipped,
             front: front,
             back: back
         )
+        .aspectRatio(0.65, contentMode: .fit)
     }
 }
 
@@ -45,13 +46,11 @@ private extension HobbyCard {
             isFavorite: isFavorite,
             favoriteAction: favoriteAction
         )
-        .aspectRatio(0.65, contentMode: .fit)
     }
 
     func back() -> some View {
         Color.white
             .overlay(backImage)
-            .aspectRatio(0.65, contentMode: .fit)
     }
 
     var backImage: some View {
@@ -62,9 +61,24 @@ private extension HobbyCard {
 }
 
 #Preview {
-    ZStack {
-        Color.background.ignoresSafeArea()
-        HobbyCard(.preview, isShuffling: false)
-            .padding()
+
+    struct Preview: View {
+
+        @State
+        var isFlipped = false
+
+        var body: some View {
+            ZStack {
+                Color.background.ignoresSafeArea()
+                HobbyCard(
+                    .preview,
+                    isFavorite: true,
+                    isFlipped: false
+                )
+                .padding()
+            }
+        }
     }
+
+    return Preview()
 }
