@@ -70,7 +70,7 @@ struct MyView: View {
 }
 ```
 
-For more information, please see the [getting started guide][Getting-Started].
+For more information, see the [getting started guide][Getting-Started].
 
 
 
@@ -120,6 +120,6 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 [Sponsors]: https://github.com/sponsors/danielsaidi
 [OpenSource]: https://www.danielsaidi.com/opensource
 
-[Documentation]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/
+[Documentation]: https://danielsaidi.github.io/DeckKit/
 [Getting-Started]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/getting-started
 [License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
