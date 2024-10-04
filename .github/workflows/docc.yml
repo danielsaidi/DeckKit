@@ -8,9 +8,6 @@ on:
   push:
     branches: ["master"]
 
-env:
-  SCHEME: DeckKit
-
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -39,18 +36,7 @@ jobs:
         with:
           xcode-version: '16.0'
       - name: Build DocC
-        run: |
-          swift package resolve;
-          
-          xcodebuild docbuild -scheme DeckKit -derivedDataPath /tmp/docbuild -destination 'generic/platform=iOS';
-          
-          $(xcrun --find docc) process-archive \
-            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/DeckKit.doccarchive \
-            --output-path .build/docs \
-            --hosting-base-path 'DeckKit';
-            
-          echo "<script>window.location.href += \"/documentation/deckkit\"</script>" > .build/docs/index.html;
-          
+        run: bash scripts/docc.sh ${{ github.event.repository.name }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

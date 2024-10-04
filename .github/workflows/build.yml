@@ -5,12 +5,9 @@ name: Build Runner
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
   pull_request:
-    branches: ["master"]
-    
-env:
-  SCHEME: DeckKit
+    branches: ["main"]
 
 jobs:
   build:
@@ -21,6 +18,6 @@ jobs:
         with:
           xcode-version: '16.0'
       - name: Build all platforms
-        run: bash scripts/build.sh $SCHEME
+        run: bash scripts/build.sh ${{ github.event.repository.name }}
       - name: Test iOS
-        run: bash scripts/test.sh $SCHEME
+        run: bash scripts/test.sh ${{ github.event.repository.name }}

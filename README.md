@@ -4,7 +4,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
-    <img src="https://img.shields.io/badge/Swift-5.9-orange.svg" alt="Swift 5.9" />
+    <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
     <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
@@ -12,18 +12,17 @@
 </p>
 
 
-
 ## About DeckKit
 
-DeckKit is a Swift SDK that helps you build deck-based apps in SwiftUI.
+DeckKit is a SwiftUI SDK that helps you build deck-based apps.
 
-DeckKit has a `DeckView` that can render any item collection, with support for swipe gestures, edge swipe detection, shuffling, etc. The result can look like this or completely different:
+DeckKit has a `DeckView` component that can render any ``DeckItem`` collection, with support for swipe gestures, edge swipes, shuffling, etc. The result can look like this, or completely different:
 
 <p align="center" style="border-radius: 10px">
     <img src="Resources/Demo.gif" width=300 alt="Demo video" />
 </p>
 
-DeckKit has other views as well, and can be customized to great extent. You can change colors, fonts, etc. and use completely custom views. It also has tools to manage favorite items.
+DeckKit can be customized to great extent. You can change colors, fonts, etc. and use completely custom views. It also has tools to manage favorites.
 
 
 
@@ -39,7 +38,7 @@ https://github.com/danielsaidi/DeckKit.git
 
 ## Getting started
 
-With DeckKit, you can create a `Deck` of any model that implement the `DeckItem` protocol:
+With DeckKit, you can create a `Deck` of any model that conform to `DeckItem`:
 
 ```swift
 struct Hobby: DeckItem {
@@ -70,19 +69,19 @@ struct MyView: View {
 }
 ```
 
-For more information, see the [getting started guide][Getting-Started].
+See the online [getting started guide][Getting-Started] for more information.
 
 
 
 ## Documentation
 
-The [online documentation][Documentation] has more information, articles, code examples, etc. 
+The online [documentation][Documentation] has more information, articles, code examples, etc.
 
 
 
 ## Demo Application
 
-The demo app lets you explore the library with iOS, macOS, and visionOS. To try it out, just open and run the `Demo` project.
+The `Demo` folder has an app that lets you test the library on iOS, macOS, and visionOS.
 
 
 

@@ -1,22 +1,22 @@
 #!/bin/bash
 
-# Build a <TARGET> for all supported platforms.
-
-# USAGE: bash scripts/build.sh <TARGET>
+# Documentation:
+# This script builds a <TARGET> for all supported platforms.
 
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Create local argument variables.
-TARGET=$1
-
-# Check if target is provided
+# Verify that all required arguments are provided
 if [ $# -eq 0 ]; then
-    echo "Error: No target specified"
+    echo "Error: This script requires exactly one argument"
+    echo "Usage: $0 <TARGET>"
     exit 1
 fi
 
-# Use the script folder to refer to the platform script.
+# Create local argument variables.
+TARGET=$1
+
+# Use the script folder to refer to other scripts.
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 SCRIPT="$FOLDER/build_platform.sh"
 

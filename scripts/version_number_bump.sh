@@ -1,15 +1,25 @@
 #!/bin/bash
 
-# Bump the project version number.
+# Documentation:
+# This script bumps the project version number.
 
-# USAGE: bash scripts/version_bump.sh
+# Exit immediately if a command exits with a non-zero status
+set -e
 
-# Use the script folder to refer to the platform script.
+# Use the script folder to refer to other scripts.
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-SCRIPT="$FOLDER/version.sh"
+SCRIPT="$FOLDER/version_number.sh"
 
 # Get the latest version
 VERSION=$($SCRIPT)
+
+if [ $? -ne 0 ]; then
+    echo "Failed to get the latest version"
+    exit 1
+fi
+
+# Print the current version
+echo "The current version is: $VERSION"
 
 # Function to validate semver format, including optional -rc.<INT> suffix
 validate_semver() {
@@ -19,13 +29,6 @@ validate_semver() {
         return 1
     fi
 }
-
-if [ $? -ne 0 ]; then
-    echo "Failed to get the latest version"
-    exit 1
-fi
-
-echo "The current version is: $VERSION"
 
 # Prompt user for new version
 while true; do
@@ -39,6 +42,6 @@ while true; do
     fi
 done
 
+git push -u origin HEAD
 git tag $NEW_VERSION
 git push --tags
-git push -u origin HEAD

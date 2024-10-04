@@ -10,6 +10,13 @@ DeckKit tries to honor semantic versioning:
 These release notes only cover the current major version. 
 
 
+
+## 1.4
+
+This version makes the SDK use Swift 6.
+
+
+
 ## 1.3
 
 This version has breaking changes for the favorite context/service setup, to make favorites easier to use.

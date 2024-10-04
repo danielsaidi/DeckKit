@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# Create a new project version for the provided <BUILD_TARGET> and <GIT_BRANCH>.
-
-# USAGE: bash scripts/version_create.sh <BUILD_TARGET> and <GIT_BRANCH>
+# Documentation:
+# This script creates a new project version for the provided <BUILD_TARGET> and <GIT_BRANCH>.
 
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Check if both arguments are provided
+# Verify that all required arguments are provided
 if [ $# -ne 2 ]; then
     echo "Error: This script requires exactly two arguments"
     echo "Usage: $0 <BUILD_TARGET> <GIT_BRANCH>"
@@ -20,11 +19,9 @@ GIT_BRANCH="$2"
 
 # Use the script folder to refer to the platform script.
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-VALIDATE_GIT="$FOLDER/validate_git.sh"
-VALIDATE_PROJECT="$FOLDER/validate_project.sh"
-BUILD="$FOLDER/build.sh"
-TEST="$FOLDER/test.sh"
-VERSION_BUMP="$FOLDER/version_bump.sh"
+VALIDATE_GIT="$FOLDER/version_validate_git.sh"
+VALIDATE_PROJECT="$FOLDER/version_validate_project.sh"
+VERSION_BUMP="$FOLDER/version_number_bump.sh"
 
 # A function that run a certain script and checks for errors
 run_script() {
@@ -51,13 +48,7 @@ echo "Validating Git..."
 run_script "$VALIDATE_GIT" "$GIT_BRANCH"
 
 echo "Validating Project..."
-run_script "$VALIDATE_PROJECT"
-
-echo "Building..."
-run_script "$BUILD" "$BUILD_TARGET"
-
-echo "Testing..."
-run_script "$TEST" "$BUILD_TARGET"
+run_script "$VALIDATE_PROJECT" "$BUILD_TARGET"
 
 echo "Bumping version..."
 run_script "$VERSION_BUMP"

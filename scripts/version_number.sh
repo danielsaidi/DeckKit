@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Get the latest project version number from git.
+# Documentation:
+# This script returns the latest semver project version.
 
-# USAGE: bash scripts/version.sh
+# Exit immediately if a command exits with a non-zero status
+set -e
 
 # Check if the current directory is a Git repository
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then

@@ -1,40 +1,40 @@
 #!/bin/bash
 
-# Test a <TARGET> for all supported platforms.
-
-# USAGE: bash scripts/test.sh <TARGET>
+# Documentation:
+# This script tests a <TARGET> for all supported platforms.
 
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-# Create local argument variables.
-TARGET=$1
-
-# Check if target is provided
+# Verify that all required arguments are provided
 if [ $# -eq 0 ]; then
-    echo "Error: No target specified"
+    echo "Error: This script requires exactly one argument"
+    echo "Usage: $0 <TARGET>"
     exit 1
 fi
 
-# Use the script folder to refer to the platform script.
+# Create local argument variables.
+TARGET=$1
+
+# Use the script folder to refer to other scripts.
 FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 SCRIPT="$FOLDER/test_platform.sh"
 
 # Make the script executable
 chmod +x $SCRIPT
 
-# A function that builds a specific platform
+# A function that tests a specific platform
 test_platform() {
     local platform=$1
-    echo "Building for $platform..."
+    echo "Testing for $platform..."
     if ! bash $SCRIPT $TARGET $platform; then
-        echo "Failed to build $platform"
+        echo "Failed to test $platform"
         return 1
     fi
-    echo "Successfully built $platform"
+    echo "Successfully tested $platform"
 }
 
-# Array of platforms to build
+# Array of platforms to test
 platforms=("platform=iOS_Simulator,name=iPhone_16")
 
 # Loop through platforms and build
