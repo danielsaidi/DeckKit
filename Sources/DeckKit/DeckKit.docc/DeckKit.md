@@ -1,6 +1,6 @@
 # ``DeckKit``
 
-DeckKit is a Swift SDK that helps you build deck-based apps in SwiftUI.
+DeckKit is a SwiftUI SDK that helps you build deck-based apps.
 
 
 
