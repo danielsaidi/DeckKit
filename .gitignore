@@ -4,9 +4,3 @@
 /Packages
 .swiftpm/
 *.xcuserstate
-
-# Documentation
-Docs
-documentation
-downloads
-videos
