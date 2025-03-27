@@ -4,62 +4,57 @@ This article explains how to get started with DeckKit.
 
 
 
-## How to create a deck of items
+## Creating a deck of items
 
-In DeckKit, a ``DeckItem`` is just a typealias for `Identifiable & Equatable`.
-
-For instance, consider this `Hobby` type:
+DeckKit can be used with any item type that implements the `Identifiable` protocol, like this `Hobby` type:
 
 ```swift
 struct Hobby: DeckItem {
-    
     var name: String
     var text: String
-
     var id: String { name }
 }
+
+let deck: [Hobby] = [
+    .init(name: "Music", text: "I love music!"), 
+    .init(name: "Movies", text: "...and movies!"), 
+    .init(name: "Coding", text: "...and coding!")
+]
 ```
 
-You can easily define a deck of hobbies like this:
-
-```swift
-let music = Hobby(name: "Music", text: "I love music!"),
-let movies = Hobby(name: "Movies", text: "...and movies!"),
-let coding = Hobby(name: "Coding", text: "...and coding!")
-let deck: [Hobby] = [music, movies, coding]
-```
-
-Once you have a collection of items, you can use any of the built-in functions to modify it, such as ``Swift/Array/moveFirstItemToBack()``, ``Swift/Array/moveLastItemToFront()``, etc.
+DeckKit defines several ``Swift/Array`` extensions, to let you modify decks, e.g. ``Swift/Array/moveFirstItemToBack()``, ``Swift/Array/moveLastItemToFront()``.
 
 
 
-## How to display a deck of items
+## Displaying a deck of items
 
-You can render a ``DeckItem`` collection with in any of the built-in views, e.g. in a ``DeckView`` or a ``DeckPageView``:
+You can render any list of items with in either of the view components that DeckKit provides, e.g. ``DeckView`` or ``DeckPageView``.
 
 @TabNavigator {
     
     @Tab("DeckView") {
-        ``DeckView`` renders a ``DeckItem`` collection as a deck of cards, where the user can swipe the top card in any direction to move it to the bottom of the deck and trigger optional actions in each direction:
+        ``DeckView`` renders items as a deck of cards, where the user can swipe away the top card in any direction to move it to the bottom of the deck. The deck view can also trigger optional actions for each swipe direction:
 
         ```swift
         struct MyView: View {
 
             var body: some View {
-                DeckView($hobbies) { item in
+                DeckView(
+                    $hobbies,
+                    swipeLeftAction: { .. },
+                    swipeRightAction: { .. }
+                ) { item in
                     // Return a card view for the provided item
                 }
                 .padding()
             }
         }
         ```
-
-        You can use a ``Card`` view as content view, to easily support a front and back faced card with flip support, or use any custom card view. You can also use the ``SwiftUI/View/deckViewConfiguration(_:)`` view modifier to configure this view.
     }
     
     @Tab("DeckPageView") {
         
-        ``DeckPageView`` renders a ``DeckItem`` collection as a horizontally scrolling page view:
+        ``DeckPageView`` renders items as a horizontally scrolling list of pages:
         
         ```swift
         struct MyView: View {
@@ -72,17 +67,15 @@ You can render a ``DeckItem`` collection with in any of the built-in views, e.g.
             }
         }
         ```
-        
-        You can use a ``Card`` view as content view, to easily support a front and back faced card with flip support, or use any custom card view.
     }
 }
 
+You can use a ``Card`` view as content view, to easily support a front and back faced card with flip support, or use any custom card view.
 
-## 👑 How to manage favorites
 
-DeckKit has functionality for handling the favorite state of any `Identifiable` type.
+## Favorites
 
-To track favorite state, you can just create a ``FavoriteContext`` instance as a :
+DeckKit has functionality for handling the favorite state of any `Identifiable` type, using the observable ``FavoriteContext`` type:
 
 ```swift
 struct MyView {
