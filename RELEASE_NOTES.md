@@ -22,6 +22,7 @@ This version deprecates the `DeckItem` protocol and only uses `Identifiable`.
 ### 🗑️ Deprecations
 
 * The `Card` view is renamed to `CardView`.
+* The `Color.card` color has been deprecated.
 * The `DeckItem` protocol has been deprecated.
 * The `Equatable` extensions have been deprecated.
 

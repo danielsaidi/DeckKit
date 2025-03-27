@@ -292,7 +292,7 @@ private func item(
                     swipeUpAction: { _ in print("Up") },
                     swipeDownAction: { _ in print("Down") },
                     itemView: { item in
-                        Card(
+                        CardView(
                             isFlipped: shuffle.isShuffling,
                             front: { PreviewCard(item: item) },
                             back: { Color.blue }

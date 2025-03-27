@@ -36,30 +36,11 @@ public struct CardView<Front: View, Back: View>: View {
     private var colorScheme
 
     public var body: some View {
-        frontView
-            .background(background)
-            .overlay(backView)
+        front()
+            .overlay(back().opacity(isFlipped ? 1 : 0))
             .padding(100)
             .rotation3DEffect(isFlipped ? .degrees(180) : .zero, axis: (x: 0, y: 1, z: 0))
             .padding(-100)
-    }
-}
-
-private extension CardView {
-
-    var background: some View {
-        Color.card(for: colorScheme)
-    }
-
-    var frontView: some View {
-        front()
-    }
-
-    var backView: some View {
-        front()
-            .opacity(0)
-            .overlay(back().opacity(isFlipped ? 1 : 0))
-            .clipped()
     }
 }
 
@@ -74,8 +55,8 @@ private extension CardView {
             VStack {
                 CardView(
                     isFlipped: isFlipped,
-                    front: { Color.blue.clipShape(.rect(cornerRadius: 20)) },
-                    back: { Color.red.clipShape(.rect(cornerRadius: 20)) }
+                    front: { Color.blue.withCornerRadius() },
+                    back: { Color.red.withCornerRadius() }
                 )
                 .aspectRatio(0.65, contentMode: .fit)
 
@@ -90,4 +71,11 @@ private extension CardView {
     }
 
     return Preview()
+}
+
+private extension View {
+    
+    func withCornerRadius() -> some View {
+        self.clipShape(.rect(cornerRadius: 20))
+    }
 }
