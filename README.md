@@ -1,22 +1,19 @@
 <p align="center">
-    <img src="Resources/Logo_Rounded.png" alt="DeckKit Logo" title="DeckKit" />
+    <img src="Resources/Icon.png" alt="DeckKit Logo" width="350" />
 </p>
 
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
+    <a href="https://danielsaidi.github.io/DeckKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
-    <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
-    <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
 </p>
 
 
-## About DeckKit
+# DeckKit
 
-DeckKit is a SwiftUI SDK that helps you build deck-based apps.
-
-DeckKit has a `DeckView` component that can render any ``DeckItem`` collection, with support for swipe gestures, edge swipes, shuffling, etc. The result can look like this, or completely different:
+DeckKit is a SwiftUI SDK that helps you build deck-based apps. It has a `DeckView` that can render a deck of items with support for swipe gestures, edge swipes, shuffling, etc.
 
 <p align="center" style="border-radius: 10px">
     <img src="Resources/Demo.gif" width=300 alt="Demo video" />
@@ -81,7 +78,7 @@ The online [documentation][Documentation] has more information, articles, code e
 
 ## Demo Application
 
-The `Demo` folder has an app that lets you test the library on iOS, macOS, and visionOS.
+The `Demo` folder has an app that lets you explore the library on iOS, macOS, and visionOS.
 
 
 
@@ -95,12 +92,12 @@ Your support makes it possible for me to put more work into these projects and m
 
 ## Contact
 
-Feel free to reach out if you have questions or if you want to contribute in any way:
+Feel free to reach out if you have questions or want to contribute in any way:
 
 * Website: [danielsaidi.com][Website]
-* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
-* Twitter: [@danielsaidi][Twitter]
 * E-mail: [daniel.saidi@gmail.com][Email]
+* Bluesky: [@danielsaidi@bsky.social][Bluesky]
+* Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 
 
 
@@ -114,6 +111,7 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 
 [Website]: https://www.danielsaidi.com
 [GitHub]: https://www.github.com/danielsaidi
+[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
 [Twitter]: https://www.twitter.com/danielsaidi
 [Mastodon]: https://mastodon.social/@danielsaidi
 [Sponsors]: https://github.com/sponsors/danielsaidi
@@ -121,4 +119,5 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 
 [Documentation]: https://danielsaidi.github.io/DeckKit/
 [Getting-Started]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/getting-started
+
 [License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
