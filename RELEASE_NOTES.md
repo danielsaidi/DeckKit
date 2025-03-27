@@ -15,9 +15,13 @@ These release notes only cover the current major version.
 
 This version deprecates the `DeckItem` protocol and only uses `Identifiable`.
 
+### ✨ Features
+
+* `DeckView` now has a single `swipeAction` for all directions.
+
 ### 🚨 Important
 
-* The `CardView` no longer applies a corner radius. You must apply it to the front and back view.
+* The `CardView` no longer applies a corner radius to its views.
 
 ### 🗑️ Deprecations
 

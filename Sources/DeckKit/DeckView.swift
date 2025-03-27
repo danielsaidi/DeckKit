@@ -22,65 +22,31 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     ///
     /// - Parameters:
     ///   - items: The items to present.
-    ///   - config: The configuration to apply, by default `.standard`.
     ///   - shuffleAnimation: The shuffle animation to apply, by default an internal one.
-    ///   - swipeLeftAction: The action to trigger when swiping items left, by default `nil`.
-    ///   - swipeRightAction: The action to trigger when swiping items right, by default `nil`.
-    ///   - swipeUpAction: The action to trigger when swiping items up, by default `nil`.
-    ///   - swipeDownAction: The action to trigger when swiping items down, by default `nil`.
+    ///   - swipeAction: The action to trigger when swiping items to an edge, by default `nil`.
     ///   - itemView: An item view builder to use for each item in the deck.
     public init(
         _ items: Binding<[ItemType]>,
         shuffleAnimation: DeckShuffleAnimation = .init(),
-        swipeLeftAction: ItemAction? = nil,
-        swipeRightAction: ItemAction? = nil,
-        swipeUpAction: ItemAction? = nil,
-        swipeDownAction: ItemAction? = nil,
+        swipeAction: SwipeAction? = nil,
         itemView: @escaping ItemViewBuilder
     ) {
         self._items = items
         self.initConfig = nil
         self._shuffleAnimation = .init(wrappedValue: shuffleAnimation)
-        self.swipeLeftAction = swipeLeftAction
-        self.swipeRightAction = swipeRightAction
-        self.swipeUpAction = swipeUpAction
-        self.swipeDownAction = swipeDownAction
+        self.swipeAction = swipeAction
         self.itemView = itemView
     }
     
-    @available(*, deprecated, message: "Apply a configuration with the .deckViewConfiguration view modifier instead.")
-    public init(
-        _ items: Binding<[ItemType]>,
-        config: DeckViewConfiguration,
-        shuffleAnimation: DeckShuffleAnimation = .init(),
-        swipeLeftAction: ItemAction? = nil,
-        swipeRightAction: ItemAction? = nil,
-        swipeUpAction: ItemAction? = nil,
-        swipeDownAction: ItemAction? = nil,
-        itemView: @escaping ItemViewBuilder
-    ) {
-        self._items = items
-        self.initConfig = config
-        self._shuffleAnimation = .init(wrappedValue: shuffleAnimation)
-        self.swipeLeftAction = swipeLeftAction
-        self.swipeRightAction = swipeRightAction
-        self.swipeUpAction = swipeUpAction
-        self.swipeDownAction = swipeDownAction
-        self.itemView = itemView
-    }
+    /// An action to trigger by swiping items to either edge.
+    public typealias SwipeAction = (Edge, ItemType) -> Void
     
-    /// A function to trigger when swiping away a deck item.
-    public typealias ItemAction = (ItemType) -> Void
-
     /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
-    private var initConfig: DeckViewConfiguration?
+    var initConfig: DeckViewConfiguration?
     private let itemView: (ItemType) -> ItemView
-    private let swipeLeftAction: ItemAction?
-    private let swipeRightAction: ItemAction?
-    private let swipeUpAction: ItemAction?
-    private let swipeDownAction: ItemAction?
+    private let swipeAction: SwipeAction?
     
     @Binding var items: [ItemType]
     
@@ -158,8 +124,8 @@ private extension DeckView {
     }
     
     func dragGestureEnded(_ drag: DragGesture.Value) {
-        if let item = activeItem {
-            (dragGestureEndedAction(for: drag))?(item)
+        if let item = activeItem, let edge = dragGestureEndedEdge(for: drag) {
+            swipeAction?(edge, item)
         }
         withAnimation(.spring()) {
             activeItem = nil
@@ -167,12 +133,12 @@ private extension DeckView {
         }
     }
     
-    func dragGestureEndedAction(for drag: DragGesture.Value) -> ItemAction? {
+    func dragGestureEndedEdge(for drag: DragGesture.Value) -> Edge? {
         guard dragGestureIsPastThreshold(drag) else { return nil }
         if dragGestureIsPastHorizontalThreshold(drag) {
-            return drag.translation.width > 0 ? swipeRightAction : swipeLeftAction
+            return drag.translation.width > 0 ? .trailing : .leading
         } else {
-            return drag.translation.height > 0 ? swipeDownAction : swipeUpAction
+            return drag.translation.height > 0 ? .bottom : .top
         }
     }
     
@@ -281,10 +247,9 @@ private func item(
                 DeckView(
                     $items,
                     shuffleAnimation: shuffle,
-                    swipeLeftAction: { _ in print("Left") },
-                    swipeRightAction: { _ in print("Right") },
-                    swipeUpAction: { _ in print("Up") },
-                    swipeDownAction: { _ in print("Down") },
+                    swipeAction: { edge, item in
+                        print("Swiped item #\(item.id) to the \(edge.description) edge")
+                    },
                     itemView: { item in
                         CardView(
                             isFlipped: shuffle.isShuffling,
@@ -309,5 +274,17 @@ private func item(
     }
 
     return Preview()
+}
+
+private extension Edge {
+    
+    var description: String {
+        switch self {
+        case .leading: "leading"
+        case .trailing: "trailing"
+        case .top: "top"
+        case .bottom: "bottom"
+        }
+    }
 }
 #endif
