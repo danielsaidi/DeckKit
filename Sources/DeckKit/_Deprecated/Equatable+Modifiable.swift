@@ -1,13 +1,4 @@
-//
-//  Equatable+Modified.swift
-//  DeckKit
-//
-//  Created by Daniel Saidi on 2024-02-19.
-//  Copyright © 2024 Daniel Saidi. All rights reserved.
-//
-
-import Foundation
-
+@available(*, deprecated, message: "This is no longer used.")
 public extension Equatable {
 
     /// Modify this value with a certain modification.

@@ -11,12 +11,7 @@ import SwiftUI
 /// This animation can be used to animate a deck shuffle.
 ///
 /// To use the animation, create a `@StateObject`, inject it
-/// into a ``DeckView``, then use ``shuffle(_:times:)`` when
-/// you want to shuffle any item collection. 
-///
-/// This animation will shuffle the original item list. This
-/// means that the deck view will automatically update as it
-/// is shuffled.
+/// into a ``DeckView``, then use ``shuffle(_:times:)``.
 public final class DeckShuffleAnimation: ObservableObject {
     
     /// Create a deck shuffle animation.

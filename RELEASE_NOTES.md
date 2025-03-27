@@ -13,13 +13,12 @@ These release notes only cover the current major version.
 
 ## 1.5
 
-### 💡 Adjustments
-
-* The `DeckItem` protocol is no longer needed. Just use `Identifiable`.
+This version deprecates the `DeckItem` protocol and only uses `Identifiable`.
 
 ### 🗑️ Deprecations
 
-* The `DeckItem` protocol has been deprecated. Just use `Identifiable` from now on.
+* The `DeckItem` protocol has been deprecated.
+* The `Equatable` extensions have been deprecated.
 
 
 
