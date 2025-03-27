@@ -3,17 +3,16 @@
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
-//  Copyright © 2020-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2020-2025 Daniel Saidi. All rights reserved.
 //
 
 #if os(iOS) || os(macOS) || os(visionOS)
 import SwiftUI
 
-/// This view renders a collection of ``DeckItem`` values as
-/// a physical deck of cards.
+/// This view renders a list of items as a deck of cards.
 ///
-/// This view lets users swipe the top card in any direction
-/// to move it to the bottom of the deck and trigger actions.
+/// The view can swipe the top card in any direction to move
+/// it to the bottom of the deck and trigger certain actions.
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.
@@ -83,20 +82,15 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     private let swipeUpAction: ItemAction?
     private let swipeDownAction: ItemAction?
     
-    @Binding
-    private var items: [ItemType]
+    @Binding var items: [ItemType]
     
     @Environment(\.deckViewConfiguration)
-    private var envConfig: DeckViewConfiguration
+    var envConfig: DeckViewConfiguration
     
-    @ObservedObject
-    private var shuffleAnimation: DeckShuffleAnimation
+    @ObservedObject var shuffleAnimation: DeckShuffleAnimation
     
-    @State
-    private var activeItem: ItemType?
-
-    @State
-    private var topItemOffset: CGSize = .zero
+    @State var activeItem: ItemType?
+    @State var topItemOffset: CGSize = .zero
     
     public var body: some View {
         ZStack(alignment: .center) {

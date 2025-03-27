@@ -9,8 +9,7 @@
 #if os(iOS)
 import SwiftUI
 
-/// This view renders a collection of ``DeckItem`` values as
-/// a horizontal page view.
+/// This view renders a list of items as horizontal pages.
 public struct DeckPageView<ItemType: Identifiable, ItemView: View>: View {
 
     /// Create a deck page view.
@@ -46,7 +45,29 @@ public struct DeckPageView<ItemType: Identifiable, ItemView: View>: View {
 
 #Preview {
     
-    var item1: PreviewCard.Item { PreviewCard.Item(
+    struct Preview: View {
+        
+        @State
+        var items: [PreviewCard.Item] = [
+            .item1, .item2, .item1, .item2, .item1, .item2
+        ]
+        
+        var body: some View {
+            DeckPageView($items) {
+                PreviewCard(item: $0)
+                    .aspectRatio(0.75, contentMode: .fit)
+                    .padding(15)
+            }
+        }
+    }
+
+    return Preview()
+        .background(Color.gray)
+}
+
+private extension PreviewCard.Item {
+    
+    static var item1: Self { .init(
         title: "Title 1",
         text: "Text 1",
         footnote: "Footnote 1",
@@ -54,26 +75,12 @@ public struct DeckPageView<ItemType: Identifiable, ItemView: View>: View {
         tintColor: .yellow)
     }
 
-    var item2: PreviewCard.Item { PreviewCard.Item(
+    static var item2: Self { .init(
         title: "Title 2",
         text: "Text 2",
         footnote: "Footnote 2",
         backgroundColor: .yellow,
         tintColor: .blue)
     }
-
-    @State
-    var items = [
-        item1, item2, item1, item2, item1, item2,
-        item1, item2, item1, item2, item1, item2,
-        item1, item2, item1, item2, item1, item2,
-        item1, item2, item1, item2, item1, item2
-    ]
-
-    return DeckPageView($items) {
-        PreviewCard(item: $0)
-            .aspectRatio(0.75, contentMode: .fit)
-            .padding(15)
-    }.background(Color.gray)
 }
 #endif
