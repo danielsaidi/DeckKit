@@ -70,7 +70,7 @@ You can render any list of items with in either of the view components that Deck
     }
 }
 
-You can use a ``Card`` view as content view, to easily support a front and back faced card with flip support, or use any custom card view.
+You can use a ``CardView`` as item view, to easily support a front and back faced card with flip support, or use any custom card view.
 
 
 ## Favorites

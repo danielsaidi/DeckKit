@@ -45,23 +45,28 @@ public class FavoriteContext<Item: Identifiable, Service: FavoriteService>: Obse
 
 public extension FavoriteContext {
 
+    /// Check if there are any favorites.
     var hasFavorites: Bool {
         !favorites.isEmpty
     }
 
+    /// Get all favorites.
     func getFavorites() -> [Item.ID] {
         service.getFavorites()
     }
     
+    /// Check if a certain item is marked as a favorite.
     func isFavorite(_ item: Item) -> Bool {
         service.isFavorite(item)
     }
     
+    /// Set the favorite state of a certain item.
     func setIsFavorite(_ isFavorite: Bool, for item: Item) {
         service.setIsFavorite(isFavorite, for: item)
         favorites = getFavorites()
     }
     
+    /// Toggle the favorite state of a certain item.
     func toggleIsFavorite(for item: Item) {
         service.toggleIsFavorite(for: item)
         favorites = getFavorites()

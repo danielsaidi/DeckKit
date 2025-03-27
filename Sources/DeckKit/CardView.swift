@@ -1,5 +1,5 @@
 //
-//  Card.swift
+//  CardView.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2024-05-23.
@@ -8,35 +8,28 @@
 
 import SwiftUI
 
-/// This view has a front view and can be flipped to show an
-/// optional back view.
-///
-/// This view will only apply a corner radius and a rotation
-/// effect to the view.
-public struct Card<Front: View, Back: View>: View {
+/// This view has a front and a back view and can be flipped
+/// to flip between the two.
+public struct CardView<Front: View, Back: View>: View {
 
     /// Create a card view.
     ///
     /// - Parameters:
     ///   - isFlipped: Whether the card is flipped.
-    ///   - cornerRadius: The corner radius, by default `15`.
     ///   - front: The front view.
     ///   - back: The back view.
     public init(
         isFlipped: Bool,
-        cornerRadius: Double = 15,
         @ViewBuilder front: @escaping () -> Front,
         @ViewBuilder back: @escaping () -> Back
     ) {
         self.front = front
         self.back = back
-        self.cornerRadius = cornerRadius
         self.isFlipped = isFlipped
     }
 
     private let front: () -> Front
     private let back: () -> Back
-    private let cornerRadius: Double
     private let isFlipped: Bool
 
     @Environment(\.colorScheme)
@@ -52,16 +45,14 @@ public struct Card<Front: View, Back: View>: View {
     }
 }
 
-private extension Card {
+private extension CardView {
 
     var background: some View {
         Color.card(for: colorScheme)
-            .clipShape(.rect(cornerRadius: cornerRadius))
     }
 
     var frontView: some View {
         front()
-            .clipShape(.rect(cornerRadius: cornerRadius))
     }
 
     var backView: some View {
@@ -69,7 +60,6 @@ private extension Card {
             .opacity(0)
             .overlay(back().opacity(isFlipped ? 1 : 0))
             .clipped()
-            .clipShape(.rect(cornerRadius: cornerRadius))
     }
 }
 
@@ -82,11 +72,10 @@ private extension Card {
 
         var body: some View {
             VStack {
-                Card(
+                CardView(
                     isFlipped: isFlipped,
-                    cornerRadius: 20,
-                    front: { Color.blue },
-                    back: { Color.red }
+                    front: { Color.blue.clipShape(.rect(cornerRadius: 20)) },
+                    back: { Color.red.clipShape(.rect(cornerRadius: 20)) }
                 )
                 .aspectRatio(0.65, contentMode: .fit)
 

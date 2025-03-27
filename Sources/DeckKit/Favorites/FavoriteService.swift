@@ -8,22 +8,22 @@
 
 import Foundation
 
-/// This protocol can be implemented classes that can toggle
-/// the favorite state of any `Identifiable` item type.
+/// This protocol can be implemented by any type that can be
+/// used to manage the favorite state of any `Identifiable`.
 public protocol FavoriteService: AnyObject {
 
     /// The item type that is managed by this service.
     associatedtype Item: Identifiable
 
-    /// Get all favorite item IDs.
+    /// Get all favorites.
     func getFavorites() -> [Item.ID]
     
-    /// Check whether or not a certain item is a favorite.
+    /// Check if a certain item is marked as a favorite.
     func isFavorite(_ item: Item) -> Bool
     
-    /// Set whether or not a certain item is a favorite.
+    /// Set the favorite state of a certain item.
     func setIsFavorite(_ isFavorite: Bool, for item: Item)
     
-    /// Toggle whether or not a certain item is a favorite.
+    /// Toggle the favorite state of a certain item.
     func toggleIsFavorite(for item: Item)
 }

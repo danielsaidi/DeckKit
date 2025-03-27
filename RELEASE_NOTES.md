@@ -15,8 +15,13 @@ These release notes only cover the current major version.
 
 This version deprecates the `DeckItem` protocol and only uses `Identifiable`.
 
+### 🚨 Important
+
+* The `CardView` no longer applies a corner radius. You must apply it to the front and back view.
+
 ### 🗑️ Deprecations
 
+* The `Card` view is renamed to `CardView`.
 * The `DeckItem` protocol has been deprecated.
 * The `Equatable` extensions have been deprecated.
 

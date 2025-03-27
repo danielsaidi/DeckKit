@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// This class implements ``FavoriteService`` by storing the
-/// favorite state in `UserDefaults`.
+/// This type implements the ``FavoriteService`` protocol by
+/// storing the favorite state within `UserDefaults`.
 public class UserDefaultsFavoriteService<Item: Identifiable>: FavoriteService {
 
     /// Create a service instance.
