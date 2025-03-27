@@ -102,18 +102,8 @@ public extension View {
     }
 }
 
-private extension DeckViewConfiguration {
-
-    struct Key: EnvironmentKey {
-
-        static var defaultValue: DeckViewConfiguration { .standard }
-    }
-}
-
 public extension EnvironmentValues {
 
-    var deckViewConfiguration: DeckViewConfiguration {
-        get { self [DeckViewConfiguration.Key.self] }
-        set { self [DeckViewConfiguration.Key.self] = newValue }
-    }
+    /// Apply a ``DeckViewConfiguration``.
+    @Entry var deckViewConfiguration = DeckViewConfiguration.standard
 }

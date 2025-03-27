@@ -275,6 +275,7 @@ private func item(
                 #endif
             }
             .padding()
+            .deckViewConfiguration(.init(direction: .down))
         }
     }
 
