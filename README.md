@@ -13,7 +13,7 @@
 
 # DeckKit
 
-DeckKit is a SwiftUI SDK that helps you build deck-based apps. It has a `DeckView` that can render a deck of items with support for swipe gestures, edge swipes, shuffling, etc.
+DeckKit is a SwiftUI SDK that lets you build deck-based apps with ease. It has a `DeckView` that can render any list of items, with support for swipe gestures, edge swipes, shuffling, etc.
 
 <p align="center" style="border-radius: 10px">
     <img src="Resources/Demo.gif" width=300 alt="Demo video" />
@@ -35,21 +35,17 @@ https://github.com/danielsaidi/DeckKit.git
 
 ## Getting started
 
-With DeckKit, you can create a `Deck` of any model that conform to `DeckItem`:
+With DeckKit, you can create a deck of cards with any type that conforms to `Identifiable`:
 
 ```swift
-struct Hobby: DeckItem {
+struct Hobby: Identifiable {
     
     var name: String
     var text: String
 
     var id: String { name }
 }
-```
 
-You can display a deck of cards with any of the built-in views, like a `DeckView`:
-
-```swift
 struct MyView: View {
 
     @State 
@@ -65,6 +61,8 @@ struct MyView: View {
     }
 }
 ```
+
+DeckKit has several view components for presenting decks, e.g. `DeckView` and `DeckPageView`.
 
 See the online [getting started guide][Getting-Started] for more information.
 

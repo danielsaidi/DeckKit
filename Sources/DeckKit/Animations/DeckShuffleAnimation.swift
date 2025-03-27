@@ -123,13 +123,13 @@ private extension DeckShuffleAnimation {
         }
     }
     
-    func shuffleData<Item: DeckItem>(
+    func shuffleData<Item: Identifiable>(
         for item: Item,
         in items: [Item]
     ) -> ShuffleData? {
         guard
             shuffleData.count == items.count,
-            let index = items.firstIndex(of: item)
+            let index = items.index(of: item)
         else { return nil }
         return shuffleData[index]
     }
@@ -148,7 +148,7 @@ extension View {
     }
 
     /// Apply a shuffle animation to a deck item view.
-    func deckShuffleAnimation<Item: DeckItem>(
+    func deckShuffleAnimation<Item: Identifiable>(
         _ animation: DeckShuffleAnimation,
         for item: Item,
         in items: [Item]

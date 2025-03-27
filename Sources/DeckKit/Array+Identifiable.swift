@@ -1,5 +1,5 @@
 //
-//  DeckItem.swift
+//  Array+Identifiable.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
@@ -8,10 +8,12 @@
 
 import Foundation
 
-/// This typealias represents Identifiable & Equatable items.
-public typealias DeckItem = Identifiable & Equatable
-
-public extension Array where Element: DeckItem {
+public extension Array where Element: Identifiable {
+    
+    /// Whether the collection contains certain item.
+    func contains(_ item: Element) -> Bool {
+        index(of: item) != nil
+    }
     
     /// The index of a certain item, if any.
     func index(of item: Element) -> Int? {

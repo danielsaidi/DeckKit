@@ -11,7 +11,7 @@ import SwiftUI
 
 /// This view renders a collection of ``DeckItem`` values as
 /// a horizontal page view.
-public struct DeckPageView<ItemType: DeckItem, ItemView: View>: View {
+public struct DeckPageView<ItemType: Identifiable, ItemView: View>: View {
 
     /// Create a deck page view.
     ///

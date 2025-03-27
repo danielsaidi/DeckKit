@@ -17,7 +17,7 @@ import SwiftUI
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.
-public struct DeckView<ItemType: DeckItem, ItemView: View>: View {
+public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     
     /// Create a deck view with custom parameters.
     ///
@@ -152,7 +152,7 @@ private extension DeckView {
     
     func dragGestureChanged(_ drag: DragGesture.Value, for item: ItemType) {
         if activeItem == nil { activeItem = item }
-        if item != activeItem { return }
+        if !isActive(item) { return }
         topItemOffset = drag.translation
         withAnimation(.spring()) {
             if dragGestureIsPastThreshold(drag) {
@@ -204,7 +204,7 @@ private extension DeckView {
     }
     
     func isActive(_ item: ItemType) -> Bool {
-        item == activeItem
+        item.id == activeItem?.id
     }
 
     func offset(at index: Int) -> Double {
@@ -231,7 +231,7 @@ private extension DeckView {
     }
 
     func visibleIndex(of item: ItemType) -> Int? {
-        visibleItems.firstIndex(of: item)
+        visibleItems.index(of: item)
     }
     
     func zIndex(of index: ItemType) -> Double {

@@ -19,7 +19,7 @@ struct PreviewCard: View {
         self.cornerRadius = cornerRadius
     }
 
-    struct Item: DeckItem {
+    struct Item: Identifiable {
 
         init(
             title: String,

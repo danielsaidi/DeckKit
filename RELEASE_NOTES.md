@@ -11,6 +11,18 @@ These release notes only cover the current major version.
 
 
 
+## 1.5
+
+### 💡 Adjustments
+
+* The `DeckItem` protocol is no longer needed. Just use `Identifiable`.
+
+### 🗑️ Deprecations
+
+* The `DeckItem` protocol has been deprecated. Just use `Identifiable` from now on.
+
+
+
 ## 1.4
 
 This version makes the SDK use Swift 6.
