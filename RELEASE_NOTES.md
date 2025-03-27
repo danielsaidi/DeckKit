@@ -17,6 +17,8 @@ This version deprecates the `DeckItem` protocol and only uses `Identifiable`.
 
 ### ✨ Features
 
+* `DeckView` now has a `stateAnimation` for all state changes.
+* `DeckView` now applies a `bouncy` state animation by default.
 * `DeckView` now has a single `swipeAction` for all directions.
 
 ### 🚨 Important

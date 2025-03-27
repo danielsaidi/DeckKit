@@ -22,18 +22,21 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     ///
     /// - Parameters:
     ///   - items: The items to present.
-    ///   - shuffleAnimation: The shuffle animation to apply, by default an internal one.
+    ///   - shuffleAnimation: The shuffle animation to use, by default a standard one.
+    ///   - shuffleAnimation: The animation to apply when the state changes, by default `.bouncy`.
     ///   - swipeAction: The action to trigger when swiping items to an edge, by default `nil`.
     ///   - itemView: An item view builder to use for each item in the deck.
     public init(
         _ items: Binding<[ItemType]>,
         shuffleAnimation: DeckShuffleAnimation = .init(),
+        stateAnimation: Animation = .bouncy,
         swipeAction: SwipeAction? = nil,
         itemView: @escaping ItemViewBuilder
     ) {
         self._items = items
         self.initConfig = nil
         self._shuffleAnimation = .init(wrappedValue: shuffleAnimation)
+        self.stateAnimation = stateAnimation
         self.swipeAction = swipeAction
         self.itemView = itemView
     }
@@ -45,7 +48,9 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
     var initConfig: DeckViewConfiguration?
+    
     private let itemView: (ItemType) -> ItemView
+    private let stateAnimation: Animation
     private let swipeAction: SwipeAction?
     
     @Binding var items: [ItemType]
@@ -114,7 +119,7 @@ private extension DeckView {
         if activeItem == nil { activeItem = item }
         if !isActive(item) { return }
         topItemOffset = drag.translation
-        withAnimation(.spring()) {
+        withAnimation(stateAnimation) {
             if dragGestureIsPastThreshold(drag) {
                 items.moveToBack(item)
             } else {
@@ -127,7 +132,7 @@ private extension DeckView {
         if let item = activeItem, let edge = dragGestureEndedEdge(for: drag) {
             swipeAction?(edge, item)
         }
-        withAnimation(.spring()) {
+        withAnimation(stateAnimation) {
             activeItem = nil
             topItemOffset = .zero
         }

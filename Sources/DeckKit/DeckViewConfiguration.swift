@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// This config can be used to configure a ``DeckView``.
+/// This type can be used to configure a ``DeckView``.
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.
