@@ -31,6 +31,7 @@ public extension Color {
     }
 }
 
+#if os(iOS) || os(macOS) || os(visionOS)
 public extension DeckView {
     
     @available(*, deprecated, message: "This is no longer used.")
@@ -84,3 +85,4 @@ public extension DeckView {
         self.initConfig = config
     }
 }
+#endif
