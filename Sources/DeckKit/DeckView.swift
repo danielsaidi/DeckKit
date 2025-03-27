@@ -243,8 +243,8 @@ private func item(
         var shuffle = DeckShuffleAnimation(animation: .snappy)
         
         @State
-        var items = (0...25).enumerated().map {
-            item($0.offset)
+        var items = (0...25).map {
+            item($0)
         }
         
         var body: some View {
