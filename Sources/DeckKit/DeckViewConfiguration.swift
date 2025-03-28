@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.
-public struct DeckViewConfiguration: Codable, Equatable {
+public struct DeckViewConfiguration: Codable, Equatable, Sendable {
 
     /// Create a deck view configuration.
     ///
@@ -87,7 +87,7 @@ public extension DeckViewConfiguration {
 public extension DeckViewConfiguration {
 
     /// This enum defines the visual direction of a deck.
-    enum Direction: String, Codable {
+    enum Direction: String, Codable, Sendable {
         case up, down
     }
 }

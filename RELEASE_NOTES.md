@@ -11,6 +11,12 @@ These release notes only cover the current major version.
 
 
 
+## 1.5.1
+
+This version makes `DeckViewConfiguration` conform to `Sendable`.
+
+
+
 ## 1.5
 
 This version deprecates the `DeckItem` protocol and only uses `Identifiable`.
