@@ -222,18 +222,6 @@ private extension View {
 
 // MARK: - Preview
 
-private func item(
-    _ index: Int
-) -> PreviewCard.Item {
-    .init(
-        title: "Title \(index)",
-        text: "Text \(index)",
-        footnote: "Footnote \(index)",
-        backgroundColor: .gray.opacity(0.1),
-        tintColor: .black
-    )
-}
-
 #Preview {
     
     @MainActor
@@ -243,8 +231,15 @@ private func item(
         var shuffle = DeckShuffleAnimation(animation: .snappy)
         
         @State
-        var items = (0...25).map {
-            item($0)
+        var items = (0...25).map { index in
+            PreviewCard.Item(
+                id: index,
+                title: "Title \(index)",
+                text: "Text \(index)",
+                footnote: "Footnote \(index)",
+                backgroundColor: .gray.opacity(0.1),
+                tintColor: .black
+            )
         }
         
         var body: some View {
@@ -259,7 +254,7 @@ private func item(
                         CardView(
                             isFlipped: shuffle.isShuffling,
                             front: { PreviewCard(item: item) },
-                            back: { Color.blue }
+                            back: { item.isEven ? Color.green : .blue }
                         )
                         .aspectRatio(0.65, contentMode: .fit)
                     }

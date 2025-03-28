@@ -22,12 +22,14 @@ struct PreviewCard: View {
     struct Item: Identifiable {
 
         init(
+            id: Int,
             title: String,
             text: String,
             footnote: String,
             backgroundColor: Color,
             tintColor: Color
         ) {
+            self.id = id
             self.title = title
             self.text = text
             self.footnote = footnote
@@ -35,14 +37,17 @@ struct PreviewCard: View {
             self.tintColor = tintColor
         }
 
-        let id = UUID()
-
+        let id: Int
         let title: String
         let text: String
         let footnote: String
 
         let backgroundColor: Color
         let tintColor: Color
+        
+        var isEven: Bool {
+            id.isMultiple(of: 2)
+        }
     }
     
     private let item: Item
@@ -94,6 +99,7 @@ extension PreviewCard {
     
     PreviewCard(
         item: PreviewCard.Item(
+            id: 0,
             title: "Title",
             text: "Text",
             footnote: "Footnote",

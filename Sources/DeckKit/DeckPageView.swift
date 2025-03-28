@@ -48,9 +48,7 @@ public struct DeckPageView<ItemType: Identifiable, ItemView: View>: View {
     struct Preview: View {
         
         @State
-        var items: [PreviewCard.Item] = [
-            .item1, .item2, .item1, .item2, .item1, .item2
-        ]
+        var items: [PreviewCard.Item] = [.item1, .item2]
         
         var body: some View {
             DeckPageView($items) {
@@ -68,6 +66,7 @@ public struct DeckPageView<ItemType: Identifiable, ItemView: View>: View {
 private extension PreviewCard.Item {
     
     static var item1: Self { .init(
+        id: 1,
         title: "Title 1",
         text: "Text 1",
         footnote: "Footnote 1",
@@ -76,6 +75,7 @@ private extension PreviewCard.Item {
     }
 
     static var item2: Self { .init(
+        id: 2,
         title: "Title 2",
         text: "Text 2",
         footnote: "Footnote 2",
