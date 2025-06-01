@@ -13,7 +13,7 @@
 
 # DeckKit
 
-DeckKit is a SwiftUI SDK that lets you build deck-based apps with ease. It has a `DeckView` that can render any list of items, with support for swipe gestures, edge swipes, shuffling, etc.
+DeckKit is a SwiftUI library that makes it easy to create deck-based apps. It has a `DeckView` that can render any list of items, with support for swipe gestures, edge swipes, shuffling, etc.
 
 <p align="center">
     <img src="Resources/Demo.gif" width=300 alt="Demo video" />
@@ -30,6 +30,11 @@ DeckKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/DeckKit.git
 ```
+
+
+## Support My Work
+
+Maintaining my various [open-source tools][OpenSource] takes significant time and effort. You can [become a sponsor][Sponsors] to help me dedicate more time to creating, maintaining, and improving these projects. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed. Thank you for considering!
 
 
 
@@ -106,16 +111,15 @@ DeckKit is available under the MIT license. See the [LICENSE][License] file for 
 
 
 [Email]: mailto:daniel.saidi@gmail.com
-
-[Website]: https://www.danielsaidi.com
-[GitHub]: https://www.github.com/danielsaidi
-[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
-[Twitter]: https://www.twitter.com/danielsaidi
-[Mastodon]: https://mastodon.social/@danielsaidi
+[Website]: https://danielsaidi.com
+[GitHub]: https://github.com/danielsaidi
+[OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
-[OpenSource]: https://www.danielsaidi.com/opensource
+
+[Bluesky]: https://bsky.app/profile/danielsaidi.bsky.social
+[Mastodon]: https://mastodon.social/@danielsaidi
+[Twitter]: https://twitter.com/danielsaidi
 
 [Documentation]: https://danielsaidi.github.io/DeckKit/
 [Getting-Started]: https://danielsaidi.github.io/DeckKit/documentation/deckkit/getting-started
-
 [License]: https://github.com/danielsaidi/DeckKit/blob/master/LICENSE
