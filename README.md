@@ -85,14 +85,6 @@ The `Demo` folder has an app that lets you explore the library on iOS, macOS, an
 
 
 
-## Support my work 
-
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
-
-Your support makes it possible for me to put more work into these projects and make them the best they can be.
-
-
-
 ## Contact
 
 Feel free to reach out if you have questions or want to contribute in any way:
