@@ -37,7 +37,10 @@ public struct CardView<Front: View, Back: View>: View {
 
     public var body: some View {
         front()
-            .overlay(back().opacity(isFlipped ? 1 : 0))
+            .overlay(
+                back()
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .opacity(isFlipped ? 1 : 0))
             .padding(100)
             .rotation3DEffect(isFlipped ? .degrees(180) : .zero, axis: (x: 0, y: 1, z: 0))
             .padding(-100)
@@ -55,8 +58,16 @@ public struct CardView<Front: View, Back: View>: View {
             VStack {
                 CardView(
                     isFlipped: isFlipped,
-                    front: { Color.blue.withCornerRadius() },
-                    back: { Color.red.withCornerRadius() }
+                    front: {
+                        Color.blue
+                            .overlay(Text("Front"))
+                            .withCornerRadius()
+                    },
+                    back: {
+                        Color.yellow
+                            .overlay(Text("Back"))
+                            .withCornerRadius()
+                    }
                 )
                 .aspectRatio(0.65, contentMode: .fit)
 

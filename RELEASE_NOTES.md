@@ -11,6 +11,14 @@ These release notes only cover the current major version.
 
 
 
+## 1.5.2
+
+### 🐛 Bug Fixes
+
+* `CardView` fixes the content rotation of the back view.
+
+
+
 ## 1.5.1
 
 This version makes `DeckViewConfiguration` conform to `Sendable`.
