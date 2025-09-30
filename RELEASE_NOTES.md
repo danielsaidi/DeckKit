@@ -14,7 +14,8 @@ DeckKit tries to honor semantic versioning:
 ### 💡 Adjustments
 
 * The package now uses Swift 6.1. 
-* There is a new demo app that targets iOS 26. 
+* There is a new demo app that targets iOS 26.
+* `FavoriteContext` can be created without service generic. 
 
 
 
