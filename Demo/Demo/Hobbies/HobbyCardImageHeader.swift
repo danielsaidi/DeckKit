@@ -3,23 +3,17 @@
 //  Demo
 //
 //  Created by Daniel Saidi on 2024-05-24.
-//  Copyright © 2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2024-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
 struct HobbyCardImageHeader: View {
 
-    init(_ hobby: Hobby) {
-        self.hobby = hobby
-    }
-
-    private let hobby: Hobby
-
-    private let numberSize = 60.0
+    let hobby: Hobby
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 5)
+        RoundedRectangle(cornerRadius: 10)
             .fill(hobby.color.gradient)
             .frame(height: 150)
             .overlay(imageView)
@@ -37,6 +31,6 @@ private extension HobbyCardImageHeader {
 }
 
 #Preview {
-    HobbyCardImageHeader(.preview)
+    HobbyCardImageHeader(hobby: .preview)
         .padding()
 }

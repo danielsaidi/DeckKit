@@ -10,7 +10,7 @@ import DeckKit
 import Foundation
 import SwiftUI
 
-struct Hobby: DeckItem {
+struct Hobby: Identifiable {
     
     var number: Int
     var name: String

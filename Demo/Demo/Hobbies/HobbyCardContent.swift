@@ -11,22 +11,9 @@ import SwiftUI
 
 struct HobbyCardContent: View {
 
-    init(
-        _ hobby: Hobby,
-        inSheet: Bool = false,
-        isFavorite: Bool = false,
-        favoriteAction: ((Hobby) -> Void)? = nil
-    ) {
-        self.hobby = hobby
-        self.inSheet = inSheet
-        self.isFavorite = isFavorite
-        self.favoriteAction = favoriteAction ?? { _ in }
-    }
-
-    private let hobby: Hobby
-    private let inSheet: Bool
-    private let isFavorite: Bool
-    private let favoriteAction: (Hobby) -> Void
+    let hobby: Hobby
+    let isFavorite: Bool
+    let favoriteAction: (Hobby) -> Void
 
     private let circleSize = 60.0
 
@@ -47,6 +34,8 @@ struct HobbyCardContent: View {
             }
             .font(.title2)
         }
+        .padding()
+        .background(Color.primary.colorInvert())
         .multilineTextAlignment(.center)
         .fontDesign(.serif)
         .environment(\.sizeCategory, .medium)
@@ -57,7 +46,7 @@ private extension HobbyCardContent {
 
     var cardContent: some View {
         VStack(spacing: 30) {
-            HobbyCardImageHeader(hobby)
+            HobbyCardImageHeader(hobby: hobby)
             title
             text
             Spacer()
@@ -67,28 +56,33 @@ private extension HobbyCardContent {
     }
 
     var cardNumber: some View {
-        circle.overlay {
-            Text("\(hobby.number)")
-                .bold()
+        glassBadge {
+            Text("\(hobby.number)").bold()
         }
     }
 
-    var circle: some View {
-        Circle()
-            .fill(Color.card(for: colorScheme))
-            .frame(width: circleSize, height: circleSize)
-    }
-
     var favoriteButton: some View {
-        circle.overlay {
+        glassBadge {
             Button {
                 favoriteAction(hobby)
             } label: {
                 Image.favorite
-                    .foregroundStyle(isFavorite ? .red : .primary)
                     .symbolVariant(isFavorite ? .fill : .none)
+                    .symbolEffect(.wiggle, value: isFavorite)
             }
+            .tint(.red)
         }
+    }
+
+    func glassBadge<Content: View>(
+        content: () -> Content
+    ) -> some View {
+        Circle()
+            .fill(.white)
+            .frame(width: circleSize, height: circleSize)
+            .overlay { content() }
+            .compositingGroup()
+            .shadow(radius: 1, y: 1)
     }
 
     var title: some View {
@@ -96,15 +90,16 @@ private extension HobbyCardContent {
             .font(.title)
             .fontWeight(.bold)
             .minimumScaleFactor(0.8)
+            .lineLimit(1)
     }
 
     var text: some View {
         Text(hobby.text)
-            .fixedSize(horizontal: false, vertical: true)
+            .lineLimit(4, reservesSpace: true)
     }
 
     var footnote: some View {
-        Text(inSheet ? "Swipe down to close" : "Swipe left for a new hobby, swipe right to select this one.")
+        Text("Swipe left for a new hobby, swipe right to select this one.")
             .font(.footnote)
             .fixedSize(horizontal: false, vertical: true)
     }
@@ -112,19 +107,13 @@ private extension HobbyCardContent {
 
 #Preview {
 
-    struct Preview: View {
+    @Previewable @State var isFavorite = false
 
-        @State
-        var isFavorite = false
-
-        var body: some View {
-            HobbyCardContent(
-                .preview,
-                isFavorite: isFavorite,
-                favoriteAction: { _ in isFavorite.toggle() }
-            )
-        }
-    }
-
-    return Preview()
+    HobbyCardContent(
+        hobby: .preview,
+        isFavorite: isFavorite,
+        favoriteAction: { _ in isFavorite.toggle() }
+    )
+    .padding()
+    .background(Color.primary.opacity(0.1))
 }
