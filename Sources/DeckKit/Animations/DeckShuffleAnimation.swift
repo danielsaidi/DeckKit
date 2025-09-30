@@ -133,15 +133,6 @@ private extension DeckShuffleAnimation {
 @MainActor
 extension View {
 
-    @available(*, deprecated, renamed: "deckShuffleAnimation(_:for:in:)")
-    func withShuffleAnimation<Item: DeckItem>(
-        _ animation: DeckShuffleAnimation,
-        for item: Item,
-        in items: [Item]
-    ) -> some View {
-        deckShuffleAnimation(animation, for: item, in: items)
-    }
-
     /// Apply a shuffle animation to a deck item view.
     func deckShuffleAnimation<Item: Identifiable>(
         _ animation: DeckShuffleAnimation,

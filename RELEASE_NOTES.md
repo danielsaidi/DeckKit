@@ -7,7 +7,14 @@ DeckKit tries to honor semantic versioning:
 * Breaking changes should not occur in `minor` and `patch` updates.
 * Breaking changes *can* occur in `minor` and `patch` updates, if needed.
 
-These release notes only cover the current major version. 
+
+
+## 2.0
+
+### 💡 Adjustments
+
+* The package now uses Swift 6.1. 
+* There is a new demo app that targets iOS 26. 
 
 
 
