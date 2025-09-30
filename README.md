@@ -1,10 +1,10 @@
 <p align="center">
-    <img src="Resources/Icon.png" alt="Project Icon" width="250" />
+    <img src="Resources/Icon-Badge.png" alt="Project Icon" width="250" />
 </p>
 
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
-    <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0" />
+    <img src="https://img.shields.io/badge/Swift-6.1-orange.svg" alt="Swift 6.1" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/DeckKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
