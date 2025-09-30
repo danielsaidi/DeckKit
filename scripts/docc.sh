@@ -116,7 +116,7 @@ if [ -z "$TARGET" ]; then
 fi
 
 # Set default hosting base path if not specified
-if [ -z "$HOSTING_BASE_PATH" ] && [ "$HOSTING_BASE_PATH" != "" ]; then
+if [ -z "$HOSTING_BASE_PATH" ]; then
     HOSTING_BASE_PATH="$TARGET"
 fi
 
