@@ -43,12 +43,9 @@ final class DeckViewConfigurationTests: XCTestCase {
     }
     
     func testInstanceCanBeModified() {
-        let config = DeckViewConfiguration.standard
-        let custom = config.modified {
-            $0.alwaysShowLastItem = false
-        }
-        XCTAssertTrue(config.alwaysShowLastItem)
-        XCTAssertFalse(custom.alwaysShowLastItem)
+        var config = DeckViewConfiguration.standard
+        config.alwaysShowLastItem = false
+        XCTAssertFalse(config.alwaysShowLastItem)
     }
 }
 #endif
