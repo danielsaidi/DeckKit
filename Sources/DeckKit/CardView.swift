@@ -8,8 +8,7 @@
 
 import SwiftUI
 
-/// This view has a front and a back view and can be flipped
-/// to flip between the two.
+/// This view has a front and a back view and can be flipped by swiping or tapping.
 public struct CardView<Front: View, Back: View>: View {
 
     /// Create a card view.

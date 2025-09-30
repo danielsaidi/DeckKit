@@ -11,8 +11,8 @@ import SwiftUI
 
 /// This view renders a list of items as a deck of cards.
 ///
-/// The view can swipe the top card in any direction to move
-/// it to the bottom of the deck and trigger certain actions.
+/// This view can swipe the topmost card in any direction to move it to the bottom
+/// of the deck and trigger certain actions.
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.

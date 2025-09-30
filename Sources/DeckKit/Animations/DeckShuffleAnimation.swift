@@ -10,8 +10,8 @@ import SwiftUI
 
 /// This animation can be used to animate a deck shuffle.
 ///
-/// To use the animation, create a `@StateObject`, inject it
-/// into a ``DeckView``, then use ``shuffle(_:times:)``.
+/// To use the animation, inject a `@StateObject` into a ``DeckView`` and
+/// use ``shuffle(_:times:)``.
 public final class DeckShuffleAnimation: ObservableObject {
     
     /// Create a deck shuffle animation.

@@ -8,8 +8,7 @@
 
 import Foundation
 
-/// This protocol can be implemented by any type that can be
-/// used to manage the favorite state of any `Identifiable`.
+/// This protocol can be implemented by any type that can manage favorites.
 public protocol FavoriteService: AnyObject {
 
     /// The item type that is managed by this service.

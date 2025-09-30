@@ -8,10 +8,9 @@
 
 import SwiftUI
 
-/// This observable class can be used to manage the favorite
-/// state of any `Identifiable` type.
+/// This class can be used to manage the favorite state of any `Identifiable`.
 ///
-/// This class will use a ``UserDefaultsFavoriteService`` by
+/// The class uses a ``UserDefaultsFavoriteService`` to store state by
 /// default, but you can use any custom service.
 public class FavoriteContext<Item: Identifiable, Service: FavoriteService>: ObservableObject, FavoriteService where Service.Item == Item {
 
