@@ -28,7 +28,7 @@ struct ContentView: View {
                     shuffleAnimation: shuffleAnimation,
                     swipeAction: { edge, hobby in
                         guard edge == .trailing else { return }
-                        self.sheetHobby = hobby
+                        openHobbyInSheet(hobby)
                     }
                 ) { hobby in
                     HobbyCard(
@@ -78,6 +78,11 @@ private extension ContentView {
 
     func isFavorite(_ hobby: Hobby) -> Bool {
         favoriteContext.isFavorite(hobby)
+    }
+
+    func openHobbyInSheet(_ hobby: Hobby) {
+        sheetHobby = hobby
+        hobbies.moveLastItemToFront()
     }
 
     func shuffle() {
