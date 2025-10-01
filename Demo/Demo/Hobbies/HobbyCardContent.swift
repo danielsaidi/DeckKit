@@ -15,7 +15,7 @@ struct HobbyCardContent: View {
     let isFavorite: Bool
     let favoriteAction: (Hobby) -> Void
 
-    private let circleSize = 60.0
+    private let circleSize = 50.0
 
     @Environment(\.colorScheme)
     private var colorScheme
@@ -56,13 +56,13 @@ private extension HobbyCardContent {
     }
 
     var cardNumber: some View {
-        glassBadge {
+        edgeBadge {
             Text("\(hobby.number)").bold()
         }
     }
 
     var favoriteButton: some View {
-        glassBadge {
+        edgeBadge {
             Button {
                 favoriteAction(hobby)
             } label: {
@@ -72,17 +72,6 @@ private extension HobbyCardContent {
             }
             .tint(.red)
         }
-    }
-
-    func glassBadge<Content: View>(
-        content: () -> Content
-    ) -> some View {
-        Circle()
-            .fill(.white)
-            .frame(width: circleSize, height: circleSize)
-            .overlay { content() }
-            .compositingGroup()
-            .shadow(radius: 1, y: 1)
     }
 
     var title: some View {
@@ -102,6 +91,15 @@ private extension HobbyCardContent {
         Text("Swipe left for a new hobby, swipe right to select this one.")
             .font(.footnote)
             .fixedSize(horizontal: false, vertical: true)
+    }
+
+    func edgeBadge<Content: View>(
+        content: () -> Content
+    ) -> some View {
+        Circle()
+            .fill(.white)
+            .frame(width: circleSize, height: circleSize)
+            .overlay { content() }
     }
 }
 
