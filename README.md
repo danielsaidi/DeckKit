@@ -5,10 +5,8 @@
 <p align="center">
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-6.1-orange.svg" alt="Swift 6.1" />
-    <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="Swift UI" />
     <a href="https://danielsaidi.github.io/DeckKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
-    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
 
 
@@ -23,7 +21,6 @@ DeckKit is a SwiftUI library that makes it easy to create deck-based apps. It ha
 DeckKit can be customized to great extent. You can change colors, fonts, etc. and use completely custom views. It also has tools to manage favorites.
 
 
-
 ## Installation
 
 DeckKit can be installed with the Swift Package Manager:
@@ -31,12 +28,6 @@ DeckKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/DeckKit.git
 ```
-
-
-## Support My Work
-
-Maintaining my various [open-source tools][OpenSource] takes significant time and effort. You can [become a sponsor][Sponsors] to help me dedicate more time to creating, maintaining, and improving these projects. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed. Thank you for considering!
-
 
 
 ## Getting started
@@ -73,17 +64,19 @@ DeckKit has several view components for presenting decks, e.g. `DeckView` and `D
 See the online [getting started guide][Getting-Started] for more information.
 
 
-
 ## Documentation
 
 The online [documentation][Documentation] has more information, articles, code examples, etc.
-
 
 
 ## Demo Application
 
 The `Demo` folder has an app that lets you explore the library on iOS, macOS, and visionOS.
 
+
+## Support My Work
+
+Maintaining my various [open-source tools][OpenSource] takes significant time and effort. You can [become a sponsor][Sponsors] to help me dedicate more time to creating, maintaining, and improving these projects. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed. Thank you for considering!
 
 
 ## Contact
@@ -96,11 +89,9 @@ Feel free to reach out if you have questions or want to contribute in any way:
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 
 
-
 ## License
 
 DeckKit is available under the MIT license. See the [LICENSE][License] file for more info.
-
 
 
 [Email]: mailto:daniel.saidi@gmail.com
