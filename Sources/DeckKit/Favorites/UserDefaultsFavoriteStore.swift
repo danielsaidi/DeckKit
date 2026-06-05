@@ -16,17 +16,12 @@ public final class UserDefaultsFavoriteStore<Item: Identifiable>: FavoriteStore 
     ///
     /// - Parameters:
     ///   - defaults: The user defaults instance to use.
-    ///   - storeKeyPrefix: The store key prefix to use.
-    public init(
-        defaults: UserDefaults = .standard,
-        storeKeyPrefix: String = "com.danielsaidi.deckkit.favorites."
-    ) {
+    public init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
-        self.storeKeyPrefix = storeKeyPrefix
+        migrateIfNeeded()
     }
-    
+
     private let defaults: UserDefaults
-    private let storeKeyPrefix: String
 }
 
 public extension UserDefaultsFavoriteStore {
@@ -57,6 +52,22 @@ public extension UserDefaultsFavoriteStore {
 extension UserDefaultsFavoriteStore {
 
     var storeKey: String {
-        "\(storeKeyPrefix)\(String(describing: Item.self))"
+        "com.deckkit.favorites.\(String(describing: Item.self))"
+    }
+}
+
+private extension UserDefaultsFavoriteStore {
+
+    var legacyKey: String {
+        "com.danielsaidi.deckkit.favorites.\(String(describing: Item.self))"
+    }
+
+    func migrateIfNeeded() {
+        guard
+            defaults.object(forKey: storeKey) == nil,
+            let legacy = defaults.object(forKey: legacyKey)
+        else { return }
+        defaults.set(legacy, forKey: storeKey)
+        defaults.removeObject(forKey: legacyKey)
     }
 }

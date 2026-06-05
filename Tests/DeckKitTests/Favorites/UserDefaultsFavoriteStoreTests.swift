@@ -13,15 +13,9 @@ import Testing
 struct UserDefaultsFavoriteStoreTests {
 
     @Test
-    func defaultStoreKey() {
+    func usesExpectedStoreKey() {
         let store = UserDefaultsFavoriteStore<TestClass>()
-        #expect(store.storeKey == "com.danielsaidi.deckkit.favorites.TestClass")
-    }
-
-    @Test
-    func customStoreKey() {
-        let store = UserDefaultsFavoriteStore<TestClass>(storeKeyPrefix: "com.custom.prefix.")
-        #expect(store.storeKey == "com.custom.prefix.TestClass")
+        #expect(store.storeKey == "com.deckkit.favorites.TestClass")
     }
 }
 

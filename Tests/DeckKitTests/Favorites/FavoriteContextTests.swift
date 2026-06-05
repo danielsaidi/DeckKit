@@ -19,6 +19,7 @@ struct FavoriteContextTests {
     }
 
     @Test
+    @MainActor
     func initialValuesPersistsChangedValues() {
         let store = TestStore<TestClass>()
         let context = FavoriteContext(store: store)

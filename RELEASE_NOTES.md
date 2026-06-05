@@ -15,14 +15,11 @@ The package now targets iOS 17 and aligned platform versions.
 
 This makes it possible to use @Observable instead of ObservableObject.
 
-### ✨ Features
-
-* `UserDefaultsFavoriteService` now lets you customize the storage key.
-
 ### 💡 Changes
 
 * `DeckShuffleAnimation` uses @Observable instead of ObservableObject. 
 * `FavoriteContext` uses @Observable instead of ObservableObject. 
+* `UserDefaultsFavoriteService` uses a new store prefix that changes the key.
 
 ### 🚨 Breaking Changes
 
