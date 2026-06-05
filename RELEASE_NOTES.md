@@ -22,6 +22,7 @@ This makes it possible to use @Observable instead of ObservableObject.
 
 ### 🚨 Breaking Changes
 
+* `main` is the new main branch, replacing `master`.
 * `FavoriteService` has been renamed to `FavoriteStore`.
 * `UserDefaultsFavoriteService` has been renamed to `UserDefaultsFavoriteStore`.
 
