@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-/// This type can be used to configure a ``DeckView``.
+/// This type can be used to configure a ``DeckView`` with a
+/// set of customizations.
 ///
 /// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
 /// view modifier to apply a custom configuration.
@@ -23,14 +24,14 @@ public struct DeckViewConfiguration: Codable, Equatable, Sendable {
     /// otherwise fade away as it is swiped to the back.
     ///
     /// - Parameters:
-    ///   - direction: The visual direction of the stack, by default `.down`.
+    ///   - direction: The visual stack direction, by default `.down`.
     ///   - itemDisplayCount: The max number of items to display, by default `10`.
-    ///   - alwaysShowLastItem: Whether or not to show the last item for visual stability, by default `true`.
-    ///   - scaleOffset: The percentual shrink factor to apply to each item in the stack, by default `0.02`.
-    ///   - verticalOffset: The vertical offset to apply to each item in the stack, by default `10`.
-    ///   - dragRotationFactor: The offset factor with which to rotate an item when it's panned, by default `0.05`.
-    ///   - horizontalDragThreshold: The number of points an item must be panned to be moved to the bottom of the deck, by default `100`.
-    ///   - verticalDragThreshold: The number of points an item must be panned to be moved to the bottom of the deck, by default `250`.
+    ///   - alwaysShowLastItem: Whether to always show the last item, by default `true`.
+    ///   - scaleOffset: The shrink factor to apply to each item down the deck, by default `0.02`.
+    ///   - verticalOffset: The vertical offset to apply to each item down the deck, by default `10`.
+    ///   - dragRotationFactor: The offset to rotation factor to apply when dragging items, by default `0.05`.
+    ///   - horizontalDragThreshold: The number of points an item must be dragged to be moved last in the deck, by default `100`.
+    ///   - verticalDragThreshold: The number of points an item must be dragged to be moved last in the deck, by default `250`.
     public init(
         direction: Direction = .down,
         itemDisplayCount: Int = 10,
@@ -53,28 +54,28 @@ public struct DeckViewConfiguration: Codable, Equatable, Sendable {
         self.verticalDragThreshold = verticalDragThreshold
     }
 
-    /// The visual direction of the stack.
+    /// The visual stack direction.
     public var direction: Direction
 
     /// The max number of items to display.
     public var itemDisplayCount: Int
 
-    /// Whether or not to show the last item for visual stability.
+    /// Whether to always show the last item.
     public var alwaysShowLastItem: Bool
 
-    /// The percentual shrink factor to apply to each item in the stack.
+    /// The shrink factor to apply to each item down the deck.
     public var scaleOffset: Double
 
-    /// The vertical offset to apply to each item in the stack.
+    /// The vertical offset to apply to each item down the deck.
     public var verticalOffset: Double
 
-    /// The offset factor with which to rotate an item when it's panned.
+    /// The offset to rotation factor to apply when dragging items.
     public var dragRotationFactor: Double
 
-    /// The number of points an item must be panned to be moved to the bottom of the deck.
+    /// The number of points an item must be dragged to be moved last in the deck.
     public var horizontalDragThreshold: Double
 
-    /// The number of points an item must be panned to be moved to the bottom of the deck.
+    /// The number of points an item must be dragged to be moved last in the deck.
     public var verticalDragThreshold: Double
 }
 

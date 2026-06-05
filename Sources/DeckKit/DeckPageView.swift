@@ -9,7 +9,8 @@
 #if os(iOS)
 import SwiftUI
 
-/// This view renders a list of items as horizontal pages.
+/// This view renders a list of items as a set of horizontal
+/// pages that can be swiped sideways.
 public struct DeckPageView<ItemType: Identifiable, ItemView: View>: View {
 
     /// Create a deck page view.
