@@ -8,9 +8,9 @@ DeckKit is a SwiftUI SDK that helps you build deck-based apps.
 
 ![DeckKit logo](Logo.png)
 
-DeckKit is a SwiftUI library that makes it easy to create deck-based apps on any platform. It has a ``DeckView`` that can render a list of items, with support for swipe gestures, edge swipes, shuffling, etc.
+DeckKit is a SwiftUI library that lets you create deck-based SwiftUI apps. It has a ``DeckView`` that can render a list of items, with support for swipe gestures, edge swipe actions, shuffling, etc.
 
-DeckKit can be customized to great extent. You can change colors, fonts, etc. and use completely custom views. It also has other views like the ``DeckPageView``, as well as tools to manage favorites.
+DeckKit can be customized to great extent. You can change colors, fonts, etc. and use completely custom views and animations. It also has other views like the ``DeckPageView``, as well as tools to manage favorites.
 
 
 
@@ -23,9 +23,9 @@ https://github.com/danielsaidi/DeckKit.git
 ```
 
 
-## Support My Work
+## Supported Platforms
 
-Maintaining my various [open-source tools][OpenSource] takes significant time and effort. You can [become a sponsor][Sponsors] to help me dedicate more time to creating, maintaining, and improving these projects. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed. Thank you for considering!
+DeckKit supports iOS 17, macOS 14, tvOS 17, watchOS 10, and visionOS 1.
 
 
 
@@ -58,16 +58,14 @@ DeckKit is available under the MIT license.
 - ``DeckPageView``
 - ``DeckView``
 - ``DeckViewConfiguration``
-
-### Animations
-
 - ``DeckShuffleAnimation``
+
 
 ### Favorites
 
 - ``FavoriteContext``
-- ``FavoriteService``
-- ``UserDefaultsFavoriteService``
+- ``FavoriteStore``
+- ``UserDefaultsFavoriteStore``
 
 
 

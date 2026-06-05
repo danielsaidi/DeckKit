@@ -91,7 +91,4 @@ struct MyView {
 }
 ``` 
 
-The context uses a ``FavoriteService`` to manage favorites, and can be used to fetch all favorites, set and toggle favorite state, etc.
-
-
-[Pro]: https://kankoda.com/deckkit
+The context uses a ``FavoriteStore`` to persist favorites, and can be used to fetch all favorites, set and toggle favorite state, etc. It will store favorites to `UserDefaults` by default, but you can customize this with your own store.
