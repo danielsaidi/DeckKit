@@ -96,8 +96,10 @@ private extension ContentView {
     }
 
     func toggleFavorites() {
-        favorites.showOnlyFavorites.toggle()
-        hobbies = showOnlyFavorites ? favoriteHobbies : allHobbies
+        withAnimation {
+            favorites.showOnlyFavorites.toggle()
+            hobbies = showOnlyFavorites ? favoriteHobbies : allHobbies
+        }
     }
 }
 
