@@ -11,10 +11,11 @@ import SwiftUI
 /// This animation can be used to animate a deck shuffle.
 ///
 /// To customize the standard deck shuffle animation, inject
-/// a `@StateObject` into the view hierarchy, then trigger a
-/// ``shuffle(_:times:)`` operation to perform the shuffling.
-public final class DeckShuffleAnimation: ObservableObject {
-    
+/// a `@StateObject` into a ``DeckView`` then just trigger a
+/// ``shuffle(_:times:)`` to perform the shuffling.
+@Observable
+public final class DeckShuffleAnimation {
+
     /// Create a deck shuffle animation.
     ///
     /// - Parameters:
@@ -48,8 +49,8 @@ public final class DeckShuffleAnimation: ObservableObject {
     
     /// Whether or not the animation is currently shuffling.
     public var isShuffling = false
-    
-    @Published
+
+    /// The private shuffle data.
     private var shuffleData: [ShuffleData] = []
 }
 
@@ -88,14 +89,16 @@ public extension DeckShuffleAnimation {
     ) async {
         let times = times ?? 3
         if isShuffling { return }
-        isShuffling = true
+        withAnimation(animation) { isShuffling = true }
         for _ in 0...times {
             setRandomShuffleData(for: items.count)
             try? await Task.sleep(nanoseconds: 200_000_000)
         }
-        items.wrappedValue.shuffle()
-        setShuffleData([])
-        isShuffling = false
+        withAnimation(animation) {
+            items.wrappedValue.shuffle()
+            shuffleData = []
+            isShuffling = false
+        }
     }
 }
 

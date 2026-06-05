@@ -9,6 +9,18 @@ DeckKit tries to honor semantic versioning:
 
 
 
+## 3.0
+
+The package now targets iOS 17 and aligned platform versions.
+
+This makes it possible to use @Observable instead of ObservableObject.
+
+### 💡 Adjustments
+
+* `DeckShuffleAnimation` uses @Observable instead of ObservableObject. 
+
+
+
 ## 2.0
 
 ### 💡 Adjustments

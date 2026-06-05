@@ -23,21 +23,21 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     ///
     /// - Parameters:
     ///   - items: The items to present.
+    ///   - animation: The state animation to use, by default `.bouncy`.
     ///   - shuffleAnimation: The shuffle animation to use.
-    ///   - shuffleAnimation: The animation to apply, by default `.bouncy`.
     ///   - swipeAction: An action to trigger when swiping items to an edge.
     ///   - itemView: An item view builder to use for each item in the deck.
     public init(
         _ items: Binding<[ItemType]>,
+        animation: Animation = .bouncy,
         shuffleAnimation: DeckShuffleAnimation = .init(),
-        stateAnimation: Animation = .bouncy,
         swipeAction: SwipeAction? = nil,
         itemView: @escaping ItemViewBuilder
     ) {
         self._items = items
         self.initConfig = nil
-        self._shuffleAnimation = .init(wrappedValue: shuffleAnimation)
-        self.stateAnimation = stateAnimation
+        self.shuffleAnimation = shuffleAnimation
+        self.animation = animation
         self.swipeAction = swipeAction
         self.itemView = itemView
     }
@@ -51,7 +51,7 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     var initConfig: DeckViewConfiguration?
     
     private let itemView: (ItemType) -> ItemView
-    private let stateAnimation: Animation
+    private let animation: Animation
     private let swipeAction: SwipeAction?
     
     @Binding var items: [ItemType]
@@ -59,8 +59,8 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     @Environment(\.deckViewConfiguration)
     var envConfig: DeckViewConfiguration
     
-    @ObservedObject var shuffleAnimation: DeckShuffleAnimation
-    
+    @State var shuffleAnimation: DeckShuffleAnimation
+
     @State var activeItem: ItemType?
     @State var topItemOffset: CGSize = .zero
     
@@ -125,7 +125,7 @@ private extension DeckView {
         if activeItem == nil { activeItem = item }
         if !isActive(item) { return }
         topItemOffset = drag.translation
-        withAnimation(stateAnimation) {
+        withAnimation(animation) {
             if dragGestureIsPastThreshold(drag) {
                 items.moveToBack(item)
             } else {
@@ -140,7 +140,7 @@ private extension DeckView {
         if let item = activeItem, let edge = dragGestureEndedEdge(for: drag) {
             swipeAction?(edge, item)
         }
-        withAnimation(stateAnimation) {
+        withAnimation(animation) {
             activeItem = nil
             topItemOffset = .zero
         }

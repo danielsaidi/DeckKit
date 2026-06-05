@@ -15,8 +15,9 @@ struct ContentView: View {
     @State var hobbies = Hobby.demoCollection
     @State var sheetHobby: Hobby?
 
+    @State var shuffleAnimation = DeckShuffleAnimation(animation: .bouncy)
+
     @StateObject var favoriteContext = FavoriteContext<Hobby>()
-    @StateObject var shuffleAnimation = DeckShuffleAnimation(animation: .bouncy)
 
     var body: some View {
         NavigationStack {
