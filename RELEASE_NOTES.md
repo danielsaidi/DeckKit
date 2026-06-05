@@ -18,6 +18,7 @@ This makes it possible to use @Observable instead of ObservableObject.
 ### 💡 Adjustments
 
 * `DeckShuffleAnimation` uses @Observable instead of ObservableObject. 
+* `FavoriteContext` uses @Observable instead of ObservableObject. 
 
 
 

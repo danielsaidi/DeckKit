@@ -15,9 +15,8 @@ struct ContentView: View {
     @State var hobbies = Hobby.demoCollection
     @State var sheetHobby: Hobby?
 
-    @State var shuffleAnimation = DeckShuffleAnimation(animation: .bouncy)
-
-    @StateObject var favoriteContext = FavoriteContext<Hobby>()
+    @State var favorites = FavoriteContext<Hobby>()
+    @State var shuffle = DeckShuffleAnimation(animation: .bouncy)
 
     var body: some View {
         NavigationStack {
@@ -27,7 +26,7 @@ struct ContentView: View {
                 
                 DeckView(
                     $hobbies,
-                    shuffleAnimation: shuffleAnimation,
+                    shuffleAnimation: shuffle,
                     swipeAction: { edge, hobby in
                         guard edge == .trailing else { return }
                         openHobbyInSheet(hobby)
@@ -35,9 +34,9 @@ struct ContentView: View {
                 ) { hobby in
                     HobbyCard(
                         hobby: hobby,
-                        isFavorite: favoriteContext.isFavorite(hobby),
-                        isFlipped: shuffleAnimation.isShuffling,
-                        favoriteAction: favoriteContext.toggleIsFavorite
+                        isFavorite: favorites.isFavorite(hobby),
+                        isFlipped: shuffle.isShuffling,
+                        favoriteAction: favorites.toggleIsFavorite
                     )
                 }
                 .padding()
@@ -49,19 +48,23 @@ struct ContentView: View {
             .sheet(item: $sheetHobby) { hobby in
                 HobbyCard(
                     hobby: hobby,
-                    isFavorite: favoriteContext.isFavorite(hobby),
+                    isFavorite: favorites.isFavorite(hobby),
                     isFlipped: false,
-                    favoriteAction: favoriteContext.toggleIsFavorite
+                    favoriteAction: favorites.toggleIsFavorite
                 )
             }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    Button(action: shuffle) { Image.shuffle }
+                    Button(action: shuffleDeck) {
+                        Image.shuffle
+                    }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(action: toggleFavorites) { Image.favorite }
-                        .tint(.red)
-                        .symbolVariant(showOnlyFavorites ? .fill : .none)
+                    Button(action: toggleFavorites) {
+                        Image.favorite
+                    }
+                    .tint(.red)
+                    .symbolVariant(showOnlyFavorites ? .fill : .none)
                 }
             }
         }
@@ -75,11 +78,11 @@ private extension ContentView {
     }
 
     var showOnlyFavorites: Bool {
-        favoriteContext.showOnlyFavorites
+        favorites.showOnlyFavorites
     }
 
     func isFavorite(_ hobby: Hobby) -> Bool {
-        favoriteContext.isFavorite(hobby)
+        favorites.isFavorite(hobby)
     }
 
     func openHobbyInSheet(_ hobby: Hobby) {
@@ -87,13 +90,13 @@ private extension ContentView {
         hobbies.moveLastItemToFront()
     }
 
-    func shuffle() {
+    func shuffleDeck() {
         allHobbies.shuffle()
-        shuffleAnimation.shuffle($hobbies, times: 5)
+        shuffle.shuffle($hobbies, times: 5)
     }
 
     func toggleFavorites() {
-        favoriteContext.showOnlyFavorites.toggle()
+        favorites.showOnlyFavorites.toggle()
         hobbies = showOnlyFavorites ? favoriteHobbies : allHobbies
     }
 }

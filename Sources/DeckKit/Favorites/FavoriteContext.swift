@@ -13,7 +13,8 @@ import SwiftUI
 ///
 /// The class uses a ``FavoriteService`` to store a favorite
 /// state, by default a ``UserDefaultsFavoriteService``.
-public class FavoriteContext<Item: Identifiable>: ObservableObject {
+@Observable
+public final class FavoriteContext<Item: Identifiable> {
 
     /// Create a default context instance.
     ///
@@ -34,6 +35,8 @@ public class FavoriteContext<Item: Identifiable>: ObservableObject {
         self._isFavorite = service.isFavorite
         self._setIsFavorite = service.setIsFavorite
         self._toggleIsFavorite = service.toggleIsFavorite
+        self.showOnlyFavorites = false
+        self.showOnlyFavorites = showOnlyFavoritesInternal
     }
 
     private let _getFavorites: () -> [Item.ID]
@@ -43,12 +46,18 @@ public class FavoriteContext<Item: Identifiable>: ObservableObject {
 
 
     /// The item IDs that are currently marked as favorites.
-    @Published
     public private(set) var favorites: [Item.ID] = []
 
     /// Whether or not to only show favorites.
+    public var showOnlyFavorites: Bool {
+        didSet {
+            showOnlyFavoritesInternal = showOnlyFavorites
+        }
+    }
+
+    @ObservationIgnored
     @AppStorage("com.deckkit.favorites.showonlyfavorites")
-    public var showOnlyFavorites = false
+    var showOnlyFavoritesInternal = false
 }
 
 public extension FavoriteContext {
