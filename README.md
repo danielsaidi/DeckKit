@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/github/v/release/danielsaidi/DeckKit?color=%2300550&sort=semver" alt="Version" />
     <img src="https://img.shields.io/badge/Swift-6.1-orange.svg" alt="Swift 6.1" />
     <a href="https://danielsaidi.github.io/DeckKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
-    <img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" />
+    <a href="https://github.com/danielsaidi/DeckKit/blob/main/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/DeckKit" alt="MIT License" /></a>
 </p>
 
 
