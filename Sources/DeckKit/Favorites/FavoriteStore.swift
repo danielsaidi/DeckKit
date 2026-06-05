@@ -1,5 +1,5 @@
 //
-//  FavoriteService.swift
+//  FavoriteStore.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-09-17.
@@ -10,9 +10,9 @@ import Foundation
 
 /// This protocol can be implemented by any type that can be
 /// used to store and manage favorites.
-public protocol FavoriteService: AnyObject {
+public protocol FavoriteStore: AnyObject {
 
-    /// The item type that is managed by this service.
+    /// The item type that is managed by the store.
     associatedtype Item: Identifiable
 
     /// Get all favorites.

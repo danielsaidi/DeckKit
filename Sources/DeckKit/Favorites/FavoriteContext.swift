@@ -10,31 +10,29 @@ import SwiftUI
 
 /// This class can be used to manage the favorite state of a
 /// model type that implements `Identifiable`.
-///
-/// The class uses a ``FavoriteService`` to store a favorite
-/// state, by default a ``UserDefaultsFavoriteService``.
 @Observable
 public final class FavoriteContext<Item: Identifiable> {
 
     /// Create a default context instance.
     ///
-    /// This instance uses a ``UserDefaultsFavoriteService``.
+    /// The instance uses a ``UserDefaultsFavoriteStore`` to
+    /// store favorites in `UserDefaults`.
     public convenience init() {
-        self.init(service: UserDefaultsFavoriteService<Item>())
+        self.init(store: UserDefaultsFavoriteStore<Item>())
     }
 
-    /// Create a context with a custom service.
+    /// Create a context with a custom store.
     ///
     /// - Parameters:
-    ///   - service: The service to use to manage favorites.
-    public init<Service: FavoriteService>(
-        service: Service
-    ) where Service.Item == Item {
-        self.favorites = service.getFavorites()
-        self._getFavorites = service.getFavorites
-        self._isFavorite = service.isFavorite
-        self._setIsFavorite = service.setIsFavorite
-        self._toggleIsFavorite = service.toggleIsFavorite
+    ///   - store: The store to use to manage favorites.
+    public init<Store: FavoriteStore>(
+        store: Store
+    ) where Store.Item == Item {
+        self.favorites = store.getFavorites()
+        self._getFavorites = store.getFavorites
+        self._isFavorite = store.isFavorite
+        self._setIsFavorite = store.setIsFavorite
+        self._toggleIsFavorite = store.toggleIsFavorite
         self.showOnlyFavorites = false
         self.showOnlyFavorites = showOnlyFavoritesInternal
     }

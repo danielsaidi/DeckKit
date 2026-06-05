@@ -1,5 +1,5 @@
 //
-//  UserDefaultsFavoriteService.swift
+//  UserDefaultsFavoriteStore.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-09-17.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-/// This service implements the ``FavoriteService`` protocol
-/// by storing the favorite state within `UserDefaults`.
-public class UserDefaultsFavoriteService<Item: Identifiable>: FavoriteService {
+/// This service implements ``FavoriteStore`` by storing the
+/// favorite state in `UserDefaults`.
+public class UserDefaultsFavoriteStore<Item: Identifiable>: FavoriteStore {
 
     /// Create a service instance.
     public init(
@@ -22,8 +22,8 @@ public class UserDefaultsFavoriteService<Item: Identifiable>: FavoriteService {
     private let defaults: UserDefaults
 }
 
-public extension UserDefaultsFavoriteService {
-    
+public extension UserDefaultsFavoriteStore {
+
     func getFavorites() -> [Item.ID] {
         defaults.array(forKey: key) as? [Item.ID] ?? []
     }
@@ -47,8 +47,8 @@ public extension UserDefaultsFavoriteService {
     }
 }
 
-private extension UserDefaultsFavoriteService {
-    
+private extension UserDefaultsFavoriteStore {
+
     var key: String {
         "com.danielsaidi.deckkit.favorites.\(String(describing: Item.self))"
     }

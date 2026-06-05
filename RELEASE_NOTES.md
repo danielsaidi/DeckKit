@@ -1,11 +1,11 @@
 # Release notes
 
-DeckKit tries to honor semantic versioning:
+[DeckKit](https://github.com/danielsaidi/DeckKit) uses semantic versioning with the following strategy:
 
-* Deprecations can happen at any time.
-* Deprecations should only be removed in `major` updates.
-* Breaking changes should not occur in `minor` and `patch` updates.
-* Breaking changes *can* occur in `minor` and `patch` updates, if needed.
+* Deprecations can happen in any version.
+* Deprecations are only removed in `major` updates.
+* Breaking changes must only occur in `major` updates.
+* Breaking changes *can* occur in non-major updates, if the alternative is worse.
 
 
 
@@ -19,6 +19,11 @@ This makes it possible to use @Observable instead of ObservableObject.
 
 * `DeckShuffleAnimation` uses @Observable instead of ObservableObject. 
 * `FavoriteContext` uses @Observable instead of ObservableObject. 
+
+### 🚨 Breaking Changes
+
+* `FavoriteService` has been renamed to `FavoriteStore`.
+* `UserDefaultsFavoriteService` has been renamed to `UserDefaultsFavoriteStore`.
 
 
 
