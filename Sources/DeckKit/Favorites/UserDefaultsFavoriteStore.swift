@@ -10,22 +10,29 @@ import Foundation
 
 /// This service implements ``FavoriteStore`` by storing the
 /// favorite state in `UserDefaults`.
-public class UserDefaultsFavoriteStore<Item: Identifiable>: FavoriteStore {
+public final class UserDefaultsFavoriteStore<Item: Identifiable>: FavoriteStore {
 
     /// Create a service instance.
+    ///
+    /// - Parameters:
+    ///   - defaults: The user defaults instance to use.
+    ///   - storeKeyPrefix: The store key prefix to use.
     public init(
-        defaults: UserDefaults = .standard
+        defaults: UserDefaults = .standard,
+        storeKeyPrefix: String = "com.danielsaidi.deckkit.favorites."
     ) {
         self.defaults = defaults
+        self.storeKeyPrefix = storeKeyPrefix
     }
     
     private let defaults: UserDefaults
+    private let storeKeyPrefix: String
 }
 
 public extension UserDefaultsFavoriteStore {
 
     func getFavorites() -> [Item.ID] {
-        defaults.array(forKey: key) as? [Item.ID] ?? []
+        defaults.array(forKey: storeKey) as? [Item.ID] ?? []
     }
     
     func isFavorite(_ item: Item) -> Bool {
@@ -39,7 +46,7 @@ public extension UserDefaultsFavoriteStore {
         } else {
             favorites.removeAll { $0 == item.id }
         }
-        defaults.set(favorites, forKey: key)
+        defaults.set(favorites, forKey: storeKey)
     }
     
     func toggleIsFavorite(for item: Item) {
@@ -47,9 +54,9 @@ public extension UserDefaultsFavoriteStore {
     }
 }
 
-private extension UserDefaultsFavoriteStore {
+extension UserDefaultsFavoriteStore {
 
-    var key: String {
-        "com.danielsaidi.deckkit.favorites.\(String(describing: Item.self))"
+    var storeKey: String {
+        "\(storeKeyPrefix)\(String(describing: Item.self))"
     }
 }

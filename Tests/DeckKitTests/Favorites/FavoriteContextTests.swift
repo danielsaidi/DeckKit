@@ -7,32 +7,34 @@
 //
 
 import DeckKit
-import XCTest
+import Testing
 
-final class FavoriteContextTests: XCTestCase {
-    
-    private lazy var service = TestService<TestClass>()
-    private lazy var context = FavoriteContext(service: service)
-    
-    func testInitialValuesHaveValidStandardValues() {
-        XCTAssertEqual(context.favorites, [])
-        XCTAssertEqual(context.showOnlyFavorites, false)
+struct FavoriteContextTests {
+
+    @Test
+    func initialValuesHaveValidStandardValues() {
+        let context = FavoriteContext(store: TestStore<TestClass>())
+        #expect(context.favorites == [])
+        #expect(context.showOnlyFavorites == false)
     }
-    
-    func testInitialValuesPersistsChangedValues() {
+
+    @Test
+    func initialValuesPersistsChangedValues() {
+        let store = TestStore<TestClass>()
+        let context = FavoriteContext(store: store)
         context.showOnlyFavorites = true
-        let context2 = FavoriteContext(service: service)
-        XCTAssertEqual(context2.showOnlyFavorites, true)
+        let context2 = FavoriteContext(store: store)
+        #expect(context2.showOnlyFavorites == true)
         context.showOnlyFavorites = false
     }
 }
 
 private class TestClass: Identifiable {
-    
+
     let id: Int = 1
 }
 
-private class TestService<Item: Identifiable>: FavoriteService {
+private class TestStore<Item: Identifiable>: FavoriteStore {
 
     func getFavorites() -> [Item.ID] { [] }
     func isFavorite(_ item: Item) -> Bool { false }
