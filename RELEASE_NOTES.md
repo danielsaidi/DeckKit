@@ -17,10 +17,10 @@ This version also renames back some types to shorter names, to align better with
 
 ### 🗑️ Deprecations
 
+* The `CardView` has been renamed to `Card`.
 * The `DeckView` has been renamed to `Deck`.
 * The `DeckViewConfiguration` has been renamed to `DeckConfiguration`.
 * The favorite tools will be moved to [SwiftUIKit](https://github.com/danielsaidi/SwiftUIKit).
-
 
 
 
