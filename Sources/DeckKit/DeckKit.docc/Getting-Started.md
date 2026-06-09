@@ -39,7 +39,7 @@ You can render any list of items with in either of the view components that Deck
         struct MyView: View {
 
             var body: some View {
-                DeckView(
+                Deck(
                     $hobbies,
                     swipeLeftAction: { .. },
                     swipeRightAction: { .. }
@@ -70,25 +70,4 @@ You can render any list of items with in either of the view components that Deck
     }
 }
 
-You can use a ``CardView`` as item view, to easily support a front and back faced card with flip support, or use any custom card view.
-
-
-## Favorites
-
-DeckKit has functionality for handling the favorite state of any `Identifiable` type, using the observable ``FavoriteContext`` type:
-
-```swift
-struct MyView {
-
-    @StateObject
-    var context = FavoriteContext<Hobby>()
-    
-    body: some View {
-        Button("Toggle favorite state") {
-            context.toggleIsFavorite(for: coding)
-        }
-    }
-}
-``` 
-
-The context uses a ``FavoriteStore`` to persist favorites, and can be used to fetch all favorites, set and toggle favorite state, etc. It will store favorites to `UserDefaults` by default, but you can customize this with your own store.
+You can use a ``Card`` view as item view, to easily support a front and back faced card with flip support, or use any custom card view.

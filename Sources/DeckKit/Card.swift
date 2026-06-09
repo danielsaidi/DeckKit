@@ -1,5 +1,5 @@
 //
-//  CardView.swift
+//  Card.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2024-05-23.
@@ -9,8 +9,8 @@
 import SwiftUI
 
 /// This view has a front and a back view and can be flipped
-/// by swiping or tapping.
-public struct CardView<Front: View, Back: View>: View {
+/// to reveal either side.
+public struct Card<Front: View, Back: View>: View {
 
     /// Create a card view.
     ///
@@ -56,7 +56,7 @@ public struct CardView<Front: View, Back: View>: View {
 
         var body: some View {
             VStack {
-                CardView(
+                Card(
                     isFlipped: isFlipped,
                     front: {
                         Color.blue

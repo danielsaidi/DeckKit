@@ -285,7 +285,7 @@ private extension View {
                         print("Swiped item #\(item.id) to the \(edge.description) edge")
                     },
                     itemView: { item in
-                        CardView(
+                        Card(
                             isFlipped: shuffle.isShuffling,
                             front: { PreviewCard(item: item) },
                             back: { item.isEven ? Color.green : .blue }
