@@ -24,7 +24,7 @@ struct ContentView: View {
                 Color.background
                     .ignoresSafeArea()
                 
-                DeckView(
+                Deck(
                     $hobbies,
                     shuffleAnimation: shuffle,
                     swipeAction: { edge, hobby in

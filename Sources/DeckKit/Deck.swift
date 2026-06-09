@@ -1,5 +1,5 @@
 //
-//  DeckView.swift
+//  Deck.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2020-08-31.
@@ -15,9 +15,9 @@ import SwiftUI
 /// move it to the bottom of the deck. This can also be used
 /// to trigger custom actions.
 ///
-/// You can use ``SwiftUICore/View/deckViewConfiguration(_:)``
-/// to apply a custom configuration.
-public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
+/// You can use the ``SwiftUICore/View/deckConfiguration(_:)``
+/// view modifier to apply a custom deck configuration.
+public struct Deck<ItemType: Identifiable, ItemView: View>: View {
     
     /// Create a deck view with custom parameters.
     ///
@@ -48,7 +48,7 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     /// A function that creates a view for a deck item.
     public typealias ItemViewBuilder = (ItemType) -> ItemView
     
-    var initConfig: DeckViewConfiguration?
+    var initConfig: DeckConfiguration?
     
     private let itemView: (ItemType) -> ItemView
     private let animation: Animation
@@ -56,8 +56,8 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     
     @Binding var items: [ItemType]
     
-    @Environment(\.deckViewConfiguration)
-    var envConfig: DeckViewConfiguration
+    @Environment(\.deckConfiguration)
+    var envConfig: DeckConfiguration
     
     @State var shuffleAnimation: DeckShuffleAnimation
 
@@ -88,9 +88,9 @@ public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
 
 // MARK: - Properties
 
-private extension DeckView {
+private extension Deck {
     
-    var config: DeckViewConfiguration {
+    var config: DeckConfiguration {
         initConfig ?? envConfig
     }
     
@@ -108,7 +108,7 @@ private extension DeckView {
 
 // MARK: - View Logic
 
-private extension DeckView {
+private extension Deck {
     
     func dragGesture(
         for item: ItemType
@@ -278,7 +278,7 @@ private extension View {
         
         var body: some View {
             VStack(spacing: 70) {
-                DeckView(
+                Deck(
                     $items,
                     shuffleAnimation: shuffle,
                     swipeAction: { edge, item in
@@ -304,7 +304,7 @@ private extension View {
                 #endif
             }
             .padding()
-            .deckViewConfiguration(.init(direction: .down))
+            .deckConfiguration(.init(direction: .down))
         }
     }
 

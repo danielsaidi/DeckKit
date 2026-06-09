@@ -28,12 +28,12 @@ DeckKit defines several ``Swift/Array`` extensions, to let you modify decks, e.g
 
 ## Displaying a deck of items
 
-You can render any list of items with in either of the view components that DeckKit provides, e.g. ``DeckView`` or ``DeckPageView``.
+You can render any list of items with in either of the view components that DeckKit provides, e.g. ``Deck`` or ``DeckPageView``.
 
 @TabNavigator {
     
-    @Tab("DeckView") {
-        ``DeckView`` renders items as a deck of cards, where the user can swipe away the top card in any direction to move it to the bottom of the deck. The deck view can also trigger optional actions for each swipe direction:
+    @Tab("Deck") {
+        ``Deck`` renders items as a deck of cards, where the user can swipe away the top card in any direction to move it to the bottom of the deck. The deck view can also trigger optional actions for each swipe direction:
 
         ```swift
         struct MyView: View {

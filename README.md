@@ -57,7 +57,7 @@ struct MyView: View {
     var hobbies: [Hobby] = ...
 
     var body: some View {
-        DeckView($hobbies) { hobby in
+        Deck($hobbies) { hobby in
             RoundedRectangle(cornerRadius: 25.0)
                 .fill(.blue)
                 .overlay(Text(hobby.name))
@@ -67,7 +67,7 @@ struct MyView: View {
 }
 ```
 
-DeckKit has several view components for presenting decks, e.g. `DeckView` and `DeckPageView`.
+DeckKit has several view components for presenting decks, e.g. `Deck` and `DeckPageView`.
 
 See the online [getting started guide][Getting-Started] for more information.
 

@@ -1,5 +1,5 @@
 //
-//  DeckViewConfiguration.swift
+//  DeckConfiguration.swift
 //  DeckKit
 //
 //  Created by Daniel Saidi on 2022-11-28.
@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-/// This type can be used to configure a ``DeckView`` with a
-/// set of customizations.
+/// This type can be used to configure a ``Deck`` with a set
+/// of customizations.
 ///
-/// You can use ``SwiftUICore/View/deckViewConfiguration(_:)``
-/// to apply a custom configuration.
-public struct DeckViewConfiguration: Codable, Equatable, Sendable {
+/// You can use the ``SwiftUICore/View/deckConfiguration(_:)``
+/// view modifier to apply a custom deck configuration.
+public struct DeckConfiguration: Codable, Equatable, Sendable {
 
     /// Create a deck view configuration.
     ///
@@ -79,13 +79,13 @@ public struct DeckViewConfiguration: Codable, Equatable, Sendable {
     public var verticalDragThreshold: Double
 }
 
-public extension DeckViewConfiguration {
+public extension DeckConfiguration {
     
     /// This is a standard deck view configuration.
     static var standard: Self { .init() }
 }
 
-public extension DeckViewConfiguration {
+public extension DeckConfiguration {
 
     /// This enum defines the visual direction of a deck.
     enum Direction: String, Codable, Sendable {
@@ -95,16 +95,16 @@ public extension DeckViewConfiguration {
 
 public extension View {
 
-    /// Apply a ``DeckViewConfiguration``.
-    func deckViewConfiguration(
-        _ config: DeckViewConfiguration
+    /// Apply a ``DeckConfiguration``.
+    func deckConfiguration(
+        _ config: DeckConfiguration
     ) -> some View {
-        self.environment(\.deckViewConfiguration, config)
+        self.environment(\.deckConfiguration, config)
     }
 }
 
 public extension EnvironmentValues {
 
-    /// Apply a ``DeckViewConfiguration``.
-    @Entry var deckViewConfiguration = DeckViewConfiguration.standard
+    /// Apply a ``DeckConfiguration``.
+    @Entry var deckConfiguration = DeckConfiguration.standard
 }
