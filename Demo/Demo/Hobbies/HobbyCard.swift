@@ -17,7 +17,7 @@ struct HobbyCard: View {
     let favoriteAction: (Hobby) -> Void
 
     var body: some View {
-        CardView(
+        Card(
             isFlipped: isFlipped,
             front: front,
             back: back

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A967166D2E8C62D400CF508D /* DeckKit in Frameworks */ = {isa = PBXBuildFile; productRef = A967166C2E8C62D400CF508D /* DeckKit */; };
+		A9FFFBE32FD7FA6800503C86 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9FFFBE22FD7FA6800503C86 /* SwiftUIKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A967166D2E8C62D400CF508D /* DeckKit in Frameworks */,
+				A9FFFBE32FD7FA6800503C86 /* SwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			name = Demo;
 			packageProductDependencies = (
 				A967166C2E8C62D400CF508D /* DeckKit */,
+				A9FFFBE22FD7FA6800503C86 /* SwiftUIKit */,
 			);
 			productName = Demo;
 			productReference = A967165A2E8C628800CF508D /* Demo.app */;
@@ -84,7 +87,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2600;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2650;
 				TargetAttributes = {
 					A96716592E8C628800CF508D = {
 						CreatedOnToolsVersion = 26.0.1;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A967166B2E8C62D400CF508D /* XCLocalSwiftPackageReference "../../deckkit" */,
+				A9FFFBE12FD7FA6700503C86 /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A967165B2E8C628800CF508D /* Products */;
@@ -168,6 +172,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -191,6 +196,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -230,6 +236,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -246,6 +253,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -257,6 +265,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -302,6 +311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = PMEDFW438U;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -370,10 +380,26 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		A9FFFBE12FD7FA6700503C86 /* XCRemoteSwiftPackageReference "SwiftUIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/SwiftUIKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		A967166C2E8C62D400CF508D /* DeckKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DeckKit;
+		};
+		A9FFFBE22FD7FA6800503C86 /* SwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9FFFBE12FD7FA6700503C86 /* XCRemoteSwiftPackageReference "SwiftUIKit" */;
+			productName = SwiftUIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

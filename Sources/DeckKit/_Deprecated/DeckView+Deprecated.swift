@@ -1,7 +1,9 @@
 import Foundation
 
+#if os(iOS) || os(macOS) || os(visionOS)
 @available(*, deprecated, renamed: "Deck")
-typealias DeckView = Deck
+public typealias DeckView = Deck
 
 @available(*, deprecated, renamed: "DeckConfiguration")
-typealias DeckViewConfiguration = DeckConfiguration
+public typealias DeckViewConfiguration = DeckConfiguration
+#endif

@@ -8,6 +8,7 @@
 
 import DeckKit
 import SwiftUI
+import SwiftUIKit
 
 struct ContentView: View {
 
@@ -15,7 +16,7 @@ struct ContentView: View {
     @State var hobbies = Hobby.demoCollection
     @State var sheetHobby: Hobby?
 
-    @State var favorites = FavoriteContext<Hobby>()
+    @State var favorites = SwiftUIKit.FavoriteContext<Hobby>()
     @State var shuffle = DeckShuffleAnimation(animation: .bouncy)
 
     var body: some View {
@@ -34,7 +35,7 @@ struct ContentView: View {
                 ) { hobby in
                     HobbyCard(
                         hobby: hobby,
-                        isFavorite: favorites.isFavorite(hobby),
+                        isFavorite: favorites.favorites.contains(hobby.id), // To make observation work.
                         isFlipped: shuffle.isShuffling,
                         favoriteAction: favorites.toggleIsFavorite
                     )
