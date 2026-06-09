@@ -15,8 +15,8 @@ import SwiftUI
 /// move it to the bottom of the deck. This can also be used
 /// to trigger custom actions.
 ///
-/// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
-/// view modifier to apply a custom configuration.
+/// You can use ``SwiftUICore/View/deckViewConfiguration(_:)``
+/// to apply a custom configuration.
 public struct DeckView<ItemType: Identifiable, ItemView: View>: View {
     
     /// Create a deck view with custom parameters.

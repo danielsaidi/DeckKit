@@ -8,9 +8,8 @@
 
 import SwiftUI
 
-/// This class can be used to manage the favorite state of a
-/// model type that implements `Identifiable`.
 @Observable
+@available(*, deprecated, message: "This class has been moved to https://github.com/danielsaidi/SwiftUIKit")
 public final class FavoriteContext<Item: Identifiable> {
 
     /// Create a default context instance.
@@ -58,6 +57,7 @@ public final class FavoriteContext<Item: Identifiable> {
     var showOnlyFavoritesInternal = false
 }
 
+@available(*, deprecated, message: "This class has been moved to https://github.com/danielsaidi/SwiftUIKit")
 public extension FavoriteContext {
 
     /// Check if there are any favorites.

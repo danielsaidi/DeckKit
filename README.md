@@ -12,13 +12,15 @@
 
 # DeckKit
 
-DeckKit is a SwiftUI library that makes it easy to create deck-based apps. It has a `DeckView` that can render any list of items, with support for swipe gestures, edge swipes, shuffling, etc.
+DeckKit is a SwiftUI library that makes it easy to create card and deck-based apps.
 
 <p align="center">
     <img src="Resources/Demo.gif" width=300 alt="Demo video" />
 </p>
 
-DeckKit can be customized to great extent. You can change colors, fonts, etc. and use completely custom views. It also has tools to manage favorites.
+DeckKit has a `Card` view that can render a card-like view, a `Deck` that can render a deck of items, with support for swipe gestures, edge swipes, shuffling, etc.
+
+DeckKit can be customized to great extent. You can change colors, fonts, etc. and use completely custom views.
 
 
 ## Installation
@@ -28,6 +30,12 @@ DeckKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/DeckKit.git
 ```
+
+
+## Supported Platforms
+
+DeckKit supports iOS 17, macOS 14, tvOS 17, watchOS 10, and visionOS 1.
+
 
 
 ## Getting started

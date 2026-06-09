@@ -9,6 +9,14 @@
 
 
 
+## 3.1
+
+This version deprecates the favorite tools to keep the package light and focused.
+
+The favorite tools will be moved to [SwiftUIKit](https://github.com/danielsaidi/SwiftUIKit).
+
+
+
 ## 3.0
 
 The package now targets iOS 17 and aligned platform versions.

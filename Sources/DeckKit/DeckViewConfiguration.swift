@@ -11,8 +11,8 @@ import SwiftUI
 /// This type can be used to configure a ``DeckView`` with a
 /// set of customizations.
 ///
-/// You can use the ``SwiftUI/View/deckViewConfiguration(_:)``
-/// view modifier to apply a custom configuration.
+/// You can use ``SwiftUICore/View/deckViewConfiguration(_:)``
+/// to apply a custom configuration.
 public struct DeckViewConfiguration: Codable, Equatable, Sendable {
 
     /// Create a deck view configuration.

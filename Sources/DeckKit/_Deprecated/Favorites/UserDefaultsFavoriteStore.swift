@@ -8,8 +8,7 @@
 
 import Foundation
 
-/// This service implements ``FavoriteStore`` by storing the
-/// favorite state in `UserDefaults`.
+@available(*, deprecated, message: "This class has been moved to https://github.com/danielsaidi/SwiftUIKit")
 public final class UserDefaultsFavoriteStore<Item: Identifiable>: FavoriteStore {
 
     /// Create a service instance.
@@ -24,6 +23,7 @@ public final class UserDefaultsFavoriteStore<Item: Identifiable>: FavoriteStore 
     private let defaults: UserDefaults
 }
 
+@available(*, deprecated, message: "This class has been moved to https://github.com/danielsaidi/SwiftUIKit")
 public extension UserDefaultsFavoriteStore {
 
     func getFavorites() -> [Item.ID] {
@@ -49,6 +49,7 @@ public extension UserDefaultsFavoriteStore {
     }
 }
 
+@available(*, deprecated, message: "This class has been moved to https://github.com/danielsaidi/SwiftUIKit")
 extension UserDefaultsFavoriteStore {
 
     var storeKey: String {
@@ -56,6 +57,7 @@ extension UserDefaultsFavoriteStore {
     }
 }
 
+@available(*, deprecated, message: "This class has been moved to https://github.com/danielsaidi/SwiftUIKit")
 private extension UserDefaultsFavoriteStore {
 
     var legacyKey: String {
